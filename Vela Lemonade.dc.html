@@ -82,7 +82,7 @@
         <h1 style="font-family:'Instrument Serif',serif; font-size:clamp(38px,7.4vw,82px); line-height:.98; letter-spacing:-.02em; margin-bottom:24px;">Hydration that goes down easy.</h1>
         <p style="font-size:clamp(16px,1.6vw,19px); line-height:1.55; color:#5A6058; max-width:460px; margin-bottom:36px;">Gentle prebiotic fiber and essential electrolytes in one light, refreshing lemonade designed to support your daily routine.</p>
         <div style="display:flex; gap:12px; flex-wrap:wrap; margin-bottom:40px;">
-          <a href="#reserve" style="background:#FFC928; color:#0B3D2E; font-size:15.5px; font-weight:600; padding:18px 38px; border-radius:999px; transition:transform .2s ease;" style-hover="transform:translateY(-2px); color:#0B3D2E;">Reserve the First Batch</a>
+          <a href="#waitlist" style="background:#FFC928; color:#0B3D2E; font-size:15.5px; font-weight:600; padding:18px 38px; border-radius:999px; transition:transform .2s ease;" style-hover="transform:translateY(-2px); color:#0B3D2E;">Reserve the First Batch</a>
           <a href="#formula" style="background:transparent; border:1.5px solid #D6CAB6; color:#0B3D2E; font-size:15.5px; font-weight:600; padding:16.5px 34px; border-radius:999px; transition:border-color .2s ease;" style-hover="border-color:#0B3D2E;">See What's Inside</a>
         </div>
         <div style="display:flex; flex-wrap:wrap; gap:12px 28px; padding-top:28px; border-top:1px solid #EDE2CF;">
@@ -124,7 +124,6 @@
             </button>
           </div>
           <button onClick="{{ reserve }}" style="width:100%; background:#0B3D2E; color:#FFF8ED; border:none; border-radius:999px; padding:20px; font-size:16px; font-weight:600; cursor:pointer; font-family:inherit; transition:background .2s ease;" style-hover="background:#1A5C46;">{{ reserveLabel }}</button>
-          <p style="font-size:13.5px; color:#6E6A5E; text-align:center; margin-top:16px;">Reserve today for $5 — applied to your first order.</p>
         </div>
       </div>
     </div>
@@ -186,7 +185,7 @@
         <h3 style="font-family:'Instrument Serif',serif; font-size:clamp(25px,3vw,36px); letter-spacing:-.01em; margin-bottom:14px;">Both. One light glass.</h3>
         <p style="font-size:clamp(15px,1.35vw,16.5px); line-height:1.6; color:#3F4A44; max-width:520px; margin:0 auto 20px;">No gritty fiber powder. No separate electrolyte packet. No routine to juggle.</p>
         <p style="font-size:clamp(15px,1.4vw,17px); font-weight:600; letter-spacing:.02em; margin-bottom:30px;">Tear. Pour. Shake. Sip.</p>
-        <a href="#reserve" style="display:inline-block; background:#0B3D2E; color:#FFF8ED; font-size:15px; font-weight:600; padding:17px 40px; border-radius:999px; transition:transform .2s ease;" style-hover="transform:translateY(-2px); color:#FFC928;">Try Velq</a>
+        <a href="#waitlist" style="display:inline-block; background:#0B3D2E; color:#FFF8ED; font-size:15px; font-weight:600; padding:17px 40px; border-radius:999px; transition:transform .2s ease;" style-hover="transform:translateY(-2px); color:#FFC928;">Try Velq</a>
       </div>
     </div>
   </section>
@@ -221,7 +220,7 @@
           <span style="display:inline-block; font-size:11.5px; font-weight:600; letter-spacing:.18em; text-transform:uppercase; color:#37624A; margin-bottom:22px;">Made for real routines</span>
           <h2 style="font-family:'Instrument Serif',serif; font-size:clamp(28px,5vw,56px); line-height:1.02; letter-spacing:-.02em; margin-bottom:22px;">One easy habit. Wherever the day takes you.</h2>
           <p style="font-size:clamp(15.5px,1.5vw,18px); line-height:1.6; color:#3F4A44; margin-bottom:34px; max-width:460px;">From busy mornings to afternoon walks, Velq makes it easier to get your fiber and stay hydrated without another gritty powder to choke down.</p>
-          <a href="#reserve" style="display:inline-block; background:#0B3D2E; color:#FFF8ED; font-size:15px; font-weight:600; padding:17px 36px; border-radius:999px; transition:transform .2s ease;" style-hover="transform:translateY(-2px); color:#FFC928;">Shop Velq</a>
+          <a href="#waitlist" style="display:inline-block; background:#0B3D2E; color:#FFF8ED; font-size:15px; font-weight:600; padding:17px 36px; border-radius:999px; transition:transform .2s ease;" style-hover="transform:translateY(-2px); color:#FFC928;">Shop Velq</a>
         </div>
         <div style="display:grid; grid-template-columns:var(--c2); gap:16px;">
           <div style="height:clamp(150px,22vw,250px);"><image-slot id="comm-1" shape="rounded" radius="16" fit="cover" placeholder="Tearing a Velq packet into 16 oz of cold water" src="./chatgpt-image-jul-29-2026-08_03_25-pm-ms6xl659-ao1s.png"></image-slot></div>
@@ -665,7 +664,7 @@
   </sc-if>
 
   <!-- Email -->
-  <section style="background:#FFC928; position:relative; overflow:hidden;">
+  <section id="waitlist" style="background:#FFC928; position:relative; overflow:hidden; scroll-margin-top:90px;">
     <!-- lemon photography — Unsplash: Moritz Nie & Mockup Graphics -->
     <div style="position:absolute; left:-72px; top:-62px; width:var(--lem1); height:var(--lem1); pointer-events:none; transform:rotate(-14deg); border-radius:50%; overflow:hidden; box-shadow:0 18px 39px rgba(150,105,0,.3), inset 0 0 24px rgba(160,115,0,.22);">
       <img src="https://images.unsplash.com/flagged/photo-1587302164675-820fe61bbd55?fm=jpg&amp;q=80&amp;w=900&amp;h=900&amp;fit=crop&amp;crop=entropy&amp;auto=format" alt="Fresh lemon slice" title="Photo: Mockup Graphics / Unsplash" style="width:100%; height:100%; object-fit:cover; transform:scale(2.35); display:block;">
@@ -691,7 +690,7 @@
         <button type="submit" style="background:#0B3D2E; color:#FFF8ED; padding:17px 34px; border-radius:999px; font-size:15px; font-weight:600; border:none; cursor:pointer; font-family:inherit;">Join</button>
       </form>
       <sc-if value="{{ emailSubmitted }}" hint-placeholder-val="{{ false }}">
-        <p style="font-size:14px; color:#4A4634; margin-top:16px; font-weight:600;">You're on the list — check your inbox to confirm.</p>
+        <p style="font-size:14px; color:#4A4634; margin-top:16px; font-weight:600;">You're on the list — you'll be first to hear from us.</p>
       </sc-if>
     </div>
   </section>
@@ -759,17 +758,17 @@ class Component extends DCLogic {
   goReserve = () => {
     this.setState({ view: "home", menuOpen: false });
     setTimeout(() => {
-      const el = document.getElementById("reserve");
+      const el = document.getElementById("waitlist");
       if (el) window.scrollTo({ top: el.getBoundingClientRect().top + window.scrollY - 90, behavior: "smooth" });
     }, 60);
   };
 
   pickOnce = () => this.setState({ plan: "once" });
   pickSub = () => this.setState({ plan: "sub" });
-  reserve = () => { this.setState({ reserved: true }); setTimeout(() => this.setState({ reserved: false }), 1800); };
+  reserve = () => { const el = document.getElementById("waitlist"); if (el) window.scrollTo({ top: el.getBoundingClientRect().top + window.scrollY - 90, behavior: "smooth" }); };
   toggleFaq = (i) => this.setState({ openFaq: this.state.openFaq === i ? -1 : i });
   onEmail = (e) => this.setState({ email: e.target.value });
-  submitEmail = (e) => { e.preventDefault(); if (this.state.email) this.setState({ emailSubmitted: true }); };
+  submitEmail = (e) => { e.preventDefault(); const em = this.state.email.trim(); if (!em) return; try { fetch("https://docs.google.com/forms/d/e/1FAIpQLSf7is8u_vaR8tXoAFPCkzjCOzvNRd4ahZHxE6mDWLFxF6s1ow/formResponse", { method: "POST", mode: "no-cors", headers: { "Content-Type": "application/x-www-form-urlencoded" }, body: "entry.1139808719=" + encodeURIComponent(em) }); } catch (err) {} this.setState({ emailSubmitted: true }); };
   onSearch = (e) => this.setState({ search: e.target.value, openFaq: -1 });
   onCName = (e) => this.setState({ cName: e.target.value });
   onCEmail = (e) => this.setState({ cEmail: e.target.value });
@@ -932,7 +931,7 @@ class Component extends DCLogic {
       onceBg: sub ? "#FFF8ED" : "#FFF4DA", onceBorder: sub ? "#EDE2CF" : "#0B3D2E",
       subBg: sub ? "#FFF4DA" : "#FFF8ED", subBorder: sub ? "#0B3D2E" : "#EDE2CF",
       pickOnce: this.pickOnce, pickSub: this.pickSub, reserve: this.reserve,
-      reserveLabel: this.state.reserved ? "Reserved ✓" : (sub ? "Reserve — $39.99/mo" : "Reserve — $49.99"),
+      reserveLabel: "Join the Waitlist",
       faqs: decorate(this.faqData.slice(0, 12)),
       searchedFaqs: decorate(filtered),
       noResults: filtered.length === 0,
