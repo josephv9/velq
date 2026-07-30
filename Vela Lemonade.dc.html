@@ -19,7 +19,7 @@
   a { color: #0B3D2E; text-decoration: none; cursor: pointer; }
   a:hover { color: #9A4150; }
   :root{
-    --gut:40px; --secy:110px; --hdr:76px; --nav:flex; --burger:none;
+    --gut:40px; --secy:110px; --swipehint:none; --hdr:76px; --nav:flex; --burger:none;
     --hero:1fr 1.02fr; --split:1fr 1fr; --gap-lg:60px; --gap-xl:70px; --rgap:24px;
     --c2:repeat(2,minmax(0,1fr)); --c3:repeat(3,minmax(0,1fr)); --c4:repeat(4,minmax(0,1fr));
     --foot:1.5fr 1fr 1fr 1fr; --ing:1.3fr .6fr 1.6fr; --ing2:1.1fr .5fr 1.8fr;
@@ -30,7 +30,7 @@
   @media (max-width:900px){ :root{ --nav:none; --burger:inline-flex; --hero:1fr; --split:1fr;
     --c3:repeat(2,minmax(0,1fr)); --gap-lg:38px; --gap-xl:38px; --foot:repeat(2,minmax(0,1fr));
     --secy:80px; --gut:28px; --prodleft:18px; --prodw:210px; --prodh:250px; --tl:88px 1fr; } }
-  @media (max-width:640px){ :root{ --gut:20px; --secy:62px; --hdr:64px; --c2:1fr; --c3:1fr; --c4:1fr;
+  @media (max-width:640px){ :root{ --swipehint:block; --gut:20px; --secy:62px; --hdr:64px; --c2:1fr; --c3:1fr; --c4:1fr;
     --foot:1fr; --ing:1fr; --ing2:1fr; --rgap:8px; --ord:1fr 1fr;
     --prodw:148px; --prodh:178px; --prodleft:12px; --lem1:140px; --lem2:150px; --lemshow:none; } }
   @keyframes vfloat { 0%,100% { transform: translateY(0); } 50% { transform: translateY(-14px); } }
@@ -147,7 +147,7 @@
       <sc-for list="{{ pillars }}" as="p" hint-placeholder-count="2">
         <div style="background:{{ p.bg }}; border-radius:22px; padding:20px 20px 40px; transition:transform .25s ease;" style-hover="transform:translateY(-6px);">
           <div style="height:clamp(200px,26vw,260px); border-radius:16px; overflow:hidden; margin-bottom:30px;">
-            <image-slot id="{{ p.slotId }}" shape="rounded" radius="16" fit="cover" placeholder="{{ p.placeholder }}"></image-slot>
+            <image-slot id="{{ p.slotId }}" shape="rounded" radius="16" fit="cover" placeholder="{{ p.placeholder }}" src="{{ p.src }}" credit="{{ p.credit }}" credit-href="{{ p.chref }}"></image-slot>
           </div>
           <div style="padding:0 16px;">
             <span style="display:inline-block; font-size:11px; font-weight:600; letter-spacing:.16em; text-transform:uppercase; color:{{ p.accent }}; margin-bottom:12px;">{{ p.eyebrow }}</span>
@@ -180,6 +180,7 @@
           </div>
         </sc-for>
       </div>
+      <div style="display:var(--swipehint); font-size:12px; color:#6E6A5E; text-align:center; margin-top:12px; letter-spacing:.02em;">Swipe the table to see how Velq compares →</div>
 
       <div style="background:#E4EFE4; border-radius:20px; padding:clamp(30px,4.4vw,52px) clamp(22px,4vw,48px); margin-top:28px; text-align:center;">
         <h3 style="font-family:'Instrument Serif',serif; font-size:clamp(25px,3vw,36px); letter-spacing:-.01em; margin-bottom:14px;">Both. One light glass.</h3>
@@ -817,8 +818,8 @@ class Component extends DCLogic {
       menuOpen: this.state.menuOpen, toggleMenu: this.toggleMenu, menuIcon: this.state.menuOpen ? "\u2715" : "\u2630",
 
       pillars: [
-        { eyebrow: "Fiber", title: "Support Digestion", body: "6g of gentle prebiotic fiber per stick, naturally flavored with no artificial sweeteners — a dose designed to be easy to tolerate day after day.", bg: "#FFF1CE", accent: "#7A6415", slotId: "pillar-fiber", placeholder: "Editorial: fresh fruit, fiber, calm still life" },
-        { eyebrow: "Electrolytes", title: "Stay Hydrated", body: "Sodium, potassium and magnesium to replace what daily hydration alone leaves behind.", bg: "#FFF1CE", accent: "#7A6415", slotId: "pillar-electrolytes", placeholder: "Editorial: glass of ice water with lemon, condensation" },
+        { eyebrow: "Fiber", title: "Support Digestion", body: "6g of gentle prebiotic fiber per stick, naturally flavored with no artificial sweeteners — a dose designed to be easy to tolerate day after day.", bg: "#FFF1CE", accent: "#7A6415", slotId: "pillar-fiber", src: "https://images.unsplash.com/photo-1609639643505-3c158a56de42?fm=jpg&q=80&w=1200&auto=format&fit=crop", credit: "Photo by Cristina Anne Costello on Unsplash", chref: "https://unsplash.com/@lightupphotos", placeholder: "Editorial: fresh fruit, fiber, calm still life" },
+        { eyebrow: "Electrolytes", title: "Stay Hydrated", body: "Sodium, potassium and magnesium to replace what daily hydration alone leaves behind.", bg: "#FFF1CE", accent: "#7A6415", slotId: "pillar-electrolytes", src: "https://images.unsplash.com/photo-1573624658129-3f7856192f19?fm=jpg&q=80&w=1200&auto=format&fit=crop", credit: "Photo by Vlad Tchompalov on Unsplash", chref: "https://unsplash.com/@tchompalov", placeholder: "Editorial: glass of ice water with lemon, condensation" },
       ],
       comparison: [
         { label: "Electrolytes", velq: "✓", shake: "Rarely", supps: "Separate product" },
