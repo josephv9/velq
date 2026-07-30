@@ -406,7 +406,7 @@
       <div style="display:grid; grid-template-columns:var(--c3); gap:20px;">
         <sc-for list="{{ voices }}" as="v" hint-placeholder-count="3">
           <div style="background:#FFFFFF; border:1px solid #EDE2CF; border-radius:20px; overflow:hidden;">
-            <div style="height:clamp(190px,24vw,240px);"><image-slot id="{{ v.slotId }}" shape="rect" fit="cover" placeholder="{{ v.placeholder }}"></image-slot></div>
+            <div style="height:clamp(190px,24vw,240px);"><image-slot id="{{ v.slotId }}" shape="rect" fit="cover" placeholder="{{ v.placeholder }}" src="{{ v.src }}"></image-slot></div>
             <div style="padding:clamp(20px,2.4vw,28px) clamp(20px,2.4vw,28px) clamp(24px,2.6vw,32px);">
               <p style="font-family:'Instrument Serif',serif; font-size:clamp(18px,1.8vw,22px); line-height:1.35; margin-bottom:16px;">{{ v.quote }}</p>
               <div style="font-size:13.5px; font-weight:600;">{{ v.name }}</div>
@@ -818,8 +818,8 @@ class Component extends DCLogic {
       menuOpen: this.state.menuOpen, toggleMenu: this.toggleMenu, menuIcon: this.state.menuOpen ? "\u2715" : "\u2630",
 
       pillars: [
-        { eyebrow: "Fiber", title: "Support Digestion", body: "6g of gentle prebiotic fiber per stick, naturally flavored with no artificial sweeteners — a dose designed to be easy to tolerate day after day.", bg: "#FFF1CE", accent: "#7A6415", slotId: "pillar-fiber", src: "https://images.unsplash.com/photo-1609639643505-3c158a56de42?fm=jpg&q=80&w=1200&auto=format&fit=crop", credit: "Photo by Cristina Anne Costello on Unsplash", chref: "https://unsplash.com/@lightupphotos", placeholder: "Editorial: fresh fruit, fiber, calm still life" },
-        { eyebrow: "Electrolytes", title: "Stay Hydrated", body: "Sodium, potassium and magnesium to replace what daily hydration alone leaves behind.", bg: "#FFF1CE", accent: "#7A6415", slotId: "pillar-electrolytes", src: "https://images.unsplash.com/photo-1573624658129-3f7856192f19?fm=jpg&q=80&w=1200&auto=format&fit=crop", credit: "Photo by Vlad Tchompalov on Unsplash", chref: "https://unsplash.com/@tchompalov", placeholder: "Editorial: glass of ice water with lemon, condensation" },
+        { eyebrow: "Fiber", title: "Support Digestion", body: "6g of gentle prebiotic fiber per stick, naturally flavored with no artificial sweeteners — a dose designed to be easy to tolerate day after day.", bg: "#FFF1CE", accent: "#7A6415", slotId: "pillar-fiber", src: "./pillar-fiber.webp", placeholder: "Editorial: fresh fruit, fiber, calm still life" },
+        { eyebrow: "Electrolytes", title: "Stay Hydrated", body: "Sodium, potassium and magnesium to replace what daily hydration alone leaves behind.", bg: "#FFF1CE", accent: "#7A6415", slotId: "pillar-electrolytes", src: "./pillar-electrolytes.webp", placeholder: "Editorial: glass of ice water with lemon, condensation" },
       ],
       comparison: [
         { label: "Electrolytes", velq: "✓", shake: "Rarely", supps: "Separate product" },
@@ -872,9 +872,9 @@ class Component extends DCLogic {
         { title: "Direct line to the formula", body: "Batch notes, formulation updates and a channel where feedback actually reaches the people making it." },
       ],
       voices: [
-        { name: "Dana R.", role: "Founding member, Austin", quote: "First fiber drink I've finished more than twice.", slotId: "voice-1", placeholder: "Portrait: woman with a glass of lemonade on a sunny porch" },
-        { name: "Marcus T.", role: "Founding member, Denver", quote: "It replaced two things on my counter with one.", slotId: "voice-2", placeholder: "Portrait: man with a shaker bottle after a walk" },
-        { name: "Priya S.", role: "Founding member, Chicago", quote: "Tastes like actual lemonade, not a supplement.", slotId: "voice-3", placeholder: "Portrait: woman pouring a stick into a glass in a kitchen" },
+        { name: "Dana R.", role: "Founding member, Austin", quote: "First fiber drink I've finished more than twice.", slotId: "voice-1", src: "./voice-1.webp", placeholder: "Portrait: woman with a glass of lemonade on a sunny porch" },
+        { name: "Marcus T.", role: "Founding member, Denver", quote: "It replaced two things on my counter with one.", slotId: "voice-2", src: "./voice-2.webp", placeholder: "Portrait: man with a shaker bottle after a walk" },
+        { name: "Priya S.", role: "Founding member, Chicago", quote: "Tastes like actual lemonade, not a supplement.", slotId: "voice-3", src: "./voice-3.webp", placeholder: "Portrait: woman pouring a stick into a glass in a kitchen" },
       ],
 
       timeline: [
