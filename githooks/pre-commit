@@ -1,0 +1,9 @@
+#!/bin/sh
+# Blocks commits that corrupt the __bundler JSON blocks in the site's HTML.
+# Enabled via: git config core.hooksPath githooks
+node scripts/check-bundles.js || {
+  echo ""
+  echo "Commit blocked: a __bundler block no longer parses as JSON."
+  echo "Fix the escaping (see CLAUDE.md), re-run: node scripts/check-bundles.js"
+  exit 1
+}
