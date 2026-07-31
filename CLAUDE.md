@@ -36,3 +36,22 @@ working file, editing that, then re-encoding with
 
 The pages under `guides/` and `products/` are plain HTML — normal editing
 rules apply there.
+
+## Deployment: live site serves the `site` branch, not `main`
+
+The live site (Hostinger, velq-nutrition.com) deploys from the **`site`**
+branch. Pushing `main` does NOT change the live site. `main` is the
+source-of-truth working branch; "push to live" means updating `site`.
+
+To deploy: commit the deploy set from `main` onto `site` (e.g. via a
+worktree + `git archive main <paths> | tar -x`), then push `origin site`.
+
+Deploy set: `index.html`, `.htaccess`, `favicon.*`, `apple-touch-icon.png`,
+`robots.txt`, `sitemap.xml`, `guides/`, `products/`, `pillar-*.webp`,
+`voice-*.webp`, `velq-wordmark*.png`.
+Never deploy: `*.zip`, `*.md`, `scripts/`, `githooks/`, `image-slot.js`,
+`support.js`, `Velq Lemonade.dc.html`.
+
+The `site` branch has no `scripts/` folder, so before committing there run
+`node scripts/check-bundles.js <deploy files>` from the main checkout, then
+commit with `--no-verify`.
