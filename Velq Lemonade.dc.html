@@ -204,11 +204,11 @@
           <div style="display:flex; flex-direction:column; gap:12px; margin-bottom:26px;">
             <button onClick="{{ pickOnce }}" style="display:flex; align-items:center; justify-content:space-between; background:{{ onceBg }}; border:1.5px solid {{ onceBorder }}; border-radius:16px; padding:20px clamp(18px,2.2vw,26px); cursor:pointer; font-family:inherit; text-align:left;">
               <span><span style="display:block; font-size:16px; font-weight:600;">One-time purchase</span><span style="font-size:13.5px; color:#6A675C;">Ships with the first batch</span></span>
-              <span style="font-size:20px; font-weight:600;">$39.99</span>
+              <span style="font-size:20px; font-weight:600;">$49.99</span>
             </button>
             <button onClick="{{ pickSub }}" style="display:flex; align-items:center; justify-content:space-between; background:{{ subBg }}; border:1.5px solid {{ subBorder }}; border-radius:16px; padding:20px clamp(18px,2.2vw,26px); cursor:pointer; font-family:inherit; text-align:left; position:relative;">
               <span><span style="display:block; font-size:16px; font-weight:600;">Subscribe &amp; save <span style="background:#FFC928; font-size:11px; font-weight:600; padding:3px 9px; border-radius:6px; margin-left:6px; letter-spacing:.04em;">MEMBER</span></span><span style="font-size:13.5px; color:#6A675C;">New flavors first · member benefits</span></span>
-              <span style="font-size:20px; font-weight:600;">$29.99</span>
+              <span style="font-size:20px; font-weight:600;">$39.99</span>
             </button>
           </div>
           <button onClick="{{ reserve }}" style="width:100%; background:#0B3D2E; color:#FFF8ED; border:none; border-radius:999px; padding:20px; font-size:16px; font-weight:600; cursor:pointer; font-family:inherit; transition:background .2s ease;" style-hover="background:#1A5C46;">{{ reserveLabel }}</button>
@@ -672,7 +672,7 @@
         <div style="display:flex; justify-content:space-between; align-items:flex-start; gap:24px; flex-wrap:wrap; margin-bottom:30px;">
           <div>
             <div style="font-size:11px; font-weight:600; letter-spacing:.16em; text-transform:uppercase; color:#6E6A5E; margin-bottom:10px;">Velq Lemonade · 10 sticks</div>
-            <div style="font-family:'Instrument Serif',serif; font-size:clamp(27px,3.2vw,38px); letter-spacing:-.01em;">$29.99 / month</div>
+            <div style="font-family:'Instrument Serif',serif; font-size:clamp(27px,3.2vw,38px); letter-spacing:-.01em;">$39.99 / month</div>
           </div>
           <div style="background:{{ statusBg }}; color:{{ statusColor }}; font-size:12.5px; font-weight:600; letter-spacing:.06em; text-transform:uppercase; padding:9px 18px; border-radius:999px;">{{ statusLabel }}</div>
         </div>
@@ -959,7 +959,7 @@ class Component extends DCLogic {
       ],
 
       perks: [
-        { title: "Founding pricing, locked", body: "$29.99 a month for as long as your subscription stays active — even after launch pricing changes." },
+        { title: "Founding pricing, locked", body: "$39.99 a month for as long as your subscription stays active — even after launch pricing changes." },
         { title: "First taste of new flavors", body: "Members get new flavors before they list, plus a vote on what we develop next." },
         { title: "Direct line to the formula", body: "Batch notes, formulation updates and a channel where feedback actually reaches the people making it." },
       ],
@@ -996,8 +996,8 @@ class Component extends DCLogic {
       nextDelivery: st === "canceled" ? "—" : this.state.skipped ? "Sep 12, 2026 (skipped Aug)" : "Aug 12, 2026",
       skipMonth: this.skipMonth, togglePause: this.togglePause, cancelSub: this.cancelSub,
       orders: [
-        { date: "Jul 12, 2026", item: "Velq Lemonade · 10 sticks", status: "Delivered", total: "$29.99" },
-        { date: "Jun 12, 2026", item: "Velq Lemonade · 10 sticks", status: "Delivered", total: "$29.99" },
+        { date: "Jul 12, 2026", item: "Velq Lemonade · 10 sticks", status: "Delivered", total: "$39.99" },
+        { date: "Jun 12, 2026", item: "Velq Lemonade · 10 sticks", status: "Delivered", total: "$39.99" },
         { date: "May 12, 2026", item: "Founding reservation", status: "Applied to first order", total: "$5.00" },
       ],
 
