@@ -18,7 +18,7 @@ Clean across the board: titles and meta descriptions in range, exactly one H1 pe
 
 Issues found and fixed this week:
 
-1. Homepage (the highest-value page) was missing meta description, canonical, all Open Graph and Twitter tags, and any structured data. Added all of these plus Organization and WebSite JSON-LD inside the bundle template (bundle checks pass).
+1. Homepage rendered-DOM head was bare. The raw HTML crawlers fetch has a complete head (description, canonical, OG, Organization JSON-LD), but the loader script replaces the whole document with the bundle template at load time, and the template head had none of those tags. Google renders JavaScript when indexing, so its rendering pass saw a homepage with no canonical or meta at all. The template head now carries the exact same description, canonical, OG/Twitter tags and JSON-LD as the shell (bundle checks pass).
 2. `https://www.velqnutrition.com/` served the full site with 200 instead of redirecting, a duplicate-content risk made worse by the missing homepage canonical. Added a 301 www-to-apex redirect in .htaccess.
 3. Two leftover em dashes in the homepage bundle (a feature-card divider glyph, now a middot, and a "no delivery date" placeholder in the subscription portal script, now "Not scheduled").
 
