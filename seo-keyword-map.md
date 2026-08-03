@@ -21,6 +21,8 @@ Updated 2026-07-30.
 | can you mix protein and electrolytes (together) | `/guides/can-you-mix-protein-and-electrolytes/` |
 | protein powder with prebiotic fiber | `/guides/protein-powder-with-prebiotic-fiber/` |
 | how to mix protein powder in water / 16 oz | `/guides/how-to-mix-protein-powder-in-16-oz-of-water/` |
+| why does clear protein foam | `/guides/why-does-clear-protein-foam/` |
+| protein drink for a morning routine | `/guides/protein-drink-for-your-morning-routine/` |
 | protein hydration guides (nav) | `/guides/` |
 | protein hydration powder (head term) | `/products/lemonade-protein-hydration-powder/` |
 | protein powder with electrolytes | `/products/lemonade-protein-hydration-powder/` |
@@ -34,10 +36,8 @@ Updated 2026-07-30.
 | Keyword cluster | Planned page | Blocker |
 |---|---|---|
 | clear protein vs regular whey / traditional shakes | `/guides/clear-protein-vs-protein-shakes/` | none — educational |
-| why does clear protein foam | `/guides/why-does-clear-protein-foam/` | none — educational |
 | clear protein powder without sucralose | `/guides/clear-protein-powder-without-sucralose/` | confirm Velq sweetener system before tying Velq in |
 | the Velq formula & product-testing process | `/guides/building-the-velq-formula/` | needs real founder testing notes/photos — cannot be fabricated |
-| protein drink for a morning routine | `/guides/protein-drink-for-your-morning-routine/` | none — educational |
 
 ## Conditional — only if final product is verified genuinely clear/transparent
 
