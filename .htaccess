@@ -2,6 +2,13 @@
 DirectoryIndex index.html
 ErrorDocument 404 /index.html
 
+# Canonical host: www serves duplicate content, 301 it to the apex domain
+<IfModule mod_rewrite.c>
+  RewriteEngine On
+  RewriteCond %{HTTP_HOST} ^www\.velqnutrition\.com$ [NC]
+  RewriteRule ^ https://velqnutrition.com%{REQUEST_URI} [L,R=301]
+</IfModule>
+
 <IfModule mod_deflate.c>
   AddOutputFilterByType DEFLATE text/html text/css application/javascript image/svg+xml
 </IfModule>
