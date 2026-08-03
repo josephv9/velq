@@ -39,7 +39,7 @@ rules apply there.
 
 ## Deployment: live site serves the `site` branch, not `main`
 
-The live site (Hostinger, velq-nutrition.com) deploys from the **`site`**
+The live site (Hostinger, velqnutrition.com) deploys from the **`site`**
 branch. Pushing `main` does NOT change the live site. `main` is the
 source-of-truth working branch; "push to live" means updating `site`.
 
