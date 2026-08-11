@@ -47,7 +47,8 @@ To deploy: commit the deploy set from `main` onto `site` (e.g. via a
 worktree + `git archive main <paths> | tar -x`), then push `origin site`.
 
 Deploy set: `index.html`, `.htaccess`, `favicon.*`, `apple-touch-icon.png`,
-`robots.txt`, `sitemap.xml`, `guides/`, `products/`, `pillar-*.webp`,
+`robots.txt`, `sitemap.xml`, `guides/`, `products/`, `shipping/`, `contact/`,
+`privacy/`, `terms/`, `velq-analytics.js`, `pillar-*.webp`,
 `voice-*.webp`, `velq-wordmark*.png`.
 Never deploy: `*.zip`, `*.md`, `scripts/`, `githooks/`, `image-slot.js`,
 `support.js`, `Velq Lemonade.dc.html`.
