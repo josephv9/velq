@@ -1,5 +1,5 @@
 # Velq current homepage, Journal, and existing waitlist backend
-DirectoryIndex velq-site.php
+DirectoryIndex velq-site.php index.html
 ErrorDocument 404 default
 
 # Canonical host: www serves duplicate content, 301 it to the apex domain
