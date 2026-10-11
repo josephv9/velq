@@ -1,0 +1,78 @@
+/* Velq's strawberry storefront, scoped to its homepage. */
+:root{--ink:#44242c;--muted:#74666a;--line:#ebdedf;--yellow:#fbe1e5;--lemon:#fff8f2;--pink:#fde9eb;--red:#bd304a}
+body{background:#fffdfb}h1,h2,h3{letter-spacing:-.035em}em{font-family:var(--font);font-style:normal;font-weight:600;letter-spacing:inherit;color:var(--red)}.announcement{background:var(--red);color:white;padding:10px 20px}.wordmark{color:var(--red)}.header{background:#fffdfb;height:84px}.desktop-nav{gap:26px}.button{letter-spacing:.025em;border-color:var(--red);min-height:52px}.button-dark,.nav-signup{background:var(--red);color:white}.button-dark:hover,.nav-signup:hover{background:#942039}.hero{background:#fff3ef;grid-template-columns:1fr 1fr;min-height:620px;max-width:1600px;margin:auto}.hero-copy{padding:65px 6% 65px 12%}.hero h1{font-size:clamp(2.8rem,4.6vw,4.9rem);line-height:1.1;letter-spacing:-.045em}.hero-description{font-size:1.1rem;max-width:440px}.hero-image-wrap{padding:32px 5% 32px 0}.hero-image-wrap img{max-height:580px;width:100%;object-fit:contain;border-radius:24px}.hero-stamp{background:#fffdfb;border-color:var(--red);color:var(--red);width:90px;height:90px;top:8%;right:5%;font-size:.7rem}.nutrition-strip{display:flex;align-items:center;justify-content:center;gap:45px;padding:28px 5%;background:#fffdfb;border-bottom:1px solid var(--line);flex-wrap:wrap}.nutrition-strip>span{font-size:1.7rem;font-weight:700;color:var(--red)}.nutrition-strip small{display:block;font-size:.8rem;font-weight:500;color:var(--ink)}.nutrition-strip>p{font-size:.75rem;color:var(--muted)}.section{padding-block:80px}.products .product-grid{margin-top:42px;max-width:1080px;display:block}.product-card{display:grid;grid-template-columns:1fr 1fr;gap:64px;align-items:center}.product-visual{border-radius:24px}.product-visual img{aspect-ratio:1;object-fit:contain}.tag{background:var(--red);border-radius:100px;font-size:.68rem}.product-info{padding:0}.product-info>.eyebrow{margin-bottom:16px;color:var(--red)}.product-title-row h3{font-size:clamp(2rem,3.2vw,3.1rem);line-height:1.15}.product-summary{margin-top:20px;max-width:420px;color:var(--muted);line-height:1.7}.product-size{margin-block:22px}.product-specs{gap:8px}.product-specs span{background:#fff0f1;border-radius:30px;padding:8px 12px}.product-specs span+span{border:0;padding-left:12px}.product-button{background:var(--red);color:white;margin-top:10px}.product-button:hover{background:#942039}.ingredient-section{display:block;text-align:center;background:#fff6f2;padding-block:72px}.ingredient-intro h2{font-size:clamp(2.3rem,4vw,3.6rem)}.ingredient-grid{grid-template-columns:repeat(4,minmax(0,1fr));gap:22px;max-width:1200px;margin:38px auto 0}.ingredient-grid>div{background:white;border:1px solid #efdfdd;border-radius:20px;padding:26px 18px}.ingredient-icon{display:block;width:34px;height:34px;margin:0 auto 18px;fill:none;stroke:var(--red);stroke-width:1.5;stroke-linecap:round;stroke-linejoin:round}.ingredient-grid strong{color:var(--red);font-size:2.8rem}.ingredient-grid p{margin:auto}.step-number{color:var(--red)}.ritual-grid>div{padding:28px;background:#fff6f2;border-radius:18px}.story-section{border-radius:24px;overflow:hidden;background:#fff7f4;max-width:1260px;margin-inline:auto}.story-wordmark{background:#f7d6dd;color:var(--red)}.story-copy{padding:50px 10%}.home-journal-grid{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:26px;margin-top:38px}.journal-card{border:1px solid var(--line);border-radius:18px;overflow:hidden;background:white}.journal-card img{width:100%;aspect-ratio:1.5;object-fit:cover}.journal-card .card-copy{padding:24px}.journal-card h2{font-size:1.4rem;line-height:1.3;margin:14px 0}.journal-card .card-copy>p:not(.eyebrow){font-size:.9rem;color:var(--muted);line-height:1.65}.read-link{display:block;margin-top:18px;font-weight:700;color:var(--red);font-size:.85rem}.journal-card a:hover h2{text-decoration:underline}.journal-more{display:flex;width:fit-content;margin:32px auto 0;background:white}.waitlist-section{background:#fff0f2;border-top:0;padding-block:65px}.waitlist-section h2{font-size:clamp(2rem,3.5vw,3.3rem)}.closing{background:#f8dfe4}.seo-guides{max-width:1440px;margin:auto}.footer-top{padding-top:10px}
+@media(min-width:1600px){.hero-copy{justify-self:stretch}.hero .hero-image-wrap img{max-width:none}}
+@media(max-width:1100px){.desktop-nav{gap:16px}.desktop-nav a{font-size:.82rem}.nav-signup{padding-inline:17px}.hero-copy{padding-left:10%}.nutrition-strip{gap:26px}.product-card{gap:35px}.story-section{margin-inline:6%}}
+@media(max-width:900px){.header{height:76px}.desktop-nav{display:none}.menu-toggle{display:flex}.hero h1{font-size:clamp(2.5rem,5.2vw,4rem)}.ingredient-grid{grid-template-columns:repeat(2,minmax(0,1fr))}.home-journal-grid{gap:16px}.journal-card .card-copy{padding:18px}.journal-card h2{font-size:1.15rem}}
+@media(max-width:620px){.hero{grid-template-columns:1fr;min-height:0}.hero-copy{padding:38px 7% 25px}.hero h1{font-size:clamp(2.6rem,9vw,3.4rem);margin-top:15px}.hero-description{font-size:1rem}.hero-image-wrap{padding:0 6% 30px}.hero-image-wrap img{max-height:470px;width:100%;border-radius:20px}.hero-stamp{top:5%;right:8%}.nutrition-strip{display:grid;grid-template-columns:1fr 1fr;text-align:center;gap:20px;padding:25px 7%}.nutrition-strip>p{grid-column:1/-1}.section{padding:52px 7%}.product-card{grid-template-columns:1fr;gap:28px}.product-title-row h3{font-size:2rem}.ingredient-section{padding:50px 7%}.ingredient-grid{gap:12px}.ingredient-grid>div{padding:22px 12px}.ingredient-grid strong{font-size:2.3rem}.ingredient-grid p{font-size:.8rem}.ritual-grid{grid-template-columns:1fr;gap:16px;margin-top:28px}.step-number{padding-bottom:12px;margin-bottom:16px}.story-section{grid-template-columns:1fr;margin-inline:7%}.story-wordmark{font-size:6rem;padding:40px 20px}.story-wordmark span{margin-top:25px;font-size:.7rem}.story-copy{padding:34px 8%}.home-journal-grid{grid-template-columns:1fr;gap:24px}.journal-card h2{font-size:1.4rem}.journal-card .card-copy{padding:24px}.waitlist-section{padding:45px 7%}.faq{grid-template-columns:1fr}.closing{padding:45px 7%}.header .wordmark{font-size:2.8rem}.nav-signup{font-size:.66rem;padding:12px 14px;min-height:44px}.header-actions{gap:8px}}
+@media(prefers-reduced-motion:reduce){html{scroll-behavior:auto}.button{transition:none}.product-visual img{transition:none}}
+/* Explicit contrast overrides for the former red hero theme. */
+.hero,.hero-copy,.closing{color:var(--ink)}
+.hero h1 em,.closing em{color:var(--red)}
+.hero-description,.hero-small{color:var(--muted)}
+.product-button{color:#fff}
+.hero .hero-image-wrap{background:transparent}
+.hero-copy .eyebrow{color:var(--red)}
+.hero h1{font-weight:700}
+
+/* A balanced, modern Velq palette for everyday nutrition. */
+:root{--ink:#202724;--muted:#5f6761;--line:#dcded8;--yellow:#e9e7e0;--lemon:#f5f4ef;--pink:#e9e7e0;--red:#b52b36;--font:'Avenir Next',Avenir,Arial,sans-serif}
+body,.header,.nutrition-strip{background:#fafaf7}
+.announcement{background:#25322c;color:#fff;font-size:.78rem}
+.hero{background:#eeeee7;min-height:610px}
+.hero h1{font-weight:800;letter-spacing:-.045em;line-height:1.05}
+.hero h1 em{color:var(--ink);font-weight:800}
+.hero-copy .eyebrow{color:#49594e;letter-spacing:.14em}
+.hero-description{color:#59645d;font-size:1.08rem}
+.hero-image-wrap img{border-radius:12px}
+.wordmark{color:#b52b36}
+.button{border-radius:8px;letter-spacing:.07em}
+.button-dark,.nav-signup,.product-button{background:#26382d;border-color:#26382d;color:#fff}
+.button-dark:hover,.nav-signup:hover,.product-button:hover{background:#17261e}
+.nutrition-strip>span{color:var(--ink)}
+.nutrition-strip{padding-block:26px}
+.product-visual{background:#e9e7e1;border-radius:12px}
+.product-specs span{background:#eeefe9;color:var(--ink);border-radius:6px}
+.ingredient-section{background:#f0f1eb}
+.ingredient-grid>div{border-color:#dce0d6;border-radius:10px}
+.ingredient-grid strong{color:#26382d}
+.ingredient-icon{stroke:#536247}
+.ritual-grid>div{background:#eef0e9;border-radius:10px}
+.step-number{color:#475b4b}
+.story-section{background:#eeeee8;border-radius:12px}
+.story-wordmark{background:#dce2d6;color:#26382d}
+.journal-card{border-radius:10px}
+.waitlist-section{background:#e6ebe1}
+.closing{background:#26382d;color:#fff}
+.closing em,.closing h2{color:#fff}
+.closing .button{background:#fff;color:#26382d;border-color:#fff}
+.read-link{color:#475b4b}
+@media(max-width:620px){.hero{min-height:0}.hero h1{font-size:clamp(2.4rem,9vw,3.4rem)}.hero-image-wrap img{border-radius:10px}.hero-copy{padding-top:36px}.ingredient-grid>div{border-radius:8px}}
+/* Brighter balanced Velq palette */
+:root{--ink:#202724;--muted:#59635d;--line:#e3e9e4;--yellow:#fff8d9;--lemon:#fffdf3;--pink:#fff4ec;--red:#e02839}
+body,.header,.nutrition-strip{background:#fff}
+.announcement{background:#327153}
+.hero{background:#fffdf4}
+.hero-copy .eyebrow{color:#477558}
+.hero-image-wrap{background:#fff;border-radius:12px}
+.wordmark{color:#e02839}
+.button-dark,.nav-signup,.product-button{background:#327153;border-color:#327153}
+.button-dark:hover,.nav-signup:hover,.product-button:hover{background:#25583f}
+.product-visual{background:#fff7e7}
+.product-specs span{background:#f2f8ed}
+.ingredient-section{background:#f7fbeF}
+.ingredient-grid>div{background:#fff;border-color:#e2ecda}
+.ingredient-icon{stroke:#5b8d43}
+.ritual-grid>div{background:#fff8df}
+.step-number{color:#5b8d43}
+.story-section{background:#fff7e7}
+.story-wordmark{background:#f0f8e7;color:#327153}
+.waitlist-section{background:#f0f9e7}
+.closing{background:#327153}
+.read-link{color:#327153}
+
+/* Bright storefront and simple mobile conversion. */
+:root{--ink:#202d35;--muted:#55616a;--red:#e73346;--pink:#fff0ef;--line:#e7e9ec}body{background:#fff}.announcement{background:#e73346}.header{background:#fff}.hero{background:linear-gradient(115deg,#fffdf1 0%,#fff3e9 48%,#fff0ef 100%)}.hero-copy{padding-left:10%}.hero-description{color:#36434c}.hero-image-wrap{padding:16px 16px 16px 0}.hero-image-wrap img{max-height:none;aspect-ratio:1;width:100%;object-fit:contain;background:#fff;border-radius:20px}.product-visual{background:#fff1e8}.product-visual img{width:100%;max-height:none}.ingredient-section{background:#fff9e9}.ritual-grid>div{background:#f0f7ff}.story-wordmark{background:#ffe155;color:#273840}.closing{background:#fff6c9}.waitlist-section{background:#edf7ff}.finder-promo{background:#f3f9ff;text-align:center}.finder-promo p{margin:16px auto;max-width:580px}.finder-guide-link{display:block;margin-top:22px}.mobile-early-access{display:none}.header .desktop-nav{gap:16px}.waitlist-form input[type=email]{font-size:16px}.button:focus-visible,a:focus-visible,summary:focus-visible{outline:3px solid #2252d6;outline-offset:4px}
+@media(max-width:1200px){.desktop-nav{display:none}.menu-toggle{display:flex}}@media(max-width:650px){body{padding-bottom:90px}.hero-copy{padding:38px 7% 24px}.hero-image-wrap{padding:0 5% 24px}.hero-image-wrap img{border-radius:16px}.hero h1{font-size:clamp(2.7rem,10vw,3.7rem)}.hero-stamp{display:none}.mobile-early-access{display:flex;position:fixed;bottom:max(12px,env(safe-area-inset-bottom));left:5%;right:5%;z-index:40;justify-content:center;box-shadow:0 6px 24px #18293633}.mobile-early-access[hidden]{display:none}.nutrition-strip{gap:18px;display:grid;grid-template-columns:1fr 1fr;text-align:center}.nutrition-strip>p{grid-column:1/-1}.finder-promo h2{font-size:2.5rem}.waitlist-section{scroll-margin-top:20px}}
+
+@media(min-width:901px){.hero-image-wrap{height:auto!important;min-height:0!important;aspect-ratio:1/1;align-self:center;padding:0!important;justify-content:center;align-items:center}.hero .hero-image-wrap img{width:100%;height:auto!important;max-width:none!important;max-height:none!important;aspect-ratio:auto;object-fit:contain}}
