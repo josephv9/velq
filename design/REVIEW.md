@@ -1,21 +1,20 @@
 # Velq bright premium staging review
 
-Branch: `staging/velq-bright-premium`, based on main commit `d81869f0d57a4d745d6753401375d32cf9504ea3`.
+Branch: `staging/velq-bright-premium`, based on `main` commit `d81869f0d57a4d745d6753401375d32cf9504ea3`. Hostinger's supplied deployment screen confirms `main` deploys to `public_html` with auto-deployment enabled.
 
-## Design
-Warm white surfaces, lemon hero and ingredient accents, strawberry-red calls to action, consistent sans-serif headings, rounded product and story cards, and roomier touch targets. The desktop product card places artwork beside product information; phone layouts stack these elements. The supplied packaging image remains fully visible rather than cropped. The shared stylesheet also updates Journal surfaces.
+## Design and content
+Warm white surfaces, lemon accents, strawberry-red actions, a product card that retains full supplied artwork, responsive layouts, and larger touch targets. Homepage copy, live nutrition strip, Journal cards, comparison link section, menu links, FAQ, waitlist and privacy copy now match the current live structure. The `/compare` hub and all five snack guides restored from the existing approved Hostinger guide package.
 
-## Implementation
-`velq-site.php` is the active entry point specified by `.htaccess`. Its embedded `/style.css` now appends the reviewable `design/bright-premium.css`. Run `python scripts/apply-bright-premium.py` after editing that stylesheet. No dependencies or build step were added.
-
-Existing homepage copy, all eleven articles and category pages, calculator, product artwork, canonical tags, structured data, sitemap, robots directives, analytics and waitlist logic are unchanged. Legacy Shopify product, guide and legal pages remain untouched. The legacy self-unpacking `index.html` remains intact.
+## Preservation
+All existing PHP-bundle routes except the intentionally reconciled homepage, stylesheet, and sitemap remain byte-identical, including all 11 articles, categories, calculator, images, app, journal, analytics and waitlist assets. Shopify CSP, waitlist API proxy, analytics config endpoint, and form logic remain unchanged. `.htaccess` preserves the existing source policy and explicitly keeps the retired lemonade product URL at HTTP 410.
 
 ## Validation
-- `python scripts/check-bright-premium.py`: verifies all 30 non-CSS bundled assets are identical to the base commit; PHP routing/security/Shopify CSP and API proxy code are unchanged; existing stylesheet is retained; reapplication is idempotent.
+- `python scripts/check-bright-premium.py`: 28 prior routes/assets preserved; reconciled live links/routes/canonicals/schema/sitemap checked.
 - `node scripts/check-bundles.js`: all four legacy bundle JSON blocks pass.
 - `git diff --check`: passes.
+- Existing PHP and HTML routes were verified against the route table. The live website's homepage, all eleven article pages, canonical tags, sitemap, images, FAQ and privacy dialog were checked before reconciliation.
 
-Browser preview tooling and PHP runtime are unavailable in this workspace. Visual rendering and PHP HTTP behavior were not tested. Before approval, review 320/390px phones, 768/1024px tablets, and 1440/1920px desktops; check full packaging visibility, menus, FAQ, privacy dialog, keyboard focus and no horizontal overflow. Test waitlist success and failure with an approved test address, and confirm legacy Shopify checkout links. No signup was submitted during this change.
+The live-site browser has not yet received the merged release. Full waitlist/checkout submission was not performed. The live homepage reported no layout overflow at 1363px in the inspection browser; small-device visual checks remain limited to the responsive CSS rules until after deployment.
 
-## Release boundary
-No deployment, merge, Hostinger operation, live-branch update or Sites registration was performed. `main` and `site` are unchanged. Repository instructions say `site` deploys to Hostinger, but that branch currently lacks `velq-site.php` and uses different routing from `main`. The live public homepage resembles the PHP-bundle design. The review must resolve that deployment-source discrepancy before any release; this PR does not assume that merging main publishes the redesign.
+## Release
+Merging this reviewed PR into `main` will trigger Hostinger's confirmed auto-deployment to `public_html`. Confirm the live homepage, comparison and guide routes, analytics, waitlist, retired product 410, canonical tags, sitemap and mobile layout after the deployment completes.
