@@ -8,8 +8,9 @@ ErrorDocument 404 default
   RewriteCond %{HTTP_HOST} ^www\.velqnutrition\.com$ [NC]
   RewriteRule ^ https://velqnutrition.com%{REQUEST_URI} [L,R=301]
 
-  # Retire the legacy lemonade product URL, matching its live 410 response.
+  # Retire the legacy lemonade product URL and snack finder.
   RewriteRule ^products/lemonade-protein-hydration-powder/?$ - [G,L]
+  RewriteRule ^tools/snack-finder(?:/.*)?$ - [G,L]
 
   # Keep source control and build utilities outside the public site.
   RewriteRule ^(?:\.git|hostinger-migration|scripts|githooks)(?:/|$) - [F,L]
