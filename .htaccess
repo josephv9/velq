@@ -15,7 +15,7 @@ ErrorDocument 404 default
   RewriteRule ^(?:\.git|hostinger-migration|scripts|githooks)(?:/|$) - [F,L]
 
   # Route the current Site assets and APIs through its PHP bundle.
-  RewriteRule ^(?:index\.html|tools(?:/.*)?|guides(?:/.*)?|blog(?:/.*)?|blogs/journal(?:/.*)?|(?:style|home|journal)\.css|(?:app|analytics|journal|analytics-config)\.js|api/waitlist|robots\.txt|sitemap\.xml)?$ velq-site.php [END]
+  RewriteRule ^(?:index\.html|tools(?:/.*)?|guides(?:/.*)?|blog(?:/.*)?|blogs/journal(?:/.*)?|(?:style|journal)\.css|(?:app|analytics|journal|analytics-config)\.js|api/waitlist|robots\.txt|sitemap\.xml)?$ velq-site.php [END]
 
   # Preserve existing legacy files; unknown URLs must return a real 404.
   RewriteCond %{REQUEST_FILENAME} !-f
