@@ -1,0 +1,8 @@
+export function matchingSnacks(rows,filters){const n=Number(filters.portion)||1;return rows.filter(r=>r.protein*n>=Number(filters.protein)&&r.fiber*n>=Number(filters.fiber)&&(filters.diet!=='plant'||r.plant)&&(filters.storage!=='shelf'||!r.cold)&&(filters.storage!=='cold'||r.cold)&&(filters.use==='all'||r.use.includes(filters.use)));}
+if(typeof document!=='undefined'){
+ const form=document.querySelector('#snack-filters');
+ try{const response=await fetch('/tools/snack-finder/snacks.json');if(!response.ok)throw Error('Data unavailable');const rows=await response.json();form.hidden=false;
+ const render=()=>{const filters=Object.fromEntries(new FormData(form));const matches=matchingSnacks(rows,filters);const ids=new Set(matches.map(r=>r.id));const n=Number(filters.portion);for(const r of rows){const card=document.querySelector(`[data-snack="${r.id}"]`);card.hidden=!ids.has(r.id);for(const key of ['protein','fiber','calories'])card.querySelector(`[data-${key}]`).textContent=String(Math.round(r[key]*n*10)/10);card.querySelector('.portion-note').textContent=`Showing ${n} labeled serving${n===1?'':'s'}${n!==1?' · calculated from rounded label values':''}`;}document.querySelector('#finder-count').textContent=`${matches.length} snack${matches.length===1?'':'s'} · ${n} labeled serving${n===1?'':'s'} each`;document.querySelector('#finder-empty').hidden=matches.length!==0;};
+ form.addEventListener('change',()=>{render();if(window.VELQ_ANALYTICS?.ga4)window.gtag('event','snack_finder_filter',{page_path:location.pathname});});form.addEventListener('reset',()=>setTimeout(render,0));render();
+ }catch{document.querySelector('#finder-count').textContent='Showing all 6 snacks. Filters are temporarily unavailable.';}
+}

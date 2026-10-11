@@ -1,12 +1,26 @@
-# Velq — static site
-DirectoryIndex index.html
-ErrorDocument 404 /index.html
+# Velq current homepage, Journal, and existing waitlist backend
+DirectoryIndex velq-site.php index.html
+ErrorDocument 404 default
 
 # Canonical host: www serves duplicate content, 301 it to the apex domain
 <IfModule mod_rewrite.c>
   RewriteEngine On
   RewriteCond %{HTTP_HOST} ^www\.velqnutrition\.com$ [NC]
   RewriteRule ^ https://velqnutrition.com%{REQUEST_URI} [L,R=301]
+
+  # Retire the legacy lemonade product URL, matching its live 410 response.
+  RewriteRule ^products/lemonade-protein-hydration-powder/?$ - [G,L]
+
+  # Keep source control and build utilities outside the public site.
+  RewriteRule ^(?:\.git|hostinger-migration|scripts|githooks)(?:/|$) - [F,L]
+
+  # Route the current Site assets and APIs through its PHP bundle.
+  RewriteRule ^(?:index\.html|tools(?:/.*)?|guides(?:/.*)?|blog(?:/.*)?|blogs/journal(?:/.*)?|assets/.*|(?:style|home|journal)\.css|(?:app|analytics|journal|analytics-config)\.js|api/waitlist|robots\.txt|sitemap\.xml)?$ velq-site.php [END]
+
+  # Preserve existing legacy files; unknown URLs must return a real 404.
+  RewriteCond %{REQUEST_FILENAME} !-f
+  RewriteCond %{REQUEST_FILENAME} !-d
+  RewriteRule ^ velq-site.php [END]
 </IfModule>
 
 <IfModule mod_deflate.c>

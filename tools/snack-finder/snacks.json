@@ -1,0 +1,103 @@
+[
+  {
+    "id": "almonds",
+    "name": "Blue Diamond Whole Natural Almonds",
+    "serving": "1 oz (28g)",
+    "protein": 6,
+    "fiber": 3,
+    "calories": 160,
+    "plant": true,
+    "cold": false,
+    "use": [
+      "work",
+      "travel"
+    ],
+    "note": "Contains almonds. Ready to eat; store as directed.",
+    "source": "https://www.bluediamond.com/brand/blue-diamond/snack-almonds/classic-flavors/whole-natural/",
+    "reviewed": "2026-10-10"
+  },
+  {
+    "id": "chickpeas",
+    "name": "Biena Sea Salt Roasted Chickpeas",
+    "serving": "1 oz (28g)",
+    "protein": 6,
+    "fiber": 6,
+    "calories": 120,
+    "plant": true,
+    "cold": false,
+    "use": [
+      "work",
+      "travel"
+    ],
+    "note": "Chickpeas, oil and sea salt. Check your package for allergen information.",
+    "source": "https://bienasnacks.com/products/sea-salt",
+    "reviewed": "2026-10-10"
+  },
+  {
+    "id": "original-oat",
+    "name": "Bobo\u2019s Original Oat Bar",
+    "serving": "1/2 bar (43g)",
+    "protein": 3,
+    "fiber": 2,
+    "calories": 170,
+    "plant": true,
+    "cold": false,
+    "use": [
+      "work",
+      "travel"
+    ],
+    "note": "A whole bar contains two labeled servings. Check the label for facility allergen statements.",
+    "source": "https://eatbobos.com/collections/oat-bars/products/original-oat-bar",
+    "reviewed": "2026-10-10"
+  },
+  {
+    "id": "almond-oat",
+    "name": "Bobo\u2019s Almond Butter Oat Bar",
+    "serving": "1/2 bar (43g)",
+    "protein": 4,
+    "fiber": 2,
+    "calories": 180,
+    "plant": true,
+    "cold": false,
+    "use": [
+      "work",
+      "travel"
+    ],
+    "note": "Contains almonds. A whole bar contains two labeled servings.",
+    "source": "https://eatbobos.com/collections/oat-bars/products/almond-butter-oat-bar",
+    "reviewed": "2026-10-10"
+  },
+  {
+    "id": "peanut-oat",
+    "name": "Bobo\u2019s Peanut Butter Stuff\u2019d Oat Bar",
+    "serving": "1 bar (71g)",
+    "protein": 5,
+    "fiber": 3,
+    "calories": 290,
+    "plant": true,
+    "cold": false,
+    "use": [
+      "work",
+      "travel"
+    ],
+    "note": "Contains peanuts. This bar has a different serving size from the original oat bar.",
+    "source": "https://eatbobos.com/collections/oat-bars/products/peanut-butter-stuffed",
+    "reviewed": "2026-10-10"
+  },
+  {
+    "id": "yogurt",
+    "name": "FAGE Total 0% Plain Greek Yogurt",
+    "serving": "1 container (150g)",
+    "protein": 16,
+    "fiber": 0,
+    "calories": 80,
+    "plant": false,
+    "cold": true,
+    "use": [
+      "work"
+    ],
+    "note": "Contains milk. Keep refrigerated. Provides protein but no labeled dietary fiber.",
+    "source": "https://usa.fage/products/yogurt/fage-total-0",
+    "reviewed": "2026-10-10"
+  }
+]
