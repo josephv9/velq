@@ -1,0 +1,70 @@
+#!/usr/bin/env python3
+"""Reconcile the approved staging redesign with verified live homepage and SEO routes."""
+import base64, io, json, re, zipfile
+from pathlib import Path
+import xml.etree.ElementTree as ET
+
+ROOT=Path(__file__).resolve().parents[1]
+PHP=ROOT/'velq-site.php'
+ZIP=ROOT.parent/'source-export/Velq_Hostinger_Snack_Guides.zip'
+PATTERN=r"\$assets=json_decode\(base64_decode\('([^']+)'\),true\);"
+SITEMAP_NS='http://www.sitemaps.org/schemas/sitemap/0.9'
+
+def decode_php(text):
+    match=re.search(PATTERN,text)
+    if not match: raise ValueError('Active asset bundle not found')
+    return match,json.loads(base64.b64decode(match[1]))
+
+def text_asset(body, mime='text/html; charset=utf-8'):
+    return {'data':base64.b64encode(body.encode()).decode(),'type':mime}
+
+def page(title,description,path,body,graph_type='CollectionPage'):
+    canonical='https://velqnutrition.com'+path
+    schema=json.dumps({'@context':'https://schema.org','@type':graph_type,'name':title,'description':description,'url':canonical,'inLanguage':'en-US','isPartOf':{'@type':'WebSite','name':'Velq','url':'https://velqnutrition.com/'}},separators=(',',':'))
+    return f'''<!doctype html><html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1"><title>{title} | Velq</title><meta name="description" content="{description}"><link rel="canonical" href="{canonical}"><meta name="robots" content="index,follow,max-image-preview:large"><meta property="og:type" content="website"><meta property="og:title" content="{title} | Velq"><meta property="og:description" content="{description}"><meta property="og:url" content="{canonical}"><meta name="theme-color" content="#fffcec"><link rel="stylesheet" href="/style.css"><script src="/analytics-config.js"></script><script src="/analytics.js" defer></script><script src="/app.js" defer></script><script type="application/ld+json">{schema}</script></head><body><a class="skip-link" href="#main">Skip to content</a><div class="announcement"><span>GET ON THE LIST.</span> Be first to know when Velq launches.</div><header class="header"><a href="/" class="wordmark" aria-label="Velq home">velq</a><nav class="desktop-nav" aria-label="Main navigation"><a href="/#products">Meet Velq</a><a href="/#ingredients">What’s inside</a><a href="/#story">Our story</a><a href="/compare">Compare</a><a href="/blog">Blog</a><a href="/guides/protein-and-fiber-snacks">Snack guides</a></nav><div class="header-actions"><a class="button nav-signup" href="/#waitlist">GET EARLY ACCESS</a><button id="menu-toggle" class="icon-button menu-toggle" aria-label="Open menu" aria-expanded="false"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M3 6h18M3 12h18M3 18h18"/></svg></button></div></header><nav class="mobile-nav" id="mobile-nav" aria-label="Mobile navigation" hidden><a href="/#products">Meet Velq</a><a href="/#ingredients">What’s inside</a><a href="/#story">Our story</a><a href="/compare">Compare</a><a href="/blog">Blog</a><a href="/guides/protein-and-fiber-snacks">Snack guides</a></nav><main id="main">{body}</main><footer><div class="footer-top"><a href="/" class="wordmark" aria-label="Velq home">velq</a><p>More from your everyday.<br>Less from your routine.</p><nav aria-label="Footer navigation"><a href="/#products">Meet Velq</a><a href="/#ingredients">What’s inside</a><a href="/#story">Our story</a><a href="/#faq">FAQs</a><a href="/compare">Compare</a><a href="/blog">Blog</a><a href="/guides/protein-and-fiber-snacks">Snack guides</a></nav></div><div class="footer-bottom"><span>© 2026 Velq Nutrition LLC</span><span>Products are in development. Final packaging and nutrition details may change.</span></div></footer></body></html>'''
+
+def apply():
+    source=PHP.read_text();match,assets=decode_php(source)
+    html=base64.b64decode(assets['/index.html']['data']).decode()
+    html=html.replace('<a href="#story">Our story</a><a href="/blog">Blog</a>','<a href="#story">Our story</a><a href="/compare">Compare</a><a href="/blog">Blog</a><a href="/guides/protein-and-fiber-snacks">Snack guides</a>')
+    html=html.replace('<a href="#story">Our story</a><a href="/blog">Blog</a></nav>','<a href="#story">Our story</a><a href="/compare">Compare</a><a href="/blog">Blog</a><a href="/guides/protein-and-fiber-snacks">Snack guides</a></nav>')
+    html=html.replace('Protein + Fiber<br> <em>Gummies.</em>','Your daily protein + fiber.<br> <em>Now in a gummy.</em>')
+    html=html.replace('Meet Velq zero-sugar strawberry protein and prebiotic fiber gummies with caffeine and L-theanine. Join early access for launch news.','Meet Velq strawberry protein + fiber gummies with caffeine and L-theanine. Join early access for launch news.')
+    html=html.replace('href="#" class="wordmark"','href="/" class="wordmark"')
+    nutrition='<div class="nutrition-strip" aria-label="Nutrition per pack"><span>20g <small>protein</small></span><span>10g <small>prebiotic fiber</small></span><span>80mg <small>caffeine</small></span><span>200mg <small>L-theanine</small></span><p>Per pack of 10 gummies</p></div>'
+    hero_end=html.index('</section>',html.index('<section class="hero"'))+len('</section>')
+    if 'class="nutrition-strip"' not in html: html=html[:hero_end]+'\n'+nutrition+html[hero_end:]
+    journal='''<section class="home-journal section" aria-labelledby="journal-title"><div class="section-heading"><p class="eyebrow">THE VELQ JOURNAL</p><h2 id="journal-title">Wellness, <em>made simple.</em></h2><p>A little knowledge for a brighter everyday.</p></div><div class="home-journal-grid"><article class="journal-card"><a href="/blog/protein-vs-fiber-why-your-body-needs-both"><div class="card-copy"><p class="eyebrow">Protein · 3 MIN READ</p><h2>Protein vs. Fiber: Why Your Body Needs Both</h2><p>Learn what each nutrient does, where to find them, and simple ways to build everyday meals with both.</p><span class="read-link">Read article ↗</span></div></a></article><article class="journal-card"><a href="/blog/how-much-fiber-do-you-need-every-day"><div class="card-copy"><p class="eyebrow">Fiber · 3 MIN READ</p><h2>How Much Fiber Do You Need Every Day?</h2><p>Explore recommended intake, high-fiber foods, easy swaps, and how to increase fiber comfortably.</p><span class="read-link">Read article ↗</span></div></a></article><article class="journal-card"><a href="/blog/simple-daily-wellness-routine-that-sticks"><div class="card-copy"><p class="eyebrow">Fitness · 4 MIN READ</p><h2>The Simple Daily Wellness Routine That Sticks</h2><p>Build a realistic routine with simple habits for balanced meals, hydration, movement, sleep, and consistency.</p><span class="read-link">Read article ↗</span></div></a></article></div><a class="button journal-more" href="/blog">EXPLORE WELLNESS TIPS <span aria-hidden="true">↗</span></a></section>'''
+    if 'class="home-journal section"' not in html: html=html.replace('<section class="faq section"',journal+'\n<section class="faq section"')
+    guides='''<section class="seo-guides" aria-labelledby="compare-heading"><p class="eyebrow">FIND YOUR FORMAT</p><h2 id="compare-heading">Considering protein or fiber gummies?</h2><p>Compare formats, ingredients and serving sizes before choosing.</p><div class="seo-guide-links"><a href="/blog/protein-gummies-vs-protein-powder">Protein gummies vs. powder ↗</a><a href="/blog/fiber-gummies-vs-fiber-powder">Fiber gummies vs. powder ↗</a><a href="/blog/protein-and-fiber-gummies-buying-guide">What to check before buying ↗</a><a href="/compare">See all comparisons ↗</a></div></section>'''
+    if 'id="compare-heading"' not in html: html=html.replace('</main>',guides+'</main>')
+    assets['/index.html']['data']=base64.b64encode(html.encode()).decode()
+    comparebody='''<section class="journal-hero"><p class="eyebrow">BEFORE YOU CHOOSE</p><h1>Compare your everyday options.</h1><p>Protein, fiber and caffeine gummies: practical comparisons to help you decide which format fits your routine.</p></section><section class="journal-list" aria-label="Supplement format comparisons"><div class="section-heading"><h2>Start with the label.</h2><p>Compare a complete serving, the specific ingredient sources and cost per serving. Our guides compare formats, not independently tested brands. Velq publishes these guides and is developing its own gummy product.</p><p><a href="/blog/protein-and-fiber-gummies-buying-guide">Read the protein and fiber gummies buying checklist →</a></p></div><div class="journal-grid">'''
+    items=[('Protein gummies vs. protein powder','protein-gummies-vs-protein-powder','Compare protein source, grams per serving, preparation and cost. Choose powder when flexible dosing matters; assess gummies when portability matters.'),('Protein gummies vs. protein bars','protein-gummies-vs-protein-bars','Compare complete portions, protein source, fiber, sugar and caffeine. A bar and a gummy pack can have very different ingredient profiles.'),('Fiber gummies vs. fiber powder','fiber-gummies-vs-fiber-powder','Start with the named fiber ingredient and grams per serving. Format alone does not tell you whether two products are equivalent.'),('Caffeine gummies vs. energy drinks','caffeine-gummies-vs-energy-drinks','Compare caffeine per serving, sugar, portability and the total caffeine in your routine.'),('Caffeine gummies vs. coffee','caffeine-gummies-vs-coffee-whats-the-difference','Look at labeled caffeine, serving size and timing before choosing your preferred format.'),('Combined gummies vs. separate supplements','protein-and-fiber-gummies-vs-separate-supplements','Compare the convenience of one pack with control over individual ingredients and doses.')]
+    for title,slug,desc in items:
+        comparebody+=f'<article class="journal-card"><div class="card-copy"><p class="eyebrow">FORMAT COMPARISON</p><h2><a href="/blog/{slug}">{title}</a></h2><p>{desc}</p><a class="read-link" href="/blog/{slug}">Read the comparison ↗</a></div></article>'
+    comparebody+='''</div><aside class="velq-article-cta"><p class="eyebrow">VELQ · COMING SOON</p><h2>Meet strawberry protein + fiber gummies.</h2><p>Velq’s proposed full pack of 10 gummies contains 20g protein, 10g prebiotic fiber, 80mg caffeine and 200mg L-theanine, with zero sugar. Final ingredients and nutrition details may change. Pricing and ordering are not yet available.</p><a class="button button-dark" href="/#waitlist">Get launch updates and early access ↗</a></aside></section>'''
+    assets['/compare/index.html']=text_asset(page('Compare protein, fiber and caffeine formats','Practical comparisons of protein, fiber and caffeine gummies, powders, bars, coffee and energy drinks.','/compare',comparebody))
+    if not ZIP.exists(): raise FileNotFoundError(ZIP)
+    with zipfile.ZipFile(ZIP) as z:
+        for name in z.namelist():
+            if name.startswith('guides/') and name.endswith('/index.html'):
+                route='/'+name
+                assets[route]=text_asset(z.read(name).decode())
+    sm=ET.fromstring(base64.b64decode(assets['/sitemap.xml']['data']))
+    present={x.text for x in sm.findall(f'{{{SITEMAP_NS}}}url/{{{SITEMAP_NS}}}loc')}
+    for path in ['/compare','/guides/protein-and-fiber-snacks','/guides/protein-and-fiber-snacks-for-work','/guides/protein-and-fiber-snacks-for-travel','/guides/protein-and-fiber-snacks-without-refrigeration','/guides/plant-based-protein-and-fiber-snacks','/guides/protein-and-fiber-snacks-without-protein-powder']:
+        loc='https://velqnutrition.com'+path
+        if loc not in present:
+            node=ET.SubElement(sm,f'{{{SITEMAP_NS}}}url');ET.SubElement(node,f'{{{SITEMAP_NS}}}loc').text=loc
+    assets['/sitemap.xml']['data']=base64.b64encode(ET.tostring(sm,encoding='utf-8',xml_declaration=True)).decode()
+    style=base64.b64decode(assets['/style.css']['data']).decode()
+    style=style.replace('/* BEGIN VELQ BRIGHT PREMIUM */','/* BEGIN VELQ BRIGHT PREMIUM */')
+    additions='''\n/* Live content reconciliation: home Journal and format comparison cards. */\n.nutrition-strip{display:flex;align-items:center;justify-content:center;gap:clamp(18px,4vw,56px);flex-wrap:wrap;padding:26px 5%;background:#fff;border-bottom:1px solid var(--line)}.nutrition-strip span{font-weight:800;font-size:1.35rem;color:var(--red)}.nutrition-strip small{font-size:.8rem;color:var(--ink);font-weight:600}.nutrition-strip p{flex-basis:100%;text-align:center;font-size:.75rem;color:var(--muted)}.home-journal-grid{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:22px;max-width:1120px;margin:36px auto}.home-journal-grid .journal-card{min-width:0}.home-journal-grid .card-copy{padding:24px}.home-journal-grid h2{font-size:1.35rem;line-height:1.2;margin:14px 0}.journal-more{display:flex;width:max-content;margin:0 auto;background:var(--red);color:white}.seo-guides{padding:64px 6%;border-top:1px solid var(--line);max-width:1200px;margin:auto}.seo-guides h2{font-size:clamp(1.8rem,4vw,3rem);line-height:1.15;margin:20px 0}.seo-guide-links{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:14px;margin-top:25px}.seo-guide-links a{padding:20px;border:1px solid var(--line);border-radius:14px;font-weight:600}.journal-hero{background:var(--lemon)}.velq-article-cta{background:var(--lemon)}@media(max-width:720px){.nutrition-strip{gap:14px 22px;padding:22px 5%}.nutrition-strip span{font-size:1.1rem}.nutrition-strip small{font-size:.72rem}.home-journal-grid{grid-template-columns:1fr;gap:16px;margin:26px auto}.home-journal-grid h2{font-size:1.35rem}.seo-guide-links{grid-template-columns:1fr}.seo-guides{padding:46px 6%}}\n'''
+    if 'class="nutrition-strip"' not in style: style+=additions
+    assets['/style.css']['data']=base64.b64encode(style.encode()).decode()
+    encoded=base64.b64encode(json.dumps(assets,separators=(',',':'),ensure_ascii=False).encode()).decode()
+    PHP.write_text(source[:match.start(1)]+encoded+source[match.end(1):])
+    print(f'Reconciled homepage, added comparison and snack guide routes, sitemap entries, and responsive CSS ({len(assets)} total routes).')
+
+if __name__=='__main__': apply()
