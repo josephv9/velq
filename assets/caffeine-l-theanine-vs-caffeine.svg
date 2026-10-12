@@ -1,0 +1,42 @@
+<svg xmlns="http://www.w3.org/2000/svg" role="img" aria-labelledby="title description" viewBox="0 0 1200 675" width="1200" height="675">
+<title id="title">Caffeine plus L-theanine versus caffeine alone</title>
+<desc id="description">Editorial comparison illustration of caffeine alone and caffeine together with L-theanine. No product efficacy claims are made.</desc>
+<defs>
+  <linearGradient id="bg" x1="0" y1="0" x2="1" y2="1"><stop stop-color="#f4faff"/><stop offset="1" stop-color="#fff2e8"/></linearGradient>
+  <linearGradient id="coffee" x1="0" y1="0" x2="1" y2="1"><stop stop-color="#c98a5e"/><stop offset="1" stop-color="#7c513f"/></linearGradient>
+  <filter id="shadow"><feDropShadow dx="0" dy="14" stdDeviation="17" flood-color="#244156" flood-opacity=".11"/></filter>
+</defs>
+<rect width="1200" height="675" fill="url(#bg)"/>
+<circle cx="1107" cy="-37" r="232" fill="#e8eaf8" opacity=".7"/>
+<circle cx="-47" cy="684" r="203" fill="#fce4e1" opacity=".65"/>
+<text x="76" y="71" fill="#cf344b" font-family="Arial,sans-serif" font-size="35" font-weight="900" letter-spacing="-2">velq</text>
+<text x="167" y="70" fill="#5b6572" font-family="Arial,sans-serif" font-size="15" font-weight="700" letter-spacing="5">JOURNAL / ENERGY</text>
+<text x="76" y="133" fill="#253847" font-family="Arial,sans-serif" font-size="47" font-weight="800" letter-spacing="-1">Caffeine + L-theanine</text>
+<text x="76" y="189" fill="#253847" font-family="Arial,sans-serif" font-size="47" font-weight="800" letter-spacing="-1">vs. caffeine alone</text>
+<rect x="75" y="227" width="505" height="340" rx="30" fill="#ebf3fb" stroke="#d7e4ef" stroke-width="2" filter="url(#shadow)"/>
+<rect x="620" y="227" width="505" height="340" rx="30" fill="#f9f6e9" stroke="#e7e5d6" stroke-width="2" filter="url(#shadow)"/>
+<text x="110" y="276" fill="#405f77" font-family="Arial,sans-serif" font-size="21" font-weight="800" letter-spacing="2">CAFFEINE ALONE</text>
+<text x="653" y="276" fill="#617252" font-family="Arial,sans-serif" font-size="21" font-weight="800" letter-spacing="1.5">CAFFEINE + L-THEANINE</text>
+<g transform="translate(205 331)">
+ <ellipse cx="112" cy="208" rx="123" ry="25" fill="#acbfd3" opacity=".33"/>
+ <path d="M15 42H195L180 175Q172 200 103 200Q34 200 28 175Z" fill="#fff" stroke="#66849d" stroke-width="8"/>
+ <path d="M194 66H220Q276 72 253 132Q237 165 182 150" fill="none" stroke="#66849d" stroke-width="13" stroke-linecap="round"/>
+ <ellipse cx="105" cy="45" rx="88" ry="22" fill="#ead2bb" stroke="#66849d" stroke-width="7"/>
+ <ellipse cx="105" cy="45" rx="64" ry="12" fill="url(#coffee)"/>
+ <path d="M71 11Q56 -6 74 -28M114 12Q97 -9 112 -34M155 12Q142 -6 159 -27" fill="none" stroke="#8da9b6" stroke-width="7" stroke-linecap="round"/>
+</g>
+<g transform="translate(729 328)">
+ <ellipse cx="122" cy="210" rx="133" ry="24" fill="#c3cfb4" opacity=".32"/>
+ <path d="M21 60H221L203 168Q199 194 121 194Q47 194 39 168Z" fill="#fffdf6" stroke="#77906f" stroke-width="8"/>
+ <path d="M220 84H243Q291 93 264 141Q252 159 217 156" fill="none" stroke="#77906f" stroke-width="13" stroke-linecap="round"/>
+ <ellipse cx="121" cy="61" rx="100" ry="23" fill="#e8ead1" stroke="#77906f" stroke-width="7"/>
+ <ellipse cx="121" cy="60" rx="75" ry="13" fill="#b4aa73"/>
+ <path d="M179 43Q194 -24 259 -16Q247 40 191 65Z" fill="#b6ce8e" stroke="#648056" stroke-width="5"/>
+ <path d="M200 43L249 -8" stroke="#648056" stroke-width="5" stroke-linecap="round"/>
+ <path d="M88 21Q76 0 88 -20M127 22Q115 0 128 -25" fill="none" stroke="#a4b4a0" stroke-width="6" stroke-linecap="round"/>
+</g>
+<circle cx="600" cy="399" r="35" fill="#fff" stroke="#e3e4dc" stroke-width="2"/>
+<text x="600" y="407" text-anchor="middle" fill="#344a40" font-family="Arial,sans-serif" font-size="24" font-weight="900">VS</text>
+<text x="76" y="618" fill="#576779" font-family="Arial,sans-serif" font-size="20" font-weight="600">Compare evidence • ingredient doses • timing and tolerance</text>
+<text x="1119" y="618" fill="#cf344b" font-family="Arial,sans-serif" font-size="20" font-weight="800" text-anchor="end">VELQ</text>
+</svg>

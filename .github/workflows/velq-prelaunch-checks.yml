@@ -1,0 +1,25 @@
+name: Velq prelaunch checks
+
+on:
+  push:
+    branches: [main, site]
+    paths:
+      - 'velq-site.php'
+      - 'scripts/validate-velq-site.cjs'
+      - '.github/workflows/velq-prelaunch-checks.yml'
+  pull_request:
+    branches: [main, site]
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+jobs:
+  validate-site:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - name: Validate PHP syntax
+        run: php -l velq-site.php
+      - name: Validate the packed Velq site and signup code
+        run: node scripts/validate-velq-site.cjs

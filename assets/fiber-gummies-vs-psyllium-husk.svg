@@ -1,0 +1,38 @@
+<svg xmlns="http://www.w3.org/2000/svg" role="img" aria-labelledby="title description" viewBox="0 0 1200 675" width="1200" height="675">
+<title id="title">Fiber gummies versus psyllium husk</title>
+<desc id="description">Editorial comparison illustration with strawberry-colored fiber gummies and a bowl of psyllium powder. No clinical superiority is implied.</desc>
+<defs>
+  <linearGradient id="bg" x1="0" y1="0" x2="1" y2="1"><stop offset="0" stop-color="#fff8eb"/><stop offset="1" stop-color="#f0f6e9"/></linearGradient>
+  <linearGradient id="rose" x1="0" y1="0" x2="1" y2="1"><stop stop-color="#f96e74"/><stop offset="1" stop-color="#be2f48"/></linearGradient>
+  <linearGradient id="powder" x1="0" y1="0" x2="1" y2="1"><stop stop-color="#eddfbd"/><stop offset="1" stop-color="#d0bb8e"/></linearGradient>
+  <filter id="shadow"><feDropShadow dx="0" dy="14" stdDeviation="17" flood-color="#263f30" flood-opacity=".12"/></filter>
+</defs>
+<rect width="1200" height="675" fill="url(#bg)"/>
+<circle cx="1170" cy="-48" r="244" fill="#f9dbc9" opacity=".4"/>
+<circle cx="34" cy="666" r="180" fill="#f4d9dd" opacity=".38"/>
+<text x="76" y="71" fill="#c63345" font-family="Arial,sans-serif" font-weight="900" font-size="35" letter-spacing="-2">velq</text>
+<text x="167" y="70" fill="#58655c" font-family="Arial,sans-serif" font-weight="700" font-size="15" letter-spacing="5">JOURNAL / FIBER</text>
+<text x="76" y="133" fill="#203a30" font-family="Arial,sans-serif" font-weight="800" font-size="50" letter-spacing="-1">Fiber gummies</text>
+<text x="76" y="189" fill="#203a30" font-family="Arial,sans-serif" font-weight="800" font-size="50" letter-spacing="-1">vs. psyllium husk</text>
+<rect x="75" y="227" width="505" height="340" rx="30" fill="#fff5f2" stroke="#f1dcd7" stroke-width="2" filter="url(#shadow)"/>
+<rect x="620" y="227" width="505" height="340" rx="30" fill="#f6f6e9" stroke="#dfe8d8" stroke-width="2" filter="url(#shadow)"/>
+<text x="111" y="275" fill="#a33c4d" font-family="Arial,sans-serif" font-size="21" font-weight="800" letter-spacing="2">FIBER GUMMIES</text>
+<text x="655" y="275" fill="#496b52" font-family="Arial,sans-serif" font-size="21" font-weight="800" letter-spacing="2">PSYLLIUM HUSK</text>
+<g transform="translate(201 345)" fill="url(#rose)" stroke="#a52f46" stroke-width="3">
+  <g transform="rotate(-13 0 0)"><circle cx="-34" cy="-29" r="22"/><circle cx="34" cy="-29" r="22"/><rect x="-58" y="-32" width="116" height="127" rx="50"/><ellipse cx="0" cy="26" rx="39" ry="35" fill="#fa8d94" opacity=".38"/><circle cx="-18" cy="9" r="5" fill="#662e32" stroke="none"/><circle cx="18" cy="9" r="5" fill="#662e32" stroke="none"/></g>
+  <g transform="translate(175 28) scale(.73) rotate(12)"><circle cx="-34" cy="-29" r="22"/><circle cx="34" cy="-29" r="22"/><rect x="-58" y="-32" width="116" height="127" rx="50"/><ellipse cx="0" cy="26" rx="39" ry="35" fill="#fa8d94" opacity=".38"/></g>
+</g>
+<g transform="translate(738 320)">
+ <ellipse cx="130" cy="183" rx="170" ry="34" fill="#d4dfca" opacity=".4"/>
+ <path d="M9 101C17 177 54 209 132 209S253 177 257 101" fill="#d8e4d3" stroke="#51725e" stroke-width="7"/>
+ <ellipse cx="132" cy="101" rx="124" ry="43" fill="#fffdf4" stroke="#567962" stroke-width="7"/>
+ <ellipse cx="132" cy="99" rx="99" ry="27" fill="url(#powder)"/>
+ <path d="M96 97 Q130 70 173 96" stroke="#bdac84" stroke-width="5" fill="none" stroke-linecap="round"/>
+ <path d="M260 60Q288 10 316 28Q307 69 267 73" fill="#a0bd8a" stroke="#567962" stroke-width="4"/>
+ <path d="M272 58Q302 10 316 -11" fill="none" stroke="#567962" stroke-width="5" stroke-linecap="round"/>
+</g>
+<circle cx="600" cy="399" r="35" fill="#fff" stroke="#e3e4dc" stroke-width="2"/>
+<text x="600" y="407" text-anchor="middle" fill="#344a40" font-family="Arial,sans-serif" font-size="24" font-weight="900">VS</text>
+<text x="76" y="618" fill="#52645a" font-family="Arial,sans-serif" font-size="20" font-weight="600">Compare fiber source • serving size • preparation directions</text>
+<text x="1119" y="618" fill="#c63345" font-family="Arial,sans-serif" font-size="20" font-weight="800" text-anchor="end">VELQ</text>
+</svg>
