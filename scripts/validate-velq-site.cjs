@@ -48,4 +48,29 @@ assert(analytics.includes('waitlist_signup_success') && analytics.includes('gene
 const sitemap = content('/sitemap.xml');
 assert(sitemap.includes('<urlset') && sitemap.includes('https://velqnutrition.com/blog'), 'Malformed or incomplete sitemap');
 assert(!sitemap.includes('https://velqnutrition.com/tools/snack-finder'), 'Retired URL in sitemap');
+
+const editorialImages = [
+  ['/blog/fiber-gummies-vs-psyllium-husk/index.html','/assets/fiber-gummies-vs-psyllium-husk.svg'],
+  ['/blog/caffeine-l-theanine-vs-caffeine/index.html','/assets/caffeine-l-theanine-vs-caffeine.svg']
+];
+for (const [page, picture] of editorialImages) {
+  const markup = content(page);
+  const url = 'https://velqnutrition.com' + picture;
+  assert(markup.includes('<img src="' + picture + '"'), 'Visible cover image missing: ' + page);
+  assert(markup.includes('property="og:image" content="' + url + '"'), 'Social image missing: ' + page);
+  const block = [...markup.matchAll(/<script type="application\/ld\+json">([\s\S]*?)<\/script>/g)]
+    .map(m => JSON.parse(m[1]));
+  const article = block.flatMap(x => x['@graph'] || [x]).find(x => x['@type'] === 'Article');
+  assert(article && article.image && article.image.url === url, 'Article image missing or mismatched: ' + page);
+  assert(assets[picture].type.startsWith('image/svg+xml'), 'Missing SEO cover SVG or incorrect MIME: ' + picture);
+  const svg = content(picture);
+  assert(svg.startsWith('<svg xmlns="http://www.w3.org/2000/svg"'), 'Invalid SVG image start: ' + picture);
+  assert(svg.includes('viewBox="0 0 1200 675"') && svg.trimEnd().endsWith('</svg>'), 'Image dimensions or closing tag invalid: ' + picture);
+}
+const labelPage = content('/tools/nutrition-label-value-calculator/index.html');
+const labelTitle = labelPage.match(/<title>([^<]+)<\/title>/i)?.[1] || '';
+assert(labelTitle.length <= 60, 'Nutrition label calculator title exceeds 60 characters');
+const calculatorPage = content('/tools/protein-fiber-calculator/index.html');
+const calculatorMeta = calculatorPage.match(/<meta name="description" content="([^"]+)"/i)?.[1] || '';
+assert(calculatorMeta.length <= 160, 'Protein and fiber calculator meta description exceeds 160 characters');
 console.log('PASS: ' + paths.length + ' packaged assets, ' + pages + ' live pages, ' + ld + ' valid JSON-LD blocks; canonical, mobile-related scripts and waitlist code present.');
