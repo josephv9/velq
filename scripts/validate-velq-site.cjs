@@ -108,6 +108,8 @@ assert((directGuide.match(/<table>/g)||[]).length===2,'Protein gummies compariso
 assert((directGuide.match(/<details>/g)||[]).length===8,'Protein gummies buyer FAQs missing');
 assert(directGuide.includes('data-waitlist-cta="article-end"'),'Buyer journey tracking missing');
 assert(directGuide.includes('This guide is published by Velq'),'Conflict disclosure missing');
+assert(directGuide.includes('OAKA: for plant-based 20g'), 'OAKA competitor section missing');
+assert(directGuide.includes('Soluble tapioca fiber listed; grams unconfirmed'), 'OAKA uncertainty disclosure missing');
 assert(directGuide.includes('rel="canonical" href="https://velqnutrition.com/blog/protein-gummies-with-fiber-comparison"'),'Buyer comparison canonical missing');
 assert(content('/sitemap.xml').includes('https://velqnutrition.com/blog/protein-gummies-with-fiber-comparison'),'New protein gummies guide missing in sitemap');
 assert(content('/blog/index.html').includes('href="/blog/protein-gummies-with-fiber-comparison"'),'New comparison unlinked from Journal');
