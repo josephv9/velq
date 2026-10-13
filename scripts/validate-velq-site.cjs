@@ -9,7 +9,7 @@ const match = php.match(/\$assets=json_decode\(base64_decode\('([A-Za-z0-9+/=]+)
 assert(match, 'Embedded PHP asset map must be intact');
 const assets = JSON.parse(Buffer.from(match[1], 'base64').toString('utf8'));
 const paths = Object.keys(assets);
-assert(paths.length >= 45, 'Expected at least 45 packed assets');
+assert(paths.length >= 40, 'Expected at least 40 packed assets');
 const content = path => {
   assert(assets[path], 'Missing essential asset ' + path);
   return Buffer.from(assets[path].data, 'base64').toString('utf8');
@@ -35,7 +35,7 @@ for (const [path, info] of Object.entries(assets)) {
     ld++;
   }
 }
-assert(pages >= 30, 'Expected at least 30 active HTML pages');
+assert(pages >= 25, 'Expected at least 25 active HTML pages');
 assert(ld >= 25, 'Expected structured data on site pages');
 const home = content('/index.html');
 assert(home.includes('id="hero-title">Protein + Fiber <em>Gummies</em>'), 'Homepage product headline changed');
@@ -49,6 +49,22 @@ const sitemap = content('/sitemap.xml');
 assert(sitemap.includes('<urlset') && sitemap.includes('https://velqnutrition.com/blog'), 'Malformed or incomplete sitemap');
 assert(!sitemap.includes('https://velqnutrition.com/tools/snack-finder'), 'Retired URL in sitemap');
 
+
+const retired = ["/blog/protein-gummies-vs-protein-powder","/blog/fiber-gummies-vs-fiber-powder","/guides/can-you-mix-protein-and-electrolytes","/guides/how-to-mix-protein-powder-in-16-oz-of-water","/guides/why-does-clear-protein-foam","/guides/protein-powder-for-people-who-hate-shakes","/guides/protein-and-fiber-snacks-without-protein-powder","/guides/what-is-protein-hydration-powder","/guides/protein-water-vs-protein-shakes","/guides/protein-powder-with-prebiotic-fiber","/guides/protein-drink-for-your-morning-routine","/products/lemonade-protein-hydration-powder"];
+for(const url of retired){
+  assert(!assets[url+'/index.html'],'Retired page served: '+url);
+  assert(!sitemap.includes('<loc>https://velqnutrition.com'+url+'</loc>'),'Retired page in sitemap: '+url);
+}
+for(const [path,info] of Object.entries(assets)){
+  if(!info.type.startsWith('text/html'))continue;
+  const html=content(path);
+  for(const url of retired){
+    assert(!html.includes('href="'+url+'"'),'Retired link from '+path+': '+url);
+    assert(!html.includes('"url":"https://velqnutrition.com'+url+'"'),'Retired schema on '+path+': '+url);
+  }
+}
+assert(!content('/guides/index.html').includes('Drink preparation guides'),'Powder guide hub still promoted');
+assert(!content('/compare/index.html').includes('powder'),'Powder comparison hub still promoted');
 const editorialImages = [
   ['/blog/fiber-gummies-vs-psyllium-husk/index.html','/assets/fiber-gummies-vs-psyllium-husk.svg'],
   ['/blog/caffeine-l-theanine-vs-caffeine/index.html','/assets/caffeine-l-theanine-vs-caffeine.svg']
