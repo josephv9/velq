@@ -8,6 +8,10 @@ ErrorDocument 404 default
   RewriteCond %{HTTP_HOST} ^www\.velqnutrition\.com$ [NC]
   RewriteRule ^ https://velqnutrition.com%{REQUEST_URI} [L,R=301]
 
+  # Serve the approved strawberry red-and-white product packshot anywhere the legacy product imagery is referenced.
+  # Keep the old image URLs stable for the bundled homepage and social previews.
+  RewriteRule ^assets/(?:velq-fruit-snacks-original\.jpg|velq-neutral-product\.png)$ https://cdn.shopify.com/s/files/1/0723/8372/5647/files/velq-strawberry-red-white-hero-2026.jpg?v=1791928189 [R=302,L,NE,NC]
+
   # Retire legacy powder-only pages while preserving the related snack guide.
   RewriteRule ^guides/protein-and-fiber-snacks-without-protein-powder(?:/|/index\.html)?$ /guides/protein-and-fiber-snacks [R=301,L,NE,NC]
   RewriteRule ^(?:products/lemonade-protein-hydration-powder|blog/(?:protein-gummies-vs-protein-powder|fiber-gummies-vs-fiber-powder)|guides/(?:can-you-mix-protein-and-electrolytes|how-to-mix-protein-powder-in-16-oz-of-water|why-does-clear-protein-foam|protein-powder-for-people-who-hate-shakes|what-is-protein-hydration-powder|protein-water-vs-protein-shakes|protein-powder-with-prebiotic-fiber|protein-drink-for-your-morning-routine))(?:/|/index\.html)?$ - [G,L,NC]
