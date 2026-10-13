@@ -89,4 +89,14 @@ assert(labelTitle.length <= 60, 'Nutrition label calculator title exceeds 60 cha
 const calculatorPage = content('/tools/protein-fiber-calculator/index.html');
 const calculatorMeta = calculatorPage.match(/<meta name="description" content="([^"]+)"/i)?.[1] || '';
 assert(calculatorMeta.length <= 160, 'Protein and fiber calculator meta description exceeds 160 characters');
+const shortlist = content('/blog/best-fiber-gummies-2026/index.html');
+assert(shortlist.includes('<h1>Best Fiber Gummies in 2026: The Buyer&#39;s Shortlist</h1>') || shortlist.includes('<h1>Best Fiber Gummies in 2026: The Buyer's Shortlist</h1>'), 'Shortlist H1 missing');
+assert((shortlist.match(/<table>/g) || []).length === 2, 'Shortlist HTML comparison tables missing');
+assert((shortlist.match(/<details>/g) || []).length === 8, 'Shortlist FAQs missing');
+assert(shortlist.includes('data-waitlist-cta="article-end"'), 'Shortlist waitlist attribution missing');
+assert(shortlist.includes('Velq publishes this comparison'), 'Commercial affiliation disclosure missing');
+assert(content('/sitemap.xml').includes('/blog/best-fiber-gummies-2026'), 'Shortlist absent from sitemap');
+assert(content('/index.html').includes('href="/blog/best-fiber-gummies-2026"'), 'Shortlist not linked from homepage');
+assert(content('/guides/index.html').includes('href="/blog/best-fiber-gummies-2026"'), 'Shortlist not linked from guides');
+
 console.log('PASS: ' + paths.length + ' packaged assets, ' + pages + ' live pages, ' + ld + ' valid JSON-LD blocks; canonical, mobile-related scripts and waitlist code present.');
