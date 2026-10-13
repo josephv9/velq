@@ -94,6 +94,9 @@ assert(shortlist.includes("<h1>Best Fiber Gummies in 2026: The Buyer's Shortlist
 assert((shortlist.match(/<table>/g) || []).length === 2, 'Shortlist HTML comparison tables missing');
 assert((shortlist.match(/<details>/g) || []).length === 8, 'Shortlist FAQs missing');
 assert(shortlist.includes('data-waitlist-cta="article-end"'), 'Shortlist waitlist attribution missing');
+assert(shortlist.includes('href="/assets/best-fiber-gummies-2026.css"'), 'Shortlist external stylesheet missing');
+assert(!shortlist.includes('<style>'), 'Shortlist inline CSS blocked by CSP');
+assert(assets['/assets/best-fiber-gummies-2026.css']?.type?.includes('text/css'), 'Shortlist CSS asset missing');
 assert(shortlist.includes('Velq publishes this comparison'), 'Commercial affiliation disclosure missing');
 assert(content('/sitemap.xml').includes('/blog/best-fiber-gummies-2026'), 'Shortlist absent from sitemap');
 assert(content('/index.html').includes('href="/blog/best-fiber-gummies-2026"'), 'Shortlist not linked from homepage');
