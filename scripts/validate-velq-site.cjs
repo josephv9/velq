@@ -90,7 +90,7 @@ const calculatorPage = content('/tools/protein-fiber-calculator/index.html');
 const calculatorMeta = calculatorPage.match(/<meta name="description" content="([^"]+)"/i)?.[1] || '';
 assert(calculatorMeta.length <= 160, 'Protein and fiber calculator meta description exceeds 160 characters');
 const shortlist = content('/blog/best-fiber-gummies-2026/index.html');
-assert(shortlist.includes('<h1>Best Fiber Gummies in 2026: The Buyer&#39;s Shortlist</h1>') || shortlist.includes('<h1>Best Fiber Gummies in 2026: The Buyer's Shortlist</h1>'), 'Shortlist H1 missing');
+assert(shortlist.includes("<h1>Best Fiber Gummies in 2026: The Buyer's Shortlist</h1>"), 'Shortlist H1 missing');
 assert((shortlist.match(/<table>/g) || []).length === 2, 'Shortlist HTML comparison tables missing');
 assert((shortlist.match(/<details>/g) || []).length === 8, 'Shortlist FAQs missing');
 assert(shortlist.includes('data-waitlist-cta="article-end"'), 'Shortlist waitlist attribution missing');
