@@ -10,7 +10,7 @@ ErrorDocument 404 default
 
   # Serve the approved strawberry red-and-white product packshot anywhere the legacy product imagery is referenced.
   # Keep the old image URLs stable for the bundled homepage and social previews.
-  RewriteRule ^assets/(?:velq-fruit-snacks-original\.jpg|velq-neutral-product\.png)$ https://cdn.shopify.com/s/files/1/0723/8372/5647/files/velq-strawberry-red-white-hero-2026.jpg?v=1791928189 [R=302,L,NE,NC]
+  RewriteRule ^assets/(?:velq-fruit-snacks-original\.jpg|velq-neutral-product\.png)$ https://cdn.shopify.com/s/files/1/0723/8372/5647/files/velq-red-white-strawberry-final-hero-oct-2026.jpg?v=1791934937 [R=302,L,NE,NC]
 
   # Retire legacy powder-only pages while preserving the related snack guide.
   RewriteRule ^guides/protein-and-fiber-snacks-without-protein-powder(?:/|/index\.html)?$ /guides/protein-and-fiber-snacks [R=301,L,NE,NC]
