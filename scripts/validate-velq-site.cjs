@@ -102,4 +102,15 @@ assert(content('/sitemap.xml').includes('/blog/best-fiber-gummies-2026'), 'Short
 assert(content('/index.html').includes('href="/blog/best-fiber-gummies-2026"'), 'Shortlist not linked from homepage');
 assert(content('/guides/index.html').includes('href="/blog/best-fiber-gummies-2026"'), 'Shortlist not linked from guides');
 
+const directGuide = content('/blog/protein-gummies-with-fiber-comparison/index.html');
+assert(directGuide.includes('<h1>Protein Gummies With Fiber: 2026 Label Comparison</h1>'),'New protein gummies comparison H1 missing');
+assert((directGuide.match(/<table>/g)||[]).length===2,'Protein gummies comparison tables missing');
+assert((directGuide.match(/<details>/g)||[]).length===8,'Protein gummies buyer FAQs missing');
+assert(directGuide.includes('data-waitlist-cta="article-end"'),'Buyer journey tracking missing');
+assert(directGuide.includes('This guide is published by Velq'),'Conflict disclosure missing');
+assert(directGuide.includes('rel="canonical" href="https://velqnutrition.com/blog/protein-gummies-with-fiber-comparison"'),'Buyer comparison canonical missing');
+assert(content('/sitemap.xml').includes('https://velqnutrition.com/blog/protein-gummies-with-fiber-comparison'),'New protein gummies guide missing in sitemap');
+assert(content('/blog/index.html').includes('href="/blog/protein-gummies-with-fiber-comparison"'),'New comparison unlinked from Journal');
+assert(content('/index.html').includes('href="/blog/protein-gummies-with-fiber-comparison"'),'New comparison unlinked from homepage');
+
 console.log('PASS: ' + paths.length + ' packaged assets, ' + pages + ' live pages, ' + ld + ' valid JSON-LD blocks; canonical, mobile-related scripts and waitlist code present.');
