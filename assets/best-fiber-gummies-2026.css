@@ -1,0 +1,46 @@
+:root{--best-red:#bf303f;--best-ink:#252127;--best-cream:#fff9f4;--best-light:#fff1ee}
+.best-shell{max-width:1100px;margin:0 auto;padding:20px 22px 80px;color:var(--best-ink)}
+.best-shell h1{font-size:clamp(2.3rem,6vw,4.5rem);line-height:1.05;letter-spacing:-.045em;margin:.5em 0 .35em}
+.best-shell h2{font-size:clamp(1.55rem,3.5vw,2.25rem);line-height:1.2;letter-spacing:-.03em;margin:48px 0 16px}
+.best-shell h3{font-size:clamp(1.25rem,2.4vw,1.6rem);line-height:1.24;margin:34px 0 15px}
+.best-shell p,.best-shell li{line-height:1.72}
+.best-shell a{color:#9c263a;text-decoration:underline;text-underline-offset:3px}
+.best-kicker{text-transform:uppercase;font-size:.75rem;font-weight:800;letter-spacing:.12em;color:#9c263a}
+.best-meta{font-size:.87rem;color:#695d62;border-bottom:1px solid #e6d4d0;padding-bottom:20px}
+.best-meta a{font-weight:700}
+.best-dek{font-size:1.2rem;max-width:800px}
+.best-main{max-width:850px;margin:0 auto}
+.best-disclosure{border-left:4px solid #a9384b;padding:10px 20px;background:#fff5f0;border-radius:6px}
+.best-shell .best-button,.best-cta .best-button{display:inline-flex;justify-content:center;align-items:center;padding:13px 21px;background:#aa2640;color:#fff;text-decoration:none;border-radius:100px;font-weight:800;min-height:48px}
+.best-sticky{position:sticky;top:0;z-index:30;background:#fff5f2eF;border:1px solid #f0d4d0;backdrop-filter:blur(12px);padding:9px 20px;display:flex;gap:16px;align-items:center;justify-content:space-between}
+.best-sticky strong{font-size:.88rem}
+.best-sticky .best-button{font-size:.83rem;padding:8px 16px;min-height:40px;background:#aa2640;color:#fff;text-decoration:none;border-radius:100px;font-weight:800;display:inline-flex;align-items:center;justify-content:center}
+.best-shell .jump-nav{display:flex;gap:8px;flex-wrap:wrap;margin:18px 0 28px}
+.jump-nav a{border:1px solid #e2c6bf;text-decoration:none;border-radius:100px;padding:7px 13px;font-size:.83rem}
+.best-worksheet{padding:22px;background:#eff6ef;border:1px solid #c9e0d0;border-radius:16px;margin:32px 0}
+.best-worksheet h2{margin:0 0 8px;font-size:1.35rem}
+.best-hero-image{display:flex;align-items:center;gap:24px;background:#ffede6;border:1px solid #f3d7c9;border-radius:18px;overflow:hidden;margin:38px 0}
+.best-hero-image img{display:block;max-width:42%;width:42%;aspect-ratio:1;object-fit:cover}
+.best-hero-image div{padding:22px 25px}
+.best-hero-image h2{margin:0 0 10px;font-size:1.5rem}
+.best-hero-image p{margin:0 0 16px}
+.best-takeaways li{padding:5px 0}
+.best-shell .pick{border-top:1px solid #ead9d5;padding-top:3px;margin-top:38px}
+.best-shell .quick-facts{background:#fff4e9;padding:14px 18px;border-radius:10px;font-size:.95rem}
+.best-shell .source-note{font-size:.86rem;color:#71636a}
+.best-table-scroll{overflow-x:auto;-webkit-overflow-scrolling:touch;border:1px solid #e9d7d2;border-radius:12px}
+.best-table-scroll table{border-collapse:collapse;width:100%;min-width:790px;font-size:.87rem}
+.best-table-scroll th,.best-table-scroll td{border-bottom:1px solid #eadbd8;padding:13px 12px;text-align:left;vertical-align:top}
+.best-table-scroll th{background:#ffe8df;white-space:nowrap}
+.best-table-scroll tr:last-child td{border-bottom:none}
+.best-note{font-size:.88rem;color:#6a5c61}
+.best-cta{background:#fbeee8;border-radius:20px;padding:32px;margin:42px 0}
+.best-cta h2{margin:0 0 12px}
+.best-faq details{border-bottom:1px solid #e9d7d3;padding:14px 0}
+.best-faq summary{cursor:pointer;font-weight:750}
+.best-faq p{margin:10px 0}
+.best-end-image{margin-bottom:0}
+.best-floating{position:fixed;right:16px;top:53vh;z-index:29}
+.best-floating a{display:block;padding:13px 17px;border-radius:100px;background:#aa2640;color:#fff;font-weight:800;text-decoration:none;box-shadow:0 7px 22px #491d2533}
+@media(max-width:1090px){.best-floating{display:none}}
+@media(max-width:650px){.best-shell{padding:16px 17px 100px}.best-hero-image{flex-direction:column;gap:0}.best-hero-image img{max-width:100%;width:100%;max-height:280px}.best-hero-image div{padding:20px}.best-sticky strong{font-size:.75rem}.best-sticky .best-button{font-size:.72rem}.best-dek{font-size:1.09rem}.best-shell h2{margin-top:38px}}
