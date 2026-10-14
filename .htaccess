@@ -13,7 +13,7 @@ ErrorDocument 404 default
   RewriteRule ^assets/(?:velq-fruit-snacks-original\.jpg|velq-neutral-product\.png)$ https://cdn.shopify.com/s/files/1/0723/8372/5647/files/velq-red-white-strawberry-final-hero-oct-2026.jpg?v=1791934937 [R=302,L,NE,NC]
 
   # Keep the fiber gummies vs powder search landing page live; it now has a current buyer guide.
-  RewriteRule ^blog/fiber-gummies-vs-fiber-powder(?:/|/index\\.html)?$ /blog/fiber-gummies-vs-fiber-powder/index.html [END]
+  RewriteRule ^blog/fiber-gummies-vs-fiber-powder(?:/|/index\.html)?$ /blog/fiber-gummies-vs-fiber-powder/index.html [END]
 
   # Retire legacy powder-only pages while preserving the related snack guide.
   RewriteRule ^guides/protein-and-fiber-snacks-without-protein-powder(?:/|/index\.html)?$ /guides/protein-and-fiber-snacks [R=301,L,NE,NC]
