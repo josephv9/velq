@@ -12,9 +12,12 @@ ErrorDocument 404 default
   # Keep the old image URLs stable for the bundled homepage and social previews.
   RewriteRule ^assets/(?:velq-fruit-snacks-original\.jpg|velq-neutral-product\.png)$ https://cdn.shopify.com/s/files/1/0723/8372/5647/files/velq-red-white-strawberry-final-hero-oct-2026.jpg?v=1791934937 [R=302,L,NE,NC]
 
+  # Keep the fiber gummies vs powder search landing page live; it now has a current buyer guide.
+  RewriteRule ^blog/fiber-gummies-vs-fiber-powder(?:/|/index\\.html)?$ /blog/fiber-gummies-vs-fiber-powder/index.html [END]
+
   # Retire legacy powder-only pages while preserving the related snack guide.
   RewriteRule ^guides/protein-and-fiber-snacks-without-protein-powder(?:/|/index\.html)?$ /guides/protein-and-fiber-snacks [R=301,L,NE,NC]
-  RewriteRule ^(?:products/lemonade-protein-hydration-powder|blog/(?:protein-gummies-vs-protein-powder|fiber-gummies-vs-fiber-powder)|guides/(?:can-you-mix-protein-and-electrolytes|how-to-mix-protein-powder-in-16-oz-of-water|why-does-clear-protein-foam|protein-powder-for-people-who-hate-shakes|what-is-protein-hydration-powder|protein-water-vs-protein-shakes|protein-powder-with-prebiotic-fiber|protein-drink-for-your-morning-routine))(?:/|/index\.html)?$ - [G,L,NC]
+  RewriteRule ^(?:products/lemonade-protein-hydration-powder|blog/(?:protein-gummies-vs-protein-powder)|guides/(?:can-you-mix-protein-and-electrolytes|how-to-mix-protein-powder-in-16-oz-of-water|why-does-clear-protein-foam|protein-powder-for-people-who-hate-shakes|what-is-protein-hydration-powder|protein-water-vs-protein-shakes|protein-powder-with-prebiotic-fiber|protein-drink-for-your-morning-routine))(?:/|/index\.html)?$ - [G,L,NC]
   RewriteRule ^Velq.Lemonade\.dc\.html$ - [G,L,NC]
   RewriteRule ^tools/snack-finder(?:/.*)?$ - [G,L]
 
