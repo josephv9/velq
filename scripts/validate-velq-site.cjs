@@ -45,6 +45,10 @@ const app = content('/app.js');
 assert(app.includes('velq:waitlist-success') && app.includes('result.newLead===true'), 'Confirmed signup dispatch guard missing');
 const analytics = content('/analytics.js');
 assert(analytics.includes('waitlist_signup_success') && analytics.includes('generate_lead'), 'GA4 signup events missing');
+assert(analytics.includes("entry_referrer_type") && analytics.includes("protein_fiber"), 'Buyer intent attribution missing');
+assert(content('/compare/index.html').includes('planned six-gummy packet'), 'Outdated Velq packet count in comparison hub');
+assert(content('/compare/index.html').includes('href="/blog/protein-gummies-with-fiber-comparison"'), 'Buyer intent link missing from comparison hub');
+
 const sitemap = content('/sitemap.xml');
 assert(sitemap.includes('<urlset') && sitemap.includes('https://velqnutrition.com/blog'), 'Malformed or incomplete sitemap');
 assert(!sitemap.includes('https://velqnutrition.com/tools/snack-finder'), 'Retired URL in sitemap');
