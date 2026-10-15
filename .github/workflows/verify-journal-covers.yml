@@ -1,0 +1,58 @@
+name: Verify Velq Journal covers on live site
+
+on:
+  push:
+    branches: [main]
+    paths:
+      - 'nutrition-content.php'
+      - '.github/workflows/verify-journal-covers.yml'
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+jobs:
+  check-live-covers:
+    runs-on: ubuntu-latest
+    timeout-minutes: 10
+    steps:
+      - name: Confirm nine new article cover URLs reach production
+        shell: bash
+        run: |
+          set -euo pipefail
+          pairs=(
+            'tired-on-glp1-food-fluids-causes|velq-tired_on_glp1-2026-10.webp'
+            'maintain-muscle-glp1-low-appetite|velq-maintain_muscle_glp1-2026-10.webp'
+            'glp1-constipation-fiber|velq-glp1_constipation_fiber-2026-10.webp'
+            'glp1-protein-snacks-without-shakes|velq-glp1_protein_snacks-2026-10.webp'
+            'what-to-eat-glp1-not-hungry|velq-glp1_low_appetite-2026-10.webp'
+            'portion-sizes-muscle-gain-without-counting-calories|velq-portion_sizes_muscle-2026-10.webp'
+            '30-grams-fiber-high-protein-diet|velq-30g_fiber-2026-10.webp'
+            'build-muscle-without-protein-shakes|velq-build_muscle_food_first-2026-10-v2.webp'
+            'high-protein-high-fiber-snacks-no-refrigeration|velq-protein_fiber_snacks-2026-10.webp'
+          )
+          for attempt in $(seq 1 15); do
+            failures=0
+            for pair in "${pairs[@]}"; do
+              slug="${pair%%|*}"
+              asset="${pair#*|}"
+              url="https://velqnutrition.com/blog/$slug?cover_deployment_check=$GITHUB_SHA"
+              temp_page="$(mktemp)"
+              if curl -fsSL --connect-timeout 8 --max-time 18 -H 'Cache-Control: no-cache' -o "$temp_page" "$url" && grep -Fq "$asset" "$temp_page"; then
+                echo "Verified: $slug ($asset)"
+              else
+                echo "Not yet visible: $slug"
+                failures=$((failures+1))
+              fi
+              rm -f "$temp_page"
+            done
+            if [ "$failures" -eq 0 ]; then
+              echo 'All 9 cover assets referenced by live article HTML'
+              exit 0
+            fi
+            if [ "$attempt" -eq 15 ]; then
+              echo "$failures cover URLs still missing after $attempt attempts"
+              exit 1
+            fi
+            sleep 15
+          done
