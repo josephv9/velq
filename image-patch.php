@@ -16,7 +16,10 @@ ob_start(static function (string $html): string {
     return (string) preg_replace_callback(
         '~<img\b[^>]*>~i',
         static function (array $match): string {
-            return (string) preg_replace('~\s+srcset="[^"]*cdn\.shopify\.com[^"]*"~i', '', $match[0]);
+            if (strpos($match[0], '/assets/velq-strawberry-gummies-product-20261015.jpeg') === false) {
+                return $match[0];
+            }
+            return (string) preg_replace('~\s+srcset="[^"]*"~i', '', $match[0]);
         },
         $html
     );
