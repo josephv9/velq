@@ -1,0 +1,15 @@
+<!doctype html><html lang="en"><head><meta charset="utf-8"><meta name="robots" content="noindex,nofollow"><meta name="viewport" content="width=device-width, initial-scale=1"><title>Private Velq API verification</title></head><body><main style="max-width:650px;margin:40px auto;font:16px Arial"><h1>Velq single-opt-in integration test</h1><p>Temporary test fixture for one authorized Velq-owned mailbox. This page will be removed after verification.</p><form id="qa"><p>Test address: <code>drinkvelq+directklqa14oct@gmail.com</code></p><label><input id="agree" type="checkbox" required> I consent to receiving Velq launch and product marketing emails at this test address.</label><p><button type="submit" id="run">Send one test subscription</button></p></form><pre id="result" style="white-space:pre-wrap;overflow-wrap:anywhere"></pre></main><script>
+const address="drinkvelq+directklqa14oct@gmail.com", key='RCNCJb', list='RYn82G';
+let submitted=false;
+document.querySelector('#qa').addEventListener('submit',async (ev)=>{
+  ev.preventDefault();
+  if(submitted || !document.querySelector('#agree').checked)return;
+  submitted=true;document.querySelector('#run').disabled=true;
+  const payload={data:{type:'subscription',attributes:{custom_source:'Velq single-opt-in integration test',profile:{data:{type:'profile',attributes:{email:address,subscriptions:{email:{marketing:{consent:'SUBSCRIBED'}}}}}}},relationships:{list:{data:{type:'list',id:list}}}}};
+  try {
+    const res=await fetch('https://a.klaviyo.com/client/subscriptions/?company_id='+encodeURIComponent(key),{method:'POST',mode:'cors',headers:{'Content-Type':'application/vnd.api+json','revision':'2026-07-15','Accept':'application/vnd.api+json'},body:JSON.stringify(payload)});
+    const responseText=await res.text();
+    document.querySelector('#result').textContent='Response HTTP '+res.status+'\n'+responseText.slice(0,3000);
+  }catch(err){document.querySelector('#result').textContent='Fetch failed: '+String(err)}
+});
+</script></body></html>
