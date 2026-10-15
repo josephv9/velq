@@ -56,3 +56,24 @@ jobs:
             fi
             sleep 15
           done
+
+      - name: Confirm all nine cover images appear on the Journal listing
+        shell: bash
+        run: |
+          set -euo pipefail
+          temp_page="$(mktemp)"
+          curl -fsSL --connect-timeout 8 --max-time 25 -H 'Cache-Control: no-cache' -o "$temp_page" "https://velqnutrition.com/blog?cover_deployment_check=$GITHUB_SHA"
+          for cover in \
+            velq-tired_on_glp1-2026-10.webp \
+            velq-maintain_muscle_glp1-2026-10.webp \
+            velq-glp1_constipation_fiber-2026-10.webp \
+            velq-glp1_protein_snacks-2026-10.webp \
+            velq-glp1_low_appetite-2026-10.webp \
+            velq-portion_sizes_muscle-2026-10.webp \
+            velq-30g_fiber-2026-10.webp \
+            velq-build_muscle_food_first-2026-10-v2.webp \
+            velq-protein_fiber_snacks-2026-10.webp; do
+            grep -Fq "$cover" "$temp_page" || { echo "::error::Missing from /blog: $cover"; exit 1; }
+            echo "Journal listing verified: $cover"
+          done
+          rm -f "$temp_page"
