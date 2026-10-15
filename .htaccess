@@ -33,6 +33,10 @@ php_value auto_prepend_file image-patch.php
   # Keep source control and build utilities outside the public site.
   RewriteRule ^(?:\.git|hostinger-migration|scripts|githooks)(?:/|$) - [F,L]
 
+  # Serve only the approved nutrition article and Journal collection paths.
+  RewriteRule ^(?:blog|blog/category/(?:protein|fiber|fitness|wellness|energy|glp-1)|blog/high\-protein\-high\-fiber\-snacks\-no\-refrigeration|blog/30\-grams\-fiber\-high\-protein\-diet|blog/build\-muscle\-without\-protein\-shakes|blog/portion\-sizes\-muscle\-gain\-without\-counting\-calories|blog/what\-to\-eat\-glp1\-not\-hungry|blog/glp1\-protein\-snacks\-without\-shakes|blog/glp1\-constipation\-fiber|blog/maintain\-muscle\-glp1\-low\-appetite|blog/tired\-on\-glp1\-food\-fluids\-causes)(?:/|/index\.html)?$ nutrition-content.php [END]
+  RewriteRule ^(?:journal\.css|sitemap\.xml|assets/journal/(?:high\-protein\-high\-fiber\-snacks\-no\-refrigeration|30\-grams\-fiber\-high\-protein\-diet|build\-muscle\-without\-protein\-shakes|portion\-sizes\-muscle\-gain\-without\-counting\-calories|what\-to\-eat\-glp1\-not\-hungry|glp1\-protein\-snacks\-without\-shakes|glp1\-constipation\-fiber|maintain\-muscle\-glp1\-low\-appetite|tired\-on\-glp1\-food\-fluids\-causes)\.svg)$ nutrition-content.php [END]
+
   # Route the current Site assets and APIs through its PHP bundle.
   RewriteRule ^(?:index\.html|tools(?:/.*)?|guides(?:/.*)?|blog(?:/.*)?|blogs/journal(?:/.*)?|(?:style|journal)\.css|(?:app|analytics|journal|analytics-config)\.js|api/waitlist|robots\.txt|sitemap\.xml)?$ velq-site.php [END]
 
