@@ -15,4 +15,21 @@ header('Referrer-Policy: strict-origin-when-cross-origin');
 header("Content-Security-Policy: default-src 'self'; img-src 'self' data: https://cdn.shopify.com https://www.facebook.com https://analytics.tiktok.com; style-src 'self'; script-src 'self' https://www.googletagmanager.com https://connect.facebook.net https://analytics.tiktok.com; connect-src 'self' https://www.google-analytics.com https://analytics.google.com https://region1.google-analytics.com https://www.facebook.com https://analytics.tiktok.com; form-action 'self' https://qusbk4-9s.myshopify.com; frame-ancestors 'none'; base-uri 'self'");
 header('Content-Type: '.$pages[$key]['type']);
 header('Cache-Control: '.(str_starts_with($key,'/assets/')?'public, max-age=86400':'no-cache'));
-if($_SERVER['REQUEST_METHOD']!=='HEAD')echo base64_decode($pages[$key]['data']);
+if($_SERVER['REQUEST_METHOD']!=='HEAD'){
+    $body=base64_decode($pages[$key]['data']);
+    // Display the approved versioned photographic covers on the Journal listing
+    // and individual articles, including Open Graph, Twitter, and Article.image URLs.
+    // All other page bytes remain unchanged; SVG routes stay available as fallbacks.
+    $coverReplacements=[
+    '/assets/journal/tired-on-glp1-food-fluids-causes.svg' => 'https://cdn.shopify.com/s/files/1/0723/8372/5647/files/velq-tired_on_glp1-2026-10.webp?v=1792103374',
+    '/assets/journal/maintain-muscle-glp1-low-appetite.svg' => 'https://cdn.shopify.com/s/files/1/0723/8372/5647/files/velq-maintain_muscle_glp1-2026-10.webp?v=1792103429',
+    '/assets/journal/glp1-constipation-fiber.svg' => 'https://cdn.shopify.com/s/files/1/0723/8372/5647/files/velq-glp1_constipation_fiber-2026-10.webp?v=1792103433',
+    '/assets/journal/glp1-protein-snacks-without-shakes.svg' => 'https://cdn.shopify.com/s/files/1/0723/8372/5647/files/velq-glp1_protein_snacks-2026-10.webp?v=1792103438',
+    '/assets/journal/what-to-eat-glp1-not-hungry.svg' => 'https://cdn.shopify.com/s/files/1/0723/8372/5647/files/velq-glp1_low_appetite-2026-10.webp?v=1792103442',
+    '/assets/journal/portion-sizes-muscle-gain-without-counting-calories.svg' => 'https://cdn.shopify.com/s/files/1/0723/8372/5647/files/velq-portion_sizes_muscle-2026-10.webp?v=1792103448',
+    '/assets/journal/30-grams-fiber-high-protein-diet.svg' => 'https://cdn.shopify.com/s/files/1/0723/8372/5647/files/velq-30g_fiber-2026-10.webp?v=1792103452',
+    '/assets/journal/build-muscle-without-protein-shakes.svg' => 'https://cdn.shopify.com/s/files/1/0723/8372/5647/files/velq-build_muscle_food_first-2026-10-v2.webp?v=1792103819',
+    '/assets/journal/high-protein-high-fiber-snacks-no-refrigeration.svg' => 'https://cdn.shopify.com/s/files/1/0723/8372/5647/files/velq-protein_fiber_snacks-2026-10.webp?v=1792103513',
+    ];
+    echo strtr($body,$coverReplacements);
+}
