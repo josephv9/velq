@@ -119,4 +119,33 @@ assert(content('/sitemap.xml').includes('https://velqnutrition.com/blog/protein-
 assert(content('/blog/index.html').includes('href="/blog/protein-gummies-with-fiber-comparison"'),'New comparison unlinked from Journal');
 assert(content('/index.html').includes('href="/blog/protein-gummies-with-fiber-comparison"'),'New comparison unlinked from homepage');
 
+
+const priorityGuides = [
+  '/blog/protein-and-fiber-gummies-buying-guide/index.html',
+  '/blog/protein-gummies-for-adults/index.html',
+  '/blog/fiber-gummies-for-adults-guide/index.html'
+];
+for (const path of priorityGuides) {
+  const markup = content(path);
+  assert(markup.includes('velq-gummy-label-worksheet.csv'), 'Missing downloadable comparison resource: ' + path);
+  assert(markup.includes('fda.gov'), 'Missing FDA source reference: ' + path);
+  const data = [...markup.matchAll(/<script type="application\/ld\+json">([\s\S]*?)<\/script>/g)].map(m => JSON.parse(m[1]));
+  const article = data.flatMap(x => x['@graph'] || [x]).find(x => ['Article','BlogPosting'].includes(x['@type']));
+  assert(article && article.author?.logo?.url && article.publisher?.logo?.url, 'Missing structured-data organization logos: ' + path);
+}
+assert(content('/assets/velq-gummy-label-worksheet.csv').includes('Label source URL'), 'Missing worksheet columns');
+assert(content('/index.html').includes('sizes="(max-width: 650px) 90vw'), 'Responsive homepage imagery missing');
+for (const [path, info] of Object.entries(assets)) {
+  if (!info.type.startsWith('text/html')) continue;
+  const markup = content(path);
+  assert(!markup.includes('<script src="/analytics-config.js"></script>'), 'Parser-blocking analytics configuration returned: ' + path);
+}
+const powderGuide = fs.readFileSync('blog/fiber-gummies-vs-fiber-powder/index.html','utf8');
+const powderGraph = [...powderGuide.matchAll(/<script type="application\/ld\+json">([\s\S]*?)<\/script>/g)]
+  .flatMap(m => { const x = JSON.parse(m[1]); return x['@graph'] || [x]; });
+const powderArticle = powderGraph.find(x => x['@type'] === 'Article');
+assert(powderArticle && powderArticle.image?.url && powderArticle.author?.logo?.url && powderArticle.publisher?.logo?.url,
+  'Standalone fiber comparison structured data missing image or logos');
+assert(powderGuide.includes('property="og:image"'), 'Standalone fiber comparison social image missing');
+
 console.log('PASS: ' + paths.length + ' packaged assets, ' + pages + ' live pages, ' + ld + ' valid JSON-LD blocks; canonical, mobile-related scripts and waitlist code present.');
