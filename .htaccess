@@ -21,6 +21,9 @@ php_value auto_prepend_file image-patch.php
   # IndexNow verification file is stored in assets but must be served at the domain root.
   RewriteRule ^d1d335a0e252917f7c1345bb896190c265b2826baf993531\.txt$ /assets/d1d335a0e252917f7c1345bb896190c265b2826baf993531.txt [L]
 
+  # Retired lemonade SKUs, including old collection-prefixed product URLs.
+  RewriteRule ^(?:collections/[^/]+/)?products/(?:lemonade-protein-hydration-powder|velq-lemonade-protein-hydration-powder|elq-daily-protein-fiber-electrolytes-lemonade|velq-daily-protein-fiber-electrolytes-lemonade|velq-bundle|velq-lemonade-protein-hydration-powder-3-pack)(?:/|/index\.html)?$ - [G,L,NC]
+
   # Retire legacy powder-only pages while preserving the related snack guide.
   RewriteRule ^guides/protein-and-fiber-snacks-without-protein-powder(?:/|/index\.html)?$ /guides/protein-and-fiber-snacks [R=301,L,NE,NC]
   RewriteRule ^(?:products/lemonade-protein-hydration-powder|blog/(?:protein-gummies-vs-protein-powder)|guides/(?:can-you-mix-protein-and-electrolytes|how-to-mix-protein-powder-in-16-oz-of-water|why-does-clear-protein-foam|protein-powder-for-people-who-hate-shakes|what-is-protein-hydration-powder|protein-water-vs-protein-shakes|protein-powder-with-prebiotic-fiber|protein-drink-for-your-morning-routine))(?:/|/index\.html)?$ - [G,L,NC]
