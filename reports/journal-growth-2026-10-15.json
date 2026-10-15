@@ -1,0 +1,269 @@
+{
+  "articles": [
+    {
+      "slug": "protein-vs-fiber-why-your-body-needs-both",
+      "keyword": "protein vs fiber",
+      "cluster": "Protein",
+      "intent": "Different jobs: compare the two nutrients, not competing products.",
+      "title": "Protein vs. Fiber: Why Your Body Needs Both",
+      "hook": "Protein and fiber do different jobs. Build meals with both.",
+      "tip1": "Pair a protein food with a fiber-containing plant food.",
+      "tip2": "Use meals as your foundation; supplements are optional."
+    },
+    {
+      "slug": "how-much-fiber-do-you-need-every-day",
+      "keyword": "how much fiber per day",
+      "cluster": "Fiber",
+      "intent": "Daily intake guidance; link to the practical 30g planner for meal examples.",
+      "title": "How Much Fiber Do You Need Every Day?",
+      "hook": "A daily fiber number is only the starting point.",
+      "tip1": "Choose a target appropriate to your age, diet, health, and tolerance.",
+      "tip2": "Increase gradually instead of changing everything overnight."
+    },
+    {
+      "slug": "caffeine-gummies-vs-coffee-whats-the-difference",
+      "keyword": "caffeine gummies vs coffee",
+      "cluster": "Energy",
+      "intent": "Compare labeled dose, coffee variability, timing and ingredients.",
+      "title": "Caffeine Gummies vs. Coffee: What’s the Difference?",
+      "hook": "Coffee and caffeine gummies are different formats.",
+      "tip1": "Compare the amount of caffeine in the portion you actually use.",
+      "tip2": "Check timing, other caffeine sources, and your own tolerance."
+    },
+    {
+      "slug": "how-much-protein-do-you-actually-need",
+      "keyword": "how much protein per day",
+      "cluster": "Protein",
+      "intent": "Explain daily needs; distinguish from muscle-building meal implementation.",
+      "title": "How Much Protein Do You Actually Need?",
+      "hook": "A protein goal should fit the person.",
+      "tip1": "Body size, activity, health, and overall diet all matter.",
+      "tip2": "Translate a suitable target into foods you can eat consistently."
+    },
+    {
+      "slug": "simple-daily-wellness-routine-that-sticks",
+      "keyword": "simple daily wellness routine",
+      "cluster": "Protein",
+      "intent": "Habit formation, rather than supplement comparison.",
+      "title": "The Simple Daily Wellness Routine That Sticks",
+      "hook": "A wellness routine should fit an ordinary day.",
+      "tip1": "Choose one manageable meal, movement, or sleep habit.",
+      "tip2": "Repeat it before adding another complicated rule."
+    },
+    {
+      "slug": "protein-gummies-vs-protein-bars",
+      "keyword": "protein gummies vs protein bars",
+      "cluster": "Protein",
+      "intent": "Format comparison; use real labels rather than unsupported category averages.",
+      "title": "Protein Gummies vs. Protein Bars: What Should You Choose?",
+      "hook": "Protein gummies or a protein bar? Start with the label.",
+      "tip1": "Compare a full serving, protein source, fiber, and other ingredients.",
+      "tip2": "Choose the format that fits the occasion and your needs."
+    },
+    {
+      "slug": "caffeine-gummies-vs-energy-drinks",
+      "keyword": "caffeine gummies vs energy drinks",
+      "cluster": "Energy",
+      "intent": "Compare caffeine dose and full ingredients, not promised speed or performance.",
+      "title": "Caffeine Gummies vs. Energy Drinks: What to Compare",
+      "hook": "An energy label does not tell the whole story.",
+      "tip1": "Check caffeine per serving and the full ingredient list.",
+      "tip2": "Count every caffeine source across the day."
+    },
+    {
+      "slug": "protein-and-fiber-gummies-vs-separate-supplements",
+      "keyword": "combined protein and fiber gummies vs separate supplements",
+      "cluster": "Protein",
+      "intent": "Bundled ingredients versus independent dose control.",
+      "title": "Protein and Fiber Gummies vs. Separate Supplements",
+      "hook": "One combined product or separate ingredients?",
+      "tip1": "A combined format can be convenient; separate products allow more control.",
+      "tip2": "Check the amounts and whether you want every ingredient."
+    },
+    {
+      "slug": "protein-and-fiber-gummies-buying-guide",
+      "keyword": "protein and fiber gummies buying guide",
+      "cluster": "Protein",
+      "intent": "General buying checklist; distinguish from the named-product comparison.",
+      "title": "Protein and Fiber Gummies: What to Look For Before Buying",
+      "hook": "Before buying gummies, compare a complete serving.",
+      "tip1": "Check protein source, fiber type, caffeine, allergens, and price.",
+      "tip2": "Mark missing label information as unknown instead of guessing."
+    },
+    {
+      "slug": "fiber-gummies-vs-psyllium-husk",
+      "keyword": "fiber gummies vs psyllium husk",
+      "cluster": "Fiber",
+      "intent": "Ingredient-versus-format comparison; no universal symptom-treatment claim.",
+      "title": "Fiber Gummies vs. Psyllium Husk: What Actually Matters?",
+      "hook": "Psyllium and fiber gummies are not automatically equivalent.",
+      "tip1": "Read the named fiber ingredient and the grams per serving.",
+      "tip2": "Follow directions and discuss persistent symptoms with a clinician."
+    },
+    {
+      "slug": "caffeine-l-theanine-vs-caffeine",
+      "keyword": "caffeine and l theanine vs caffeine",
+      "cluster": "Energy",
+      "intent": "Explain evidence and limits; avoid blanket calm-focus promises.",
+      "title": "Caffeine + L-Theanine vs. Caffeine Alone: What Does Research Say?",
+      "hook": "Caffeine plus L-theanine: check the evidence and the dose.",
+      "tip1": "An ingredient study is not proof that every combined product works.",
+      "tip2": "Look at caffeine timing and the full finished-product label."
+    },
+    {
+      "slug": "best-fiber-gummies-2026",
+      "keyword": "best fiber gummies 2026",
+      "cluster": "Fiber",
+      "intent": "Current named-product shortlist, distinct from the general adults checklist.",
+      "title": "Best Fiber Gummies in 2026: The Buyer's Shortlist",
+      "hook": "The best fiber gummy depends on what you need.",
+      "tip1": "Compare the named fiber, serving size, directions, and price.",
+      "tip2": "A higher number is not automatically a better fit."
+    },
+    {
+      "slug": "protein-gummies-with-fiber-comparison",
+      "keyword": "protein gummies with fiber comparison",
+      "cluster": "Protein",
+      "intent": "Named products and verifiable label data; no generic format winner.",
+      "title": "Protein Gummies With Fiber: 2026 Label Comparison",
+      "hook": "Compare protein gummies with fiber using real label facts.",
+      "tip1": "Use the same complete-serving basis for each product.",
+      "tip2": "Separate verified facts from prelaunch targets."
+    },
+    {
+      "slug": "protein-gummies-for-adults",
+      "keyword": "protein gummies for adults",
+      "cluster": "Protein",
+      "intent": "Adult suitability and buying checklist, not a duplicate brand ranking.",
+      "title": "Protein Gummies for Adults: What Matters Before You Buy",
+      "hook": "Adult protein gummies still need a full-label check.",
+      "tip1": "Look for protein source, serving directions, allergens, and caffeine.",
+      "tip2": "Small format does not mean suitable for everyone."
+    },
+    {
+      "slug": "fiber-gummies-for-adults-guide",
+      "keyword": "fiber gummies for adults",
+      "cluster": "Fiber",
+      "intent": "Adult ingredient and tolerance education, not a ranked shortlist.",
+      "title": "Fiber Gummies for Adults: Types, Doses and Tradeoffs",
+      "hook": "Fiber gummies vary in more than flavor.",
+      "tip1": "Compare the ingredient, grams, serving count, and directions.",
+      "tip2": "Choose based on your needs and tolerance."
+    },
+    {
+      "slug": "fiber-gummies-vs-fiber-powder",
+      "keyword": "fiber powder vs gummies",
+      "cluster": "Fiber",
+      "intent": "Powder-versus-gummy format and cost; keep separate from ingredient-specific psyllium.",
+      "title": "Fiber Powder vs Gummies: How to Compare Labels",
+      "hook": "Fiber powder or gummies? Compare more than convenience.",
+      "tip1": "The fiber ingredient and full serving matter more than the format alone.",
+      "tip2": "Read water directions, other ingredients, and cost per serving."
+    },
+    {
+      "slug": "high-protein-high-fiber-snacks-no-refrigeration",
+      "keyword": "high protein high fiber snacks no refrigeration",
+      "cluster": "Protein",
+      "intent": "Shelf-stable combinations with storage guidance; distinguish from the shorter travel guide.",
+      "title": "High-Protein, High-Fiber Snacks That Don’t Need Refrigeration",
+      "hook": "Need protein and fiber without a fridge?",
+      "tip1": "Pair shelf-stable protein foods with fruit or whole grains.",
+      "tip2": "Check storage directions after opening and avoid hot-car storage."
+    },
+    {
+      "slug": "30-grams-fiber-high-protein-diet",
+      "keyword": "30 grams of fiber a day high protein diet",
+      "cluster": "Fiber",
+      "intent": "Practical example day and editable planner, not another general daily-needs article.",
+      "title": "How to Get 30 Grams of Fiber a Day on a High-Protein Diet",
+      "hook": "Protein goals do not have to crowd out fiber.",
+      "tip1": "Add a fiber source to meals you already enjoy.",
+      "tip2": "Use a manageable example day and increase gradually."
+    },
+    {
+      "slug": "build-muscle-without-protein-shakes",
+      "keyword": "build muscle without protein shakes",
+      "cluster": "Protein",
+      "intent": "Food-first implementation, distinct from daily-protein target guidance.",
+      "title": "How to Build Muscle Without Protein Shakes: A Food-First Guide",
+      "hook": "You do not need a shaker bottle to plan protein.",
+      "tip1": "Use foods you enjoy and can prepare consistently.",
+      "tip2": "Keep strength training, overall food intake, and recovery in the plan."
+    },
+    {
+      "slug": "portion-sizes-muscle-gain-without-counting-calories",
+      "keyword": "portion sizes for muscle gain",
+      "cluster": "Protein",
+      "intent": "Visual meal structure and deliberate adjustment process.",
+      "title": "Portion Sizes for Building Muscle Without Counting Every Calorie",
+      "hook": "Muscle-gain portions do not have to mean tracking every bite.",
+      "tip1": "Start with a repeatable meal structure.",
+      "tip2": "Review training, recovery, and appetite before changing everything."
+    },
+    {
+      "slug": "what-to-eat-glp1-not-hungry",
+      "keyword": "what to eat on glp1 when not hungry",
+      "cluster": "GLP-1",
+      "intent": "Low-appetite meal structure; avoid duplicate snack list.",
+      "title": "Not Hungry on a GLP-1? What to Eat When Full Meals Feel Impossible",
+      "hook": "Not hungry on a GLP-1? Nutrition still matters.",
+      "tip1": "Discuss smaller, manageable meals with your care team.",
+      "tip2": "Report persistent inability to eat or drink; do not self-adjust medication."
+    },
+    {
+      "slug": "glp1-protein-snacks-without-shakes",
+      "keyword": "glp1 protein snacks without shakes",
+      "cluster": "GLP-1",
+      "intent": "Food alternatives to shakes with actual-portion label arithmetic.",
+      "title": "High-Protein Snacks for GLP-1 Users Who Are Tired of Shakes",
+      "hook": "Tired of shakes while taking a GLP-1?",
+      "tip1": "Consider manageable portions of foods such as yogurt, eggs, or tofu.",
+      "tip2": "Protein amount and tolerance vary; personalize with your care team."
+    },
+    {
+      "slug": "glp1-constipation-fiber",
+      "keyword": "glp1 constipation fiber",
+      "cluster": "GLP-1",
+      "intent": "Fiber tolerance, hydration and red flags; no gummy cure claim.",
+      "title": "Constipated on a GLP-1? When More Fiber Helps—and When It Can Backfire",
+      "hook": "Constipated on a GLP-1? More fiber is not always the next step.",
+      "tip1": "Sudden increases can worsen bloating or fullness.",
+      "tip2": "Persistent or severe symptoms need clinical advice."
+    },
+    {
+      "slug": "maintain-muscle-glp1-low-appetite",
+      "keyword": "maintain muscle on glp1 low appetite",
+      "cluster": "GLP-1",
+      "intent": "Muscle preservation during treatment, distinct from general muscle gain.",
+      "title": "How to Maintain Muscle on a GLP-1 When Your Appetite Is Low",
+      "hook": "Weight loss is only part of the picture.",
+      "tip1": "Discuss adequate nutrition and appropriate strength training.",
+      "tip2": "Protein alone does not guarantee muscle preservation."
+    },
+    {
+      "slug": "tired-on-glp1-food-fluids-causes",
+      "keyword": "tired on glp1 food fluids",
+      "cluster": "GLP-1",
+      "intent": "Fatigue discussion checklist, not caffeine-based treatment.",
+      "title": "Feeling Tired on a GLP-1? Food, Fluids, and Other Causes to Check",
+      "hook": "Tired on a GLP-1? Look beyond another coffee.",
+      "tip1": "Review food, fluids, sleep, symptoms, and medication timing with your clinician.",
+      "tip2": "Fatigue has several possible causes; do not assume a deficiency."
+    }
+  ],
+  "resources": [
+    "/assets/growth/nutrition-workbook.html",
+    "/assets/growth/meal-components.svg"
+  ],
+  "clinicalReview": "Not completed; packet prepared for qualified reviewer.",
+  "volumeValidation": "Unavailable: Bing keyword data is not connected; no exact monthly volumes or numeric difficulty asserted.",
+  "competitionCheck": "Public search results inspected October 15, 2026 for the new topics and selected existing comparisons. Broad GLP-1 terms include major clinical and publisher sites; narrower questions are hypotheses, not proven low competition.",
+  "measurementBaseline": {
+    "period": "September 15–October 12, 2026",
+    "ga4Sessions": 365,
+    "organicSearchSessions": 7,
+    "generateLeadEvents": 0,
+    "generateLeadMarkedKeyEvent": true
+  },
+  "publication": "Website updates prepared; social assets are not posted or sent automatically."
+}
