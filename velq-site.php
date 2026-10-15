@@ -26,6 +26,27 @@ if($route!=='/api/waitlist' && $route!=='/analytics-config.js'){
 $upstream = 'https://velq-daily-mock.josephvelasquez604.chatgpt.site';
 $path = parse_url($_SERVER['REQUEST_URI'], PHP_URL_PATH);
 $analytics = str_ends_with($path, '/analytics-config.js');
+function velq_is_trusted_signup_request(array $headers): bool {
+    $trustedHosts = ['velqnutrition.com', 'www.velqnutrition.com'];
+    $isTrustedUrl = static function (string $value) use ($trustedHosts): bool {
+        if ($value === '') return false;
+        $parts = parse_url($value);
+        return is_array($parts)
+            && strtolower($parts['scheme'] ?? '') === 'https'
+            && in_array(strtolower($parts['host'] ?? ''), $trustedHosts, true)
+            && !isset($parts['port']) && !isset($parts['user']) && !isset($parts['pass']);
+    };
+    $origin = trim((string) ($headers['HTTP_ORIGIN'] ?? ''));
+    if ($origin !== '') return $isTrustedUrl($origin);
+
+    // Some privacy-aware clients/proxies omit Origin on same-origin requests.
+    // Accept only browser-reported same-origin requests or a verified HTTPS Velq referrer.
+    $fetchSite = strtolower(trim((string) ($headers['HTTP_SEC_FETCH_SITE'] ?? '')));
+    $referrer = trim((string) ($headers['HTTP_REFERER'] ?? ''));
+    if ($fetchSite === 'same-origin') return $referrer === '' || $isTrustedUrl($referrer);
+    if ($fetchSite === '') return $isTrustedUrl($referrer);
+    return false;
+}
 function fail(int $status, string $message): never {
     http_response_code($status);
     header('Content-Type: application/json; charset=utf-8');
@@ -36,9 +57,7 @@ if ($analytics) {
     if (!in_array($_SERVER['REQUEST_METHOD'], ['GET', 'HEAD'], true)) fail(405, 'Method not allowed.');
 } else {
     if ($_SERVER['REQUEST_METHOD'] !== 'POST') fail(405, 'Method not allowed.');
-    $origin = parse_url($_SERVER['HTTP_ORIGIN'] ?? '');
-    $host = strtolower(explode(':', $_SERVER['HTTP_HOST'])[0]);
-    if (($origin['scheme'] ?? '') !== 'https' || strtolower($origin['host'] ?? '') !== $host || isset($origin['port'])) fail(403, 'Please join through the Velq website.');
+    if (!velq_is_trusted_signup_request($_SERVER)) fail(403, 'Please join through the Velq website.');
     if (!str_starts_with($_SERVER['CONTENT_TYPE'] ?? '', 'application/json')) fail(415, 'Invalid request format.');
     $body = file_get_contents('php://input', false, null, 0, 2049);
     if ($body === false || strlen($body) > 2048) fail(400, 'Please check your information and try again.');
