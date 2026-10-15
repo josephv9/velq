@@ -60,3 +60,32 @@ assert.equal(events('waitlist_signup_success').length,1,'Duplicate confirmation 
 assert.equal(events('generate_lead').length,1,'Duplicate confirmation must not duplicate generate_lead');
 assert(!JSON.stringify(params).includes('@'),'No email may go to GA4');
 console.log('PASS: buyer article, referrer and conversion context survive homepage navigation; one server-confirmed lead counted, no real submission.');
+
+
+const {spawnSync}=require('node:child_process');
+const originHelper=source.match(/(function velq_is_trusted_signup_request\(array \$headers\): bool \{[\s\S]*?\n\})\nfunction fail\(/);
+assert(originHelper,'Expected pure waitlist origin-validation helper');
+const originTests = originHelper[1] + `
+\$cases = [
+  ['public apex via proxy', ['HTTP_ORIGIN' => 'https://velqnutrition.com', 'HTTP_HOST' => '191.96.56.62'], true],
+  ['public www via proxy', ['HTTP_ORIGIN' => 'https://www.velqnutrition.com', 'HTTP_HOST' => 'internal-server.local'], true],
+  ['same-origin browser without Origin', ['HTTP_SEC_FETCH_SITE' => 'same-origin', 'HTTP_REFERER' => 'https://velqnutrition.com/'], true],
+  ['same-origin metadata without referrer', ['HTTP_SEC_FETCH_SITE' => 'same-origin'], true],
+  ['referrer fallback without metadata', ['HTTP_REFERER' => 'https://velqnutrition.com/'], true],
+  ['foreign explicit origin', ['HTTP_ORIGIN' => 'https://attacker.example', 'HTTP_REFERER' => 'https://velqnutrition.com/'], false],
+  ['plain HTTP public origin', ['HTTP_ORIGIN' => 'http://velqnutrition.com'], false],
+  ['nonstandard port', ['HTTP_ORIGIN' => 'https://velqnutrition.com:8443'], false],
+  ['origin null', ['HTTP_ORIGIN' => 'null', 'HTTP_SEC_FETCH_SITE' => 'same-origin'], false],
+  ['foreign referrer', ['HTTP_REFERER' => 'https://other.example', 'HTTP_SEC_FETCH_SITE' => 'same-origin'], false],
+  ['cross-site metadata without origin', ['HTTP_REFERER' => 'https://velqnutrition.com/', 'HTTP_SEC_FETCH_SITE' => 'cross-site'], false],
+  ['missing origin and trust evidence', [], false]
+];
+foreach (\$cases as [\$name, \$headers, \$expected]) {
+  \$actual=velq_is_trusted_signup_request(\$headers);
+  if (\$actual !== \$expected) {fwrite(STDERR, "FAILED: " . \$name . "\\n"); exit(1);}
+}
+echo 'PASS: ' . count(\$cases) . ' real origin-validation cases, including trusted proxy and CSRF denial.' . PHP_EOL;
+`;
+const originResult=spawnSync('php',['-r',originTests],{encoding:'utf8',timeout:10000});
+assert.equal(originResult.status,0,originResult.stderr || originResult.error?.message || 'Origin tests failed');
+console.log(originResult.stdout.trim());
