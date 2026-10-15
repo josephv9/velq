@@ -54,7 +54,7 @@ assert(sitemap.includes('<urlset') && sitemap.includes('https://velqnutrition.co
 assert(!sitemap.includes('https://velqnutrition.com/tools/snack-finder'), 'Retired URL in sitemap');
 
 
-const retired = ["/blog/protein-gummies-vs-protein-powder","/blog/fiber-gummies-vs-fiber-powder","/guides/can-you-mix-protein-and-electrolytes","/guides/how-to-mix-protein-powder-in-16-oz-of-water","/guides/why-does-clear-protein-foam","/guides/protein-powder-for-people-who-hate-shakes","/guides/protein-and-fiber-snacks-without-protein-powder","/guides/what-is-protein-hydration-powder","/guides/protein-water-vs-protein-shakes","/guides/protein-powder-with-prebiotic-fiber","/guides/protein-drink-for-your-morning-routine","/products/lemonade-protein-hydration-powder"];
+const retired = ["/blog/protein-gummies-vs-protein-powder","/guides/can-you-mix-protein-and-electrolytes","/guides/how-to-mix-protein-powder-in-16-oz-of-water","/guides/why-does-clear-protein-foam","/guides/protein-powder-for-people-who-hate-shakes","/guides/protein-and-fiber-snacks-without-protein-powder","/guides/what-is-protein-hydration-powder","/guides/protein-water-vs-protein-shakes","/guides/protein-powder-with-prebiotic-fiber","/guides/protein-drink-for-your-morning-routine","/products/lemonade-protein-hydration-powder"];
 for(const url of retired){
   assert(!assets[url+'/index.html'],'Retired page served: '+url);
   assert(!sitemap.includes('<loc>https://velqnutrition.com'+url+'</loc>'),'Retired page in sitemap: '+url);
@@ -119,6 +119,9 @@ assert(content('/sitemap.xml').includes('https://velqnutrition.com/blog/protein-
 assert(content('/blog/index.html').includes('href="/blog/protein-gummies-with-fiber-comparison"'),'New comparison unlinked from Journal');
 assert(content('/index.html').includes('href="/blog/protein-gummies-with-fiber-comparison"'),'New comparison unlinked from homepage');
 
+
+assert(content('/sitemap.xml').includes('https://velqnutrition.com/blog/fiber-gummies-vs-fiber-powder'), 'Fiber powder comparison missing from sitemap');
+assert(content('/blog/fiber-gummies-for-adults-guide/index.html').includes('href="/blog/fiber-gummies-vs-fiber-powder"'), 'Fiber comparison lacks contextual internal link');
 
 const priorityGuides = [
   '/blog/protein-and-fiber-gummies-buying-guide/index.html',
