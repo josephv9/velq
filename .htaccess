@@ -2,6 +2,9 @@
 DirectoryIndex velq-site.php index.html
 ErrorDocument 404 default
 
+# Apply the current product-photo override to the bundled homepage response.
+php_value auto_prepend_file image-patch.php
+
 # Canonical host: www serves duplicate content, 301 it to the apex domain
 <IfModule mod_rewrite.c>
   RewriteEngine On
