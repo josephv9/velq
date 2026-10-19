@@ -1,0 +1,20 @@
+name: Velq route reliability diagnosis
+
+on:
+  push:
+    branches: [main]
+    paths:
+      - '.github/workflows/velq-route-reliability.yml'
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+jobs:
+  diagnose-routes:
+    runs-on: ubuntu-latest
+    timeout-minutes: 8
+    steps:
+      - uses: actions/checkout@v4
+      - name: Compare normal and no-cache routes
+        run: python3 scripts/diagnose-route-reliability.py
