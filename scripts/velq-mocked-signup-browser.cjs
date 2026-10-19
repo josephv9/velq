@@ -43,6 +43,7 @@ const assert=require('node:assert/strict');
   assert.equal(actual.success[0][2].event_id,fakeId,'Backend confirmation identifier not propagated');
   assert(!JSON.stringify(actual).includes('@'),'Email leaked into analytics payload');
   const names=traffic.map(x=>new URL(x).searchParams.get('en')).filter(Boolean);
+  console.log('MOCKED_COLLECTOR',JSON.stringify({count:traffic.length,eventNames:names}));
   assert(names.includes('waitlist_signup_success'),'Confirmed signup was not sent to mocked GA4 endpoint');
   assert(names.includes('generate_lead'),'Lead was not sent to mocked GA4 endpoint');
   assert.equal(errors.length,0,'Browser errors: '+JSON.stringify(errors));
