@@ -1,0 +1,24 @@
+name: Velq real browser GA4 validation
+
+on:
+  push:
+    branches: [main]
+    paths:
+      - '.github/workflows/velq-browser-ga4-probe.yml'
+      - 'scripts/live-ga4-browser-probe.cjs'
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+jobs:
+  browser-probe:
+    runs-on: ubuntu-latest
+    timeout-minutes: 12
+    steps:
+      - uses: actions/checkout@v4
+      - run: npm install --no-save playwright@1.56.1
+      - name: Browser trace of GA4 runtime and requests
+        run: |
+          which google-chrome
+          node scripts/live-ga4-browser-probe.cjs
