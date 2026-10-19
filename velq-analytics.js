@@ -1,9 +1,6 @@
-/* Velq site analytics (GA4).
-   Paste the GA4 measurement ID below (Admin > Data streams > velqnutrition.com).
-   Until a real G- ID is set, this file does nothing. After editing, redeploy
-   this one file to the site branch. */
+/* Velq GA4 measurement ID supplied by site owner. */
 (function () {
-  var ID = 'G-XXXXXXXXXX';
+  var ID = 'G-F93RK1P0H5';
   if (!/^G-[A-Z0-9]{6,}$/.test(ID) || ID.indexOf('X') !== -1) return;
   var s = document.createElement('script');
   s.async = true;
