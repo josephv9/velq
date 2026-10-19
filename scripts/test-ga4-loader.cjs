@@ -12,7 +12,7 @@ function runLoader(hasPackedTracker){
   const scripts=[];
   const ctx={
     document:{
-      querySelector:selector=>hasPackedTracker&&selector==='script[src="/analytics.js"]'?{}:null,
+      querySelector:selector=>hasPackedTracker&&selector.includes('analytics-config.js')?{}:null,
       createElement:()=>({}),
       head:{appendChild:node=>scripts.push(node)}
     },
