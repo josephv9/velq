@@ -2,6 +2,13 @@
 declare(strict_types=1);
 
 ob_start(static function (string $html): string {
+    // The packed analytics-config.js still contains an obsolete GA4 stream ID.
+    // Correct only this script response, before the deferred /analytics.js reads
+    // the configuration. Keep all other event/pixel settings unchanged.
+    $assetPath = parse_url($_SERVER['REQUEST_URI'] ?? '', PHP_URL_PATH) ?: '';
+    if ($assetPath === '/analytics-config.js') {
+        return str_replace('G-KTHFTZ9XEM', 'G-F93RK1P0H5', $html);
+    }
     if (stripos($html, '<html') === false) {
         return $html;
     }
