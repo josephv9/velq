@@ -37,8 +37,7 @@ runLoader(true);
 runLoader(false);
 
 function phpOutput(markup){
-  const script='$_SERVER["REQUEST_URI"]="/"; include "image-patch.php"; echo '+JSON.stringify(markup).replace(/^\x22/,'\x27').replace(/\x22$/,'\x27')+';';
-  // Use PHP single-quoted source only for markup that does not contain apostrophes.
+  const script='$_SERVER["REQUEST_URI"]="/"; include "image-patch.php"; echo base64_decode("'+Buffer.from(markup,'utf8').toString('base64')+'");';
   const proc=spawnSync('php',['-r',script],{encoding:'utf8',timeout:12000});
   assert.equal(proc.status,0,proc.stderr||proc.error?.message||'PHP filter failed');
   return proc.stdout;
