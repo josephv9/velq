@@ -21,7 +21,20 @@ if($route!=='/api/waitlist' && $route!=='/analytics-config.js'){
  if(!isset($assets[$path])){http_response_code(404);header('Content-Type: text/plain; charset=utf-8');echo 'Not found';exit;}
  header('Content-Type: '.$assets[$path]['type']);
  header('Cache-Control: '.(str_starts_with($path,'/assets/')?'public, max-age=86400':'no-cache'));
- if($_SERVER['REQUEST_METHOD']!=='HEAD')echo base64_decode($assets[$path]['data']);exit;
+ if($_SERVER['REQUEST_METHOD']!=='HEAD'){
+  $output=base64_decode($assets[$path]['data']);
+  if($output!==false && str_starts_with($assets[$path]['type'],'text/html')){
+    if(strpos($output,'/velq-lead-capture.js')===false){
+      $output=str_ireplace('</head>','<link rel="stylesheet" href="/velq-lead-capture.css?v=1"></head>',$output);
+      $output=str_ireplace('</body>','<script src="/velq-lead-capture.js?v=1" defer></script></body>',$output);
+    }
+    if(strpos($output,'/velq-analytics.js')===false){
+      $output=str_replace('<script src="/analytics.js" defer></script>','<script src="/velq-analytics.js"></script><script src="/analytics.js" defer></script>',$output);
+    }
+  }
+  if($output!==false)echo $output;
+}
+exit;
 }
 $upstream = 'https://velq-daily-mock.josephvelasquez604.chatgpt.site';
 $path = parse_url($_SERVER['REQUEST_URI'], PHP_URL_PATH);

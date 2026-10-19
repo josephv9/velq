@@ -1,7 +1,16 @@
-/* Velq GA4 measurement ID supplied by site owner. */
+/* Velq site analytics (GA4).
+   Production measurement ID provided by the Velq account owner.
+   Loaded once per HTML page by the existing PHP output filter. */
 (function () {
   var ID = 'G-F93RK1P0H5';
   if (!/^G-[A-Z0-9]{6,}$/.test(ID) || ID.indexOf('X') !== -1) return;
+  // The packed /analytics.js owns page views and confirmed waitlist events.
+  // Feed it the real ID, but never initialize GA4 twice on those pages.
+  var config = window.VELQ_ANALYTICS;
+  if (!config || typeof config !== 'object') config = {};
+  config.ga4 = ID;
+  window.VELQ_ANALYTICS = config;
+  if (document.querySelector('script[src="/analytics.js"]')) return;
   var s = document.createElement('script');
   s.async = true;
   s.src = 'https://www.googletagmanager.com/gtag/js?id=' + ID;
