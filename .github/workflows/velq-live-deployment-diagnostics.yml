@@ -5,6 +5,7 @@ on:
     branches: [main]
     paths:
       - '.github/workflows/velq-live-deployment-diagnostics.yml'
+      - 'scripts/live-seo-probe.py'
   workflow_dispatch:
 
 permissions:
