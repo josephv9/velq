@@ -94,6 +94,23 @@ ob_start(static function (string $html): string {
             break;
     }
 
+    // VELQ_GA4_BOOTSTRAP: load the single GA4 initializer on all PHP-rendered
+    // pages. The early <html> guard excludes the waitlist JSON API and assets.
+    // Do not duplicate a tag already included by the site bundle.
+    if (stripos($html, '/velq-analytics.js') === false
+        && stripos($html, 'gtag/js?id=G-F93RK1P0H5') === false
+        && stripos($html, "gtag('config', 'G-F93RK1P0H5'") === false) {
+        $withGa4 = preg_replace(
+            '~(<head\\b[^>]*>)~i',
+            '$1' . "\n" . '<script src="/velq-analytics.js"></script>',
+            $html,
+            1
+        );
+        if (is_string($withGa4)) {
+            $html = $withGa4;
+        }
+    }
+
     return (string) preg_replace_callback(
         '~<img\b[^>]*>~i',
         static function (array $match): string {
