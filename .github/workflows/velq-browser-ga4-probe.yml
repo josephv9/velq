@@ -6,6 +6,8 @@ on:
     paths:
       - '.github/workflows/velq-browser-ga4-probe.yml'
       - 'scripts/live-ga4-browser-probe.cjs'
+      - 'image-patch.php'
+      - 'velq-analytics.js'
   workflow_dispatch:
 
 permissions:
