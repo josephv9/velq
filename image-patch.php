@@ -95,16 +95,16 @@ ob_start(static function (string $html): string {
     }
 
     // VELQ_GA4_BOOTSTRAP: exactly one GA4 initializer for each HTML response.
-    // Packed pages load /analytics.js (deferred) and own confirmed signup events.
-    // Insert the ID bridge after its script tag, so it runs first without
-    // initializing a second gtag instance or changing other pixel settings.
+    // The packed /analytics-config.js can be deferred by the upstream.
+    // Inject a deferred ID override before /analytics.js so config (G-K),
+    // bridge (G-F), then tracker run in the correct order.
     if (stripos($html, '/velq-analytics.js') === false
         && stripos($html, 'gtag/js?id=G-F93RK1P0H5') === false
         && stripos($html, "gtag('config', 'G-F93RK1P0H5'") === false) {
         if (strpos($html, 'src="/analytics.js"') !== false) {
             $withGa4 = preg_replace(
                 '~(<script\b[^>]*src="/analytics\.js"[^>]*></script>)~i',
-                '$1' . "\n" . '<script src="/velq-analytics.js"></script>',
+                '<script src="/velq-analytics.js" defer></script>' . "\n" . '$1',
                 $html,
                 1
             );
