@@ -63,7 +63,8 @@
       var consent = inline && inline.elements && inline.elements.consent;
       if (email && consent && consent.checked) syncIdentifiedKlaviyo(email.value.trim(), 'inline_waitlist');
     }
-    markJoined();
+    if (e.detail.source === 'popup') save(JOINED_KEY, '1');
+    else markJoined();
   });
 
   function onKey(e) {
