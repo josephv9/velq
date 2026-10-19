@@ -1,0 +1,22 @@
+name: Velq mocked waitlist and GA4 browser QA
+
+on:
+  push:
+    branches: [main]
+    paths:
+      - '.github/workflows/velq-mocked-signup-browser.yml'
+      - 'scripts/velq-mocked-signup-browser.cjs'
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+jobs:
+  test-confirmed-signup:
+    runs-on: ubuntu-latest
+    timeout-minutes: 10
+    steps:
+      - uses: actions/checkout@v4
+      - run: npm install --no-save playwright@1.56.1
+      - name: Simulated confirmed signup (mocked backend and GA4)
+        run: node scripts/velq-mocked-signup-browser.cjs
