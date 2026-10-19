@@ -46,6 +46,19 @@ const labels=render('/blog/protein-gummies-with-fiber-comparison',asset('/blog/p
 assert(labels.includes('Compare protein gummies with fiber using published protein, prebiotic fiber'),'Label-comparison description missing');
 assert(labels.includes('from Cutfruit, PROTEDY, Kuma, OAKA and prelaunch Velq'),'Prelaunch disclosure missing');
 
+// Fiber-vs-powder readers now have direct paths to distinct buying intents.
+const fiberPowder = fs.readFileSync('blog/fiber-gummies-vs-fiber-powder/index.html','utf8');
+assert(fiberPowder.includes('id="gummy-buyer-next"'),'Fiber-vs-powder buyer path missing');
+for(const path of [
+  '/blog/best-fiber-gummies-2026',
+  '/blog/protein-gummies-with-fiber-comparison',
+  '/blog/protein-and-fiber-gummies-buying-guide'
+]){
+  assert(fiberPowder.includes('href="'+path+'"'),'Missing high-intent gummy link '+path);
+  assert.equal((fiberPowder.match(new RegExp('href="'+path+'"','g'))||[]).length,1,'Duplicate buyer link '+path);
+}
+assert(fiberPowder.includes('Velq is still in development; its target formula is not a finished nutrition label.'),'Missing prelaunch disclosure on buyer path');
+
 const api='{"ok":true,"newLead":false}';
 assert.equal(render('/api/waitlist',api),api,'Non-HTML API response must not change');
 assert(home.includes('final nutrition may change')||home.includes('Final nutrition may change'),'Prelaunch warning removed');
