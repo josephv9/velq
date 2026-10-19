@@ -135,14 +135,34 @@ ob_start(static function (string $html): string {
         }
     }
 
+    // The approved visual assets now have 480/800/1200 px WebP variants.
+    // These are HTML-only replacements; schema and social images remain unchanged.
+    if ($seoPath === '/' && strpos($html, 'data-velq-responsive-preload') === false) {
+        $preload = '<link data-velq-responsive-preload rel="preload" as="image" href="/assets/velq-strawberry-gummies-hero-20261015-v3-800.webp" imagesrcset="/assets/velq-strawberry-gummies-hero-20261015-v3-480.webp 480w, /assets/velq-strawberry-gummies-hero-20261015-v3-800.webp 800w, /assets/velq-strawberry-gummies-hero-20261015-v3-1200.webp 1200w" imagesizes="(max-width: 650px) 90vw, (max-width: 1100px) 48vw, 560px" fetchpriority="high">';
+        $html = preg_replace('~</head>~i', $preload . "\n" . '</head>', $html, 1) ?? $html;
+    }
+
     return (string) preg_replace_callback(
         '~<img\b[^>]*>~i',
         static function (array $match): string {
-            if (strpos($match[0], '/assets/velq-strawberry-gummies-hero-20261015-v3.jpeg') === false
-                && strpos($match[0], '/assets/velq-gummies-packshot-20261015-v2.jpeg') === false) {
-                return $match[0];
+            $variants = [
+                '/assets/velq-strawberry-gummies-hero-20261015-v3.jpeg'
+                    => '/assets/velq-strawberry-gummies-hero-20261015-v3',
+                '/assets/velq-gummies-packshot-20261015-v2.jpeg'
+                    => '/assets/velq-gummies-packshot-20261015-v2',
+            ];
+            foreach ($variants as $original => $base) {
+                if (strpos($match[0], $original) === false) {
+                    continue;
+                }
+                $tag = preg_replace('~\s+srcset="[^"]*"~i', '', $match[0]);
+                $tag = preg_replace('~\s+sizes="[^"]*"~i', '', $tag);
+                $tag = str_replace('src="' . $original . '"', 'src="' . $base . '-800.webp"', $tag);
+                $responsive = ' srcset="' . $base . '-480.webp 480w, ' . $base . '-800.webp 800w, ' . $base . '-1200.webp 1200w"'
+                    . ' sizes="(max-width: 650px) 90vw, (max-width: 1100px) 48vw, 560px"';
+                return preg_replace('~\s*(/?>)$~', $responsive . '$1', $tag, 1) ?? $tag;
             }
-            return (string) preg_replace('~\s+srcset="[^"]*"~i', '', $match[0]);
+            return $match[0];
         },
         $html
     );
