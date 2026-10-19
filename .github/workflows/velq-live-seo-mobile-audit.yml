@@ -18,11 +18,10 @@ jobs:
       - uses: actions/checkout@v4
 
       - name: Verify public robots and sitemap URL responses
-        continue-on-error: true
         shell: bash
         run: |
           python3 - <<'PY'
-          import concurrent.futures, json, re, urllib.request, xml.etree.ElementTree as ET
+          import concurrent.futures, json, re, time, urllib.request, xml.etree.ElementTree as ET
           base='https://velqnutrition.com'
           def fetch(url):
               req=urllib.request.Request(url,headers={'User-Agent':'Velq-SEO-QA/1.0','Cache-Control':'no-cache'})
@@ -39,38 +38,46 @@ jobs:
           assert len(urls)==len(set(urls)),'Duplicate sitemap URLs'
           assert all(u.startswith(base+'/') for u in urls),'Noncanonical host in sitemap'
           def check(url):
-              try:
-                  status,final,headers,body=fetch(url)
-                  meta_noindex=bool(re.search(r'<meta[^>]+name=["\x27]robots["\x27][^>]+noindex',body,re.I))
-                  x_noindex='noindex' in headers.get('X-Robots-Tag','').lower()
-                  has_canonical='rel="canonical"' in body or "rel='canonical'" in body
-                  return {'url':url,'status':status,'final':final,'noindex':meta_noindex or x_noindex,'canonical_tag':has_canonical,'bytes':len(body)}
-              except Exception as e:
-                  return {'url':url,'error':str(e)}
+              errors=[]
+              for attempt in range(1,4):
+                  try:
+                      status,final,headers,body=fetch(url)
+                      meta_noindex=bool(re.search(r'<meta[^>]+name=["\x27]robots["\x27][^>]+noindex',body,re.I))
+                      x_noindex='noindex' in headers.get('X-Robots-Tag','').lower()
+                      has_canonical='rel="canonical"' in body or "rel='canonical'" in body
+                      return {'url':url,'status':status,'final':final,'noindex':meta_noindex or x_noindex,'canonical_tag':has_canonical,'bytes':len(body),'retries':attempt-1,'transient_errors':errors}
+                  except Exception as e:
+                      errors.append(str(e))
+                      if attempt<3: time.sleep(0.6*attempt)
+              return {'url':url,'errors':errors}
           with concurrent.futures.ThreadPoolExecutor(max_workers=6) as pool:
               checked=list(pool.map(check,urls))
           failures=[x for x in checked if x.get('status')!=200 or x.get('noindex') or x.get('final')!=x.get('url') or not x.get('canonical_tag')]
-          print('SITEMAP_COVERAGE',json.dumps({'total_urls':len(urls),'200_ok':len(checked)-len([x for x in checked if x.get('status')!=200]),'failures':failures},indent=2))
+          print('SITEMAP_COVERAGE',json.dumps({'total_urls':len(urls),'200_ok':len(checked)-len([x for x in checked if x.get('status')!=200]),'recovered_transient_errors':[x for x in checked if x.get('retries',0)>0],'failures':failures},indent=2))
           assert not failures, f'{len(failures)} sitemap URLs have crawl or canonical issues'
           print('PASS: All sitemap URLs return indexable canonical pages from the preferred host. This is not a Google indexed-page count.')
           PY
 
       - name: Install Lighthouse
+        if: always()
         run: npm install --global lighthouse@12
 
       - name: Mobile Lighthouse homepage
+        if: always()
         continue-on-error: true
         run: |
           lighthouse 'https://velqnutrition.com/' --chrome-flags='--headless=new --no-sandbox --disable-dev-shm-usage' --only-categories=performance,accessibility,seo --form-factor=mobile --screenEmulation.mobile=true --output=json --output-path="/tmp/velq-home-mobile.json" --quiet
-          node -e 'const r=require("/tmp/velq-home-mobile.json");const a=r.audits;console.log(JSON.stringify({url:r.finalUrl,device:"mobile",scores:Object.fromEntries(Object.entries(r.categories).map(([k,v])=>[k,Math.round(v.score*100)])),labLCP:a["largest-contentful-paint"]?.displayValue,labCLS:a["cumulative-layout-shift"]?.displayValue,labTBT:a["total-blocking-time"]?.displayValue,labFCP:a["first-contentful-paint"]?.displayValue},null,2));'
+          node -e 'const r=require("/tmp/velq-home-mobile.json");const a=r.audits;console.log(JSON.stringify({url:r.finalUrl,device:"mobile",scores:Object.fromEntries(Object.entries(r.categories).map(([k,v])=>[k,Math.round(v.score*100)])),labLCP:a["largest-contentful-paint"]?.displayValue,labCLS:a["cumulative-layout-shift"]?.displayValue,labTBT:a["total-blocking-time"]?.displayValue,labFCP:a["first-contentful-paint"]?.displayValue,ga4NetworkIDs:[...new Set((a["network-requests"]?.details?.items||[]).flatMap(x=>(x.url||"").match(/G-[A-Z0-9]{8,}/g)||[]))]},null,2));'
 
       - name: Mobile Lighthouse protein gummies comparison
+        if: always()
         continue-on-error: true
         run: |
           lighthouse 'https://velqnutrition.com/blog/protein-gummies-with-fiber-comparison' --chrome-flags='--headless=new --no-sandbox --disable-dev-shm-usage' --only-categories=performance,accessibility,seo --form-factor=mobile --screenEmulation.mobile=true --output=json --output-path="/tmp/velq-comparison-mobile.json" --quiet
-          node -e 'const r=require("/tmp/velq-comparison-mobile.json");const a=r.audits;console.log(JSON.stringify({url:r.finalUrl,device:"mobile",scores:Object.fromEntries(Object.entries(r.categories).map(([k,v])=>[k,Math.round(v.score*100)])),labLCP:a["largest-contentful-paint"]?.displayValue,labCLS:a["cumulative-layout-shift"]?.displayValue,labTBT:a["total-blocking-time"]?.displayValue,labFCP:a["first-contentful-paint"]?.displayValue},null,2));'
+          node -e 'const r=require("/tmp/velq-comparison-mobile.json");const a=r.audits;console.log(JSON.stringify({url:r.finalUrl,device:"mobile",scores:Object.fromEntries(Object.entries(r.categories).map(([k,v])=>[k,Math.round(v.score*100)])),labLCP:a["largest-contentful-paint"]?.displayValue,labCLS:a["cumulative-layout-shift"]?.displayValue,labTBT:a["total-blocking-time"]?.displayValue,labFCP:a["first-contentful-paint"]?.displayValue,ga4NetworkIDs:[...new Set((a["network-requests"]?.details?.items||[]).flatMap(x=>(x.url||"").match(/G-[A-Z0-9]{8,}/g)||[]))]},null,2));'
 
       - name: Field Core Web Vitals if PageSpeed API permits
+        if: always()
         continue-on-error: true
         shell: bash
         run: |
