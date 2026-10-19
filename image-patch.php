@@ -101,6 +101,12 @@ ob_start(static function (string $html): string {
             break;
     }
 
+    // Bust Hostinger CDN's old /app.js cache on the homepage so visitors load
+    // the consented popup and confirmed-receipt logic immediately after deploy.
+    if ($seoPath === '/') {
+        $html = str_replace('src="/app.js"', 'src="/app.js?v=early-access-20261019"', $html);
+    }
+
     // VELQ_GA4_BOOTSTRAP: exactly one GA4 initializer for each HTML response.
     // The packed /analytics-config.js can be deferred by the upstream.
     // Inject a deferred ID override before /analytics.js so config (G-K),
