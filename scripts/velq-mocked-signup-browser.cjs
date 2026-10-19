@@ -15,8 +15,16 @@ const assert=require('node:assert/strict');
     await route.fulfill({status:200,contentType:'application/json',
       body:JSON.stringify({ok:true,status:'confirmed',newLead:true,eventId:fakeId})});
   });
-  await context.route(/https:\/\/(?:www\.google-analytics\.com|region1\.google-analytics\.com)\/g\/collect/,async route=>{
-    traffic.push(route.request().url());
+  await context.route(/https:\/\/(?:www\.google-analytics\.com|region1\.google-analytics\.com)\/g\/(?:collect|batch)/,async route=>{
+    // GA4 may POST multiple events in the body of a single g/collect request.
+    // Store only event names; never print query strings, cookies, or user data.
+    const request=route.request();
+    const payload=request.postData()||'';
+    const names=[...new URL(request.url()).searchParams.getAll('en')];
+    for(const line of payload.split(/\r?\n/)){
+      names.push(...new URLSearchParams(line).getAll('en'));
+    }
+    traffic.push({method:request.method(),names});
     await route.fulfill({status:204,body:''});
   });
   const page=await context.newPage();
@@ -31,7 +39,7 @@ const assert=require('node:assert/strict');
   await page.locator('#waitlist-form').evaluate(f=>f.requestSubmit());
   await page.waitForFunction(()=>Array.from(window.dataLayer||[]).some(x=>x[0]==='event'&&x[1]==='waitlist_signup_success'),{timeout:15000});
   // GA4 batches successive custom events; wait for the mocked collector to receive them.
-  for(let retry=0;retry<24&&!traffic.some(u=>new URL(u).searchParams.get('en')==='generate_lead');retry++){
+  for(let retry=0;retry<24&&!traffic.some(req=>req.names.includes('generate_lead'));retry++){
     await page.waitForTimeout(500);
   }
   const actual=await page.evaluate(()=>{
@@ -45,8 +53,8 @@ const assert=require('node:assert/strict');
   assert.equal(actual.complete.length,1,'Expected one waitlist_signup_complete event');
   assert.equal(actual.success[0][2].event_id,fakeId,'Backend confirmation identifier not propagated');
   assert(!JSON.stringify(actual).includes('@'),'Email leaked into analytics payload');
-  const names=traffic.map(x=>new URL(x).searchParams.get('en')).filter(Boolean);
-  console.log('MOCKED_COLLECTOR',JSON.stringify({count:traffic.length,eventNames:names}));
+  const names=traffic.flatMap(req=>req.names).filter(Boolean);
+  console.log('MOCKED_COLLECTOR',JSON.stringify({requests:traffic.map(req=>({method:req.method,eventNames:req.names})),eventNames:names}));
   assert(names.includes('waitlist_signup_success'),'Confirmed signup was not sent to mocked GA4 endpoint');
   assert(names.includes('generate_lead'),'Lead was not sent to mocked GA4 endpoint');
   assert.equal(errors.length,0,'Browser errors: '+JSON.stringify(errors));
