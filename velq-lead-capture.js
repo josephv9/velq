@@ -133,6 +133,7 @@
       if (!form.reportValidity() || submit.disabled) return;
       var email = form.elements.email.value.trim();
       if (!email || !form.elements.consent.checked) return;
+      event('velq_early_access_submit', 'submit');
       submit.disabled = true;
       submit.textContent = 'JOINING...';
       feedback.textContent = '';
@@ -154,7 +155,7 @@
         }
         if (result.newLead === true && typeof result.eventId === 'string' && result.eventId) {
           window.dispatchEvent(new CustomEvent('velq:waitlist-success', {
-            detail: { eventId: result.eventId, source: 'popup' }
+            detail: { eventId: result.eventId, source: 'popup', trigger: reason }
           }));
           syncIdentifiedKlaviyo(email, 'popup');
         } else {
