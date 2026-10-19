@@ -28,8 +28,10 @@ def fetch(path, agent):
         return {'path':path,'agent':agent,'error':str(error)}
     title=re.search(r'<title>([^<]*)</title>',body,re.I)
     ids=sorted(set(re.findall(r'G-[A-Z0-9]{8,}',body)))
+    script_srcs=re.findall(r'<script[^>]*src=["\x27]([^"\x27]+)["\x27][^>]*>',body,re.I)
+    bridge_injected=any('/velq-analytics.js' in x for x in script_srcs)
     return {'path':path,'agent':agent,'status':status,'destination':dest,'title':title.group(1)[:85] if title else '',
-            'bytes':len(body),'ids':ids,'loader_bridge_present':'single GA4 initializer' in body or 'config.ga4 = ID;' in body,
+            'bytes':len(body),'ids':ids,'script_srcs':script_srcs[:22],'bridge_injected':bridge_injected,'loader_bridge_present':'single GA4 initializer' in body or 'config.ga4 = ID;' in body,
             'has_waitlist_success':'waitlist_signup_success' in body,'cache':headers.get('X-Cache',headers.get('x-cache',''))}
 for path in ['/robots.txt','/sitemap.xml','/analytics-config.js','/analytics.js','/velq-analytics.js','/']+PATHS:
     agents=['browser','audit'] if path in PATHS else ['browser']
