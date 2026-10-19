@@ -30,7 +30,10 @@ const assert=require('node:assert/strict');
   await consent.check();
   await page.locator('#waitlist-form').evaluate(f=>f.requestSubmit());
   await page.waitForFunction(()=>Array.from(window.dataLayer||[]).some(x=>x[0]==='event'&&x[1]==='waitlist_signup_success'),{timeout:15000});
-  await page.waitForTimeout(1800);
+  // GA4 batches successive custom events; wait for the mocked collector to receive them.
+  for(let retry=0;retry<24&&!traffic.some(u=>new URL(u).searchParams.get('en')==='generate_lead');retry++){
+    await page.waitForTimeout(500);
+  }
   const actual=await page.evaluate(()=>{
     const get=name=>(window.dataLayer||[]).filter(x=>x&&x[0]==='event'&&x[1]===name);
     return {success:get('waitlist_signup_success'),leads:get('generate_lead'),
