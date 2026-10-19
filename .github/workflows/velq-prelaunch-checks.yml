@@ -5,6 +5,8 @@ on:
     branches: [main, site]
     paths:
       - 'velq-site.php'
+      - 'image-patch.php'
+      - 'scripts/test-gummy-seo.cjs'
       - 'scripts/validate-velq-site.cjs'
       - 'scripts/test-waitlist-attribution.cjs'
       - '.github/workflows/velq-prelaunch-checks.yml'
@@ -22,7 +24,11 @@ jobs:
       - uses: actions/checkout@v4
       - name: Validate PHP syntax
         run: php -l velq-site.php
+      - name: Validate SEO response filter PHP syntax
+        run: php -l image-patch.php
       - name: Validate the packed Velq site and signup code
         run: node scripts/validate-velq-site.cjs
+      - name: Test gummy buyer paths and page metadata without external requests
+        run: node scripts/test-gummy-seo.cjs
       - name: Test confirmed waitlist attribution without creating leads
         run: node scripts/test-waitlist-attribution.cjs
