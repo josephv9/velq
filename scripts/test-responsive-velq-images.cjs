@@ -30,7 +30,7 @@ const original='<html><head><title>Velq</title></head><body>'
   +'<img src="/assets/unrelated.png" width="20" height="20"></body></html>';
 const html=phpOutput(original);
 assert.equal((html.match(/data-velq-responsive-preload/g)||[]).length,1,'Exactly one preload on homepage');
-assert.equal((html.match(/srcset="\/assets\/velq-/g)||[]).length,2,'Exactly two optimized image srcsets expected');
+assert.equal((html.match(/<img\b[^>]*\ssrcset="\/assets\/velq-/g)||[]).length,2,'Exactly two optimized image srcsets expected');
 assert(html.includes('src="/assets/velq-strawberry-gummies-hero-20261015-v3-800.webp"'),'Optimized hero not rendered');
 assert(html.includes('src="/assets/velq-gummies-packshot-20261015-v2-800.webp"'),'Optimized product packshot not rendered');
 assert(!html.includes('/stale.jpg'),'Stale srcset present');
