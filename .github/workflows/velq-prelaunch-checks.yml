@@ -8,6 +8,9 @@ on:
       - 'image-patch.php'
       - 'velq-analytics.js'
       - 'scripts/test-ga4-loader.cjs'
+      - 'scripts/test-responsive-velq-images.cjs'
+      - 'assets/velq-strawberry-gummies-hero-20261015-v3-*.webp'
+      - 'assets/velq-gummies-packshot-20261015-v2-*.webp'
       - 'scripts/test-gummy-seo.cjs'
       - 'scripts/validate-velq-site.cjs'
       - 'scripts/test-waitlist-attribution.cjs'
@@ -36,3 +39,5 @@ jobs:
         run: node scripts/test-waitlist-attribution.cjs
       - name: Verify one GA4 initializer and preserved event configuration
         run: node scripts/test-ga4-loader.cjs
+      - name: Verify responsive WebP variants and rendered image markup
+        run: node scripts/test-responsive-velq-images.cjs
