@@ -6,6 +6,8 @@ on:
     paths:
       - 'velq-site.php'
       - 'image-patch.php'
+      - 'velq-analytics.js'
+      - 'scripts/test-ga4-loader.cjs'
       - 'scripts/test-gummy-seo.cjs'
       - 'scripts/validate-velq-site.cjs'
       - 'scripts/test-waitlist-attribution.cjs'
@@ -32,3 +34,5 @@ jobs:
         run: node scripts/test-gummy-seo.cjs
       - name: Test confirmed waitlist attribution without creating leads
         run: node scripts/test-waitlist-attribution.cjs
+      - name: Verify one GA4 initializer and preserved event configuration
+        run: node scripts/test-ga4-loader.cjs
