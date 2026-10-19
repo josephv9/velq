@@ -17,22 +17,45 @@ const interest=document.querySelector('#waitlist-interest');
 const feedback=document.querySelector('#signup-feedback');
 const submit=document.querySelector('#waitlist-submit');
 document.querySelectorAll('[data-interest]').forEach(link=>link.addEventListener('click',()=>{interest.value='strawberry';}));
+const pendingKey='velq_pending_waitlist';
+const storeReceipt=receipt=>{try{if(receipt)sessionStorage.setItem(pendingKey,receipt);else sessionStorage.removeItem(pendingKey);}catch{}};
+const savedReceipt=()=>{try{return sessionStorage.getItem(pendingKey);}catch{return null;}};
+async function waitlistRequest(body){
+  const controller=new AbortController();const timer=setTimeout(()=>controller.abort(),15000);
+  try{const response=await fetch('/api/waitlist',{method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify(body),signal:controller.signal});return {response,result:await response.json()};}finally{clearTimeout(timer);}
+}
+async function completeWaitlist(initial){
+  let {response,result}=initial;const started=Date.now();let delay=1500;
+  while(result.status==='pending'&&result.receipt&&Date.now()-started<10*60*1000){
+    storeReceipt(result.receipt);
+    feedback.textContent='Your request is saved. Weâre confirming your subscriptionâ¦';
+    await new Promise(resolve=>setTimeout(resolve,delay));delay=Math.min(10000,delay*1.5);
+    ({response,result}=await waitlistRequest({receipt:result.receipt}));
+  }
+  if(result.status==='pending'){feedback.textContent='Your request is saved and confirmation is still pending. Return to this page to check again.';return;}
+  if(!response.ok||result.ok!==true){storeReceipt(null);throw new Error(result.status==='suppressed'?'This address cannot be subscribed through this form. Please contact Velq.':result.error||'We couldnât save your signup. Please try again.');}
+  storeReceipt(null);
+  if(result.status==='confirmed'&&result.newLead===true&&result.eventId)window.dispatchEvent(new CustomEvent('velq:waitlist-success',{detail:{eventId:result.eventId}}));
+  form.reset();interest.value='strawberry';feedback.classList.add('success');feedback.textContent='Youâre on the list! Weâll email you when Velq launches.';
+}
+function signupError(error){
+  // An interrupted poll is not a failed subscription or a successful conversion.
+  if(savedReceipt()){feedback.textContent='Your request is saved. Return to this page to check confirmation.';return;}
+  if(window.VELQ_ANALYTICS?.ga4)window.gtag?.('event','waitlist_submit_failed',{form_id:'waitlist-form',failure_type:error.name==='AbortError'?'timeout':'request_failed'});
+  feedback.classList.add('error');feedback.textContent=error.name==='AbortError'?'That took longer than expected. Please try again.':error.message||'Please check your connection and try again.';
+}
 form.addEventListener('submit',async event=>{
-  event.preventDefault();
-  if(!form.reportValidity())return;
+  event.preventDefault();if(submit.disabled||!form.reportValidity())return;
   if(window.VELQ_ANALYTICS?.ga4)window.gtag?.('event','waitlist_submit_attempt',{form_id:'waitlist-form'});
-  submit.disabled=true;submit.textContent='JOINING…';feedback.textContent='';feedback.className='signup-feedback';
-  try{
-    const controller=new AbortController();const timer=setTimeout(()=>controller.abort(),15000);
-    let response;
-    try{response=await fetch('/api/waitlist',{method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify({email:form.elements.email.value,interest:interest.value,consent:form.elements.consent.checked,company:form.elements.company.value}),signal:controller.signal});}finally{clearTimeout(timer);}
-    const result=await response.json();
-    if(!response.ok||result.ok!==true)throw new Error(result.error||'We couldn’t save your signup. Please try again.');
-    if(!form.elements.company.value&&result.newLead===true&&result.eventId){window.dispatchEvent(new CustomEvent('velq:waitlist-success',{detail:{eventId:result.eventId}}));}
-    form.reset();interest.value='strawberry';feedback.classList.add('success');feedback.textContent='You’re on the list! We’ll email you when Velq launches.';
-  }catch(error){if(window.VELQ_ANALYTICS?.ga4)window.gtag?.('event','waitlist_submit_failed',{form_id:'waitlist-form',failure_type:error.name==='AbortError'?'timeout':'request_failed'});feedback.classList.add('error');feedback.textContent=error.name==='AbortError'?'That took longer than expected. Please try again.':error.message||'Please check your connection and try again.';}
-  finally{submit.disabled=false;submit.innerHTML='JOIN THE WAITLIST <span aria-hidden="true">↗</span>';}
+  submit.disabled=true;submit.textContent='JOININGâ¦';feedback.textContent='';feedback.className='signup-feedback';
+  try{await completeWaitlist(await waitlistRequest(savedReceipt()?{receipt:savedReceipt()}:{email:form.elements.email.value,interest:interest.value,consent:form.elements.consent.checked,company:form.elements.company.value}));}
+  catch(error){signupError(error);}
+  finally{submit.disabled=false;submit.innerHTML='JOIN THE WAITLIST <span aria-hidden="true">â</span>';}
 });
+if(savedReceipt()){
+  submit.disabled=true;
+  completeWaitlist({response:{ok:true},result:{status:'pending',receipt:savedReceipt()}}).catch(signupError).finally(()=>{submit.disabled=false;});
+}
 
 const privacy=document.querySelector('#privacy-dialog');
 document.querySelector('#privacy-open').addEventListener('click',()=>privacy.showModal());
@@ -46,13 +69,6 @@ if(context?.registerTool){
 
 const stickyAccess=document.querySelector('.mobile-early-access');
 if(stickyAccess&&'IntersectionObserver' in window){const observer=new IntersectionObserver(entries=>{stickyAccess.hidden=entries.some(e=>e.isIntersecting);},{threshold:0});observer.observe(document.querySelector('#waitlist'));}
-
-// Use the approved product photo for the homepage hero and product card.
-const approvedProductImage='/assets/velq-strawberry-gummies-target-20261015.jpeg';
-document.querySelectorAll('#hero-image, .product-visual img').forEach(image=>{
-  image.src=approvedProductImage;
-  image.srcset='';
-});
 
 /* Lead-capture popup: same first-party waitlist API and confirmed-lead tracking as the inline form. */
 (() => {
@@ -110,7 +126,7 @@ document.querySelectorAll('#hero-image, .product-visual img').forEach(image=>{
     if (window.VELQ_ANALYTICS?.ga4 && typeof window.gtag === 'function') window.gtag('event', name, params);
   }
   function eligible() {
-    if (opened || closedInSession || storage.get('velq_waitlist_joined') === '1') return false;
+    if (opened || closedInSession || storage.get('velq_waitlist_joined') === '1' || savedReceipt()) return false;
     const dismissed = Number(storage.get('velq_popup_dismissed_at') || 0);
     if (dismissed && Date.now() - dismissed < 7 * 24 * 60 * 60 * 1000) return false;
     if (document.visibilityState === 'hidden' || document.querySelector('dialog[open]')) return false;
@@ -166,33 +182,46 @@ document.querySelectorAll('#hero-image, .product-visual img').forEach(image=>{
     submit.textContent = 'JOINING...';
     error.hidden = true;
     error.textContent = '';
-    const controller = new AbortController();
-    const timer = setTimeout(() => controller.abort(), 15000);
     try {
-      const response = await fetch('/api/waitlist', {
-        method: 'POST',
-        credentials: 'same-origin',
-        headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify({ email: email.value.trim(), interest: 'strawberry', consent: true, company: '' }),
-        signal: controller.signal
+      // Keep the live waitlist's pending-receipt protocol and resume it on return visits.
+      let { response, result } = await waitlistRequest({
+        email: email.value.trim(), interest: 'strawberry', consent: true, company: ''
       });
-      const result = await response.json();
-      if (!response.ok || result.ok !== true) throw new Error(result.error || 'We could not save your signup. Please try again.');
+      const started = Date.now();
+      let delay = 1500;
+      while (result.status === 'pending' && result.receipt && Date.now() - started < 10 * 60 * 1000) {
+        storeReceipt(result.receipt);
+        submit.textContent = 'CONFIRMING...';
+        await new Promise(resolve => setTimeout(resolve, delay));
+        delay = Math.min(10000, delay * 1.5);
+        ({ response, result } = await waitlistRequest({ receipt: result.receipt }));
+      }
+      if (result.status === 'pending') {
+        error.textContent = 'Your request is saved. Confirmation is still pending. Return to this page to check.';
+        error.hidden = false;
+        return;
+      }
+      if (!response.ok || result.ok !== true) {
+        storeReceipt(null);
+        throw new Error(result.status === 'suppressed'
+          ? 'This address cannot be subscribed here. Please contact Velq.'
+          : (result.error || 'We could not save your signup. Please try again.'));
+      }
+      storeReceipt(null);
       storage.set('velq_waitlist_joined', '1');
       shell.querySelector('.vlp-content').hidden = true;
       shell.querySelector('.vlp-success').hidden = false;
       shell.querySelector('.vlp-success button').focus({ preventScroll: true });
       analytics('lead_popup_signup_success', { new_lead: result.newLead === true });
       // Only a genuinely new, server-confirmed signup triggers the existing GA4 generate_lead event.
-      if (result.newLead === true && typeof result.eventId === 'string' && result.eventId) {
+      if (result.status === 'confirmed' && result.newLead === true && typeof result.eventId === 'string' && result.eventId) {
         window.dispatchEvent(new CustomEvent('velq:waitlist-success', { detail: { eventId: result.eventId } }));
       }
     } catch (e) {
-      error.textContent = e?.name === 'AbortError' ? 'The request timed out. Please try again.' : (e?.message || 'Please check your connection and try again.');
+      error.textContent = savedReceipt() ? 'Your request was saved. Return later to check confirmation.' : (e?.name === 'AbortError' ? 'The request timed out. Please try again.' : (e?.message || 'Please check your connection and try again.'));
       error.hidden = false;
-      analytics('lead_popup_submit_failed', { failure_type: e?.name === 'AbortError' ? 'timeout' : 'request_failed' });
+      if (!savedReceipt()) analytics('lead_popup_submit_failed', { failure_type: e?.name === 'AbortError' ? 'timeout' : 'request_failed' });
     } finally {
-      clearTimeout(timer);
       submit.disabled = false;
       submit.textContent = 'GET EARLY ACCESS →';
     }
