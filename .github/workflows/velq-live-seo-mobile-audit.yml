@@ -1,0 +1,98 @@
+name: Velq live sitemap and mobile performance audit
+
+on:
+  push:
+    branches: [main]
+    paths:
+      - '.github/workflows/velq-live-seo-mobile-audit.yml'
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+jobs:
+  audit-live-site:
+    runs-on: ubuntu-latest
+    timeout-minutes: 16
+    steps:
+      - uses: actions/checkout@v4
+
+      - name: Verify public robots and sitemap URL responses
+        continue-on-error: true
+        shell: bash
+        run: |
+          python3 - <<'PY'
+          import concurrent.futures, json, re, urllib.request, xml.etree.ElementTree as ET
+          base='https://velqnutrition.com'
+          def fetch(url):
+              req=urllib.request.Request(url,headers={'User-Agent':'Velq-SEO-QA/1.0','Cache-Control':'no-cache'})
+              with urllib.request.urlopen(req,timeout=25) as resp:
+                  return resp.status,resp.geturl(),dict(resp.headers),resp.read(3_000_000).decode('utf-8','replace')
+          status,final,headers,robots=fetch(base+'/robots.txt')
+          print('ROBOTS',json.dumps({'status':status,'url':final,'contains_sitemap':base+'/sitemap.xml' in robots,'length':len(robots)}))
+          status,final,headers,xml=fetch(base+'/sitemap.xml')
+          print('SITEMAP',json.dumps({'status':status,'url':final,'content_type':headers.get('Content-Type'),'length':len(xml)}))
+          root=ET.fromstring(xml)
+          ns={'s':'http://www.sitemaps.org/schemas/sitemap/0.9'}
+          urls=[el.text for el in root.findall('.//s:loc',ns)]
+          assert len(urls)>=20, f'Only {len(urls)} sitemap URLs'
+          assert len(urls)==len(set(urls)),'Duplicate sitemap URLs'
+          assert all(u.startswith(base+'/') for u in urls),'Noncanonical host in sitemap'
+          def check(url):
+              try:
+                  status,final,headers,body=fetch(url)
+                  meta_noindex=bool(re.search(r'<meta[^>]+name=["\x27]robots["\x27][^>]+noindex',body,re.I))
+                  x_noindex='noindex' in headers.get('X-Robots-Tag','').lower()
+                  has_canonical='rel="canonical"' in body or "rel='canonical'" in body
+                  return {'url':url,'status':status,'final':final,'noindex':meta_noindex or x_noindex,'canonical_tag':has_canonical,'bytes':len(body)}
+              except Exception as e:
+                  return {'url':url,'error':str(e)}
+          with concurrent.futures.ThreadPoolExecutor(max_workers=6) as pool:
+              checked=list(pool.map(check,urls))
+          failures=[x for x in checked if x.get('status')!=200 or x.get('noindex') or x.get('final')!=x.get('url') or not x.get('canonical_tag')]
+          print('SITEMAP_COVERAGE',json.dumps({'total_urls':len(urls),'200_ok':len(checked)-len([x for x in checked if x.get('status')!=200]),'failures':failures},indent=2))
+          assert not failures, f'{len(failures)} sitemap URLs have crawl or canonical issues'
+          print('PASS: All sitemap URLs return indexable canonical pages from the preferred host. This is not a Google indexed-page count.')
+          PY
+
+      - name: Install Lighthouse
+        run: npm install --global lighthouse@12
+
+      - name: Mobile Lighthouse homepage
+        continue-on-error: true
+        run: |
+          lighthouse 'https://velqnutrition.com/' --chrome-flags='--headless=new --no-sandbox --disable-dev-shm-usage' --only-categories=performance,accessibility,seo --form-factor=mobile --screenEmulation.mobile=true --output=json --output-path="/tmp/velq-home-mobile.json" --quiet
+          node -e 'const r=require("/tmp/velq-home-mobile.json");const a=r.audits;console.log(JSON.stringify({url:r.finalUrl,device:"mobile",scores:Object.fromEntries(Object.entries(r.categories).map(([k,v])=>[k,Math.round(v.score*100)])),labLCP:a["largest-contentful-paint"]?.displayValue,labCLS:a["cumulative-layout-shift"]?.displayValue,labTBT:a["total-blocking-time"]?.displayValue,labFCP:a["first-contentful-paint"]?.displayValue},null,2));'
+
+      - name: Mobile Lighthouse protein gummies comparison
+        continue-on-error: true
+        run: |
+          lighthouse 'https://velqnutrition.com/blog/protein-gummies-with-fiber-comparison' --chrome-flags='--headless=new --no-sandbox --disable-dev-shm-usage' --only-categories=performance,accessibility,seo --form-factor=mobile --screenEmulation.mobile=true --output=json --output-path="/tmp/velq-comparison-mobile.json" --quiet
+          node -e 'const r=require("/tmp/velq-comparison-mobile.json");const a=r.audits;console.log(JSON.stringify({url:r.finalUrl,device:"mobile",scores:Object.fromEntries(Object.entries(r.categories).map(([k,v])=>[k,Math.round(v.score*100)])),labLCP:a["largest-contentful-paint"]?.displayValue,labCLS:a["cumulative-layout-shift"]?.displayValue,labTBT:a["total-blocking-time"]?.displayValue,labFCP:a["first-contentful-paint"]?.displayValue},null,2));'
+
+      - name: Field Core Web Vitals if PageSpeed API permits
+        continue-on-error: true
+        shell: bash
+        run: |
+          python3 - <<'PY'
+          import json,urllib.request
+          url='https://www.googleapis.com/pagespeedonline/v5/runPagespeed?url=https%3A%2F%2Fvelqnutrition.com%2F&strategy=mobile'
+          try:
+              with urllib.request.urlopen(url,timeout=90) as resp: data=json.load(resp)
+              field=data.get('loadingExperience',{}).get('metrics',{})
+              origin=data.get('originLoadingExperience',{}).get('metrics',{})
+              print('CHROME_USER_EXPERIENCE',json.dumps({'url_level':field,'origin_level':origin},indent=2)[:6000])
+              if not field and not origin: print('No CrUX field data for this origin; lab Lighthouse is not a substitute for field INP.')
+          except Exception as e:
+              print('Public PageSpeed field-data lookup unavailable:',str(e))
+          PY
+
+      - name: Upload Lighthouse evidence
+        if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: velq-mobile-lighthouse
+          path: |
+            /tmp/velq-home-mobile.json
+            /tmp/velq-comparison-mobile.json
+          if-no-files-found: warn
