@@ -10,7 +10,9 @@
   if (!config || typeof config !== 'object') config = {};
   config.ga4 = ID;
   window.VELQ_ANALYTICS = config;
-  if (document.querySelector('script[src="/analytics.js"]')) return;
+  // Some homepage templates inject the tracker after this script executes.
+  // The earlier config script reliably identifies pages with the packed tracker.
+  if (document.querySelector('script[src^="/analytics-config.js"], script[src^="/analytics.js"]')) return;
   var s = document.createElement('script');
   s.async = true;
   s.src = 'https://www.googletagmanager.com/gtag/js?id=' + ID;
