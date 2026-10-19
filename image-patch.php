@@ -94,18 +94,29 @@ ob_start(static function (string $html): string {
             break;
     }
 
-    // VELQ_GA4_BOOTSTRAP: load the single GA4 initializer on all PHP-rendered
-    // pages. The early <html> guard excludes the waitlist JSON API and assets.
-    // Do not duplicate a tag already included by the site bundle.
+    // VELQ_GA4_BOOTSTRAP: exactly one GA4 initializer for each HTML response.
+    // Packed pages load /analytics.js (deferred) and own confirmed signup events.
+    // Insert the ID bridge after its script tag, so it runs first without
+    // initializing a second gtag instance or changing other pixel settings.
     if (stripos($html, '/velq-analytics.js') === false
         && stripos($html, 'gtag/js?id=G-F93RK1P0H5') === false
         && stripos($html, "gtag('config', 'G-F93RK1P0H5'") === false) {
-        $withGa4 = preg_replace(
-            '~(<head\\b[^>]*>)~i',
-            '$1' . "\n" . '<script src="/velq-analytics.js"></script>',
-            $html,
-            1
-        );
+        if (strpos($html, 'src="/analytics.js"') !== false) {
+            $withGa4 = preg_replace(
+                '~(<script\b[^>]*src="/analytics\.js"[^>]*></script>)~i',
+                '$1' . "\n" . '<script src="/velq-analytics.js"></script>',
+                $html,
+                1
+            );
+        } else {
+            // Standalone Journal pages still require ordinary GA4 page views.
+            $withGa4 = preg_replace(
+                '~(<head\b[^>]*>)~i',
+                '$1' . "\n" . '<script src="/velq-analytics.js"></script>',
+                $html,
+                1
+            );
+        }
         if (is_string($withGa4)) {
             $html = $withGa4;
         }
