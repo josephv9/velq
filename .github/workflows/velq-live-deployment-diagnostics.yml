@@ -1,0 +1,20 @@
+name: Velq deployment and error diagnostics
+
+on:
+  push:
+    branches: [main]
+    paths:
+      - '.github/workflows/velq-live-deployment-diagnostics.yml'
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+jobs:
+  test-live-response:
+    runs-on: ubuntu-latest
+    timeout-minutes: 8
+    steps:
+      - uses: actions/checkout@v4
+      - name: Probe live homepage, scripts, sitemap, and failing URLs
+        run: python3 scripts/live-seo-probe.py
