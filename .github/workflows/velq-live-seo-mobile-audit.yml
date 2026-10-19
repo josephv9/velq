@@ -5,6 +5,9 @@ on:
     branches: [main]
     paths:
       - '.github/workflows/velq-live-seo-mobile-audit.yml'
+      - 'image-patch.php'
+      - 'assets/velq-strawberry-gummies-hero-20261015-v3-*.webp'
+      - 'assets/velq-gummies-packshot-20261015-v2-*.webp'
   workflow_dispatch:
 
 permissions:
@@ -56,6 +59,41 @@ jobs:
           print('SITEMAP_COVERAGE',json.dumps({'total_urls':len(urls),'200_ok':len(checked)-len([x for x in checked if x.get('status')!=200]),'recovered_transient_errors':[x for x in checked if x.get('retries',0)>0],'failures':failures},indent=2))
           assert not failures, f'{len(failures)} sitemap URLs have crawl or canonical issues'
           print('PASS: All sitemap URLs return indexable canonical pages from the preferred host. This is not a Google indexed-page count.')
+          PY
+
+      - name: Verify live responsive image files and rendered homepage
+        shell: bash
+        run: |
+          python3 - <<'PY'
+          import json,urllib.request,time
+          base='https://velqnutrition.com'
+          names=['velq-strawberry-gummies-hero-20261015-v3','velq-gummies-packshot-20261015-v2']
+          checks=[]
+          for name in names:
+              for width in [480,800,1200]:
+                  relative=f'/assets/{name}-{width}.webp'
+                  for attempt in range(3):
+                      try:
+                          req=urllib.request.Request(base+relative,headers={'Cache-Control':'no-cache','User-Agent':'Velq-image-deployment-QA/1.0'})
+                          with urllib.request.urlopen(req,timeout=18) as res:
+                              size=len(res.read(350000))
+                              row={'asset':relative,'http':res.status,'content_type':res.headers.get('Content-Type'),'bytes':size,'attempt':attempt+1}
+                              checks.append(row)
+                              assert res.status==200 and 'image/webp' in row['content_type'] and size>10000,row
+                              break
+                      except Exception as exc:
+                          if attempt==2: checks.append({'asset':relative,'error':str(exc)})
+                          else: time.sleep(1)
+          for row in checks: print('IMAGE',json.dumps(row))
+          assert len(checks)==6 and all(x.get('http')==200 for x in checks),'Responsive image assets are not all live.'
+          req=urllib.request.Request(base+'/',headers={'Cache-Control':'no-cache'})
+          with urllib.request.urlopen(req,timeout=25) as res: html=res.read(250000).decode('utf-8','replace')
+          content={'has_hero_webp':'/assets/velq-strawberry-gummies-hero-20261015-v3-800.webp' in html,
+                   'has_packshot_webp':'/assets/velq-gummies-packshot-20261015-v2-800.webp' in html,
+                   'has_srcset':'srcset="/assets/velq-strawberry-gummies-hero-20261015-v3-480.webp' in html,
+                   'preload':'data-velq-responsive-preload' in html}
+          print('HOMEPAGE_IMAGE_MARKUP',json.dumps(content))
+          assert all(content.values()),'Rendered live HTML does not contain expected responsive imagery.'
           PY
 
       - name: Install Lighthouse
