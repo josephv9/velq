@@ -30,7 +30,20 @@ const assert=require('node:assert/strict');
   const page=await context.newPage();
   const errors=[];
   page.on('pageerror',e=>errors.push(e.message));
-  await page.goto('https://velqnutrition.com/',{waitUntil:'domcontentloaded',timeout:30000});
+  // Velq has had occasional transient 404/500 and slow TLS responses.
+  // Retrying a GET is safe; POST requests are still always intercepted.
+  let loaded=false;
+  for(let attempt=0;attempt<3&&!loaded;attempt++){
+    try{
+      const response=await page.goto('https://velqnutrition.com/',{waitUntil:'domcontentloaded',timeout:25000});
+      loaded=response?.status()===200;
+      if(!loaded)console.log('NAVIGATION_RETRY',JSON.stringify({attempt:attempt+1,status:response?.status()}));
+    }catch(error){
+      console.log('NAVIGATION_RETRY',JSON.stringify({attempt:attempt+1,error:String(error).slice(0,140)}));
+    }
+    if(!loaded)await page.waitForTimeout(900);
+  }
+  assert(loaded,'Homepage was not reliably available in 3 GET attempts');
   await page.waitForTimeout(2500);
   await page.locator('#waitlist-email').fill('qa-simulated@example.invalid');
   const consent=page.locator('#waitlist-form input[name="consent"]');
