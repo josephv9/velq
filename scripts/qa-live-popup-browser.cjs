@@ -80,9 +80,10 @@ const base='https://velqnutrition.com/';
      joined:localStorage.getItem('velq_waitlist_joined_v1'),
      tracking:localStorage.getItem('velq_tracking_consent_v1'),
      klaviyo:!!document.querySelector('script[data-velq-consented-klaviyo]'),
-     activePopup:document.querySelector('.vlp-card')?'vlp-card':'velq-early-access'
+     activePopup:document.querySelector('.vlp-card')?'vlp-card':'velq-early-access',
+     loadedScripts:[...document.scripts].map(x=>x.src||'inline').filter(Boolean)
    }));
-   console.log('LIVE_BROWSER_POST_SIGNUP '+JSON.stringify({width,mode:useExisting?'existing':'bundled',postCount:posts.length,eventNames:state.events.map(e=>e.name),formIds:state.events.filter(e=>e.name==='generate_lead').map(e=>e.params?.form_id),tracking:state.tracking,klaviyo:state.klaviyo,errors:errors.slice(0,5)}));
+   console.log('LIVE_BROWSER_POST_SIGNUP '+JSON.stringify({width,mode:useExisting?'existing':'bundled',postCount:posts.length,eventNames:state.events.map(e=>e.name),formIds:state.events.filter(e=>e.name==='generate_lead').map(e=>e.params?.form_id),successParams:state.events.filter(e=>e.name==='lead_popup_signup_success').map(e=>Object.fromEntries(Object.entries(e.params||{}).filter(([k,v])=>!/@/.test(String(v))))),loadedScripts:state.loadedScripts,tracking:state.tracking,klaviyo:state.klaviyo,errors:errors.slice(0,5)}));
    const leads=state.events.filter(x=>x.name==='generate_lead');
    assert.equal(leads.length,1,'Exactly one confirmed GA4 generate_lead should be queued');
    assert(!JSON.stringify(state.events).includes('velq-browser-qa@example.com'),'PII leaked into GA4 event queue');
