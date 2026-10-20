@@ -59,6 +59,7 @@ ob_start(static function (string $html): string {
         "https://cdn.shopify.com/s/files/1/0723/8372/5647/files/velq-maintain_muscle_glp1-2026-10.webp?v=1792103429" => "https://velqnutrition.com/assets/journal/velq-journal-glp1-keep-muscle-20261020-v5.jpg",
         "https://cdn.shopify.com/s/files/1/0723/8372/5647/files/velq-glp1_constipation_fiber-2026-10.webp?v=1792103433" => "https://velqnutrition.com/assets/journal/velq-journal-glp1-constipation-20261020-v5.jpg",
         "https://cdn.shopify.com/s/files/1/0723/8372/5647/files/velq-protein_fiber_snacks-2026-10.webp?v=1792103513" => "https://velqnutrition.com/assets/journal/velq-journal-snacks-to-go-20261020-v5.jpg",
+        "https://cdn.shopify.com/s/files/1/0723/8372/5647/files/velq-portion_sizes_muscle-2026-10.webp?v=1792103448" => "https://velqnutrition.com/assets/journal/velq-journal-portions-muscle-20261020-v5.jpg",
     ]);
 
     // The approved full-width covers are 1536 x 864. Match intrinsic

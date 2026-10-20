@@ -77,7 +77,7 @@ function velq_discovery_images(): array
         ['high-protein-high-fiber-snacks-no-refrigeration', '/assets/journal/velq-journal-snacks-to-go-20261020-v5.jpg', 1536, 864, 'Velq Journal cover for protein and fiber snacks without refrigeration.'],
         ['30-grams-fiber-high-protein-diet', '/assets/journal/velq-journal-fiber-thirty-20261020-v5.jpg', 1536, 864, 'Velq Journal cover for the article about fiber in a high-protein diet.'],
         ['build-muscle-without-protein-shakes', '/assets/journal/velq-journal-build-muscle-20261020-v5.jpg', 1536, 864, 'Velq Journal cover for the food-first muscle-building article.'],
-        ['portion-sizes-muscle-gain-without-counting-calories', 'files/velq-portion_sizes_muscle-2026-10.webp?v=1792103448', 1536, 1024, 'Velq Journal cover for the article about portions and muscle gain.'],
+        ['portion-sizes-muscle-gain-without-counting-calories', '/assets/journal/velq-journal-portions-muscle-20261020-v5.jpg', 1536, 864, 'Velq Journal cover for the article about portions and muscle gain.'],
         ['what-to-eat-glp1-not-hungry', '/assets/journal/velq-journal-glp1-not-hungry-20261020-v5.jpg', 1536, 864, 'Velq Journal cover for the article about food and low appetite while using a GLP-1 medicine.'],
         ['glp1-protein-snacks-without-shakes', 'files/velq-glp1_protein_snacks-2026-10.webp?v=1792103438', 1536, 1024, 'Velq Journal cover for the article about protein snacks while using a GLP-1 medicine.'],
         ['glp1-constipation-fiber', '/assets/journal/velq-journal-glp1-constipation-20261020-v5.jpg', 1536, 864, 'Velq Journal cover for the article about constipation and fiber while using a GLP-1 medicine.'],
