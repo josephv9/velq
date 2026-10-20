@@ -6,6 +6,8 @@ on:
     paths:
       - '.github/workflows/velq-mocked-signup-browser.yml'
       - 'scripts/velq-mocked-signup-browser.cjs'
+      - 'image-patch.php'
+      - 'velq-analytics.js'
   workflow_dispatch:
 
 permissions:
