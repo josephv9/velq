@@ -115,12 +115,19 @@ from the Milestone 3 release and this preflight confirms production contains
 current source branch and is followed by public verification; the older deployment
 branch is not overwritten.
 
-## Account-dependent verification
+## Direct platform verification
 
-The GSC Wizard connection returned `subscription_required` for both Search Console
-and Bing site enumeration. No account data was retrieved. Velq's effective Google
-AI inclusion setting, Bing property verification, current indexed-page count,
-Google AI/multimodal impressions and Bing citation totals remain unverified.
+Workflow preference confirmed on 20 October 2026: Velq no longer uses GSC Wizard.
+Use Google Search Console and Bing Webmaster Tools directly for account reporting,
+through authorized native access or reports exported from those platforms. The
+published discovery improvements and direct IndexNow submission utility have no
+GSC Wizard dependency; renewing that subscription is not a prerequisite.
+
+The release audit did not retrieve Google or Bing account data, and direct account
+verification has not yet been completed. Velq's effective Google AI inclusion
+setting, Bing property verification, current indexed-page count, Google
+AI/multimodal impressions and Bing citation totals remain unverified. This is a
+remaining verification task, not a site failure caused by a missing subscription.
 
 ### Google AI and multimodal discovery
 
