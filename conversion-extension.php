@@ -51,14 +51,14 @@ function velq_conversion_response(string $body, string $path): string {
 
     // One ordered analytics owner and one waitlist/popup implementation on every route.
     // Versions also invalidate old Hostinger browser/CDN copies of the competing scripts.
-    $head = '<link rel="stylesheet" href="/velq-lead-capture.css?v=conversion-20261020">'
+    $head = '<link rel="stylesheet" href="/velq-lead-capture.css?v=popup-cta-20261020">'
         . '<link rel="stylesheet" href="/assets/velq-conversion.css?v=20261020">'
         . '<script src="/analytics-config.js" defer></script>'
         . '<script src="/velq-analytics.js?v=conversion-20261020" defer></script>'
         . '<script src="/analytics.js?v=conversion-20261020" defer></script>';
     $scripts = '<script src="/velq-waitlist.js?v=conversion-20261020" defer></script>'
-        . '<script src="/app.js?v=conversion-20261020" defer></script>'
-        . '<script src="/velq-lead-capture.js?v=conversion-20261020" defer></script>';
+        . '<script src="/app.js?v=popup-cta-20261020" defer></script>'
+        . '<script src="/velq-lead-capture.js?v=popup-cta-20261020" defer></script>';
     // Preserve current blocks in place when this filter is applied again, so
     // later image/preload metadata stays in its original order. Remove any
     // additional old or duplicated asset tags around the preserved blocks.

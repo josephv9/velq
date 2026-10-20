@@ -8,7 +8,7 @@
   var JOINED_KEY = 'velq_waitlist_joined_v1';
   var DISMISSED_KEY = 'velq_early_access_dismissed_until_v1';
   var path = window.location.pathname;
-  if (!/^\/(?:$|blog(?:\/|$)|guides(?:\/|$)|products(?:\/|$)|compare(?:\/|$)|tools(?:\/|$))/.test(path)) return;
+  var autoEligiblePath = /^\/(?:$|blog(?:\/|$)|guides(?:\/|$)|products(?:\/|$)|compare(?:\/|$)|tools(?:\/|$))/.test(path);
 
   var shown = false;
   var overlay = null;
@@ -117,15 +117,17 @@
     if (!overlay) return;
     overlay.remove();
     overlay = null;
+    document.documentElement.classList.remove('velq-lead-open');
     document.removeEventListener('keydown', onKey, true);
     if (!silent) {
       save(DISMISSED_KEY, Date.now() + 7 * 24 * 60 * 60 * 1000);
       event('velq_early_access_dismiss', reason);
     }
-    if (previousFocus && previousFocus.isConnected && typeof previousFocus.focus === 'function') previousFocus.focus();
+    if (previousFocus && previousFocus.isConnected && typeof previousFocus.focus === 'function') previousFocus.focus({ preventScroll: true });
   }
-  function show(reason) {
-    if (!eligible()) return;
+  function show(reason, manual) {
+    if (overlay) { overlay.querySelector('input, button')?.focus({ preventScroll: true }); return true; }
+    if (!window.VelqWaitlist || (!manual && !eligible())) return false;
     shown = true;
     previousFocus = document.activeElement;
     var el = document.createElement('div');
@@ -153,6 +155,7 @@
     ].join('');
     document.body.appendChild(el);
     overlay = el;
+    document.documentElement.classList.add('velq-lead-open');
     document.addEventListener('keydown', onKey, true);
     el.querySelectorAll('[data-velq-close]').forEach(function (btn) {
       btn.addEventListener('click', function () { close(btn.getAttribute('data-velq-close')); });
@@ -171,8 +174,29 @@
     });
     event('velq_early_access_view', reason);
     el.querySelector('#velq-lead-email').focus({ preventScroll: true });
+    return true;
   }
+  // An explicit signup click always opens the dialog, even after dismissal.
+  window.VelqLeadCapture = Object.freeze({ open: function () { return show('onsite', true); } });
+  document.addEventListener('click', function (e) {
+    if (e.defaultPrevented || e.button > 0 || e.metaKey || e.ctrlKey || e.shiftKey || e.altKey) return;
+    var target = e.target instanceof Element ? e.target.closest('a[href], button[data-waitlist-cta]') : null;
+    if (!target || target.closest('#velq-early-access')) return;
+    var isSignup = target.hasAttribute('data-waitlist-cta');
+    if (target.tagName === 'A') {
+      var url = new URL(target.href, window.location.href);
+      isSignup = isSignup || (url.origin === window.location.origin && url.hash === '#waitlist');
+    }
+    if (!isSignup || !show('onsite', true)) return;
+    e.preventDefault();
+    e.stopPropagation();
+    var nav = document.getElementById('mobile-nav');
+    var toggle = document.getElementById('menu-toggle');
+    if (nav) nav.hidden = true;
+    if (toggle) { toggle.setAttribute('aria-expanded', 'false'); toggle.setAttribute('aria-label', 'Open menu'); }
+  }, true);
   function start() {
+    if (!autoEligiblePath) return;
     window.setTimeout(function () { show('time_on_page'); }, 14000);
     document.addEventListener('mouseout', function (e) {
       if (Date.now() - startedAt > 7000 && e.clientY <= 0 && !e.relatedTarget) show('exit_intent');

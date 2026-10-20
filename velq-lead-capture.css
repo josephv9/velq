@@ -31,3 +31,6 @@
 .velq-tracking-optional a,.velq-inline-tracking a{color:#9d2644;text-decoration:underline}
 .velq-inline-tracking{display:flex;gap:10px;align-items:flex-start;color:#554b50;font-size:12px;line-height:1.55;margin:11px 0 16px}
 .velq-inline-tracking input{flex:0 0 auto;width:17px;height:17px;margin:2px 0 0;accent-color:#b52b47}
+
+/* Keep the current page position while signup is open. */
+html.velq-lead-open{overflow:hidden}

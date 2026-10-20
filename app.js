@@ -27,10 +27,6 @@
   if (form && window.VelqWaitlist) {
     window.VelqWaitlist.bindForm({ form, submit: document.querySelector('#waitlist-submit'), feedback: document.querySelector('#signup-feedback'), source: 'inline', autoResume: true });
     document.querySelectorAll('[data-interest]').forEach(link => link.addEventListener('click', () => { if (interest) interest.value = 'strawberry'; }));
-    document.querySelectorAll('a[href="#waitlist"]').forEach(link => link.addEventListener('click', () => {
-      const email = form.elements.email;
-      if (email && !email.disabled) email.focus({ preventScroll: true });
-    }));
   }
   const privacy = document.querySelector('#privacy-dialog');
   document.querySelector('#privacy-open')?.addEventListener('click', () => privacy?.showModal());
@@ -40,11 +36,10 @@
     const lifecycle = new AbortController();
     window.addEventListener('pagehide', () => lifecycle.abort(), { once: true });
     try {
-      Promise.resolve(context.registerTool({ name: 'start_velq_waitlist_signup', description: 'Navigate to the Velq strawberry gummy waitlist signup form. Does not submit an email or join the waitlist.', inputSchema: { type: 'object', properties: { interest: { type: 'string', enum: ['strawberry'] } }, additionalProperties: false }, annotations: { readOnlyHint: false }, execute(input) {
+      Promise.resolve(context.registerTool({ name: 'start_velq_waitlist_signup', description: 'Open the Velq strawberry gummy waitlist signup popup. Does not submit an email or join the waitlist.', inputSchema: { type: 'object', properties: { interest: { type: 'string', enum: ['strawberry'] } }, additionalProperties: false }, annotations: { readOnlyHint: false }, execute(input) {
         if (input?.interest && input.interest !== 'strawberry') throw new Error('Unknown product interest.');
         if (interest) interest.value = 'strawberry';
-        document.querySelector('#waitlist')?.scrollIntoView();
-        if (!form.elements.email?.disabled) form.elements.email?.focus({ preventScroll: true });
+        if (!window.VelqLeadCapture?.open()) throw new Error('The signup popup is not ready. Please try again.');
         return { status: 'form_open', submitted: false };
       } }, { signal: lifecycle.signal })).catch(() => {});
     } catch {}
