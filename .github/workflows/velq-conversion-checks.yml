@@ -11,6 +11,9 @@ on:
       - 'velq-lead-capture.js'
       - 'conversion-*.php'
       - 'image-patch.php'
+      - 'home-cover.php'
+      - 'assets/velq-home-cover.css'
+      - 'scripts/test-home-cover.cjs'
       - 'nutrition-content.php'
       - '.htaccess'
       - 'assets/velq-conversion.css'
@@ -44,6 +47,7 @@ jobs:
           php -l conversion-extension.php
           php -l conversion-content.php
           php -l image-patch.php
+          php -l home-cover.php
           php -l nutrition-content.php
           node --check analytics.js
           node --check app.js
@@ -61,6 +65,7 @@ jobs:
             sleep 1
           done
           node scripts/test-conversion-journey.cjs
+          node scripts/test-home-cover.cjs
       - name: Verify one analytics owner and existing page metadata
         run: |
           node scripts/test-ga4-loader.cjs

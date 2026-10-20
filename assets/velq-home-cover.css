@@ -1,22 +1,38 @@
-/* Approved photographic homepage cover. Existing navigation and signup stay live. */
+/* One cover composition across phones, tablets and desktop. */
 .velq-cover-home .announcement{display:none}
-.velq-cover-home .header{position:absolute;top:24px;left:4%;right:4%;width:auto;height:86px;z-index:30;border:0;border-radius:24px;background:#fff;padding:0 28px;box-shadow:none}
-.velq-cover-home .header .wordmark{color:#080808;font-size:3.5rem;line-height:1}
-.velq-cover-home .header .desktop-nav a{color:#161616}
-.velq-cover-home .header .nav-signup{background:#fff;color:#111;border-color:#111}
-.velq-cover-home .mobile-nav{position:absolute;top:120px;left:4%;right:4%;z-index:35;border-radius:18px;background:#fff;color:#111}
-.velq-cover-home .hero.lifestyle-cover{position:relative;display:flex;align-items:flex-end;justify-content:center;isolation:isolate;overflow:hidden;max-width:none;margin:0;min-height:780px;height:100svh;max-height:1100px;background:#313936;color:white}
+.velq-cover-home .header{position:absolute;top:20px;left:4%;right:4%;width:auto;height:76px;display:grid;grid-template-columns:minmax(0,1fr) auto minmax(0,1fr);align-items:center;gap:12px;z-index:30;border:0;border-radius:22px;background:#fff;padding:0 24px;box-shadow:none}
+.velq-cover-home .header .wordmark{position:static;transform:none;justify-self:center;color:#080808;font-size:46px;line-height:1;letter-spacing:-.06em;margin:0}
+.velq-cover-home .header .menu-toggle{display:flex;justify-self:start;margin:0;width:44px;height:44px;align-items:center;justify-content:center;color:#111}
+.velq-cover-home .header .menu-toggle svg{width:24px;height:24px}
+.velq-cover-home .header .nav-signup{justify-self:end;min-width:0;min-height:44px;padding:10px 16px;margin:0;border:1px solid #222;border-radius:9px;background:#fff;color:#111;font:600 13px/1.2 Arial,sans-serif;letter-spacing:0;white-space:nowrap;text-transform:none}
+.velq-cover-home .mobile-nav{position:absolute;top:108px;left:4%;right:4%;z-index:35;padding:18px 24px;border-radius:18px;background:#fff;color:#111;box-shadow:0 12px 28px #0002}
+.velq-cover-home .mobile-nav[hidden]{display:none}
+.velq-cover-home .hero.lifestyle-cover{position:relative;display:block;isolation:isolate;overflow:hidden;max-width:none;width:100%;margin:0;min-height:820px;height:100svh;max-height:1200px;background:#202725;color:#fff}
 .velq-cover-home .lifestyle-cover .hero-image-wrap{position:absolute;inset:0;display:block;padding:0!important;margin:0;aspect-ratio:auto;min-height:100%!important;width:100%;height:100%!important;border-radius:0;background:transparent;z-index:-2}
-.velq-cover-home .lifestyle-cover .hero-image-wrap img{display:block;width:100%;height:100%!important;max-height:none!important;max-width:none!important;aspect-ratio:auto;object-fit:cover;object-position:center 42%;border-radius:0;background:transparent}
-.velq-cover-home .lifestyle-cover:after{content:"";position:absolute;inset:0;z-index:-1;background:linear-gradient(180deg,transparent 35%,rgba(0,0,0,.08) 48%,rgba(0,0,0,.72) 100%)}
-.velq-cover-home .lifestyle-cover .hero-copy{align-self:flex-end;width:100%;max-width:1100px;text-align:center;padding:0 24px 42px;color:#fff}
-.velq-cover-home .lifestyle-cover .eyebrow{color:#fff;font-size:clamp(.9rem,1.6vw,1.25rem);letter-spacing:0;font-weight:400;margin:0 0 18px;text-transform:none}
-.velq-cover-home .lifestyle-cover h1{color:#fff;font-size:clamp(2.6rem,5.2vw,5.2rem);font-weight:300;line-height:1.02;letter-spacing:-.045em;margin:0}
-.velq-cover-home .lifestyle-cover h1 strong{font-weight:800}
-.velq-cover-home .lifestyle-cover .hero-description{color:#fff;font-size:clamp(1rem,1.8vw,1.35rem);max-width:none;margin:22px 0 28px;line-height:1.4}
-.velq-cover-home .lifestyle-cover .button{background:rgba(0,0,0,.12);border:1px solid rgba(255,255,255,.8);border-radius:9px;color:#fff;min-height:58px;padding:17px 30px;font-size:1rem;font-weight:400;letter-spacing:0}
-.velq-cover-home .lifestyle-cover .button:hover{background:rgba(255,255,255,.18)}
-.velq-cover-home .lifestyle-cover .hero-small{color:#eee;font-size:.72rem;line-height:1.4;margin:13px 0 0}
-@media(min-width:901px){.velq-cover-home .hero.lifestyle-cover{justify-content:flex-start}.velq-cover-home .lifestyle-cover .hero-image-wrap img{object-position:center 48%}.velq-cover-home .lifestyle-cover .hero-copy{width:51%;padding:0 4% 60px;text-align:left}.velq-cover-home .lifestyle-cover h1{font-size:clamp(2.8rem,4.5vw,5rem)}.velq-cover-home .lifestyle-cover:after{background:linear-gradient(90deg,rgba(0,0,0,.52),transparent 80%),linear-gradient(0deg,rgba(0,0,0,.72),transparent 65%)}}
-@media(max-width:900px){.velq-cover-home .header{height:72px;top:20px;padding:0 18px;border-radius:20px}.velq-cover-home .header .wordmark{position:absolute;left:50%;transform:translateX(-50%);font-size:3rem}.velq-cover-home .header-actions{width:100%;justify-content:space-between;flex-direction:row-reverse}.velq-cover-home .header .nav-signup{font-size:.6rem;padding:10px;min-height:40px}.velq-cover-home .menu-toggle{display:flex;color:#111}.velq-cover-home .mobile-nav{top:104px}.velq-cover-home .hero.lifestyle-cover{min-height:760px;max-height:1000px}.velq-cover-home .lifestyle-cover .hero-copy{padding:0 18px 38px}.velq-cover-home .lifestyle-cover h1{font-size:clamp(2.4rem,8.4vw,4.2rem)}.velq-cover-home .lifestyle-cover .hero-description{font-size:1rem;margin:20px 0 24px}.velq-cover-home .lifestyle-cover .eyebrow{font-size:.87rem;margin-bottom:18px}.velq-cover-home .mobile-early-access{display:none}}
-@media(max-width:360px){.velq-cover-home .header .wordmark{font-size:2.5rem}.velq-cover-home .header .nav-signup{font-size:.52rem;padding:8px}.velq-cover-home .lifestyle-cover .eyebrow{font-size:.77rem}}
+.velq-cover-home .lifestyle-cover .hero-image-wrap img{display:block;width:100%;height:100%!important;max-height:none!important;max-width:none!important;aspect-ratio:auto;object-fit:cover;object-position:center 64%;border-radius:0;background:transparent}
+.velq-cover-home .lifestyle-cover:after{content:"";position:absolute;inset:0;z-index:-1;background:linear-gradient(180deg,transparent 24%,rgba(0,0,0,.08) 40%,rgba(0,0,0,.55) 65%,rgba(0,0,0,.85) 100%)}
+.velq-cover-home .hero.lifestyle-cover .hero-copy{position:absolute;bottom:36px;left:0;right:0;align-self:auto;transform:none;display:block;width:calc(100% - 40px);max-width:900px;margin:0 auto;padding:0;text-align:center;color:#fff}
+.velq-cover-home .lifestyle-cover #hero-eyebrow{color:#fff;font:400 clamp(13px,1.3vw,17px)/1.5 Arial,sans-serif;letter-spacing:0;margin:0 0 16px;text-transform:none}
+.velq-cover-home .lifestyle-cover #hero-title{color:#fff;font-family:Arial,sans-serif;font-size:clamp(34px,4.6vw,62px);font-weight:400;line-height:1.1;letter-spacing:-.035em;margin:0;padding:0;text-wrap:balance}
+.velq-cover-home .lifestyle-cover #hero-title>span{display:block;white-space:nowrap}
+.velq-cover-home .lifestyle-cover #hero-title strong{font-weight:700}
+.velq-cover-home .lifestyle-cover #hero-description{color:#fff;font:400 clamp(15px,1.5vw,19px)/1.5 Arial,sans-serif;max-width:34ch;margin:18px auto 24px;text-wrap:balance}
+.velq-cover-home .lifestyle-cover #hero-cta{display:inline-flex;align-items:center;justify-content:center;background:rgba(0,0,0,.18);border:1px solid #fff;border-radius:9px;color:#fff;min-height:54px;max-width:100%;padding:15px 30px;font:500 15px/1.25 Arial,sans-serif;letter-spacing:.02em}
+.velq-cover-home .lifestyle-cover #hero-cta:hover{background:rgba(255,255,255,.18)}
+.velq-cover-home .lifestyle-cover #hero-small{color:#eee;font:400 11px/1.5 Arial,sans-serif;max-width:42ch;margin:14px auto 0;text-wrap:balance}
+.velq-cover-home .mobile-early-access{display:none}
+@media(max-width:600px){
+ .velq-cover-home .header{top:16px;height:68px;padding:0 12px;gap:8px;border-radius:20px}
+ .velq-cover-home .header .wordmark{font-size:38px}
+ .velq-cover-home .header .nav-signup{font-size:11px;padding:10px 11px}
+ .velq-cover-home .header .menu-toggle{width:40px;height:44px}
+ .velq-cover-home .mobile-nav{top:96px}
+ .velq-cover-home .hero.lifestyle-cover{min-height:860px;max-height:1100px}
+ .velq-cover-home .lifestyle-cover .hero-image-wrap img{object-position:center 32%}
+ .velq-cover-home .hero.lifestyle-cover .hero-copy{bottom:30px;width:calc(100% - 32px)}
+ .velq-cover-home .lifestyle-cover #hero-title{font-size:clamp(29px,8.2vw,44px);line-height:1.12}
+ .velq-cover-home .lifestyle-cover #hero-description{margin:16px auto 20px;max-width:29ch;font-size:15px}
+ .velq-cover-home .lifestyle-cover #hero-eyebrow{font-size:12px;margin-bottom:14px}
+ .velq-cover-home .lifestyle-cover #hero-cta{min-width:230px}
+}
+@media(prefers-reduced-motion:reduce){.velq-cover-home .lifestyle-cover *{transition:none}}
