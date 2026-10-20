@@ -140,7 +140,6 @@
       '<p class="velq-lead-eyebrow">VELQ / EARLY ACCESS</p>',
       '<h2 id="velq-lead-title">Something good is coming.</h2>',
       '<p class="velq-lead-description" id="velq-lead-description">Strawberry protein + fiber gummies are in development. Join for launch news, final product details and your first chance to shop.</p>',
-      '<p class="velq-lead-proof">Free to join &middot; No payment today</p>',
       '<form id="velq-lead-form">',
       '<label class="velq-lead-label" for="velq-lead-email">Email address</label>',
       '<input id="velq-lead-email" name="email" type="email" placeholder="you@example.com" autocomplete="email" inputmode="email" maxlength="254" required>',
