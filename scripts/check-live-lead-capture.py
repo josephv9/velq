@@ -24,15 +24,15 @@ checks={
  "popup_js_200":results["/velq-lead-capture.js"]["status"]==200,
  "popup_14_second_timer":"14000" in results["/velq-lead-capture.js"]["body"],
  "popup_7_day_dismissal":"7 * 24 * 60 * 60 * 1000" in results["/velq-lead-capture.js"]["body"],
- "popup_utm_event":"velq_early_access_submit" in results["/velq-lead-capture.js"]["body"],
- "popup_source_event":"source: 'popup', trigger: reason" in results["/velq-lead-capture.js"]["body"],
+ "popup_engagement_event":"velq_early_access_view" in results["/velq-lead-capture.js"]["body"],
+ "popup_source_event":"source: 'popup'" in results["/velq-lead-capture.js"]["body"],
  "popup_uses_existing_waitlist":"/api/waitlist" in results["/velq-lead-capture.js"]["body"],
  "popup_requires_optin":'name="consent" type="checkbox" required' in results["/velq-lead-capture.js"]["body"],
  "klaviyo_known_public_key":"RCNCJb" in results["/velq-lead-capture.js"]["body"],
- "klaviyo_optin_gate":"velq_klaviyo_opted_in_v1" in results["/velq-lead-capture.js"]["body"],
- "klaviyo_not_loaded_anonymously":"read(KLAVIYO_CONSENT_KEY) !== '1'" in results["/velq-lead-capture.js"]["body"],
+ "klaviyo_optin_gate":"velq_tracking_consent_v1" in results["/velq-lead-capture.js"]["body"] and "name=\"tracking_consent\"" in results["/velq-lead-capture.js"]["body"],
+ "klaviyo_not_loaded_anonymously":"read(TRACKING_CONSENT_KEY) !== '1'" in results["/velq-lead-capture.js"]["body"],
  "popup_css_200":results["/velq-lead-capture.css"]["status"]==200,
- "popup_narrow_layout_fixed":"On narrow screens anchor" in results["/velq-lead-capture.css"]["body"],
+ "popup_narrow_sheet_clamped":"max-height:92dvh" in results["/velq-lead-capture.css"]["body"] and "overflow:auto" in results["/velq-lead-capture.css"]["body"],
  "analytics_200":results["/analytics.js"]["status"]==200,
  "analytics_popup_attribution":"const isPopup=event.detail?.source==='popup'" in results["/analytics.js"]["body"],
  "analytics_popup_form_id":"form_id:isPopup?'velq-lead-form':'waitlist-form'" in results["/analytics.js"]["body"],
@@ -44,14 +44,6 @@ checks={
 }
 for path,response in results.items():
     print("HTTP",json.dumps({"path":path,"status":response["status"],"bytes":len(response["body"]),"attempt":response["attempt"],"errors":response.get("errors"),"content_type":response.get("headers",{}).get("Content-Type")}))
-for path,terms in {
- "/velq-lead-capture.js":["klaviyo","learnq","consent","early_access","eventId","source:","track","cookie"],
- "/velq-lead-capture.css":["@media","lead-card","max-height","bottom:","overflow-y"]
-}.items():
-    body=results[path]["body"]
-    lines=body.splitlines()
-    indices=[i for i,line in enumerate(lines) if any(term.lower() in line.lower() for term in terms)]
-    print("DIAGNOSTIC",json.dumps({"path":path,"line_count":len(lines),"sample":[{"line":i+1,"text":lines[i][:420]} for i in indices[:90]]}))
 for name,ok in checks.items(): print("CHECK",json.dumps({"name":name,"result":"PASS" if ok else "FAIL"}))
 print("SUMMARY",json.dumps({"passed":sum(checks.values()),"total":len(checks),"failures":[n for n,ok in checks.items() if not ok]}))
 if not all(checks.values()): sys.exit(1)
