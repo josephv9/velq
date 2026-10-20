@@ -65,15 +65,15 @@ function velq_discovery_images(): array
     // nutrition-content.php. Public image bytes were checked for these sizes.
     $covers = [
         ['protein-vs-fiber-why-your-body-needs-both', 'files/velq-journal-protein-vs-fiber-oct2026.jpg?v=1792109199', 1536, 1024, 'Velq Journal cover for Protein vs. Fiber: Why Your Body Needs Both.'],
-        ['how-much-fiber-do-you-need-every-day', 'files/velq-journal-fiber-daily-oct2026.jpg?v=1792109193', 1536, 1024, 'Velq Journal cover for How Much Fiber Do You Need Every Day?'],
-        ['simple-daily-wellness-routine-that-sticks', 'files/velq-journal-wellness-routine-oct2026.jpg?v=1792109238', 1536, 1024, 'Velq Journal cover for The Simple Daily Wellness Routine That Sticks.'],
+        ['how-much-fiber-do-you-need-every-day', '/assets/journal/velq-journal-fiber-daily-20261020-v4.jpg', 1536, 864, 'Velq Journal cover for How Much Fiber Do You Need Every Day?'],
+        ['simple-daily-wellness-routine-that-sticks', '/assets/journal/velq-journal-wellness-routine-20261020-v4.jpg', 1536, 864, 'Velq Journal cover for The Simple Daily Wellness Routine That Sticks.'],
         ['caffeine-gummies-vs-coffee-whats-the-difference', 'files/velq-journal-caffeine-vs-coffee-oct2026.jpg?v=1792109249', 1536, 1024, 'Velq Journal cover for the comparison of caffeine gummies and coffee.'],
-        ['how-much-protein-do-you-actually-need', 'files/velq-journal-protein-needs-oct2026.jpg?v=1792109233', 1536, 1024, 'Velq Journal cover for How Much Protein Do You Actually Need?'],
+        ['how-much-protein-do-you-actually-need', '/assets/journal/velq-journal-protein-needs-20261020-v4.jpg', 1536, 864, 'Velq Journal cover for How Much Protein Do You Actually Need?'],
         ['caffeine-gummies-vs-energy-drinks', 'files/velq-journal-caffeine-vs-energy-drinks-oct2026.jpg?v=1792109254', 1536, 1024, 'Velq Journal cover comparing caffeine gummies and energy drinks.'],
-        ['protein-and-fiber-gummies-vs-separate-supplements', 'files/velq-journal-gummies-vs-supplements-oct2026.jpg?v=1792109244', 1536, 1024, 'Velq Journal cover comparing combined protein and fiber gummies with separate supplements.'],
-        ['protein-and-fiber-gummies-buying-guide', 'files/velq-journal-buyer-guide-oct2026.jpg?v=1792109222', 1536, 1024, 'Velq Journal cover for the protein and fiber gummy buying checklist.'],
-        ['protein-gummies-vs-protein-bars', 'articles/velq-protein-bars-cover.jpg?v=1791605998', 1536, 864, 'Velq Journal cover comparing protein gummies and protein bars.'],
-        ['fiber-gummies-vs-fiber-powder', 'files/velq-journal-fiber-gummies-vs-powder-oct2026.jpg?v=1792109205', 1536, 1024, 'Editorial illustration comparing fiber gummies with fiber powder.'],
+        ['protein-and-fiber-gummies-vs-separate-supplements', '/assets/journal/velq-journal-gummies-vs-supplements-20261020-v4.jpg', 1536, 864, 'Velq Journal cover comparing combined protein and fiber gummies with separate supplements.'],
+        ['protein-and-fiber-gummies-buying-guide', '/assets/journal/velq-journal-buyer-guide-20261020-v4.jpg', 1536, 864, 'Velq Journal cover for the protein and fiber gummy buying checklist.'],
+        ['protein-gummies-vs-protein-bars', '/assets/journal/velq-journal-protein-gummies-vs-bars-20261020-v4.jpg', 1536, 864, 'Velq Journal cover comparing protein gummies and protein bars.'],
+        ['fiber-gummies-vs-fiber-powder', '/assets/journal/velq-journal-fiber-gummies-vs-powder-20261020-v4.jpg', 1536, 864, 'Editorial illustration comparing fiber gummies with fiber powder.'],
         ['high-protein-high-fiber-snacks-no-refrigeration', 'files/velq-protein_fiber_snacks-2026-10.webp?v=1792103513', 1536, 1024, 'Velq Journal cover for protein and fiber snacks without refrigeration.'],
         ['30-grams-fiber-high-protein-diet', 'files/velq-30g_fiber-2026-10.webp?v=1792103452', 1536, 1024, 'Velq Journal cover for the article about fiber in a high-protein diet.'],
         ['build-muscle-without-protein-shakes', 'files/velq-build_muscle_food_first-2026-10-v2.webp?v=1792103819', 1536, 1024, 'Velq Journal cover for the food-first muscle-building article.'],
@@ -85,7 +85,8 @@ function velq_discovery_images(): array
         ['tired-on-glp1-food-fluids-causes', 'files/velq-tired_on_glp1-2026-10.webp?v=1792103374', 1536, 1024, 'Velq Journal cover for the article about tiredness, food and fluids while using a GLP-1 medicine.'],
     ];
     foreach ($covers as [$slug, $file, $width, $height, $alt]) {
-        $pages['/blog/' . $slug] = $page($image($cdn . $file, $width, $height, $alt));
+        $url = str_starts_with($file, '/') ? $file : $cdn . $file;
+        $pages['/blog/' . $slug] = $page($image($url, $width, $height, $alt));
     }
     $pages['/blog/portion-sizes-muscle-gain-without-counting-calories']['images'][] = $base . '/assets/growth/meal-components.svg';
     return $pages;
