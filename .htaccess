@@ -13,7 +13,7 @@ php_value auto_prepend_file image-patch.php
 
   # Milestone 3 evidence pages and calculators precede the packed blog/tools routes.
   # research-content.php canonicalizes slash/index aliases and serves only this map.
-  RewriteRule ^(?:research(?:/gummy-serving-study-2026)?|tools/(?:serving-comparison-calculator|nutrition-label-value-calculator)|blog/protein-gummies-with-fiber-comparison)(?:/|/index\.html)?$ research-content.php [END]
+  RewriteRule ^(?:media|research(?:/gummy-serving-study-2026)?|tools/(?:serving-comparison-calculator|nutrition-label-value-calculator)|blog/protein-gummies-with-fiber-comparison)(?:/|/index\.html)?$ research-content.php [END]
 
   # Serve the approved strawberry red-and-white product packshot anywhere the legacy product imagery is referenced.
   # Keep the old image URLs stable for the bundled homepage and social previews.

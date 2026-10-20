@@ -3,6 +3,7 @@ declare(strict_types=1);
 
 // Milestone 3 pages use an explicit route map; no user-controlled file paths.
 $researchPages = [
+    '/media' => 'media/index.html',
     '/research' => 'research/index.html',
     '/research/gummy-serving-study-2026' => 'research/gummy-serving-study-2026/index.html',
     '/tools/serving-comparison-calculator' => 'tools/serving-comparison-calculator/index.html',

@@ -1,0 +1,63 @@
+VELQ — BRAND FACTS AND EDITORIAL RESOURCES
+Checked: October 20, 2026
+Canonical media resources: https://velqnutrition.com/media
+
+BRAND
+Velq Nutrition LLC is developing strawberry protein + fiber gummies.
+The product concept also includes caffeine and L-theanine.
+Joseph Velasquez is Velq's founder.
+Website: https://velqnutrition.com/
+
+CURRENT STATUS
+Velq is prelaunch. Its launch waitlist is free to join.
+Final formulation, label, retail price and ordering availability are not yet confirmed.
+Product and packaging images are development previews; details may change.
+Please confirm current availability separately before describing product reviews or samples.
+
+RESOURCES
+Nutrition-label value calculator:
+https://velqnutrition.com/tools/nutrition-label-value-calculator
+
+Seven-product serving-size study (manufacturer labels, observed October 20, 2026):
+https://velqnutrition.com/research/gummy-serving-study-2026
+
+Serving comparison calculator:
+https://velqnutrition.com/tools/serving-comparison-calculator
+
+Study source data:
+https://velqnutrition.com/assets/research/gummy-labels-2026-10-20.csv
+https://velqnutrition.com/assets/research/gummy-labels-2026-10-20.json
+
+Gummy buying guide:
+https://velqnutrition.com/blog/protein-and-fiber-gummies-buying-guide
+
+Editable label worksheet:
+https://velqnutrition.com/assets/velq-gummy-label-worksheet.csv
+
+Editorial policy:
+https://velqnutrition.com/blog/editorial-policy
+
+CALCULATOR METHODS
+Cost per complete serving = package price / labeled servings per package.
+Cost per 10 g protein = cost per serving * 10 / protein grams per serving.
+Cost per 5 g fiber = cost per serving * 5 / fiber grams per serving.
+Price must be nonnegative and serving count greater than zero.
+Invalid or missing required inputs prompt a correction. Blank optional amounts
+show "Not entered"; zero protein or fiber produces an N/A nutrient-cost result.
+USD results round to two decimal places; positive amounts under one cent
+display "<$0.01".
+These calculations do not establish ingredient quality, safety, clinical
+equivalence or suitability. Read current full product labels and directions.
+
+EDITORIAL DISCLOSURE
+Velq publishes these tools and comparisons alongside its own product development.
+Founder commentary should not be presented as independent clinical advice.
+Manufacturer-published figures and development targets are not independent
+laboratory results. Consult the linked resource for its methods and limitations.
+
+CONTACT
+Editorial inquiries, creator conversations, corrections and image-use requests:
+support@velqnutrition.com
+https://velqnutrition.com/contact/
+For a correction, include the resource URL and specific detail to review.
+For a story, include your angle and deadline.

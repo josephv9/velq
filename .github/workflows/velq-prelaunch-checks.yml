@@ -6,6 +6,11 @@ on:
     paths:
       - 'velq-site.php'
       - 'image-patch.php'
+      - 'authority-extension.php'
+      - 'media/**'
+      - 'assets/velq-media*'
+      - 'assets/velq-authority-links.css'
+      - 'scripts/test-authority-resources.cjs'
       - 'research-content.php'
       - 'research-extension.php'
       - 'research/**'
@@ -46,6 +51,9 @@ jobs:
         run: |
           php -l research-content.php
           php -l research-extension.php
+          php -l authority-extension.php
+      - name: Verify media discovery and preserve unrelated responses
+        run: node scripts/test-authority-resources.cjs
       - name: Verify dated research tables and downloads reproduce exactly
         run: |
           python3 scripts/build-research-pages.py
