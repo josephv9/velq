@@ -10,6 +10,36 @@
   if (!config || typeof config !== 'object') config = {};
   config.ga4 = ID;
   window.VELQ_ANALYTICS = config;
+
+  // Bridge the older live popup's backend-confirmed success into the site's
+  // primary GA4 lead events. Do not count attempts, duplicate signups or PII.
+  var queue = window.dataLayer = window.dataLayer || [];
+  if (!window.__velqNativePopupLeadBridgeInstalled) {
+    window.__velqNativePopupLeadBridgeInstalled = true;
+    var originalPush = queue.push;
+    var bridgedOnce = false;
+    queue.push = function () {
+      var result = originalPush.apply(this, arguments);
+      for (var i = 0; i < arguments.length; i++) {
+        var command = arguments[i];
+        if (!command || command[0] !== 'event' ||
+            command[1] !== 'lead_popup_signup_success' ||
+            !command[2] || command[2].new_lead !== true || bridgedOnce) continue;
+        bridgedOnce = true;
+        var params = {
+          lead_source: 'velq_launch_waitlist',
+          form_id: 'velq-popup-form',
+          cta_position: 'popup',
+          signup_page: window.location && window.location.pathname || '/',
+          popup_name: 'velq_early_access'
+        };
+        originalPush.call(this, ['event', 'waitlist_signup_success', params]);
+        originalPush.call(this, ['event', 'generate_lead', params]);
+      }
+      return result;
+    };
+  }
+
   if (document.querySelector('script[src="/analytics.js"]')) return;
   var s = document.createElement('script');
   s.async = true;
