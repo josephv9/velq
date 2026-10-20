@@ -34,6 +34,9 @@ ob_start(static function (string $html): string {
         $html
     ) ?? $html;
 
+    // Refresh the founder cover stylesheet for visitors with the previous palette cached.
+    $html = str_replace('href="/home.css?v=40"', 'href="/home.css?v=founder-white-20261020"', $html);
+
     $heroImage = '/assets/velq-strawberry-gummies-hero-20261015-v3.jpeg';
     $productImage = '/assets/velq-gummies-packshot-20261015-v2.jpeg';
     $html = str_replace(
