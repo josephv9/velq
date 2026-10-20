@@ -12,6 +12,8 @@ on:
       - 'assets/velq-strawberry-gummies-hero-20261015-v3-*.webp'
       - 'assets/velq-gummies-packshot-20261015-v2-*.webp'
       - 'scripts/test-gummy-seo.cjs'
+      - 'scripts/test-commercial-seo.cjs'
+      - 'assets/velq-commercial-m2.css'
       - 'scripts/validate-velq-site.cjs'
       - 'scripts/test-waitlist-attribution.cjs'
       - '.github/workflows/velq-prelaunch-checks.yml'
@@ -35,6 +37,8 @@ jobs:
         run: node scripts/validate-velq-site.cjs
       - name: Test gummy buyer paths and page metadata without external requests
         run: node scripts/test-gummy-seo.cjs
+      - name: Verify commercial buyer comparison journeys without external calls
+        run: node scripts/test-commercial-seo.cjs
       - name: Test confirmed waitlist attribution without creating leads
         run: node scripts/test-waitlist-attribution.cjs
       - name: Verify one GA4 initializer and preserved event configuration

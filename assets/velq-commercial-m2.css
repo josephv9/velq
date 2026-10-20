@@ -1,0 +1,16 @@
+/* Velq Milestone 2: compact accessible commercial comparison journeys. */
+.velq-m2-related{box-sizing:border-box;max-width:1040px;margin:38px auto 50px;padding:clamp(22px,4vw,42px);border:1px solid #eacfd2;border-radius:20px;background:#fff8f6;color:#44242c;clear:both}
+.velq-m2-related *{box-sizing:border-box}
+.velq-m2-related .velq-m2-kicker{margin:0 0 12px;font-size:.72rem;font-weight:800;letter-spacing:.12em;color:#a22e48}
+.velq-m2-related h2{margin:0 0 12px;color:#44242c;font-size:clamp(1.45rem,2.6vw,2.1rem);line-height:1.2;letter-spacing:-.025em}
+.velq-m2-related>p:not(.velq-m2-kicker){max-width:72ch;line-height:1.65;margin:0 0 16px}
+.velq-m2-related .velq-m2-links{list-style:none;margin:18px 0;padding:0;display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:12px}
+.velq-m2-related .velq-m2-links li{margin:0;padding:0}
+.velq-m2-related .velq-m2-links a{display:block;height:100%;padding:17px 18px;border:1px solid #ead2d6;border-radius:12px;background:#fff;color:#86233b;font-weight:700;text-decoration:none;line-height:1.4;overflow-wrap:anywhere}
+.velq-m2-related .velq-m2-links a:hover,.velq-m2-related .velq-m2-links a:focus-visible{border-color:#ad3954;text-decoration:underline}
+.velq-m2-related .velq-m2-links a:focus-visible{outline:3px solid #aa3856;outline-offset:2px}
+.velq-m2-related .velq-m2-links a span{white-space:nowrap}
+.velq-m2-related .velq-m2-note{font-size:.88rem;color:#67555a}
+.velq-m2-related .velq-m2-note a{color:#8a1e38;text-decoration:underline;text-underline-offset:3px;font-weight:700}
+@media(max-width:700px){.velq-m2-related{margin:26px 16px 38px;padding:22px 18px}.velq-m2-related .velq-m2-links{grid-template-columns:1fr;gap:9px}.velq-m2-related .velq-m2-links a{padding:14px}}
+@media(prefers-reduced-motion:reduce){.velq-m2-related *{scroll-behavior:auto}}
