@@ -125,6 +125,27 @@ ob_start(static function (string $html): string {
                 '',
                 $html
             ) ?? $html;
+            // Put each buying-guide link on its own row, without stray separators.
+            $html = preg_replace_callback(
+                '~<nav aria-label="Product buying guides">.*?</nav>~is',
+                static function (array $nav): string {
+                    preg_match_all('~<a\b[^>]*>.*?</a>~is', $nav[0], $links);
+                    $rows = '';
+                    foreach ($links[0] as $link) {
+                        $rows .= '<li>' . $link . '</li>';
+                    }
+                    return '<nav aria-label="Product buying guides" class="velq-buying-guide-nav">'
+                        . '<p>Compare before you choose:</p><ul>' . $rows . '</ul></nav>';
+                },
+                $html
+            ) ?? $html;
+            $html = str_replace('</head>', '<style id="velq-buying-guide-spacing">'
+                . '.velq-cover-home main>nav.velq-buying-guide-nav{display:block;height:auto;overflow:visible;}'
+                . '.velq-buying-guide-nav>p{margin:0 0 14px;line-height:1.5;}'
+                . '.velq-buying-guide-nav>ul{display:grid;grid-template-columns:minmax(0,1fr);gap:12px;list-style:none;padding:0;margin:0;}'
+                . '.velq-buying-guide-nav>ul>li{display:block;min-width:0;padding:0;margin:0;}'
+                . '.velq-buying-guide-nav>ul>li>a{display:block;position:static;white-space:normal;overflow-wrap:anywhere;line-height:1.6;padding:6px 0;}'
+                . '</style></head>', $html);
             break;
 
         case '/guides':
