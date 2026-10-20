@@ -160,12 +160,6 @@ ob_start(static function (string $html): string {
                 $tag = str_replace('src="' . $original . '"', 'src="' . $base . '-800.webp"', $tag);
                 $responsive = ' srcset="' . $base . '-480.webp 480w, ' . $base . '-800.webp 800w, ' . $base . '-1200.webp 1200w"'
                     . ' sizes="(max-width: 650px) 90vw, (max-width: 1100px) 48vw, 560px"';
-                // Prioritize painting the above-the-fold hero as soon as decoded.
-                if (str_contains($original, 'hero-20261015-v3.jpeg')) {
-                    $tag = preg_replace('~\\s+decoding="[^"]*"~i', '', $tag) ?? $tag;
-                    $tag = preg_replace('~\\s+loading="[^"]*"~i', '', $tag) ?? $tag;
-                    $tag = preg_replace('~\\s*(/?>)$~', ' decoding="sync" loading="eager"$1', $tag, 1) ?? $tag;
-                }
                 return preg_replace('~\s*(/?>)$~', $responsive . '$1', $tag, 1) ?? $tag;
             }
             return $match[0];
