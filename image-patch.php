@@ -4,6 +4,7 @@ declare(strict_types=1);
 require_once __DIR__ . '/research-extension.php';
 require_once __DIR__ . '/authority-extension.php';
 require_once __DIR__ . '/discovery-extension.php';
+require_once __DIR__ . '/conversion-extension.php';
 
 ob_start(static function (string $html): string {
     // The packed analytics-config.js still contains an obsolete GA4 stream ID.
@@ -17,6 +18,7 @@ ob_start(static function (string $html): string {
     // the HTML-only image/SEO filter; the waitlist API remains byte-for-byte.
     $html = velq_research_response($html, $assetPath);
     $html = velq_authority_response($html, $assetPath);
+    $html = velq_conversion_response($html, $assetPath);
     if (stripos($html, '<html') === false) {
         return velq_discovery_response($html, $assetPath);
     }

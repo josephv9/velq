@@ -14,9 +14,9 @@ function asset(path){
   return Buffer.from(assets[path].data,'base64').toString('utf8');
 }
 function render(route,source){
-  const program='$_SERVER["REQUEST_URI"]=$argv[1]; require "image-patch.php"; echo stream_get_contents(STDIN);';
-  const r=spawnSync('php',['-d','display_errors=1','-r',program,route],{
-    input:source,encoding:'utf8',maxBuffer:16*1024*1024,timeout:15000
+  const program='$_SERVER["REQUEST_URI"]=$argv[1]; require "image-patch.php"; echo base64_decode($argv[2]);';
+  const r=spawnSync('php',['-d','display_errors=1','-r',program,route,Buffer.from(source).toString('base64')],{
+    encoding:'utf8',maxBuffer:16*1024*1024,timeout:15000
   });
   assert.equal(r.status,0,'PHP render failed for '+route+': '+(r.stderr||r.error?.message));
   assert(!r.stdout.includes('Fatal error'),'PHP fatal error at '+route);

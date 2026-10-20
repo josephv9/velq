@@ -12,7 +12,7 @@ $host=strtolower(explode(':',$_SERVER['HTTP_HOST'])[0]);
 if(!in_array($host,['velqnutrition.com','www.velqnutrition.com'],true))header('X-Robots-Tag: noindex, nofollow');
 header('X-Content-Type-Options: nosniff');
 header('Referrer-Policy: strict-origin-when-cross-origin');
-header("Content-Security-Policy: default-src 'self'; img-src 'self' data: https://cdn.shopify.com https://www.facebook.com https://analytics.tiktok.com; style-src 'self'; script-src 'self' https://www.googletagmanager.com https://connect.facebook.net https://analytics.tiktok.com; connect-src 'self' https://www.google-analytics.com https://analytics.google.com https://region1.google-analytics.com https://www.facebook.com https://analytics.tiktok.com; form-action 'self' https://qusbk4-9s.myshopify.com; frame-ancestors 'none'; base-uri 'self'");
+header("Content-Security-Policy: default-src 'self'; img-src 'self' data: https://cdn.shopify.com https://www.facebook.com https://analytics.tiktok.com https://*.klaviyo.com; style-src 'self'; script-src 'self' https://www.googletagmanager.com https://connect.facebook.net https://analytics.tiktok.com https://static.klaviyo.com; connect-src 'self' https://www.google-analytics.com https://analytics.google.com https://region1.google-analytics.com https://www.facebook.com https://analytics.tiktok.com https://*.klaviyo.com; form-action 'self' https://qusbk4-9s.myshopify.com; frame-ancestors 'none'; base-uri 'self'");
 header('Content-Type: '.$pages[$key]['type']);
 header('Cache-Control: '.(str_starts_with($key,'/assets/')?'public, max-age=86400':'no-cache'));
 if($_SERVER['REQUEST_METHOD']!=='HEAD'){

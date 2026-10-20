@@ -1,0 +1,68 @@
+name: Velq conversion journey checks
+
+on:
+  push:
+    branches: [main]
+    paths:
+      - 'app.js'
+      - 'analytics.js'
+      - 'velq-analytics.js'
+      - 'velq-waitlist.js'
+      - 'velq-lead-capture.js'
+      - 'conversion-*.php'
+      - 'image-patch.php'
+      - 'nutrition-content.php'
+      - '.htaccess'
+      - 'assets/velq-conversion.css'
+      - 'products/strawberry-protein-fiber-gummies/**'
+      - 'scripts/test-waitlist-flow.cjs'
+      - 'scripts/test-conversion-journey.cjs'
+      - 'scripts/conversion-qa-router.php'
+      - '.github/workflows/velq-conversion-checks.yml'
+  pull_request:
+    branches: [main]
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+jobs:
+  local-confirmed-journey:
+    runs-on: ubuntu-latest
+    timeout-minutes: 10
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: '22'
+      - name: Install browser for local mocked checks
+        run: |
+          npm install --no-save playwright@1.56.1
+          npx playwright install --with-deps chromium
+      - name: Validate PHP and script syntax
+        run: |
+          php -l conversion-extension.php
+          php -l conversion-content.php
+          php -l image-patch.php
+          php -l nutrition-content.php
+          node --check analytics.js
+          node --check app.js
+          node --check velq-waitlist.js
+          node --check velq-lead-capture.js
+      - name: Check twelve signup protocol and consent cases with intercepted endpoints
+        run: node scripts/test-waitlist-flow.cjs
+      - name: Check mobile and desktop journeys against the local site
+        run: |
+          php -S 127.0.0.1:8766 scripts/conversion-qa-router.php >/tmp/velq-conversion-server.log 2>&1 &
+          server_pid=$!
+          trap 'kill "$server_pid"' EXIT
+          for attempt in 1 2 3 4 5; do
+            if curl -fsS http://127.0.0.1:8766/ >/dev/null; then break; fi
+            sleep 1
+          done
+          node scripts/test-conversion-journey.cjs
+      - name: Verify one analytics owner and existing page metadata
+        run: |
+          node scripts/test-ga4-loader.cjs
+          node scripts/test-gummy-seo.cjs
+          node scripts/test-commercial-seo.cjs
