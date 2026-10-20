@@ -52,11 +52,18 @@ ob_start(static function (string $html): string {
         "https://cdn.shopify.com/s/files/1/0723/8372/5647/files/velq-journal-gummies-vs-supplements-oct2026.jpg?v=1792109244" => "https://velqnutrition.com/assets/journal/velq-journal-gummies-vs-supplements-20261020-v4.jpg",
         "https://cdn.shopify.com/s/files/1/0723/8372/5647/files/velq-journal-protein-needs-oct2026.jpg?v=1792109233" => "https://velqnutrition.com/assets/journal/velq-journal-protein-needs-20261020-v4.jpg",
         "https://cdn.shopify.com/s/files/1/0723/8372/5647/files/velq-journal-wellness-routine-oct2026.jpg?v=1792109238" => "https://velqnutrition.com/assets/journal/velq-journal-wellness-routine-20261020-v4.jpg",
+        "https://cdn.shopify.com/s/files/1/0723/8372/5647/files/velq-tired_on_glp1-2026-10.webp?v=1792103374" => "https://velqnutrition.com/assets/journal/velq-journal-glp1-tired-20261020-v5.jpg",
+        "https://cdn.shopify.com/s/files/1/0723/8372/5647/files/velq-glp1_low_appetite-2026-10.webp?v=1792103442" => "https://velqnutrition.com/assets/journal/velq-journal-glp1-not-hungry-20261020-v5.jpg",
+        "https://cdn.shopify.com/s/files/1/0723/8372/5647/files/velq-30g_fiber-2026-10.webp?v=1792103452" => "https://velqnutrition.com/assets/journal/velq-journal-fiber-thirty-20261020-v5.jpg",
+        "https://cdn.shopify.com/s/files/1/0723/8372/5647/files/velq-build_muscle_food_first-2026-10-v2.webp?v=1792103819" => "https://velqnutrition.com/assets/journal/velq-journal-build-muscle-20261020-v5.jpg",
+        "https://cdn.shopify.com/s/files/1/0723/8372/5647/files/velq-maintain_muscle_glp1-2026-10.webp?v=1792103429" => "https://velqnutrition.com/assets/journal/velq-journal-glp1-keep-muscle-20261020-v5.jpg",
+        "https://cdn.shopify.com/s/files/1/0723/8372/5647/files/velq-glp1_constipation_fiber-2026-10.webp?v=1792103433" => "https://velqnutrition.com/assets/journal/velq-journal-glp1-constipation-20261020-v5.jpg",
+        "https://cdn.shopify.com/s/files/1/0723/8372/5647/files/velq-protein_fiber_snacks-2026-10.webp?v=1792103513" => "https://velqnutrition.com/assets/journal/velq-journal-snacks-to-go-20261020-v5.jpg",
     ]);
 
-    // The seven approved full-width covers are 1536 x 864. Match intrinsic
+    // The approved full-width covers are 1536 x 864. Match intrinsic
     // dimensions without cropping or changing any other Journal artwork.
-    $approvedCoverPattern = '~https://velqnutrition\.com/assets/journal/velq-journal-[a-z-]+-20261020-v4\.jpg~';
+    $approvedCoverPattern = '~https://velqnutrition\.com/assets/journal/velq-journal-[a-z0-9-]+-20261020-v[45]\.jpg~';
     $html = preg_replace_callback(
         '~<img\b[^>]*>~i',
         static function (array $match) use ($approvedCoverPattern): string {
