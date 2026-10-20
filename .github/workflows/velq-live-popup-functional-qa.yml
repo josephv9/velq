@@ -1,0 +1,24 @@
+name: Velq Live Popup Functional QA
+on:
+  push:
+    branches: [main]
+    paths:
+      - 'scripts/qa-live-popup-browser.cjs'
+      - '.github/workflows/velq-live-popup-functional-qa.yml'
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+jobs:
+  verify-live:
+    runs-on: ubuntu-latest
+    timeout-minutes: 15
+    steps:
+      - uses: actions/checkout@v4
+      - name: Install Playwright Chromium
+        run: |
+          npm install --no-save playwright@1.56.1
+          npx playwright install --with-deps chromium
+      - name: Test live popup at five viewport widths without submitting real leads
+        run: node scripts/qa-live-popup-browser.cjs
