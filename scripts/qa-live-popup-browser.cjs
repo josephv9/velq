@@ -32,7 +32,10 @@ const base='https://velqnutrition.com/';
      popup:!!document.querySelector('#velq-early-access'),
      waitlist:(()=>{let e=document.querySelector('#waitlist');if(!e)return null;let b=e.getBoundingClientRect();return {top:b.top,bottom:b.bottom}})(),
      scripts:[...document.scripts].filter(x=>/lead-capture|analytics/.test(x.src)).map(x=>({src:x.src,async:x.async,defer:x.defer})),
-     active:document.activeElement?.tagName,bodyText:document.body?.innerText.slice(0,170)
+     active:document.activeElement?.tagName,bodyText:document.body?.innerText.slice(0,170),
+     storage:{joined:localStorage.getItem('velq_waitlist_joined_v1'),dismissed:localStorage.getItem('velq_early_access_dismissed_until_v1'),tracking:localStorage.getItem('velq_tracking_consent_v1')},
+     dialogs:[...document.querySelectorAll('dialog[open], [aria-modal="true"]')].map(e=>({id:e.id,className:e.className,hidden:e.hidden})),
+     eventNames:(window.dataLayer||[]).filter(x=>x&&x[0]==='event').map(x=>x[1]).slice(-15)
    }));
    console.log('LIVE_DEBUG '+JSON.stringify({width,diag,errors:errors.slice(0,10)}));
    await page.locator('#velq-early-access').waitFor({state:'visible',timeout:6000});
