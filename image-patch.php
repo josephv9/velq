@@ -23,6 +23,17 @@ ob_start(static function (string $html): string {
         return velq_discovery_response($html, $assetPath);
     }
 
+    // Remove the Compare labels tab from both header navigation variants.
+    $html = preg_replace_callback(
+        '~<nav\b[^>]*\bclass="(?:desktop-nav|mobile-nav)"[^>]*>.*?</nav>~is',
+        static fn(array $nav): string => str_replace(
+            '<a href="/tools/nutrition-label-value-calculator">Compare labels</a>',
+            '',
+            $nav[0]
+        ),
+        $html
+    ) ?? $html;
+
     $heroImage = '/assets/velq-strawberry-gummies-hero-20261015-v3.jpeg';
     $productImage = '/assets/velq-gummies-packshot-20261015-v2.jpeg';
     $html = str_replace(
