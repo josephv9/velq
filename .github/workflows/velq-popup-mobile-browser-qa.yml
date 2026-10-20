@@ -57,7 +57,7 @@ jobs:
             const browser=await chromium.launch({headless:true,args:['--no-sandbox']});
             try{
               for(const width of [320,375,430,768,1280]){
-                const ctx=await browser.newContext({viewport:{width,height:844}});
+                const ctx=await browser.newContext({viewport:{width,height:844},reducedMotion:'reduce'});
                 const page=await ctx.newPage(),errors=[];
                 page.on('pageerror',e=>errors.push(e.message));
                 await page.route('https://static.klaviyo.com/**',r=>r.fulfill({status:200,contentType:'text/javascript',body:''}));
@@ -70,7 +70,7 @@ jobs:
       const metrics=await page.evaluate(()=>({innerWidth:innerWidth,innerHeight:innerHeight,visualHeight:visualViewport?.height,cssMaxHeight:getComputedStyle(document.querySelector('.velq-lead-card')).maxHeight,display:getComputedStyle(document.querySelector('.velq-lead-overlay')).display}));
       console.log('MOBILE_BOX',JSON.stringify({width,card,metrics}));
                 assert(card&&card.x>=-1&&card.x+card.width<=width+1,'Horizontal overflow at '+width+': '+JSON.stringify(card));
-                assert(card.y>=-1&&card.y+card.height<=845,'Vertical overflow at '+width);
+                assert(card.y>=-1&&card.y+card.height<=845,'Vertical overflow at '+width+': '+JSON.stringify({card,metrics}));
                 const check=page.locator('#velq-lead-form [name=consent]');
                 assert.equal(await check.isChecked(),false,'Checkbox must default unchecked');
                 assert.equal(await check.getAttribute('required'),'','Checkbox must be required');
