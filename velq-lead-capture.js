@@ -46,15 +46,31 @@
     save(JOINED_KEY, '1');
     if (overlay) close('other_signup', true);
   }
+  var KLAVIYO_PUBLIC_KEY = 'RCNCJb';
+  var KLAVIYO_CONSENT_KEY = 'velq_klaviyo_opted_in_v1';
+  function loadConsentedKlaviyo() {
+    // No Klaviyo onsite cookie before a successful, explicitly opted-in signup.
+    if (read(KLAVIYO_CONSENT_KEY) !== '1') return;
+    window._learnq = window._learnq || [];
+    if (document.querySelector('script[src*="static.klaviyo.com/onsite/js/"]')) return;
+    var script = document.createElement('script');
+    script.async = true;
+    script.src = 'https://static.klaviyo.com/onsite/js/' + KLAVIYO_PUBLIC_KEY + '/klaviyo.js';
+    script.setAttribute('data-velq-consented-klaviyo', 'true');
+    document.head.appendChild(script);
+  }
   function syncIdentifiedKlaviyo(email, source) {
-    // Never load a new vendor or share an address unless an existing Klaviyo
-    // installation is available and an explicit marketing opt-in was given.
-    if (!email || !window._learnq || typeof window._learnq.push !== 'function') return;
+    if (typeof email !== 'string' || !/^[^@\s]+@[^@\s]+\.[^@\s]+$/.test(email)) return;
+    save(KLAVIYO_CONSENT_KEY, '1');
+    loadConsentedKlaviyo();
+    // Identity commands are queued until the consent-gated Klaviyo script loads.
+    if (!window._learnq || typeof window._learnq.push !== 'function') return;
     window._learnq.push(['identify', { $email: email }]);
     window._learnq.push(['track', 'Joined Velq Early Access', {
       Product: 'Strawberry Protein + Fiber Gummies', Source: source
     }]);
   }
+  loadConsentedKlaviyo();
   window.addEventListener('velq:waitlist-success', function (e) {
     if (!e.detail || !e.detail.eventId) return;
     if (e.detail.source !== 'popup') {
@@ -157,10 +173,10 @@
           window.dispatchEvent(new CustomEvent('velq:waitlist-success', {
             detail: { eventId: result.eventId, source: 'popup', trigger: reason }
           }));
-          syncIdentifiedKlaviyo(email, 'popup');
-        } else {
-          markJoined();
         }
+        // Re-identify consented returners; analytics lead events still require newLead.
+        syncIdentifiedKlaviyo(email, 'popup');
+        save(JOINED_KEY, '1');
         if (overlay === el) {
           form.innerHTML = '<div class="velq-lead-thanks" role="status"><strong>You are on the list!</strong><p>We will email you when Velq launches.</p><button class="velq-lead-done" type="button">DONE</button></div>';
           form.querySelector('button').addEventListener('click', function () { close('completed', true); });
