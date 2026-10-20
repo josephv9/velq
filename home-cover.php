@@ -61,5 +61,6 @@ HTML;
     $html = preg_replace('~<a\\b[^>]*href="#story"[^>]*>.*?</a>~s', '', $html) ?? $html;
     // Remove the homepage guide-promotion section requested by the owner.
     $html = preg_replace('~<section\b[^>]*aria-labelledby="compare-heading"[^>]*>.*?</section>~s', '', $html, 1) ?? $html;
+    $html = preg_replace('~<nav\b[^>]*aria-label="Product buying guides"[^>]*>.*?</nav>~s', '', $html, 1) ?? $html;
     return $html;
 }
