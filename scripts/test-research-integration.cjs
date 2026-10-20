@@ -51,7 +51,7 @@ for (const route of ['/', '/blog/simple-daily-wellness-routine-that-sticks']) {
   assert(!output.includes('/assets/research/'), 'Unrelated page received research assets');
 }
 const pageRoutes = ['/research', ...links];
-const dispatcherRoutes = [...pageRoutes, '/blog/protein-gummies-with-fiber-comparison'];
+const dispatcherRoutes = [...pageRoutes, '/blog/protein-gummies-with-fiber-comparison', '/media'];
 const rewrites = fs.readFileSync('.htaccess', 'utf8');
 const evidenceRule = rewrites.split(/\r?\n/).find(line => /^\s*RewriteRule /.test(line) && line.includes('research-content.php [END]'));
 assert(evidenceRule, 'Evidence dispatcher rewrite is present');
@@ -79,7 +79,7 @@ const assets = JSON.parse(Buffer.from(bundle[1], 'base64').toString());
 const analytics = Buffer.from(assets['/analytics.js'].data, 'base64').toString();
 const patched = render('/analytics.js', analytics);
 const oldPart = String.raw`\/compare|\/blog`;
-const newPart = String.raw`\/compare|\/research(?:\/[a-z0-9-]+)?|\/blog`;
+const newPart = String.raw`\/compare|\/media|\/research(?:\/[a-z0-9-]+)?|\/blog`;
 assert.equal(analytics.split(oldPart).length - 1, 1, 'Expected exactly one original path allowlist');
 assert.equal(patched, analytics.replace(oldPart, newPart), 'Analytics changed outside the research route allowlist');
 assert.equal(render('/analytics.js', patched), patched, 'Analytics patch is not idempotent');
