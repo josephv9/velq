@@ -1,0 +1,61 @@
+name: Velq LCP bottleneck experiment
+
+on:
+  push:
+    branches: [main]
+    paths: ['.github/workflows/velq-lcp-diagnostics.yml']
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+jobs:
+  compare-lcp:
+    runs-on: ubuntu-latest
+    timeout-minutes: 14
+    steps:
+      - uses: actions/checkout@v4
+      - run: npm install --global lighthouse@12
+      - name: Confirm Lighthouse request-blocking support
+        run: lighthouse --help | grep -i blocked
+      - name: Mobile Lighthouse normal traffic
+        run: >
+          lighthouse https://velqnutrition.com/
+          --chrome-flags="--headless=new --no-sandbox --disable-dev-shm-usage"
+          --only-categories=performance
+          --form-factor=mobile
+          --output=json
+          --output-path="/tmp/velq-normal.json"
+          --quiet
+      - name: Mobile Lighthouse without third-party Google tag
+        run: >
+          lighthouse https://velqnutrition.com/
+          --chrome-flags="--headless=new --no-sandbox --disable-dev-shm-usage"
+          --only-categories=performance
+          --form-factor=mobile
+          --blocked-url-patterns="*googletagmanager.com*"
+          --output=json
+          --output-path="/tmp/velq-no-gtag.json"
+          --quiet
+      - name: Print measurement comparison
+        run: |
+          node - <<'JS'
+          for(const file of ['normal','no-gtag']){
+            const report=require('/tmp/velq-'+file+'.json'),a=report.audits;
+            const metrics=Object.fromEntries([
+              ['lcp','largest-contentful-paint'],['fcp','first-contentful-paint'],
+              ['tbt','total-blocking-time'],['cls','cumulative-layout-shift'],
+              ['speed_index','speed-index']].map(([key,id])=>[key,a[id]?.numericValue]));
+            const insight=a['lcp-breakdown-insight']?.details?.items?.[0]?.items||[];
+            console.log('LCP_VARIANT',JSON.stringify({variant:file,performance:Math.round(report.categories.performance.score*100),metrics,breakdown:insight}));
+          }
+          JS
+      - name: Upload experiment reports
+        if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: velq-lcp-diagnostic
+          path: |
+            /tmp/velq-normal.json
+            /tmp/velq-no-gtag.json
+          if-no-files-found: warn
