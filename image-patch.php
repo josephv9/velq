@@ -3,6 +3,7 @@ declare(strict_types=1);
 
 require_once __DIR__ . '/research-extension.php';
 require_once __DIR__ . '/authority-extension.php';
+require_once __DIR__ . '/discovery-extension.php';
 
 ob_start(static function (string $html): string {
     // The packed analytics-config.js still contains an obsolete GA4 stream ID.
@@ -17,7 +18,7 @@ ob_start(static function (string $html): string {
     $html = velq_research_response($html, $assetPath);
     $html = velq_authority_response($html, $assetPath);
     if (stripos($html, '<html') === false) {
-        return $html;
+        return velq_discovery_response($html, $assetPath);
     }
 
     $heroImage = '/assets/velq-strawberry-gummies-hero-20261015-v3.jpeg';
@@ -269,7 +270,7 @@ ob_start(static function (string $html): string {
         $html = preg_replace('~</head>~i', $preload . "\n" . '</head>', $html, 1) ?? $html;
     }
 
-    return (string) preg_replace_callback(
+    $html = (string) preg_replace_callback(
         '~<img\b[^>]*>~i',
         static function (array $match): string {
             $variants = [
@@ -293,4 +294,6 @@ ob_start(static function (string $html): string {
         },
         $html
     );
+    // Run last so image metadata describes the approved, currently served images.
+    return velq_discovery_response($html, $assetPath);
 });

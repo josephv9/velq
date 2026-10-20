@@ -7,6 +7,11 @@ on:
       - 'velq-site.php'
       - 'image-patch.php'
       - 'authority-extension.php'
+      - 'discovery-extension.php'
+      - 'assets/discovery/**'
+      - 'scripts/build-discovery-guides.py'
+      - 'scripts/test-discovery.cjs'
+      - 'scripts/submit-indexnow.py'
       - 'media/**'
       - 'assets/velq-media*'
       - 'assets/velq-authority-links.css'
@@ -52,6 +57,11 @@ jobs:
           php -l research-content.php
           php -l research-extension.php
           php -l authority-extension.php
+          php -l discovery-extension.php
+      - name: Verify image discovery, structured metadata and unchanged crawl controls
+        run: node scripts/test-discovery.cjs
+      - name: Check the explicit IndexNow submission utility
+        run: python3 -m py_compile scripts/submit-indexnow.py
       - name: Verify media discovery and preserve unrelated responses
         run: node scripts/test-authority-resources.cjs
       - name: Verify dated research tables and downloads reproduce exactly
