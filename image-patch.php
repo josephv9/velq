@@ -127,6 +127,126 @@ JS;
             break;
     }
 
+
+    // MILESTONE2_NAV: link established commercial pages by real buying intent.
+    // No new keyword doorway URLs, changes to analytics events, or waitlist logic.
+    $buyerPaths = [
+        '/compare' => [
+            'Explore the right comparison for your goal',
+            'A fiber-only gummy, a protein gummy and fiber powder are different buying decisions. Check full-serving labels, ingredients and current availability.',
+            [
+                ['/blog/fiber-gummies-vs-fiber-powder', 'Fiber powder vs gummies: serving, ingredients and cost'],
+                ['/blog/protein-gummies-for-adults', 'Protein gummies for adults: buying checklist'],
+                ['/blog/fiber-gummies-for-adults-guide', 'Fiber gummies for adults: label checklist']
+            ]
+        ],
+        '/guides' => [
+            'Choose a focused gummy buying guide',
+            'Start with the question that matches your needs. Compare actual labels rather than relying on front-of-pack claims.',
+            [
+                ['/blog/protein-gummies-for-adults', 'Choosing adult protein gummies'],
+                ['/blog/fiber-gummies-for-adults-guide', 'Choosing adult fiber gummies'],
+                ['/blog/fiber-gummies-vs-fiber-powder', 'Fiber gummies vs fiber powder']
+            ]
+        ],
+        '/blog/best-fiber-gummies-2026' => [
+            'Compare fiber-only gummies with alternative formats',
+            'This shortlist uses brand-published label facts, not independently tested product outcomes. Fiber type and directions matter.',
+            [
+                ['/blog/fiber-gummies-vs-psyllium-husk', 'Fiber gummies vs psyllium: ingredient differences'],
+                ['/blog/fiber-gummies-vs-fiber-powder', 'Fiber gummies vs fiber powder: cost and serving size'],
+                ['/blog/protein-gummies-with-fiber-comparison', 'Protein gummies with fiber: named-brand comparison']
+            ]
+        ],
+        '/blog/protein-gummies-with-fiber-comparison' => [
+            'Continue the protein gummy comparison',
+            'Read protein source, sugar, fiber, caffeine and serving size together. The same protein grams do not guarantee equivalent nutrition.',
+            [
+                ['/blog/protein-and-fiber-gummies-buying-guide', 'Protein and prebiotic fiber gummy buying guide'],
+                ['/blog/protein-gummies-vs-protein-bars', 'Protein gummies vs protein bars'],
+                ['/blog/protein-and-fiber-gummies-vs-separate-supplements', 'Combined gummies vs separate supplements']
+            ]
+        ],
+        '/blog/protein-and-fiber-gummies-buying-guide' => [
+            'Turn the checklist into a buying decision',
+            'Compare marketed fiber-only products, combined formulas and the option of taking ingredients separately.',
+            [
+                ['/blog/best-fiber-gummies-2026', '2026 fiber gummy buyer shortlist'],
+                ['/blog/protein-gummies-with-fiber-comparison', 'Named protein and fiber gummy brands'],
+                ['/blog/protein-and-fiber-gummies-vs-separate-supplements', 'Combined gummies vs separate protein and fiber']
+            ]
+        ],
+        '/blog/protein-gummies-vs-protein-bars' => [
+            'Compare actual labels after choosing your format',
+            'A gummy is not automatically a meal replacement. Check the complete serving, protein source, calories, fiber, allergens and caffeine.',
+            [
+                ['/blog/protein-gummies-with-fiber-comparison', 'Current protein gummy labels and servings'],
+                ['/blog/protein-and-fiber-gummies-buying-guide', 'Protein and fiber gummy buyer checklist'],
+                ['/blog/protein-and-fiber-gummies-vs-separate-supplements', 'Combined gummies vs separate supplements']
+            ]
+        ],
+        '/blog/fiber-gummies-vs-psyllium-husk' => [
+            'Compare the fiber ingredient, not just the format',
+            'Psyllium has specific fluid directions. Different fibers are not interchangeable even when their labeled gram amounts match.',
+            [
+                ['/blog/fiber-gummies-vs-fiber-powder', 'Fiber powder vs gummies: label comparison'],
+                ['/blog/best-fiber-gummies-2026', 'Best fiber gummies 2026: buyer shortlist'],
+                ['/blog/fiber-gummies-for-adults-guide', 'Fiber gummies for adults: ingredients and servings']
+            ]
+        ],
+        '/blog/protein-and-fiber-gummies-vs-separate-supplements' => [
+            'Explore finished product labels before choosing',
+            'One combined product may be convenient; separate ingredients may offer more control over serving amounts.',
+            [
+                ['/blog/protein-gummies-with-fiber-comparison', 'Protein gummies with fiber: brand comparison'],
+                ['/blog/protein-and-fiber-gummies-buying-guide', 'Gummy buying checklist'],
+                ['/tools/nutrition-label-value-calculator', 'Free calculator: price per complete serving']
+            ]
+        ],
+        '/blog/protein-gummies-for-adults' => [
+            'Compare protein gummy buying options',
+            'Identify protein source, complete serving, allergens and any declared caffeine before choosing.',
+            [
+                ['/blog/protein-gummies-with-fiber-comparison', 'Protein gummies with fiber: current brand labels'],
+                ['/blog/protein-gummies-vs-protein-bars', 'Protein gummies vs bars'],
+                ['/blog/protein-and-fiber-gummies-buying-guide', 'Protein and fiber gummy checklist']
+            ]
+        ],
+        '/blog/fiber-gummies-for-adults-guide' => [
+            'Choose a fiber buying comparison',
+            'Check the named fiber source, grams per serving, sweeteners and product directions.',
+            [
+                ['/blog/best-fiber-gummies-2026', 'Fiber gummy buyer shortlist'],
+                ['/blog/fiber-gummies-vs-psyllium-husk', 'Fiber gummies vs psyllium'],
+                ['/blog/fiber-gummies-vs-fiber-powder', 'Fiber gummies vs powder']
+            ]
+        ]
+    ];
+    if (isset($buyerPaths[$seoPath]) && !str_contains($html, 'id="velq-m2-related"')) {
+        [$buyerHeading, $buyerIntro, $buyerLinks] = $buyerPaths[$seoPath];
+        $safeBuyerText = static fn(string $text): string =>
+            htmlspecialchars($text, ENT_QUOTES | ENT_SUBSTITUTE, 'UTF-8');
+        $buyerBlock = '<section id="velq-m2-related" class="velq-m2-related" aria-labelledby="velq-m2-heading">'
+            . '<p class="velq-m2-kicker">COMPARE BEFORE YOU CHOOSE</p>'
+            . '<h2 id="velq-m2-heading">' . $safeBuyerText($buyerHeading) . '</h2>'
+            . '<p>' . $safeBuyerText($buyerIntro) . '</p><ul class="velq-m2-links">';
+        foreach ($buyerLinks as [$url, $label]) {
+            $buyerBlock .= '<li><a href="' . $safeBuyerText($url) . '">'
+                . $safeBuyerText($label) . ' <span aria-hidden="true">→</span></a></li>';
+        }
+        $buyerBlock .= '</ul><p class="velq-m2-note">'
+            . 'Velq gummies are in development; final nutrition, pricing and availability may change. '
+            . '<a href="/#waitlist" data-waitlist-cta="commercial-journey">Get free launch updates</a>'
+            . ' — this is not a preorder.</p></section>';
+        $buyerOutput = preg_replace('~</main>~i', $buyerBlock . '</main>', $html, 1, $buyerCount);
+        if ($buyerCount === 1 && is_string($buyerOutput)) {
+            $html = $buyerOutput;
+            $html = preg_replace('~</head>~i',
+                '<link rel="stylesheet" href="/assets/velq-commercial-m2.css"></head>',
+                $html, 1) ?? $html;
+        }
+    }
+
     // Bust Hostinger CDN's old /app.js cache on the homepage so visitors load
     // the consented popup and confirmed-receipt logic immediately after deploy.
     if ($seoPath === '/') {
