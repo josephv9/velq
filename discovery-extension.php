@@ -64,12 +64,12 @@ function velq_discovery_images(): array
     // These are the final approved cover URLs emitted by image-patch.php and
     // nutrition-content.php. Public image bytes were checked for these sizes.
     $covers = [
-        ['protein-vs-fiber-why-your-body-needs-both', 'files/velq-journal-protein-vs-fiber-oct2026.jpg?v=1792109199', 1536, 1024, 'Velq Journal cover for Protein vs. Fiber: Why Your Body Needs Both.'],
+        ['protein-vs-fiber-why-your-body-needs-both', '/assets/journal/velq-journal-protein-vs-fiber-20261020-v6.jpg', 1536, 864, 'Velq Journal cover for Protein vs. Fiber: Why Your Body Needs Both.'],
         ['how-much-fiber-do-you-need-every-day', '/assets/journal/velq-journal-fiber-daily-20261020-v4.jpg', 1536, 864, 'Velq Journal cover for How Much Fiber Do You Need Every Day?'],
-        ['simple-daily-wellness-routine-that-sticks', '/assets/journal/velq-journal-wellness-routine-20261020-v4.jpg', 1536, 864, 'Velq Journal cover for The Simple Daily Wellness Routine That Sticks.'],
-        ['caffeine-gummies-vs-coffee-whats-the-difference', 'files/velq-journal-caffeine-vs-coffee-oct2026.jpg?v=1792109249', 1536, 1024, 'Velq Journal cover for the comparison of caffeine gummies and coffee.'],
+        ['simple-daily-wellness-routine-that-sticks', '/assets/journal/velq-journal-wellness-routine-20261020-v6.jpg', 1536, 864, 'Velq Journal cover for The Simple Daily Wellness Routine That Sticks.'],
+        ['caffeine-gummies-vs-coffee-whats-the-difference', '/assets/journal/velq-journal-coffee-20261020-v6.jpg', 1536, 864, 'Velq Journal cover for the comparison of caffeine gummies and coffee.'],
         ['how-much-protein-do-you-actually-need', '/assets/journal/velq-journal-protein-needs-20261020-v4.jpg', 1536, 864, 'Velq Journal cover for How Much Protein Do You Actually Need?'],
-        ['caffeine-gummies-vs-energy-drinks', 'files/velq-journal-caffeine-vs-energy-drinks-oct2026.jpg?v=1792109254', 1536, 1024, 'Velq Journal cover comparing caffeine gummies and energy drinks.'],
+        ['caffeine-gummies-vs-energy-drinks', '/assets/journal/velq-journal-energy-drinks-20261020-v6.jpg', 1536, 864, 'Velq Journal cover comparing caffeine gummies and energy drinks.'],
         ['protein-and-fiber-gummies-vs-separate-supplements', '/assets/journal/velq-journal-gummies-vs-supplements-20261020-v4.jpg', 1536, 864, 'Velq Journal cover comparing combined protein and fiber gummies with separate supplements.'],
         ['protein-and-fiber-gummies-buying-guide', '/assets/journal/velq-journal-buyer-guide-20261020-v4.jpg', 1536, 864, 'Velq Journal cover for the protein and fiber gummy buying checklist.'],
         ['protein-gummies-vs-protein-bars', '/assets/journal/velq-journal-protein-gummies-vs-bars-20261020-v4.jpg', 1536, 864, 'Velq Journal cover comparing protein gummies and protein bars.'],
@@ -79,7 +79,7 @@ function velq_discovery_images(): array
         ['build-muscle-without-protein-shakes', '/assets/journal/velq-journal-build-muscle-20261020-v5.jpg', 1536, 864, 'Velq Journal cover for the food-first muscle-building article.'],
         ['portion-sizes-muscle-gain-without-counting-calories', '/assets/journal/velq-journal-portions-muscle-20261020-v5.jpg', 1536, 864, 'Velq Journal cover for the article about portions and muscle gain.'],
         ['what-to-eat-glp1-not-hungry', '/assets/journal/velq-journal-glp1-not-hungry-20261020-v5.jpg', 1536, 864, 'Velq Journal cover for the article about food and low appetite while using a GLP-1 medicine.'],
-        ['glp1-protein-snacks-without-shakes', 'files/velq-glp1_protein_snacks-2026-10.webp?v=1792103438', 1536, 1024, 'Velq Journal cover for the article about protein snacks while using a GLP-1 medicine.'],
+        ['glp1-protein-snacks-without-shakes', '/assets/journal/velq-journal-glp1-protein-snacks-20261020-v6.jpg', 1536, 864, 'Velq Journal cover for the article about protein snacks while using a GLP-1 medicine.'],
         ['glp1-constipation-fiber', '/assets/journal/velq-journal-glp1-constipation-20261020-v5.jpg', 1536, 864, 'Velq Journal cover for the article about constipation and fiber while using a GLP-1 medicine.'],
         ['maintain-muscle-glp1-low-appetite', '/assets/journal/velq-journal-glp1-keep-muscle-20261020-v5.jpg', 1536, 864, 'Velq Journal cover for the article about muscle and low appetite while using a GLP-1 medicine.'],
         ['tired-on-glp1-food-fluids-causes', '/assets/journal/velq-journal-glp1-tired-20261020-v5.jpg', 1536, 864, 'Velq Journal cover for the article about tiredness, food and fluids while using a GLP-1 medicine.'],
