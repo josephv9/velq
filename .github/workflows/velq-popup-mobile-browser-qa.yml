@@ -4,9 +4,12 @@ on:
     branches: [main]
     paths:
       - '.github/workflows/velq-popup-mobile-browser-qa.yml'
+      - 'scripts/qa-velq-popup-mobile.cjs'
   workflow_dispatch:
+
 permissions:
   contents: read
+
 jobs:
   verify:
     runs-on: ubuntu-latest
@@ -24,84 +27,6 @@ jobs:
         run: |
           npm install --no-save playwright@1.56.1
           npx playwright install --with-deps chromium
-      - name: Verify five responsive widths, consent, mocked signup, GA4 and Klaviyo
+      - name: Run mobile and desktop popup QA with mocked waitlist
         working-directory: main
-        run: |
-          node <<'NODE'
-          const fs=require('node:fs'),http=require('node:http'),assert=require('node:assert/strict'),path=require('node:path');
-          const {chromium}=require('playwright'),root=path.resolve('../site-live');
-          const popup=fs.readFileSync(path.join(root,'velq-lead-capture.js'),'utf8');
-          const css=fs.readFileSync(path.join(root,'velq-lead-capture.css'),'utf8');
-          const php=fs.readFileSync(path.join(root,'velq-site.php'),'utf8');
-          const match=php.match(/\$assets=json_decode\(base64_decode\('([A-Za-z0-9+/=]+)'\),true\)/);
-          assert(match,'Packed analytics missing');
-          const assets=JSON.parse(Buffer.from(match[1],'base64').toString('utf8'));
-          const analytics=Buffer.from(assets['/analytics.js'].data,'base64').toString('utf8');
-          new Function(popup);new Function(analytics);
-          const requests=[];
-          const server=http.createServer((req,res)=>{
-            const p=new URL(req.url,'http://localhost').pathname;
-            if(p==='/api/waitlist'){
-              let body='';req.on('data',s=>body+=s);
-              req.on('end',()=>{requests.push(JSON.parse(body));res.writeHead(200,{'Content-Type':'application/json'});res.end(JSON.stringify({ok:true,newLead:true,eventId:'mock-confirmed-001'}))});
-              return;
-            }
-            let files={'/velq-lead-capture.js':popup,'/velq-lead-capture.css':css,'/analytics.js':analytics};
-            if(files[p]){res.writeHead(200,{'Content-Type':p.endsWith('.css')?'text/css':'text/javascript'});res.end(files[p]);return}
-            res.writeHead(200,{'Content-Type':'text/html'});
-            res.end('<!doctype html><html><head><meta name="viewport" content="width=device-width,initial-scale=1"><link rel="stylesheet" href="/velq-lead-capture.css"></head><body><h1>Velq</h1><p>Strawberry gummies preview</p><script>window.VELQ_ANALYTICS={ga4:"G-F93RK1P0H5"};</script><script defer src="/analytics.js"></script><script defer src="/velq-lead-capture.js"></script></body></html>');
-          });
-          (async()=>{
-            await new Promise(r=>server.listen(0,'127.0.0.1',r));
-            const base='http://127.0.0.1:'+server.address().port;
-            const browser=await chromium.launch({headless:true,args:['--no-sandbox']});
-            try{
-              for(const width of [320,375,430,768,1280]){
-                const ctx=await browser.newContext({viewport:{width,height:844},reducedMotion:'reduce'});
-                const page=await ctx.newPage(),errors=[];
-                page.on('pageerror',e=>errors.push(e.message));
-                await page.route('https://static.klaviyo.com/**',r=>r.fulfill({status:200,contentType:'text/javascript',body:''}));
-                await page.route('https://www.googletagmanager.com/**',r=>r.fulfill({status:200,contentType:'text/javascript',body:''}));
-                await page.clock.install();
-                await page.goto(base,{waitUntil:'domcontentloaded'});
-                await page.clock.fastForward(14500);
-                await page.locator('#velq-early-access').waitFor({state:'visible',timeout:4000});
-                const card=await page.locator('.velq-lead-card').boundingBox();
-      const metrics=await page.evaluate(()=>({innerWidth:innerWidth,innerHeight:innerHeight,visualHeight:visualViewport?.height,cssMaxHeight:getComputedStyle(document.querySelector('.velq-lead-card')).maxHeight,display:getComputedStyle(document.querySelector('.velq-lead-overlay')).display}));
-      console.log('MOBILE_BOX',JSON.stringify({width,card,metrics}));
-                assert(card&&card.x>=-1&&card.x+card.width<=width+1,'Horizontal overflow at '+width+': '+JSON.stringify(card));
-                assert(card.y>=-1&&card.y+card.height<=845,'Vertical overflow at '+width+': '+JSON.stringify({card,metrics}));
-                const check=page.locator('#velq-lead-form [name=consent]');
-                assert.equal(await check.isChecked(),false,'Checkbox must default unchecked');
-                assert.equal(await check.getAttribute('required'),'','Checkbox must be required');
-                let start=requests.length;
-                await page.locator('#velq-lead-email').fill('qa-mobile@example.com');
-                await page.locator('.velq-lead-submit').click();
-                assert.equal(requests.length,start,'Submitted without consent');
-                await check.check();
-                await page.locator('.velq-lead-submit').click();
-                await page.locator('.velq-lead-thanks').waitFor({state:'visible',timeout:4000});
-                assert.equal(requests.length,start+1,'Expected one mock signup');
-                assert.equal(requests.at(-1).consent,true,'Backend consent missing');
-                const state=await page.evaluate(()=>({
-                  events:(window.dataLayer||[]).filter(x=>x&&x[0]==='event').map(x=>({name:x[1],data:x[2]})),
-                  joined:localStorage.getItem('velq_waitlist_joined_v1'),
-                  consented:localStorage.getItem('velq_klaviyo_opted_in_v1'),
-                  klaviyo:document.querySelector('script[data-velq-consented-klaviyo]')?.src||null
-                }));
-                const leads=state.events.filter(x=>x.name==='generate_lead');
-                assert.equal(leads.length,1,'Expected one confirmed GA4 event');
-                assert.equal(leads[0].data.form_id,'velq-lead-form','Popup form attribution wrong');
-                assert.equal(leads[0].data.cta_position,'popup','Popup CTA attribution wrong');
-                assert(!JSON.stringify(state.events).includes('qa-mobile@example.com'),'PII sent to GA4');
-                assert.equal(state.joined,'1','Joined preference missing');
-                assert.equal(state.consented,'1','Klaviyo consent flag missing');
-                assert(state.klaviyo?.includes('/RCNCJb/klaviyo.js'),'Klaviyo not loaded after consent');
-                assert.equal(errors.length,0,'Browser errors at '+width+': '+errors.join(','));
-                console.log('PASS',JSON.stringify({width,popupFits:true,consentUnchecked:true,oneMockSignup:true,ga4Lead:true,returningVisitorTracking:true}));
-                await ctx.close();
-              }
-              console.log('ALL PASS: No real signup submitted; API and analytics transport mocked.');
-            }finally{await browser.close();await new Promise(r=>server.close(r))}
-          })().catch(e=>{console.error(e);process.exitCode=1;server.close()});
-          NODE
+        run: node scripts/qa-velq-popup-mobile.cjs
