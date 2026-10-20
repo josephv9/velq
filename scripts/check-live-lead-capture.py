@@ -51,7 +51,7 @@ for path,terms in {
     body=results[path]["body"]
     lines=body.splitlines()
     indices=[i for i,line in enumerate(lines) if any(term.lower() in line.lower() for term in terms)]
-    print("DIAGNOSTIC",json.dumps({"path":path,"line_count":len(lines),"sample":[{"line":i+1,"text":lines[i][:280]} for i in indices[:35]]}))
+    print("DIAGNOSTIC",json.dumps({"path":path,"line_count":len(lines),"sample":[{"line":i+1,"text":lines[i][:420]} for i in indices[:90]]}))
 for name,ok in checks.items(): print("CHECK",json.dumps({"name":name,"result":"PASS" if ok else "FAIL"}))
 print("SUMMARY",json.dumps({"passed":sum(checks.values()),"total":len(checks),"failures":[n for n,ok in checks.items() if not ok]}))
 if not all(checks.values()): sys.exit(1)
