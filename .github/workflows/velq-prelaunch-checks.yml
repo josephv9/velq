@@ -6,6 +6,15 @@ on:
     paths:
       - 'velq-site.php'
       - 'image-patch.php'
+      - 'research-content.php'
+      - 'research-extension.php'
+      - 'research/**'
+      - 'assets/research/**'
+      - 'tools/serving-comparison-calculator/**'
+      - 'tools/nutrition-label-value-calculator/**'
+      - 'blog/protein-gummies-with-fiber-comparison/index.html'
+      - 'scripts/build-research-pages.py'
+      - 'scripts/test-research-*.cjs'
       - 'velq-analytics.js'
       - 'scripts/test-ga4-loader.cjs'
       - 'scripts/test-responsive-velq-images.cjs'
@@ -33,6 +42,18 @@ jobs:
         run: php -l velq-site.php
       - name: Validate SEO response filter PHP syntax
         run: php -l image-patch.php
+      - name: Validate research routes and response extension
+        run: |
+          php -l research-content.php
+          php -l research-extension.php
+      - name: Verify dated research tables and downloads reproduce exactly
+        run: |
+          python3 scripts/build-research-pages.py
+          git diff --exit-code -- research/ assets/research/gummy-labels-2026-10-20.csv assets/research/gummy-serving-comparison-2026.svg
+      - name: Check serving arithmetic and calculation completion semantics
+        run: node scripts/test-research-calculators.cjs
+      - name: Verify research routing, sitemaps, sources of attribution and API integrity
+        run: node scripts/test-research-integration.cjs
       - name: Validate the packed Velq site and signup code
         run: node scripts/validate-velq-site.cjs
       - name: Test gummy buyer paths and page metadata without external requests
