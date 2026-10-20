@@ -119,14 +119,12 @@ ob_start(static function (string $html): string {
                 'Meet Velq strawberry protein and prebiotic fiber gummies, currently in development. Explore gummy buying guides and join the launch waitlist for early access.'
                     => 'Velq strawberry protein and prebiotic fiber gummies are in development, with caffeine and L-theanine planned. Compare gummy servings and join the waitlist.',
             ]);
-            $finderLink = '<a class="finder-guide-link" href="/guides/protein-and-fiber-snacks">Read practical snack guides →</a>';
-            if (strpos($html, 'data-gummy-buyer-paths="home"') === false) {
-                $html = str_replace(
-                    $finderLink,
-                    $finderLink . '<p data-gummy-buyer-paths="home">Choosing protein and fiber gummies? <a href="/blog/protein-and-fiber-gummies-buying-guide">Start with the protein and prebiotic fiber buying checklist</a>, then <a href="/blog/protein-gummies-with-fiber-comparison">compare protein, fiber and caffeine per complete gummy serving</a>. Velq is prelaunch; the final label may change.</p>',
-                    $html
-                );
-            }
+            // Remove the homepage label-comparison promotion and its supporting copy.
+            $html = preg_replace(
+                '~<section\b[^>]*class="finder-promo section"[^>]*>.*?</section>~is',
+                '',
+                $html
+            ) ?? $html;
             break;
 
         case '/guides':
