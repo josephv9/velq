@@ -9,19 +9,21 @@ const base='https://velqnutrition.com/';
    const ctx=await browser.newContext({viewport:{width,height:844},reducedMotion:'reduce'});
    const page=await ctx.newPage(),posts=[],errors=[];
    page.on('pageerror',e=>errors.push(e.message));
-   await page.route('**/*',async route=>{
-     const req=route.request(),u=new URL(req.url()),host=u.hostname;
-     if(u.pathname==='/api/waitlist'&&host==='velqnutrition.com'&&req.method()==='POST'){
-       try{posts.push(JSON.parse(req.postData()||'{}'));}catch{posts.push({});}
-       return route.fulfill({status:200,contentType:'application/json',body:JSON.stringify({ok:true,newLead:true,eventId:'mock-lead-'+width})});
-     }
-     if(host==='static.klaviyo.com'||host.endsWith('.klaviyo.com')||host.endsWith('.google-analytics.com')||host==='www.googletagmanager.com'||host==='connect.facebook.net'||host==='analytics.tiktok.com'){
-       return route.fulfill({status:200,contentType:'text/javascript',body:''});
-     }
-     return route.continue();
+   await page.route('**/api/waitlist',async route=>{
+     const req=route.request();
+     if(req.method()!=='POST')return route.continue();
+     try{posts.push(JSON.parse(req.postData()||'{}'));}catch{posts.push({});}
+     return route.fulfill({status:200,contentType:'application/json',body:JSON.stringify({ok:true,newLead:true,eventId:'mock-lead-'+width})});
    });
+   await page.route(/https:\/\/(?:[^/]*\.)?(?:klaviyo\.com|google-analytics\.com|googletagmanager\.com|facebook\.net|tiktok\.com)\//,route=>route.fulfill({status:200,contentType:'text/javascript',body:''}));
+   await page.route('https://fonts.googleapis.com/**',route=>route.fulfill({status:200,contentType:'text/css',body:''}));
+   await page.route('https://fonts.gstatic.com/**',route=>route.fulfill({status:200,contentType:'font/woff2',body:''}));
    await page.clock.install();
-   const response=await page.goto(base,{waitUntil:'domcontentloaded',timeout:35000});
+   let response;
+   try{response=await page.goto(base,{waitUntil:'commit',timeout:25000});}
+   catch(e){console.log('LIVE_NAV_FAILURE '+JSON.stringify({width,error:e.message,errors:errors.slice(0,5)}));throw e;}
+   try{await page.waitForLoadState('domcontentloaded',{timeout:25000});}
+   catch(e){console.log('LIVE_DOMCONTENT_TIMEOUT '+JSON.stringify({width,error:e.message}));}
    assert.equal(response.status(),200,'Homepage status');
    await page.clock.fastForward(15100);
    const diag=await page.evaluate(()=>({
