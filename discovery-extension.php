@@ -74,15 +74,15 @@ function velq_discovery_images(): array
         ['protein-and-fiber-gummies-buying-guide', '/assets/journal/velq-journal-buyer-guide-20261020-v4.jpg', 1536, 864, 'Velq Journal cover for the protein and fiber gummy buying checklist.'],
         ['protein-gummies-vs-protein-bars', '/assets/journal/velq-journal-protein-gummies-vs-bars-20261020-v4.jpg', 1536, 864, 'Velq Journal cover comparing protein gummies and protein bars.'],
         ['fiber-gummies-vs-fiber-powder', '/assets/journal/velq-journal-fiber-gummies-vs-powder-20261020-v4.jpg', 1536, 864, 'Editorial illustration comparing fiber gummies with fiber powder.'],
-        ['high-protein-high-fiber-snacks-no-refrigeration', 'files/velq-protein_fiber_snacks-2026-10.webp?v=1792103513', 1536, 1024, 'Velq Journal cover for protein and fiber snacks without refrigeration.'],
-        ['30-grams-fiber-high-protein-diet', 'files/velq-30g_fiber-2026-10.webp?v=1792103452', 1536, 1024, 'Velq Journal cover for the article about fiber in a high-protein diet.'],
-        ['build-muscle-without-protein-shakes', 'files/velq-build_muscle_food_first-2026-10-v2.webp?v=1792103819', 1536, 1024, 'Velq Journal cover for the food-first muscle-building article.'],
+        ['high-protein-high-fiber-snacks-no-refrigeration', '/assets/journal/velq-journal-snacks-to-go-20261020-v5.jpg', 1536, 864, 'Velq Journal cover for protein and fiber snacks without refrigeration.'],
+        ['30-grams-fiber-high-protein-diet', '/assets/journal/velq-journal-fiber-thirty-20261020-v5.jpg', 1536, 864, 'Velq Journal cover for the article about fiber in a high-protein diet.'],
+        ['build-muscle-without-protein-shakes', '/assets/journal/velq-journal-build-muscle-20261020-v5.jpg', 1536, 864, 'Velq Journal cover for the food-first muscle-building article.'],
         ['portion-sizes-muscle-gain-without-counting-calories', 'files/velq-portion_sizes_muscle-2026-10.webp?v=1792103448', 1536, 1024, 'Velq Journal cover for the article about portions and muscle gain.'],
-        ['what-to-eat-glp1-not-hungry', 'files/velq-glp1_low_appetite-2026-10.webp?v=1792103442', 1536, 1024, 'Velq Journal cover for the article about food and low appetite while using a GLP-1 medicine.'],
+        ['what-to-eat-glp1-not-hungry', '/assets/journal/velq-journal-glp1-not-hungry-20261020-v5.jpg', 1536, 864, 'Velq Journal cover for the article about food and low appetite while using a GLP-1 medicine.'],
         ['glp1-protein-snacks-without-shakes', 'files/velq-glp1_protein_snacks-2026-10.webp?v=1792103438', 1536, 1024, 'Velq Journal cover for the article about protein snacks while using a GLP-1 medicine.'],
-        ['glp1-constipation-fiber', 'files/velq-glp1_constipation_fiber-2026-10.webp?v=1792103433', 1536, 1024, 'Velq Journal cover for the article about constipation and fiber while using a GLP-1 medicine.'],
-        ['maintain-muscle-glp1-low-appetite', 'files/velq-maintain_muscle_glp1-2026-10.webp?v=1792103429', 1536, 1024, 'Velq Journal cover for the article about muscle and low appetite while using a GLP-1 medicine.'],
-        ['tired-on-glp1-food-fluids-causes', 'files/velq-tired_on_glp1-2026-10.webp?v=1792103374', 1536, 1024, 'Velq Journal cover for the article about tiredness, food and fluids while using a GLP-1 medicine.'],
+        ['glp1-constipation-fiber', '/assets/journal/velq-journal-glp1-constipation-20261020-v5.jpg', 1536, 864, 'Velq Journal cover for the article about constipation and fiber while using a GLP-1 medicine.'],
+        ['maintain-muscle-glp1-low-appetite', '/assets/journal/velq-journal-glp1-keep-muscle-20261020-v5.jpg', 1536, 864, 'Velq Journal cover for the article about muscle and low appetite while using a GLP-1 medicine.'],
+        ['tired-on-glp1-food-fluids-causes', '/assets/journal/velq-journal-glp1-tired-20261020-v5.jpg', 1536, 864, 'Velq Journal cover for the article about tiredness, food and fluids while using a GLP-1 medicine.'],
     ];
     foreach ($covers as [$slug, $file, $width, $height, $alt]) {
         $url = str_starts_with($file, '/') ? $file : $cdn . $file;
