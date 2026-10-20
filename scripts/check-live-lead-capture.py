@@ -44,6 +44,14 @@ checks={
 }
 for path,response in results.items():
     print("HTTP",json.dumps({"path":path,"status":response["status"],"bytes":len(response["body"]),"attempt":response["attempt"],"errors":response.get("errors"),"content_type":response.get("headers",{}).get("Content-Type")}))
+for path,terms in {
+ "/velq-lead-capture.js":["klaviyo","learnq","consent","early_access","eventId","source:","track","cookie"],
+ "/velq-lead-capture.css":["@media","lead-card","max-height","bottom:","overflow-y"]
+}.items():
+    body=results[path]["body"]
+    lines=body.splitlines()
+    indices=[i for i,line in enumerate(lines) if any(term.lower() in line.lower() for term in terms)]
+    print("DIAGNOSTIC",json.dumps({"path":path,"line_count":len(lines),"sample":[{"line":i+1,"text":lines[i][:280]} for i in indices[:35]]}))
 for name,ok in checks.items(): print("CHECK",json.dumps({"name":name,"result":"PASS" if ok else "FAIL"}))
 print("SUMMARY",json.dumps({"passed":sum(checks.values()),"total":len(checks),"failures":[n for n,ok in checks.items() if not ok]}))
 if not all(checks.values()): sys.exit(1)
