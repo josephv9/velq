@@ -162,3 +162,13 @@ body.velq-cover-home{--ink:#080808;--muted:#595959;--line:#e8e8e8;--red:#080808;
 /* Approved complete benefit cards: retain artwork and embedded text without cropping. */
 .velq-cover-home .benefit-card.benefit-image-card{padding:0;background:transparent;overflow:hidden;align-self:start}
 .velq-cover-home .benefit-image-card>img{display:block;width:100%;height:auto;aspect-ratio:1 / 1;max-width:100%;object-fit:cover;object-position:center;border-radius:13px}
+
+/* Shared geometry aligns every heading, copy block, and photograph. */
+.velq-cover-home .benefit-track{align-items:start}
+.velq-cover-home .benefit-card.benefit-uniform-card{box-sizing:border-box;padding:12px;aspect-ratio:1 / 1;display:grid;grid-template-rows:40% 60%;gap:0;background:#f6f6f6;overflow:hidden;align-self:start}
+.velq-cover-home .benefit-uniform-copy{display:flex;flex-direction:column;align-items:center;justify-content:center;min-height:0;text-align:center;padding:8px 4px 14px}
+.velq-cover-home .benefit-uniform-copy h3{font:400 clamp(18px,2vw,25px)/1.2 Arial,sans-serif;letter-spacing:-.04em;margin:0 0 14px;white-space:nowrap}
+.velq-cover-home .benefit-uniform-copy p{font:400 clamp(12px,1.15vw,15px)/1.4 Arial,sans-serif;color:#111;min-height:0;margin:0}
+.velq-cover-home .benefit-uniform-photo{width:100%;height:100%;min-height:0;border-radius:9px;overflow:hidden}
+.velq-cover-home .benefit-uniform-photo svg{display:block;width:100%;height:100%;overflow:hidden}
+@media(max-width:900px){.velq-cover-home .benefit-card.benefit-uniform-card{flex:0 0 89%;scroll-snap-align:center}.velq-cover-home .benefit-uniform-copy h3{font-size:clamp(18px,5vw,25px)}.velq-cover-home .benefit-uniform-copy p{font-size:clamp(12px,3.2vw,15px)}}

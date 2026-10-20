@@ -21,7 +21,7 @@ function velq_home_cover(string $html, string $path): string {
     $html = str_replace('<body>', '<body class="velq-cover-home">', $html);
     $html = preg_replace('~<link\b[^>]*data-velq-responsive-preload[^>]*>~i', '', $html) ?? $html;
     $preload = '<link data-velq-responsive-preload rel="preload" as="image" href="'.$base.'-800.webp" imagesrcset="'.$base.'-480.webp 480w, '.$base.'-800.webp 800w, '.$base.'-1200.webp 1200w" imagesizes="100vw" fetchpriority="high">';
-    return str_replace('</head>', '<link rel="stylesheet" href="/assets/velq-home-cover.css?v=20261020-benefit-cards-uniform-10">'.$preload.'</head>', $html);
+    return str_replace('</head>', '<link rel="stylesheet" href="/assets/velq-home-cover.css?v=20261020-benefit-aligned-11">'.$preload.'</head>', $html);
 }
 
 /** Single-product layout. Image slots accept ordinary img elements when supplied. */
@@ -36,9 +36,9 @@ function velq_single_product_layout(string $html): string {
 <section class="cadence-section" id="why-velq" aria-labelledby="why-title">
   <h2 id="why-title">Why <strong>Velq?</strong></h2>
   <div class="benefit-track" tabindex="0" aria-label="Velq formula highlights, swipe to explore">
-    <article class="benefit-card benefit-image-card"><img src="/assets/velq-why-everyday-20261020-800.webp" srcset="/assets/velq-why-everyday-20261020-480.webp 480w, /assets/velq-why-everyday-20261020-800.webp 800w, /assets/velq-why-everyday-20261020-1200.webp 1200w" sizes="(max-width: 620px) 80vw, (max-width: 900px) 68vw, 420px" width="1274" height="1234" loading="lazy" decoding="async" alt="Built for your everyday. Protein, fiber and caffeine. One easy gummy routine."></article>
-    <article class="benefit-card benefit-image-card"><img src="/assets/velq-why-essentials-20261020-800.webp" srcset="/assets/velq-why-essentials-20261020-480.webp 480w, /assets/velq-why-essentials-20261020-800.webp 800w, /assets/velq-why-essentials-20261020-1200.webp 1200w" sizes="(max-width: 620px) 80vw, (max-width: 900px) 68vw, 420px" width="1270" height="1239" loading="lazy" decoding="async" alt="Big on the essentials. 20g protein, 10g fiber, 80mg caffeine. All in your daily pack."></article>
-    <article class="benefit-card benefit-image-card"><img src="/assets/velq-why-ready-20261020-800.webp" srcset="/assets/velq-why-ready-20261020-480.webp 480w, /assets/velq-why-ready-20261020-800.webp 800w, /assets/velq-why-ready-20261020-1200.webp 1200w" sizes="(max-width: 620px) 80vw, (max-width: 900px) 68vw, 420px" width="1273" height="1236" loading="lazy" decoding="async" alt="Ready when you are. Strawberry gummies that fit wherever your day takes you."></article>
+    <article class="benefit-card benefit-uniform-card"><div class="benefit-uniform-copy"><h3>Built for your everyday.</h3><p>Protein, fiber and caffeine.<br>One easy gummy routine.</p></div><div class="benefit-uniform-photo"><svg viewBox="54 461 1166 663" preserveAspectRatio="xMidYMid slice" role="img" aria-label="Man holding Velq strawberry gummies at the gym"><image href="/assets/velq-why-everyday-20261020-1200.webp" width="1274" height="1234" preserveAspectRatio="none"/></svg></div></article>
+    <article class="benefit-card benefit-uniform-card"><div class="benefit-uniform-copy"><h3>Big on the essentials.</h3><p>20g protein. 10g fiber. 80mg caffeine.<br>All in your daily pack.</p></div><div class="benefit-uniform-photo"><svg viewBox="58 486 1154 656" preserveAspectRatio="xMidYMid slice" role="img" aria-label="Red strawberry gummy bears"><image href="/assets/velq-why-essentials-20261020-1200.webp" width="1270" height="1239" preserveAspectRatio="none"/></svg></div></article>
+    <article class="benefit-card benefit-uniform-card"><div class="benefit-uniform-copy"><h3>Ready when you are.</h3><p>Strawberry gummies that fit<br>wherever your day takes you.</p></div><div class="benefit-uniform-photo"><svg viewBox="50 455 1173 707" preserveAspectRatio="xMidYMid slice" role="img" aria-label="Woman holding Velq strawberry gummies outdoors"><image href="/assets/velq-why-ready-20261020-1200.webp" width="1273" height="1236" preserveAspectRatio="none"/></svg></div></article>
   </div>
   <p class="formula-note">Target amounts per packet. Product in development; final formula and label may change.</p>
 </section>
