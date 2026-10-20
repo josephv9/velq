@@ -5,6 +5,7 @@ require_once __DIR__ . '/research-extension.php';
 require_once __DIR__ . '/authority-extension.php';
 require_once __DIR__ . '/discovery-extension.php';
 require_once __DIR__ . '/conversion-extension.php';
+require_once __DIR__ . '/home-cover.php';
 
 ob_start(static function (string $html): string {
     // The packed analytics-config.js still contains an obsolete GA4 stream ID.
@@ -353,6 +354,7 @@ ob_start(static function (string $html): string {
         },
         $html
     );
+    $html = velq_home_cover($html, $assetPath);
     // Run last so image metadata describes the approved, currently served images.
     return velq_discovery_response($html, $assetPath);
 });
