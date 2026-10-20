@@ -11,6 +11,9 @@ php_value auto_prepend_file image-patch.php
   RewriteCond %{HTTP_HOST} ^www\.velqnutrition\.com$ [NC]
   RewriteRule ^ https://velqnutrition.com%{REQUEST_URI} [L,R=301]
 
+  # A prelaunch product detail page with the same confirmed waitlist journey.
+  RewriteRule ^products/strawberry-protein-fiber-gummies(?:/|/index\.html)?$ conversion-content.php [END]
+
   # Milestone 3 evidence pages and calculators precede the packed blog/tools routes.
   # research-content.php canonicalizes slash/index aliases and serves only this map.
   RewriteRule ^(?:media|research(?:/gummy-serving-study-2026)?|tools/(?:serving-comparison-calculator|nutrition-label-value-calculator)|blog/protein-gummies-with-fiber-comparison)(?:/|/index\.html)?$ research-content.php [END]
@@ -42,7 +45,7 @@ php_value auto_prepend_file image-patch.php
   RewriteRule ^(?:journal\.css|sitemap\.xml|assets/journal/(?:high\-protein\-high\-fiber\-snacks\-no\-refrigeration|30\-grams\-fiber\-high\-protein\-diet|build\-muscle\-without\-protein\-shakes|portion\-sizes\-muscle\-gain\-without\-counting\-calories|what\-to\-eat\-glp1\-not\-hungry|glp1\-protein\-snacks\-without\-shakes|glp1\-constipation\-fiber|maintain\-muscle\-glp1\-low\-appetite|tired\-on\-glp1\-food\-fluids\-causes)\.svg)$ nutrition-content.php [END]
 
   # Serve the consent-based early-access popup while preserving the existing PHP bundle.
-  RewriteRule ^app\.js$ - [END]
+  RewriteRule ^(?:app|analytics|velq-waitlist)\.js$ - [END]
 
   # Route the current Site assets and APIs through its PHP bundle.
   RewriteRule ^(?:index\.html|tools(?:/.*)?|guides(?:/.*)?|blog(?:/.*)?|blogs/journal(?:/.*)?|(?:style|journal)\.css|(?:app|analytics|journal|analytics-config)\.js|api/waitlist|robots\.txt|sitemap\.xml)?$ velq-site.php [END]

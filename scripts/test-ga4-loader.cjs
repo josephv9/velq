@@ -44,13 +44,13 @@ function phpOutput(markup,route='/'){
 }
 const packed='<html><head><script src="/analytics-config.js"></script><script src="/analytics.js" defer></script></head><body>Ready</body></html>';
 const packedResult=phpOutput(packed);
-assert.equal((packedResult.match(/src="\/velq-analytics\.js"/g)||[]).length,1,'One bridge per page');
-assert(packedResult.indexOf('src="/analytics-config.js"')<packedResult.indexOf('src="/analytics.js"'),'Config should load first');
-assert(packedResult.indexOf('src="/velq-analytics.js"')<packedResult.indexOf('src="/analytics.js"'),'Deferred bridge must run before bundled tracker');
-assert(packedResult.includes('src="/velq-analytics.js" defer'),'Bridge must be deferred after analytics-config');
+assert.equal((packedResult.match(/src="\/velq-analytics\.js(?:\?[^"]*)?"/g)||[]).length,1,'One bridge per page');
+assert(packedResult.indexOf('src="/analytics-config.js"')<packedResult.indexOf('src="/analytics.js'),'Config should load first');
+assert(packedResult.indexOf('src="/velq-analytics.js')<packedResult.indexOf('src="/analytics.js'),'Deferred bridge must run before bundled tracker');
+assert(/src="\/velq-analytics\.js(?:\?[^"]*)?" defer/.test(packedResult),'Bridge must be deferred after analytics-config');
 const standalone=phpOutput('<html><head><title>Test</title></head><body>Ready</body></html>');
-assert.equal((standalone.match(/src="\/velq-analytics\.js"/g)||[]).length,1,'Standalone page should load GA4');
-assert(standalone.indexOf('src="/velq-analytics.js"')<standalone.indexOf('</head>'),'Standalone load must be in head');
+assert.equal((standalone.match(/src="\/velq-analytics\.js(?:\?[^"]*)?"/g)||[]).length,1,'Standalone page should load GA4');
+assert(standalone.indexOf('src="/velq-analytics.js')<standalone.indexOf('</head>'),'Standalone load must be in head');
 // Previously the live /analytics-config.js contained a second, obsolete
 // measurement ID. Correct the served JS so deferred /analytics.js cannot
 // override the bridge with a different property.

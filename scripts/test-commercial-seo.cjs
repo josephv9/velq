@@ -19,9 +19,9 @@ const pages = {
  '/blog/fiber-gummies-for-adults-guide':['/blog/best-fiber-gummies-2026','/blog/fiber-gummies-vs-psyllium-husk','/blog/fiber-gummies-vs-fiber-powder']
 };
 function render(route,html){
- const code='$_SERVER["REQUEST_URI"]=$argv[1]; require "image-patch.php"; echo stream_get_contents(STDIN);';
- const result=spawnSync('php',['-d','display_errors=1','-r',code,route],{
-   input:html,encoding:'utf8',timeout:15000,maxBuffer:8*1024*1024
+ const code='$_SERVER["REQUEST_URI"]=$argv[1]; require "image-patch.php"; echo base64_decode($argv[2]);';
+ const result=spawnSync('php',['-d','display_errors=1','-r',code,route,Buffer.from(html).toString('base64')],{
+   encoding:'utf8',timeout:15000,maxBuffer:8*1024*1024
  });
  assert.equal(result.status,0,'PHP error for '+route+': '+(result.stderr||result.error?.message));
  assert(!result.stdout.includes('Fatal error'),'PHP fatal for '+route);
