@@ -139,13 +139,7 @@ ob_start(static function (string $html): string {
                 },
                 $html
             ) ?? $html;
-            $html = str_replace('</head>', '<style id="velq-buying-guide-spacing">'
-                . '.velq-cover-home main>nav.velq-buying-guide-nav{display:block;height:auto;overflow:visible;}'
-                . '.velq-buying-guide-nav>p{margin:0 0 14px;line-height:1.5;}'
-                . '.velq-buying-guide-nav>ul{display:grid;grid-template-columns:minmax(0,1fr);gap:12px;list-style:none;padding:0;margin:0;}'
-                . '.velq-buying-guide-nav>ul>li{display:block;min-width:0;padding:0;margin:0;}'
-                . '.velq-buying-guide-nav>ul>li>a{display:block;position:static;white-space:normal;overflow-wrap:anywhere;line-height:1.6;padding:6px 0;}'
-                . '</style></head>', $html);
+            $html = str_replace('</head>', '<link rel="stylesheet" href="/assets/velq-buying-guide-spacing.css?v=1"></head>', $html);
             break;
 
         case '/guides':
