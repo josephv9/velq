@@ -22,8 +22,8 @@ function velq_discovery_images(): array
     };
     $page = static fn(array $primary, array $visible = []): array => ['primary' => $primary, 'images' => $visible ?: [$primary['url']]];
 
-    $hero = $image('/assets/velq-strawberry-gummies-hero-20261015-v3.jpeg', 1254, 1254,
-        'Development preview of Velq strawberry protein and fiber gummy packaging and gummies. Final details may change.');
+    $hero = $image('/assets/velq-lifestyle-cover-20261020-1200.webp', 1200, 1499,
+        'Woman holding a red and white Velq strawberry protein and fiber gummy packet by the coast. Development preview; final details may change.');
     $packshot = $image('/assets/velq-gummies-packshot-20261015-v2-1200.webp', 1200, 1200,
         'Development preview of Velq strawberry gummy packaging. Final packaging and nutrition may change.');
     $legacy = $image($cdn . 'files/velq-red-white-strawberry-final-hero-oct-2026.jpg?v=1791934937', 1254, 1254,
@@ -39,7 +39,7 @@ function velq_discovery_images(): array
 
     $pages = [
         '/' => $page($hero, [
-            $base . '/assets/velq-strawberry-gummies-hero-20261015-v3-1200.webp',
+            $base . '/assets/velq-lifestyle-cover-20261020-1200.webp',
             $base . '/assets/velq-gummies-packshot-20261015-v2-1200.webp',
         ]),
         '/media' => $page($packshot, [$base . '/assets/velq-gummies-packshot-20261015-v2-800.webp']),

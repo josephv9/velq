@@ -157,7 +157,7 @@ for (const [route, record] of Object.entries(pages)) {
     const before = heroTag(baseline), after = heroTag(output);
     assert(before && after, 'Homepage hero image is missing');
     const beforeAttrs = attrs(before), afterAttrs = attrs(after);
-    assert.equal(afterAttrs.width, '1254'); assert.equal(afterAttrs.height, '1254');
+    assert.equal(afterAttrs.width, '1122'); assert.equal(afterAttrs.height, '1402');
     for (const key of ['src', 'srcset', 'sizes', 'fetchpriority', 'loading', 'decoding', 'alt']) {
       assert.equal(afterAttrs[key], beforeAttrs[key], 'Homepage hero ' + key + ' changed');
     }
@@ -167,7 +167,7 @@ for (const [route, record] of Object.entries(pages)) {
     assert(preload, 'Responsive hero preload missing');
     assert.equal(attrs(preload).imagesrcset, afterAttrs.srcset);
     assert.equal(attrs(preload).imagesizes, afterAttrs.sizes);
-    expectedBody = expectedBody.replace(before, before.replace(/\bwidth="[^"]*"/, 'width="1254"').replace(/\bheight="[^"]*"/, 'height="1254"'));
+    expectedBody = expectedBody.replace(before, before.replace(/\bwidth="[^"]*"/, 'width="1122"').replace(/\bheight="[^"]*"/, 'height="1402"'));
   }
   assert.equal(body(output), expectedBody, `${route}: visible content changed beyond the corrected hero dimensions`);
 
