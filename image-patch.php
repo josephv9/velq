@@ -367,6 +367,17 @@ ob_start(static function (string $html): string {
         },
         $html
     );
+    // Use the owner-supplied packet photo on the four homepage buying-guide links.
+    $packetRoutes = ['/blog/protein-gummies-for-adults', '/blog/fiber-gummies-for-adults-guide', '/blog/caffeine-gummies-vs-coffee-whats-the-difference', '/guides/protein-and-fiber-snacks'];
+    $packetPath = preg_replace('~/index\.html$~', '', rtrim($assetPath, '/'));
+    if (in_array($packetPath, $packetRoutes, true)) {
+        $packetTag = '<img src="/assets/velq-approved-strawberry-packet-20261020.webp" width="1254" height="1254" decoding="async" alt="Velq strawberry protein and fiber gummies: approved red and white 10-pack pouch and individual packet">';
+        if (strpos($html, '<img') !== false) {
+            $html = preg_replace('~<img\b[^>]*>~i', $packetTag, $html, 1) ?? $html;
+        } else {
+            $html = preg_replace('~</h1>~i', '</h1><figure>'.$packetTag.'</figure>', $html, 1) ?? $html;
+        }
+    }
     $html = velq_home_cover($html, $assetPath);
     // Run last so image metadata describes the approved, currently served images.
     return velq_discovery_response($html, $assetPath);

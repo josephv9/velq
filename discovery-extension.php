@@ -89,6 +89,11 @@ function velq_discovery_images(): array
         $pages['/blog/' . $slug] = $page($image($url, $width, $height, $alt));
     }
     $pages['/blog/portion-sizes-muscle-gain-without-counting-calories']['images'][] = $base . '/assets/growth/meal-components.svg';
+    $approvedPacket = $image('/assets/velq-approved-strawberry-packet-20261020.webp', 1254, 1254,
+        'Velq strawberry protein and fiber gummies: approved red and white 10-pack pouch and individual packet.');
+    foreach (['/blog/protein-gummies-for-adults', '/blog/fiber-gummies-for-adults-guide', '/blog/caffeine-gummies-vs-coffee-whats-the-difference', '/guides/protein-and-fiber-snacks'] as $packetRoute) {
+        $pages[$packetRoute] = $page($approvedPacket);
+    }
     return $pages;
 }
 
