@@ -1,0 +1,1337 @@
+{
+  "checked_at_utc": "2026-10-20T20:26:09.594770+00:00",
+  "site": "https://velqnutrition.com",
+  "sitemap_url_count": 47,
+  "sitemap_unique_url_count": 47,
+  "sitemap_image_entries": 35,
+  "sitemap_unique_images": 32,
+  "sitemap_image_pages": 31,
+  "pages": [
+    {
+      "url": "https://velqnutrition.com/",
+      "http_status": 200,
+      "final_url": "https://velqnutrition.com/",
+      "canonical": [
+        "https://velqnutrition.com/"
+      ],
+      "robots": [
+        "index, follow, max-image-preview:large"
+      ],
+      "schema_blocks": 1,
+      "image_count": 5,
+      "social_image": [
+        "https://velqnutrition.com/assets/velq-strawberry-gummies-hero-20261015-v3.jpeg"
+      ],
+      "release_metadata_checked": true,
+      "issues": []
+    },
+    {
+      "url": "https://velqnutrition.com/blog",
+      "http_status": 200,
+      "final_url": "https://velqnutrition.com/blog",
+      "canonical": [
+        "https://velqnutrition.com/blog"
+      ],
+      "robots": [
+        "index,follow,max-image-preview:large"
+      ],
+      "schema_blocks": 1,
+      "image_count": 18,
+      "social_image": [],
+      "release_metadata_checked": false,
+      "issues": []
+    },
+    {
+      "url": "https://velqnutrition.com/blog/category/protein",
+      "http_status": 200,
+      "final_url": "https://velqnutrition.com/blog/category/protein",
+      "canonical": [
+        "https://velqnutrition.com/blog/category/protein"
+      ],
+      "robots": [
+        "index,follow,max-image-preview:large"
+      ],
+      "schema_blocks": 1,
+      "image_count": 7,
+      "social_image": [],
+      "release_metadata_checked": false,
+      "issues": []
+    },
+    {
+      "url": "https://velqnutrition.com/blog/category/fiber",
+      "http_status": 200,
+      "final_url": "https://velqnutrition.com/blog/category/fiber",
+      "canonical": [
+        "https://velqnutrition.com/blog/category/fiber"
+      ],
+      "robots": [
+        "index,follow,max-image-preview:large"
+      ],
+      "schema_blocks": 1,
+      "image_count": 6,
+      "social_image": [],
+      "release_metadata_checked": false,
+      "issues": []
+    },
+    {
+      "url": "https://velqnutrition.com/blog/category/energy",
+      "http_status": 200,
+      "final_url": "https://velqnutrition.com/blog/category/energy",
+      "canonical": [
+        "https://velqnutrition.com/blog/category/energy"
+      ],
+      "robots": [
+        "index,follow,max-image-preview:large"
+      ],
+      "schema_blocks": 1,
+      "image_count": 3,
+      "social_image": [],
+      "release_metadata_checked": false,
+      "issues": []
+    },
+    {
+      "url": "https://velqnutrition.com/blog/category/fitness",
+      "http_status": 200,
+      "final_url": "https://velqnutrition.com/blog/category/fitness",
+      "canonical": [
+        "https://velqnutrition.com/blog/category/fitness"
+      ],
+      "robots": [
+        "index,follow,max-image-preview:large"
+      ],
+      "schema_blocks": 1,
+      "image_count": 5,
+      "social_image": [],
+      "release_metadata_checked": false,
+      "issues": []
+    },
+    {
+      "url": "https://velqnutrition.com/blog/category/wellness",
+      "http_status": 200,
+      "final_url": "https://velqnutrition.com/blog/category/wellness",
+      "canonical": [
+        "https://velqnutrition.com/blog/category/wellness"
+      ],
+      "robots": [
+        "index,follow,max-image-preview:large"
+      ],
+      "schema_blocks": 1,
+      "image_count": 2,
+      "social_image": [],
+      "release_metadata_checked": false,
+      "issues": []
+    },
+    {
+      "url": "https://velqnutrition.com/blog/protein-vs-fiber-why-your-body-needs-both",
+      "http_status": 200,
+      "final_url": "https://velqnutrition.com/blog/protein-vs-fiber-why-your-body-needs-both",
+      "canonical": [
+        "https://velqnutrition.com/blog/protein-vs-fiber-why-your-body-needs-both"
+      ],
+      "robots": [
+        "index,follow,max-image-preview:large"
+      ],
+      "schema_blocks": 1,
+      "image_count": 1,
+      "social_image": [
+        "https://cdn.shopify.com/s/files/1/0723/8372/5647/files/velq-journal-protein-vs-fiber-oct2026.jpg?v=1792109199"
+      ],
+      "release_metadata_checked": true,
+      "issues": []
+    },
+    {
+      "url": "https://velqnutrition.com/blog/how-much-fiber-do-you-need-every-day",
+      "http_status": 200,
+      "final_url": "https://velqnutrition.com/blog/how-much-fiber-do-you-need-every-day",
+      "canonical": [
+        "https://velqnutrition.com/blog/how-much-fiber-do-you-need-every-day"
+      ],
+      "robots": [
+        "index,follow,max-image-preview:large"
+      ],
+      "schema_blocks": 1,
+      "image_count": 1,
+      "social_image": [
+        "https://cdn.shopify.com/s/files/1/0723/8372/5647/files/velq-journal-fiber-daily-oct2026.jpg?v=1792109193"
+      ],
+      "release_metadata_checked": true,
+      "issues": []
+    },
+    {
+      "url": "https://velqnutrition.com/blog/caffeine-gummies-vs-coffee-whats-the-difference",
+      "http_status": 200,
+      "final_url": "https://velqnutrition.com/blog/caffeine-gummies-vs-coffee-whats-the-difference",
+      "canonical": [
+        "https://velqnutrition.com/blog/caffeine-gummies-vs-coffee-whats-the-difference"
+      ],
+      "robots": [
+        "index,follow,max-image-preview:large"
+      ],
+      "schema_blocks": 1,
+      "image_count": 1,
+      "social_image": [
+        "https://cdn.shopify.com/s/files/1/0723/8372/5647/files/velq-journal-caffeine-vs-coffee-oct2026.jpg?v=1792109249"
+      ],
+      "release_metadata_checked": true,
+      "issues": []
+    },
+    {
+      "url": "https://velqnutrition.com/blog/how-much-protein-do-you-actually-need",
+      "http_status": 200,
+      "final_url": "https://velqnutrition.com/blog/how-much-protein-do-you-actually-need",
+      "canonical": [
+        "https://velqnutrition.com/blog/how-much-protein-do-you-actually-need"
+      ],
+      "robots": [
+        "index,follow,max-image-preview:large"
+      ],
+      "schema_blocks": 1,
+      "image_count": 1,
+      "social_image": [
+        "https://cdn.shopify.com/s/files/1/0723/8372/5647/files/velq-journal-protein-needs-oct2026.jpg?v=1792109233"
+      ],
+      "release_metadata_checked": true,
+      "issues": []
+    },
+    {
+      "url": "https://velqnutrition.com/blog/simple-daily-wellness-routine-that-sticks",
+      "http_status": 200,
+      "final_url": "https://velqnutrition.com/blog/simple-daily-wellness-routine-that-sticks",
+      "canonical": [
+        "https://velqnutrition.com/blog/simple-daily-wellness-routine-that-sticks"
+      ],
+      "robots": [
+        "index,follow,max-image-preview:large"
+      ],
+      "schema_blocks": 1,
+      "image_count": 1,
+      "social_image": [
+        "https://cdn.shopify.com/s/files/1/0723/8372/5647/files/velq-journal-wellness-routine-oct2026.jpg?v=1792109238"
+      ],
+      "release_metadata_checked": true,
+      "issues": []
+    },
+    {
+      "url": "https://velqnutrition.com/blog/protein-gummies-vs-protein-bars",
+      "http_status": 200,
+      "final_url": "https://velqnutrition.com/blog/protein-gummies-vs-protein-bars",
+      "canonical": [
+        "https://velqnutrition.com/blog/protein-gummies-vs-protein-bars"
+      ],
+      "robots": [
+        "index,follow,max-image-preview:large"
+      ],
+      "schema_blocks": 1,
+      "image_count": 1,
+      "social_image": [
+        "https://cdn.shopify.com/s/files/1/0723/8372/5647/articles/velq-protein-bars-cover.jpg?v=1791605998"
+      ],
+      "release_metadata_checked": true,
+      "issues": []
+    },
+    {
+      "url": "https://velqnutrition.com/blog/caffeine-gummies-vs-energy-drinks",
+      "http_status": 200,
+      "final_url": "https://velqnutrition.com/blog/caffeine-gummies-vs-energy-drinks",
+      "canonical": [
+        "https://velqnutrition.com/blog/caffeine-gummies-vs-energy-drinks"
+      ],
+      "robots": [
+        "index,follow,max-image-preview:large"
+      ],
+      "schema_blocks": 1,
+      "image_count": 1,
+      "social_image": [
+        "https://cdn.shopify.com/s/files/1/0723/8372/5647/files/velq-journal-caffeine-vs-energy-drinks-oct2026.jpg?v=1792109254"
+      ],
+      "release_metadata_checked": true,
+      "issues": []
+    },
+    {
+      "url": "https://velqnutrition.com/blog/protein-and-fiber-gummies-vs-separate-supplements",
+      "http_status": 200,
+      "final_url": "https://velqnutrition.com/blog/protein-and-fiber-gummies-vs-separate-supplements",
+      "canonical": [
+        "https://velqnutrition.com/blog/protein-and-fiber-gummies-vs-separate-supplements"
+      ],
+      "robots": [
+        "index,follow,max-image-preview:large"
+      ],
+      "schema_blocks": 1,
+      "image_count": 1,
+      "social_image": [
+        "https://cdn.shopify.com/s/files/1/0723/8372/5647/files/velq-journal-gummies-vs-supplements-oct2026.jpg?v=1792109244"
+      ],
+      "release_metadata_checked": true,
+      "issues": []
+    },
+    {
+      "url": "https://velqnutrition.com/blog/protein-and-fiber-gummies-buying-guide",
+      "http_status": 200,
+      "final_url": "https://velqnutrition.com/blog/protein-and-fiber-gummies-buying-guide",
+      "canonical": [
+        "https://velqnutrition.com/blog/protein-and-fiber-gummies-buying-guide"
+      ],
+      "robots": [
+        "index,follow,max-image-preview:large"
+      ],
+      "schema_blocks": 1,
+      "image_count": 1,
+      "social_image": [
+        "https://cdn.shopify.com/s/files/1/0723/8372/5647/files/velq-journal-buyer-guide-oct2026.jpg?v=1792109222"
+      ],
+      "release_metadata_checked": true,
+      "issues": []
+    },
+    {
+      "url": "https://velqnutrition.com/tools/protein-fiber-calculator",
+      "http_status": 200,
+      "final_url": "https://velqnutrition.com/tools/protein-fiber-calculator",
+      "canonical": [
+        "https://velqnutrition.com/tools/protein-fiber-calculator"
+      ],
+      "robots": [
+        "index,follow,max-image-preview:large"
+      ],
+      "schema_blocks": 1,
+      "image_count": 0,
+      "social_image": [],
+      "release_metadata_checked": false,
+      "issues": []
+    },
+    {
+      "url": "https://velqnutrition.com/compare",
+      "http_status": 200,
+      "final_url": "https://velqnutrition.com/compare",
+      "canonical": [
+        "https://velqnutrition.com/compare"
+      ],
+      "robots": [
+        "index,follow,max-image-preview:large"
+      ],
+      "schema_blocks": 1,
+      "image_count": 0,
+      "social_image": [],
+      "release_metadata_checked": false,
+      "issues": []
+    },
+    {
+      "url": "https://velqnutrition.com/guides",
+      "http_status": 200,
+      "final_url": "https://velqnutrition.com/guides",
+      "canonical": [
+        "https://velqnutrition.com/guides"
+      ],
+      "robots": [
+        "index,follow,max-image-preview:large"
+      ],
+      "schema_blocks": 1,
+      "image_count": 0,
+      "social_image": [
+        "https://cdn.shopify.com/s/files/1/0723/8372/5647/files/velq-journal-buyer-guide-oct2026.jpg?v=1792109222"
+      ],
+      "release_metadata_checked": false,
+      "issues": []
+    },
+    {
+      "url": "https://velqnutrition.com/guides/protein-and-fiber-snacks",
+      "http_status": 200,
+      "final_url": "https://velqnutrition.com/guides/protein-and-fiber-snacks",
+      "canonical": [
+        "https://velqnutrition.com/guides/protein-and-fiber-snacks"
+      ],
+      "robots": [
+        "index,follow"
+      ],
+      "schema_blocks": 1,
+      "image_count": 0,
+      "social_image": [],
+      "release_metadata_checked": false,
+      "issues": []
+    },
+    {
+      "url": "https://velqnutrition.com/guides/protein-and-fiber-snacks-for-work",
+      "http_status": 200,
+      "final_url": "https://velqnutrition.com/guides/protein-and-fiber-snacks-for-work",
+      "canonical": [
+        "https://velqnutrition.com/guides/protein-and-fiber-snacks-for-work"
+      ],
+      "robots": [
+        "index,follow"
+      ],
+      "schema_blocks": 1,
+      "image_count": 0,
+      "social_image": [],
+      "release_metadata_checked": false,
+      "issues": []
+    },
+    {
+      "url": "https://velqnutrition.com/guides/protein-and-fiber-snacks-for-travel",
+      "http_status": 200,
+      "final_url": "https://velqnutrition.com/guides/protein-and-fiber-snacks-for-travel",
+      "canonical": [
+        "https://velqnutrition.com/guides/protein-and-fiber-snacks-for-travel"
+      ],
+      "robots": [
+        "index,follow"
+      ],
+      "schema_blocks": 1,
+      "image_count": 0,
+      "social_image": [],
+      "release_metadata_checked": false,
+      "issues": []
+    },
+    {
+      "url": "https://velqnutrition.com/guides/protein-and-fiber-snacks-without-refrigeration",
+      "http_status": 200,
+      "final_url": "https://velqnutrition.com/guides/protein-and-fiber-snacks-without-refrigeration",
+      "canonical": [
+        "https://velqnutrition.com/guides/protein-and-fiber-snacks-without-refrigeration"
+      ],
+      "robots": [
+        "index,follow"
+      ],
+      "schema_blocks": 1,
+      "image_count": 0,
+      "social_image": [],
+      "release_metadata_checked": false,
+      "issues": []
+    },
+    {
+      "url": "https://velqnutrition.com/guides/plant-based-protein-and-fiber-snacks",
+      "http_status": 200,
+      "final_url": "https://velqnutrition.com/guides/plant-based-protein-and-fiber-snacks",
+      "canonical": [
+        "https://velqnutrition.com/guides/plant-based-protein-and-fiber-snacks"
+      ],
+      "robots": [
+        "index,follow"
+      ],
+      "schema_blocks": 1,
+      "image_count": 0,
+      "social_image": [],
+      "release_metadata_checked": false,
+      "issues": []
+    },
+    {
+      "url": "https://velqnutrition.com/blog/fiber-gummies-vs-psyllium-husk",
+      "http_status": 200,
+      "final_url": "https://velqnutrition.com/blog/fiber-gummies-vs-psyllium-husk",
+      "canonical": [
+        "https://velqnutrition.com/blog/fiber-gummies-vs-psyllium-husk"
+      ],
+      "robots": [
+        "index,follow,max-image-preview:large"
+      ],
+      "schema_blocks": 1,
+      "image_count": 1,
+      "social_image": [
+        "https://velqnutrition.com/assets/fiber-gummies-vs-psyllium-husk.svg"
+      ],
+      "release_metadata_checked": true,
+      "issues": []
+    },
+    {
+      "url": "https://velqnutrition.com/blog/caffeine-l-theanine-vs-caffeine",
+      "http_status": 200,
+      "final_url": "https://velqnutrition.com/blog/caffeine-l-theanine-vs-caffeine",
+      "canonical": [
+        "https://velqnutrition.com/blog/caffeine-l-theanine-vs-caffeine"
+      ],
+      "robots": [
+        "index,follow,max-image-preview:large"
+      ],
+      "schema_blocks": 1,
+      "image_count": 1,
+      "social_image": [
+        "https://velqnutrition.com/assets/caffeine-l-theanine-vs-caffeine.svg"
+      ],
+      "release_metadata_checked": true,
+      "issues": []
+    },
+    {
+      "url": "https://velqnutrition.com/tools/nutrition-label-value-calculator",
+      "http_status": 200,
+      "final_url": "https://velqnutrition.com/tools/nutrition-label-value-calculator",
+      "canonical": [
+        "https://velqnutrition.com/tools/nutrition-label-value-calculator"
+      ],
+      "robots": [
+        "index,follow,max-image-preview:large"
+      ],
+      "schema_blocks": 1,
+      "image_count": 1,
+      "social_image": [
+        "https://velqnutrition.com/assets/discovery/nutrition-label-value-guide.png"
+      ],
+      "release_metadata_checked": true,
+      "issues": []
+    },
+    {
+      "url": "https://velqnutrition.com/blog/best-fiber-gummies-2026",
+      "http_status": 200,
+      "final_url": "https://velqnutrition.com/blog/best-fiber-gummies-2026",
+      "canonical": [
+        "https://velqnutrition.com/blog/best-fiber-gummies-2026"
+      ],
+      "robots": [
+        "index,follow,max-image-preview:large"
+      ],
+      "schema_blocks": 1,
+      "image_count": 2,
+      "social_image": [
+        "https://cdn.shopify.com/s/files/1/0723/8372/5647/files/velq-red-white-strawberry-final-hero-oct-2026.jpg?v=1791934937"
+      ],
+      "release_metadata_checked": true,
+      "issues": []
+    },
+    {
+      "url": "https://velqnutrition.com/blog/protein-gummies-with-fiber-comparison",
+      "http_status": 200,
+      "final_url": "https://velqnutrition.com/blog/protein-gummies-with-fiber-comparison",
+      "canonical": [
+        "https://velqnutrition.com/blog/protein-gummies-with-fiber-comparison"
+      ],
+      "robots": [
+        "index,follow,max-image-preview:large"
+      ],
+      "schema_blocks": 1,
+      "image_count": 2,
+      "social_image": [
+        "https://cdn.shopify.com/s/files/1/0723/8372/5647/files/velq-red-white-strawberry-final-hero-oct-2026.jpg?v=1791934937"
+      ],
+      "release_metadata_checked": true,
+      "issues": []
+    },
+    {
+      "url": "https://velqnutrition.com/blog/protein-gummies-for-adults",
+      "http_status": 200,
+      "final_url": "https://velqnutrition.com/blog/protein-gummies-for-adults",
+      "canonical": [
+        "https://velqnutrition.com/blog/protein-gummies-for-adults"
+      ],
+      "robots": [
+        "index,follow,max-image-preview:large"
+      ],
+      "schema_blocks": 1,
+      "image_count": 1,
+      "social_image": [
+        "https://velqnutrition.com/assets/strawberry.webp"
+      ],
+      "release_metadata_checked": true,
+      "issues": []
+    },
+    {
+      "url": "https://velqnutrition.com/blog/fiber-gummies-for-adults-guide",
+      "http_status": 200,
+      "final_url": "https://velqnutrition.com/blog/fiber-gummies-for-adults-guide",
+      "canonical": [
+        "https://velqnutrition.com/blog/fiber-gummies-for-adults-guide"
+      ],
+      "robots": [
+        "index,follow,max-image-preview:large"
+      ],
+      "schema_blocks": 1,
+      "image_count": 1,
+      "social_image": [
+        "https://velqnutrition.com/assets/strawberry.webp"
+      ],
+      "release_metadata_checked": true,
+      "issues": []
+    },
+    {
+      "url": "https://velqnutrition.com/blog/fiber-gummies-vs-fiber-powder",
+      "http_status": 200,
+      "final_url": "https://velqnutrition.com/blog/fiber-gummies-vs-fiber-powder",
+      "canonical": [
+        "https://velqnutrition.com/blog/fiber-gummies-vs-fiber-powder"
+      ],
+      "robots": [
+        "index,follow,max-image-preview:large"
+      ],
+      "schema_blocks": 1,
+      "image_count": 1,
+      "social_image": [
+        "https://cdn.shopify.com/s/files/1/0723/8372/5647/files/velq-journal-fiber-gummies-vs-powder-oct2026.jpg?v=1792109205"
+      ],
+      "release_metadata_checked": true,
+      "issues": []
+    },
+    {
+      "url": "https://velqnutrition.com/blog/high-protein-high-fiber-snacks-no-refrigeration",
+      "http_status": 200,
+      "final_url": "https://velqnutrition.com/blog/high-protein-high-fiber-snacks-no-refrigeration",
+      "canonical": [
+        "https://velqnutrition.com/blog/high-protein-high-fiber-snacks-no-refrigeration"
+      ],
+      "robots": [
+        "index,follow,max-image-preview:large"
+      ],
+      "schema_blocks": 1,
+      "image_count": 1,
+      "social_image": [
+        "https://cdn.shopify.com/s/files/1/0723/8372/5647/files/velq-protein_fiber_snacks-2026-10.webp?v=1792103513"
+      ],
+      "release_metadata_checked": true,
+      "issues": []
+    },
+    {
+      "url": "https://velqnutrition.com/blog/30-grams-fiber-high-protein-diet",
+      "http_status": 200,
+      "final_url": "https://velqnutrition.com/blog/30-grams-fiber-high-protein-diet",
+      "canonical": [
+        "https://velqnutrition.com/blog/30-grams-fiber-high-protein-diet"
+      ],
+      "robots": [
+        "index,follow,max-image-preview:large"
+      ],
+      "schema_blocks": 1,
+      "image_count": 1,
+      "social_image": [
+        "https://cdn.shopify.com/s/files/1/0723/8372/5647/files/velq-30g_fiber-2026-10.webp?v=1792103452"
+      ],
+      "release_metadata_checked": true,
+      "issues": []
+    },
+    {
+      "url": "https://velqnutrition.com/blog/build-muscle-without-protein-shakes",
+      "http_status": 200,
+      "final_url": "https://velqnutrition.com/blog/build-muscle-without-protein-shakes",
+      "canonical": [
+        "https://velqnutrition.com/blog/build-muscle-without-protein-shakes"
+      ],
+      "robots": [
+        "index,follow,max-image-preview:large"
+      ],
+      "schema_blocks": 1,
+      "image_count": 1,
+      "social_image": [
+        "https://cdn.shopify.com/s/files/1/0723/8372/5647/files/velq-build_muscle_food_first-2026-10-v2.webp?v=1792103819"
+      ],
+      "release_metadata_checked": true,
+      "issues": []
+    },
+    {
+      "url": "https://velqnutrition.com/blog/portion-sizes-muscle-gain-without-counting-calories",
+      "http_status": 200,
+      "final_url": "https://velqnutrition.com/blog/portion-sizes-muscle-gain-without-counting-calories",
+      "canonical": [
+        "https://velqnutrition.com/blog/portion-sizes-muscle-gain-without-counting-calories"
+      ],
+      "robots": [
+        "index,follow,max-image-preview:large"
+      ],
+      "schema_blocks": 1,
+      "image_count": 2,
+      "social_image": [
+        "https://cdn.shopify.com/s/files/1/0723/8372/5647/files/velq-portion_sizes_muscle-2026-10.webp?v=1792103448"
+      ],
+      "release_metadata_checked": true,
+      "issues": []
+    },
+    {
+      "url": "https://velqnutrition.com/blog/what-to-eat-glp1-not-hungry",
+      "http_status": 200,
+      "final_url": "https://velqnutrition.com/blog/what-to-eat-glp1-not-hungry",
+      "canonical": [
+        "https://velqnutrition.com/blog/what-to-eat-glp1-not-hungry"
+      ],
+      "robots": [
+        "index,follow,max-image-preview:large"
+      ],
+      "schema_blocks": 1,
+      "image_count": 1,
+      "social_image": [
+        "https://cdn.shopify.com/s/files/1/0723/8372/5647/files/velq-glp1_low_appetite-2026-10.webp?v=1792103442"
+      ],
+      "release_metadata_checked": true,
+      "issues": []
+    },
+    {
+      "url": "https://velqnutrition.com/blog/glp1-protein-snacks-without-shakes",
+      "http_status": 200,
+      "final_url": "https://velqnutrition.com/blog/glp1-protein-snacks-without-shakes",
+      "canonical": [
+        "https://velqnutrition.com/blog/glp1-protein-snacks-without-shakes"
+      ],
+      "robots": [
+        "index,follow,max-image-preview:large"
+      ],
+      "schema_blocks": 1,
+      "image_count": 1,
+      "social_image": [
+        "https://cdn.shopify.com/s/files/1/0723/8372/5647/files/velq-glp1_protein_snacks-2026-10.webp?v=1792103438"
+      ],
+      "release_metadata_checked": true,
+      "issues": []
+    },
+    {
+      "url": "https://velqnutrition.com/blog/glp1-constipation-fiber",
+      "http_status": 200,
+      "final_url": "https://velqnutrition.com/blog/glp1-constipation-fiber",
+      "canonical": [
+        "https://velqnutrition.com/blog/glp1-constipation-fiber"
+      ],
+      "robots": [
+        "index,follow,max-image-preview:large"
+      ],
+      "schema_blocks": 1,
+      "image_count": 1,
+      "social_image": [
+        "https://cdn.shopify.com/s/files/1/0723/8372/5647/files/velq-glp1_constipation_fiber-2026-10.webp?v=1792103433"
+      ],
+      "release_metadata_checked": true,
+      "issues": []
+    },
+    {
+      "url": "https://velqnutrition.com/blog/maintain-muscle-glp1-low-appetite",
+      "http_status": 200,
+      "final_url": "https://velqnutrition.com/blog/maintain-muscle-glp1-low-appetite",
+      "canonical": [
+        "https://velqnutrition.com/blog/maintain-muscle-glp1-low-appetite"
+      ],
+      "robots": [
+        "index,follow,max-image-preview:large"
+      ],
+      "schema_blocks": 1,
+      "image_count": 1,
+      "social_image": [
+        "https://cdn.shopify.com/s/files/1/0723/8372/5647/files/velq-maintain_muscle_glp1-2026-10.webp?v=1792103429"
+      ],
+      "release_metadata_checked": true,
+      "issues": []
+    },
+    {
+      "url": "https://velqnutrition.com/blog/tired-on-glp1-food-fluids-causes",
+      "http_status": 200,
+      "final_url": "https://velqnutrition.com/blog/tired-on-glp1-food-fluids-causes",
+      "canonical": [
+        "https://velqnutrition.com/blog/tired-on-glp1-food-fluids-causes"
+      ],
+      "robots": [
+        "index,follow,max-image-preview:large"
+      ],
+      "schema_blocks": 1,
+      "image_count": 1,
+      "social_image": [
+        "https://cdn.shopify.com/s/files/1/0723/8372/5647/files/velq-tired_on_glp1-2026-10.webp?v=1792103374"
+      ],
+      "release_metadata_checked": true,
+      "issues": []
+    },
+    {
+      "url": "https://velqnutrition.com/blog/category/glp-1",
+      "http_status": 200,
+      "final_url": "https://velqnutrition.com/blog/category/glp-1",
+      "canonical": [
+        "https://velqnutrition.com/blog/category/glp-1"
+      ],
+      "robots": [
+        "index,follow,max-image-preview:large"
+      ],
+      "schema_blocks": 1,
+      "image_count": 5,
+      "social_image": [],
+      "release_metadata_checked": false,
+      "issues": []
+    },
+    {
+      "url": "https://velqnutrition.com/blog/editorial-policy",
+      "http_status": 200,
+      "final_url": "https://velqnutrition.com/blog/editorial-policy",
+      "canonical": [
+        "https://velqnutrition.com/blog/editorial-policy"
+      ],
+      "robots": [
+        "index,follow,max-image-preview:large"
+      ],
+      "schema_blocks": 0,
+      "image_count": 0,
+      "social_image": [],
+      "release_metadata_checked": false,
+      "issues": []
+    },
+    {
+      "url": "https://velqnutrition.com/research",
+      "http_status": 200,
+      "final_url": "https://velqnutrition.com/research",
+      "canonical": [
+        "https://velqnutrition.com/research"
+      ],
+      "robots": [
+        "index,follow,max-image-preview:large"
+      ],
+      "schema_blocks": 1,
+      "image_count": 1,
+      "social_image": [
+        "https://velqnutrition.com/assets/research/gummy-serving-comparison-2026.png"
+      ],
+      "release_metadata_checked": true,
+      "issues": []
+    },
+    {
+      "url": "https://velqnutrition.com/research/gummy-serving-study-2026",
+      "http_status": 200,
+      "final_url": "https://velqnutrition.com/research/gummy-serving-study-2026",
+      "canonical": [
+        "https://velqnutrition.com/research/gummy-serving-study-2026"
+      ],
+      "robots": [
+        "index,follow,max-image-preview:large"
+      ],
+      "schema_blocks": 1,
+      "image_count": 1,
+      "social_image": [
+        "https://velqnutrition.com/assets/research/gummy-serving-comparison-2026.png"
+      ],
+      "release_metadata_checked": true,
+      "issues": []
+    },
+    {
+      "url": "https://velqnutrition.com/tools/serving-comparison-calculator",
+      "http_status": 200,
+      "final_url": "https://velqnutrition.com/tools/serving-comparison-calculator",
+      "canonical": [
+        "https://velqnutrition.com/tools/serving-comparison-calculator"
+      ],
+      "robots": [
+        "index,follow,max-image-preview:large"
+      ],
+      "schema_blocks": 1,
+      "image_count": 1,
+      "social_image": [
+        "https://velqnutrition.com/assets/discovery/gummy-serving-label-guide.png"
+      ],
+      "release_metadata_checked": true,
+      "issues": []
+    },
+    {
+      "url": "https://velqnutrition.com/media",
+      "http_status": 200,
+      "final_url": "https://velqnutrition.com/media",
+      "canonical": [
+        "https://velqnutrition.com/media"
+      ],
+      "robots": [
+        "max-image-preview:large"
+      ],
+      "schema_blocks": 1,
+      "image_count": 1,
+      "social_image": [
+        "https://velqnutrition.com/assets/velq-gummies-packshot-20261015-v2-1200.webp"
+      ],
+      "release_metadata_checked": true,
+      "issues": []
+    }
+  ],
+  "images": [
+    {
+      "url": "https://cdn.shopify.com/s/files/1/0723/8372/5647/articles/velq-protein-bars-cover.jpg?v=1791605998",
+      "http_status": 200,
+      "final_url": "https://cdn.shopify.com/s/files/1/0723/8372/5647/articles/velq-protein-bars-cover.jpg?v=1791605998",
+      "content_type": "image/jpeg",
+      "bytes": 242980,
+      "sha256": "899d46a38acff5b4156c44c69e238838a0a4a6b38f7268e044285109bf9ae2d8",
+      "dimensions": [
+        1536,
+        864
+      ],
+      "metadata_dimensions_match": true,
+      "local_bytes_match": null,
+      "valid_image_response": true
+    },
+    {
+      "url": "https://cdn.shopify.com/s/files/1/0723/8372/5647/files/velq-30g_fiber-2026-10.webp?v=1792103452",
+      "http_status": 200,
+      "final_url": "https://cdn.shopify.com/s/files/1/0723/8372/5647/files/velq-30g_fiber-2026-10.webp?v=1792103452",
+      "content_type": "image/jpeg",
+      "bytes": 234918,
+      "sha256": "b0b30204937194422e743992626bd628b2c93742bef738a448a68ca5bc48f730",
+      "dimensions": [
+        1536,
+        1024
+      ],
+      "metadata_dimensions_match": true,
+      "local_bytes_match": null,
+      "valid_image_response": true
+    },
+    {
+      "url": "https://cdn.shopify.com/s/files/1/0723/8372/5647/files/velq-build_muscle_food_first-2026-10-v2.webp?v=1792103819",
+      "http_status": 200,
+      "final_url": "https://cdn.shopify.com/s/files/1/0723/8372/5647/files/velq-build_muscle_food_first-2026-10-v2.webp?v=1792103819",
+      "content_type": "image/jpeg",
+      "bytes": 312404,
+      "sha256": "294f007131e12dc9c8184471a8a97fa611004a6bba1dbaf20ce10ef3a079625f",
+      "dimensions": [
+        1536,
+        1024
+      ],
+      "metadata_dimensions_match": true,
+      "local_bytes_match": null,
+      "valid_image_response": true
+    },
+    {
+      "url": "https://cdn.shopify.com/s/files/1/0723/8372/5647/files/velq-glp1_constipation_fiber-2026-10.webp?v=1792103433",
+      "http_status": 200,
+      "final_url": "https://cdn.shopify.com/s/files/1/0723/8372/5647/files/velq-glp1_constipation_fiber-2026-10.webp?v=1792103433",
+      "content_type": "image/jpeg",
+      "bytes": 317931,
+      "sha256": "4278c08ff8945fb1d0af1ff21ad5a062fcff9af633f16b1c86c5c654390841ca",
+      "dimensions": [
+        1536,
+        1024
+      ],
+      "metadata_dimensions_match": true,
+      "local_bytes_match": null,
+      "valid_image_response": true
+    },
+    {
+      "url": "https://cdn.shopify.com/s/files/1/0723/8372/5647/files/velq-glp1_low_appetite-2026-10.webp?v=1792103442",
+      "http_status": 200,
+      "final_url": "https://cdn.shopify.com/s/files/1/0723/8372/5647/files/velq-glp1_low_appetite-2026-10.webp?v=1792103442",
+      "content_type": "image/jpeg",
+      "bytes": 225979,
+      "sha256": "6e09cc956269f5b52571f915de516fc0eff1212b08506a34dba195c6cfad0be6",
+      "dimensions": [
+        1536,
+        1024
+      ],
+      "metadata_dimensions_match": true,
+      "local_bytes_match": null,
+      "valid_image_response": true
+    },
+    {
+      "url": "https://cdn.shopify.com/s/files/1/0723/8372/5647/files/velq-glp1_protein_snacks-2026-10.webp?v=1792103438",
+      "http_status": 200,
+      "final_url": "https://cdn.shopify.com/s/files/1/0723/8372/5647/files/velq-glp1_protein_snacks-2026-10.webp?v=1792103438",
+      "content_type": "image/jpeg",
+      "bytes": 303857,
+      "sha256": "8dde861fc5db4a6952143452703fec73f10160b73ca4afc97fee343943ce7eb6",
+      "dimensions": [
+        1536,
+        1024
+      ],
+      "metadata_dimensions_match": true,
+      "local_bytes_match": null,
+      "valid_image_response": true
+    },
+    {
+      "url": "https://cdn.shopify.com/s/files/1/0723/8372/5647/files/velq-journal-buyer-guide-oct2026.jpg?v=1792109222",
+      "http_status": 200,
+      "final_url": "https://cdn.shopify.com/s/files/1/0723/8372/5647/files/velq-journal-buyer-guide-oct2026.jpg?v=1792109222",
+      "content_type": "image/jpeg",
+      "bytes": 243180,
+      "sha256": "ef8530fd6617bd3af781f894002afac764c3b60f6a1dfea9d84492f4898d92ac",
+      "dimensions": [
+        1536,
+        1024
+      ],
+      "metadata_dimensions_match": true,
+      "local_bytes_match": null,
+      "valid_image_response": true
+    },
+    {
+      "url": "https://cdn.shopify.com/s/files/1/0723/8372/5647/files/velq-journal-caffeine-vs-coffee-oct2026.jpg?v=1792109249",
+      "http_status": 200,
+      "final_url": "https://cdn.shopify.com/s/files/1/0723/8372/5647/files/velq-journal-caffeine-vs-coffee-oct2026.jpg?v=1792109249",
+      "content_type": "image/jpeg",
+      "bytes": 293473,
+      "sha256": "8242c06a0c022b0cb2ed8edaa3004bb4325aa11afc7b507cfb90d7a225ae0c1d",
+      "dimensions": [
+        1536,
+        1024
+      ],
+      "metadata_dimensions_match": true,
+      "local_bytes_match": null,
+      "valid_image_response": true
+    },
+    {
+      "url": "https://cdn.shopify.com/s/files/1/0723/8372/5647/files/velq-journal-caffeine-vs-energy-drinks-oct2026.jpg?v=1792109254",
+      "http_status": 200,
+      "final_url": "https://cdn.shopify.com/s/files/1/0723/8372/5647/files/velq-journal-caffeine-vs-energy-drinks-oct2026.jpg?v=1792109254",
+      "content_type": "image/jpeg",
+      "bytes": 269669,
+      "sha256": "60f2c70fe7310359904718c3e8be806808d7e1c79e89ccd12bfd43a5b014cb9e",
+      "dimensions": [
+        1536,
+        1024
+      ],
+      "metadata_dimensions_match": true,
+      "local_bytes_match": null,
+      "valid_image_response": true
+    },
+    {
+      "url": "https://cdn.shopify.com/s/files/1/0723/8372/5647/files/velq-journal-fiber-daily-oct2026.jpg?v=1792109193",
+      "http_status": 200,
+      "final_url": "https://cdn.shopify.com/s/files/1/0723/8372/5647/files/velq-journal-fiber-daily-oct2026.jpg?v=1792109193",
+      "content_type": "image/jpeg",
+      "bytes": 333397,
+      "sha256": "7b726478dd6739e5d578a5959bb9239f63d9f6a2355b0e88b5ee4b2977ea4916",
+      "dimensions": [
+        1536,
+        1024
+      ],
+      "metadata_dimensions_match": true,
+      "local_bytes_match": null,
+      "valid_image_response": true
+    },
+    {
+      "url": "https://cdn.shopify.com/s/files/1/0723/8372/5647/files/velq-journal-fiber-gummies-vs-powder-oct2026.jpg?v=1792109205",
+      "http_status": 200,
+      "final_url": "https://cdn.shopify.com/s/files/1/0723/8372/5647/files/velq-journal-fiber-gummies-vs-powder-oct2026.jpg?v=1792109205",
+      "content_type": "image/jpeg",
+      "bytes": 320836,
+      "sha256": "17152e07ca15201001a0f32399d243580a17c7c9fd5b63bb47134be0762f3a25",
+      "dimensions": [
+        1536,
+        1024
+      ],
+      "metadata_dimensions_match": true,
+      "local_bytes_match": null,
+      "valid_image_response": true
+    },
+    {
+      "url": "https://cdn.shopify.com/s/files/1/0723/8372/5647/files/velq-journal-gummies-vs-supplements-oct2026.jpg?v=1792109244",
+      "http_status": 200,
+      "final_url": "https://cdn.shopify.com/s/files/1/0723/8372/5647/files/velq-journal-gummies-vs-supplements-oct2026.jpg?v=1792109244",
+      "content_type": "image/jpeg",
+      "bytes": 338845,
+      "sha256": "09ebd17e0f2a8567ed64a58e451612734921a589c6a877f25ee83d6c2e65727c",
+      "dimensions": [
+        1536,
+        1024
+      ],
+      "metadata_dimensions_match": true,
+      "local_bytes_match": null,
+      "valid_image_response": true
+    },
+    {
+      "url": "https://cdn.shopify.com/s/files/1/0723/8372/5647/files/velq-journal-protein-needs-oct2026.jpg?v=1792109233",
+      "http_status": 200,
+      "final_url": "https://cdn.shopify.com/s/files/1/0723/8372/5647/files/velq-journal-protein-needs-oct2026.jpg?v=1792109233",
+      "content_type": "image/jpeg",
+      "bytes": 250744,
+      "sha256": "530b02cc04f08a57a3974b31722794ebf63c04310544857223cf3163e53ca7c0",
+      "dimensions": [
+        1536,
+        1024
+      ],
+      "metadata_dimensions_match": true,
+      "local_bytes_match": null,
+      "valid_image_response": true
+    },
+    {
+      "url": "https://cdn.shopify.com/s/files/1/0723/8372/5647/files/velq-journal-protein-vs-fiber-oct2026.jpg?v=1792109199",
+      "http_status": 200,
+      "final_url": "https://cdn.shopify.com/s/files/1/0723/8372/5647/files/velq-journal-protein-vs-fiber-oct2026.jpg?v=1792109199",
+      "content_type": "image/jpeg",
+      "bytes": 288560,
+      "sha256": "2f132b819a29d88e8643218f739027cffd015d27126deba5b5bd038353862bec",
+      "dimensions": [
+        1536,
+        1024
+      ],
+      "metadata_dimensions_match": true,
+      "local_bytes_match": null,
+      "valid_image_response": true
+    },
+    {
+      "url": "https://cdn.shopify.com/s/files/1/0723/8372/5647/files/velq-journal-wellness-routine-oct2026.jpg?v=1792109238",
+      "http_status": 200,
+      "final_url": "https://cdn.shopify.com/s/files/1/0723/8372/5647/files/velq-journal-wellness-routine-oct2026.jpg?v=1792109238",
+      "content_type": "image/jpeg",
+      "bytes": 294138,
+      "sha256": "e9824a7e7291e3ea0a184d3cfea1c6aa2ba8bfce0efbb1a659cb2d2a590e3517",
+      "dimensions": [
+        1536,
+        1024
+      ],
+      "metadata_dimensions_match": true,
+      "local_bytes_match": null,
+      "valid_image_response": true
+    },
+    {
+      "url": "https://cdn.shopify.com/s/files/1/0723/8372/5647/files/velq-maintain_muscle_glp1-2026-10.webp?v=1792103429",
+      "http_status": 200,
+      "final_url": "https://cdn.shopify.com/s/files/1/0723/8372/5647/files/velq-maintain_muscle_glp1-2026-10.webp?v=1792103429",
+      "content_type": "image/jpeg",
+      "bytes": 161669,
+      "sha256": "868b7de7d3af96ab4a6b0ce3d664d4773befac0d8760e2dde63556721645ce74",
+      "dimensions": [
+        1536,
+        1024
+      ],
+      "metadata_dimensions_match": true,
+      "local_bytes_match": null,
+      "valid_image_response": true
+    },
+    {
+      "url": "https://cdn.shopify.com/s/files/1/0723/8372/5647/files/velq-portion_sizes_muscle-2026-10.webp?v=1792103448",
+      "http_status": 200,
+      "final_url": "https://cdn.shopify.com/s/files/1/0723/8372/5647/files/velq-portion_sizes_muscle-2026-10.webp?v=1792103448",
+      "content_type": "image/jpeg",
+      "bytes": 367707,
+      "sha256": "ea18ff568afa6d6c1417c4d90c3d821379abe55b95261f0b393ae43e1d01847c",
+      "dimensions": [
+        1536,
+        1024
+      ],
+      "metadata_dimensions_match": true,
+      "local_bytes_match": null,
+      "valid_image_response": true
+    },
+    {
+      "url": "https://cdn.shopify.com/s/files/1/0723/8372/5647/files/velq-protein_fiber_snacks-2026-10.webp?v=1792103513",
+      "http_status": 200,
+      "final_url": "https://cdn.shopify.com/s/files/1/0723/8372/5647/files/velq-protein_fiber_snacks-2026-10.webp?v=1792103513",
+      "content_type": "image/jpeg",
+      "bytes": 245063,
+      "sha256": "9b91ba66c7095b381a2c2b7c06f24e48223930a0abec9614f1390fe27e83842b",
+      "dimensions": [
+        1536,
+        1024
+      ],
+      "metadata_dimensions_match": true,
+      "local_bytes_match": null,
+      "valid_image_response": true
+    },
+    {
+      "url": "https://cdn.shopify.com/s/files/1/0723/8372/5647/files/velq-red-white-strawberry-final-hero-oct-2026.jpg?v=1791934937",
+      "http_status": 200,
+      "final_url": "https://cdn.shopify.com/s/files/1/0723/8372/5647/files/velq-red-white-strawberry-final-hero-oct-2026.jpg?v=1791934937",
+      "content_type": "image/jpeg",
+      "bytes": 305676,
+      "sha256": "c85571bce3465fc1905aae29aa84c86a1403acd730ffb06572c9106deca5cbee",
+      "dimensions": [
+        1254,
+        1254
+      ],
+      "metadata_dimensions_match": true,
+      "local_bytes_match": null,
+      "valid_image_response": true
+    },
+    {
+      "url": "https://cdn.shopify.com/s/files/1/0723/8372/5647/files/velq-tired_on_glp1-2026-10.webp?v=1792103374",
+      "http_status": 200,
+      "final_url": "https://cdn.shopify.com/s/files/1/0723/8372/5647/files/velq-tired_on_glp1-2026-10.webp?v=1792103374",
+      "content_type": "image/jpeg",
+      "bytes": 246759,
+      "sha256": "5da9408c8adc8baa033fe54702b0fd7b49c158eacdddd0c7b92e2af664ae41e0",
+      "dimensions": [
+        1536,
+        1024
+      ],
+      "metadata_dimensions_match": true,
+      "local_bytes_match": null,
+      "valid_image_response": true
+    },
+    {
+      "url": "https://velqnutrition.com/assets/caffeine-l-theanine-vs-caffeine.svg",
+      "http_status": 200,
+      "final_url": "https://velqnutrition.com/assets/caffeine-l-theanine-vs-caffeine.svg",
+      "content_type": "image/svg+xml",
+      "bytes": 4077,
+      "sha256": "21409bc38851382eb282846929126b5afdca9336e81948eaba2034304efdc012",
+      "dimensions": [
+        1200.0,
+        675.0
+      ],
+      "metadata_dimensions_match": true,
+      "local_bytes_match": true,
+      "valid_image_response": true
+    },
+    {
+      "url": "https://velqnutrition.com/assets/discovery/gummy-serving-label-guide.png",
+      "http_status": 200,
+      "final_url": "https://velqnutrition.com/assets/discovery/gummy-serving-label-guide.png",
+      "content_type": "image/png",
+      "bytes": 106472,
+      "sha256": "8aaf70dfaadcce84b6f37071b5d0425bcbc93da3d66f3546bd68f7a37a86527c",
+      "dimensions": [
+        1200,
+        675
+      ],
+      "metadata_dimensions_match": true,
+      "local_bytes_match": true,
+      "valid_image_response": true
+    },
+    {
+      "url": "https://velqnutrition.com/assets/discovery/gummy-serving-label-guide.svg",
+      "http_status": 200,
+      "final_url": "https://velqnutrition.com/assets/discovery/gummy-serving-label-guide.svg",
+      "content_type": "image/svg+xml",
+      "bytes": 7600,
+      "sha256": "9f26b516badb1c8cfd754e98da0f2c98e0b2008c8e90afb1a723574094cd920e",
+      "dimensions": [
+        1200.0,
+        675.0
+      ],
+      "metadata_dimensions_match": true,
+      "local_bytes_match": true,
+      "valid_image_response": true
+    },
+    {
+      "url": "https://velqnutrition.com/assets/discovery/nutrition-label-value-guide.png",
+      "http_status": 200,
+      "final_url": "https://velqnutrition.com/assets/discovery/nutrition-label-value-guide.png",
+      "content_type": "image/png",
+      "bytes": 115583,
+      "sha256": "603f85dc9e5d3e2c33bac6c5cfe87c9ee1bcca83615e3b78507741ad603b5e72",
+      "dimensions": [
+        1200,
+        675
+      ],
+      "metadata_dimensions_match": true,
+      "local_bytes_match": true,
+      "valid_image_response": true
+    },
+    {
+      "url": "https://velqnutrition.com/assets/discovery/nutrition-label-value-guide.svg",
+      "http_status": 200,
+      "final_url": "https://velqnutrition.com/assets/discovery/nutrition-label-value-guide.svg",
+      "content_type": "image/svg+xml",
+      "bytes": 7621,
+      "sha256": "431fcfa0d30f66ac8c1a08338d0575e52bdaf648579526c8bdb0e897079d597f",
+      "dimensions": [
+        1200.0,
+        675.0
+      ],
+      "metadata_dimensions_match": true,
+      "local_bytes_match": true,
+      "valid_image_response": true
+    },
+    {
+      "url": "https://velqnutrition.com/assets/fiber-gummies-vs-psyllium-husk.svg",
+      "http_status": 200,
+      "final_url": "https://velqnutrition.com/assets/fiber-gummies-vs-psyllium-husk.svg",
+      "content_type": "image/svg+xml",
+      "bytes": 4123,
+      "sha256": "c1345372e2bdd18b726923aae877d30c1730d0d96b53498f452444475e3f83ec",
+      "dimensions": [
+        1200.0,
+        675.0
+      ],
+      "metadata_dimensions_match": true,
+      "local_bytes_match": true,
+      "valid_image_response": true
+    },
+    {
+      "url": "https://velqnutrition.com/assets/growth/meal-components.svg",
+      "http_status": 200,
+      "final_url": "https://velqnutrition.com/assets/growth/meal-components.svg",
+      "content_type": "image/svg+xml",
+      "bytes": 1802,
+      "sha256": "f8fd4c91a18a24570dcba17d72d0ce086dcdcb31bfcf1272367610f304f5b69a",
+      "dimensions": null,
+      "metadata_dimensions_match": true,
+      "local_bytes_match": true,
+      "valid_image_response": true
+    },
+    {
+      "url": "https://velqnutrition.com/assets/research/gummy-serving-comparison-2026.png",
+      "http_status": 200,
+      "final_url": "https://velqnutrition.com/assets/research/gummy-serving-comparison-2026.png",
+      "content_type": "image/png",
+      "bytes": 75717,
+      "sha256": "97afec9d3da0758c4aa3dd47047c80f587d315c42bb6547960f375ad2ee1e795",
+      "dimensions": [
+        1200,
+        675
+      ],
+      "metadata_dimensions_match": true,
+      "local_bytes_match": true,
+      "valid_image_response": true
+    },
+    {
+      "url": "https://velqnutrition.com/assets/research/gummy-serving-comparison-2026.svg",
+      "http_status": 200,
+      "final_url": "https://velqnutrition.com/assets/research/gummy-serving-comparison-2026.svg",
+      "content_type": "image/svg+xml",
+      "bytes": 3244,
+      "sha256": "0bd44229c90572aa14a294c330f1aa3e5c56edfc4bb808e2930b06a3dd5eb053",
+      "dimensions": [
+        1200.0,
+        675.0
+      ],
+      "metadata_dimensions_match": true,
+      "local_bytes_match": true,
+      "valid_image_response": true
+    },
+    {
+      "url": "https://velqnutrition.com/assets/strawberry.webp",
+      "http_status": 200,
+      "final_url": "https://velqnutrition.com/assets/strawberry.webp",
+      "content_type": "image/webp",
+      "bytes": 136080,
+      "sha256": "47e9bfa75e583d9deef0ac3bfa62333ad0eb4430e138bc78d4080ca3bd9ee266",
+      "dimensions": [
+        1254,
+        1254
+      ],
+      "metadata_dimensions_match": true,
+      "local_bytes_match": null,
+      "valid_image_response": true
+    },
+    {
+      "url": "https://velqnutrition.com/assets/velq-gummies-packshot-20261015-v2-1200.webp",
+      "http_status": 200,
+      "final_url": "https://velqnutrition.com/assets/velq-gummies-packshot-20261015-v2-1200.webp",
+      "content_type": "image/webp",
+      "bytes": 99994,
+      "sha256": "04b173af23a63fc39053e73904cd584f84c727bf214153cb8e4c616a90600c01",
+      "dimensions": [
+        1200,
+        1200
+      ],
+      "metadata_dimensions_match": true,
+      "local_bytes_match": true,
+      "valid_image_response": true
+    },
+    {
+      "url": "https://velqnutrition.com/assets/velq-gummies-packshot-20261015-v2-800.webp",
+      "http_status": 200,
+      "final_url": "https://velqnutrition.com/assets/velq-gummies-packshot-20261015-v2-800.webp",
+      "content_type": "image/webp",
+      "bytes": 60598,
+      "sha256": "ce9fd40e746d6e2068724c5bbf990d656d890068b2f2793cc8b5b9df61da02e0",
+      "dimensions": [
+        800,
+        800
+      ],
+      "metadata_dimensions_match": true,
+      "local_bytes_match": true,
+      "valid_image_response": true
+    },
+    {
+      "url": "https://velqnutrition.com/assets/velq-strawberry-gummies-hero-20261015-v3-1200.webp",
+      "http_status": 200,
+      "final_url": "https://velqnutrition.com/assets/velq-strawberry-gummies-hero-20261015-v3-1200.webp",
+      "content_type": "image/webp",
+      "bytes": 107384,
+      "sha256": "5f6710f2b93089e24062734c9f99928a511bb14cc67c0b3c128bd7a0f2b39da0",
+      "dimensions": [
+        1200,
+        1200
+      ],
+      "metadata_dimensions_match": true,
+      "local_bytes_match": true,
+      "valid_image_response": true
+    },
+    {
+      "url": "https://velqnutrition.com/assets/velq-strawberry-gummies-hero-20261015-v3.jpeg",
+      "http_status": 200,
+      "final_url": "https://velqnutrition.com/assets/velq-strawberry-gummies-hero-20261015-v3.jpeg",
+      "content_type": "image/jpeg",
+      "bytes": 452739,
+      "sha256": "e1ee0e52b9b9a7265fcdfb9793b05d1e58e8a7e0ed1de9e7284db4537c268860",
+      "dimensions": [
+        1254,
+        1254
+      ],
+      "metadata_dimensions_match": true,
+      "local_bytes_match": true,
+      "valid_image_response": true
+    }
+  ],
+  "limits": "Public technical checks only; does not establish indexed URLs, AI inclusion setting, search impressions, citations, or GA4 receipt."
+}
