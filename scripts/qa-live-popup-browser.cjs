@@ -24,6 +24,15 @@ const base='https://velqnutrition.com/';
    const response=await page.goto(base,{waitUntil:'domcontentloaded',timeout:35000});
    assert.equal(response.status(),200,'Homepage status');
    await page.clock.fastForward(15100);
+   const diag=await page.evaluate(()=>({
+     title:document.title,pathname:location.pathname,hidden:document.hidden,
+     ready:document.readyState,loaded:window.__velqLeadCaptureLoaded||false,
+     popup:!!document.querySelector('#velq-early-access'),
+     waitlist:(()=>{let e=document.querySelector('#waitlist');if(!e)return null;let b=e.getBoundingClientRect();return {top:b.top,bottom:b.bottom}})(),
+     scripts:[...document.scripts].filter(x=>/lead-capture|analytics/.test(x.src)).map(x=>({src:x.src,async:x.async,defer:x.defer})),
+     active:document.activeElement?.tagName,bodyText:document.body?.innerText.slice(0,170)
+   }));
+   console.log('LIVE_DEBUG '+JSON.stringify({width,diag,errors:errors.slice(0,10)}));
    await page.locator('#velq-early-access').waitFor({state:'visible',timeout:6000});
    const box=await page.locator('.velq-lead-card').boundingBox();
    assert(box&&box.x>=-1&&box.x+box.width<=width+1,'Horizontal overflow '+width+' '+JSON.stringify(box));
