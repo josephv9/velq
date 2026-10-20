@@ -1,0 +1,52 @@
+name: Velq homepage LCP release check
+
+on:
+  push:
+    branches: [main]
+    paths:
+      - '.github/workflows/velq-home-lcp-release-check.yml'
+      - 'image-patch.php'
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+jobs:
+  mobile-homepage:
+    runs-on: ubuntu-latest
+    timeout-minutes: 6
+    steps:
+      - uses: actions/checkout@v4
+      - run: npm install --global lighthouse@12
+      - name: Mobile homepage Lighthouse with bounded execution
+        shell: bash
+        run: |
+          timeout 130s lighthouse https://velqnutrition.com/ \
+            --chrome-flags="--headless=new --no-sandbox --disable-dev-shm-usage" \
+            --only-categories=performance,seo \
+            --form-factor=mobile \
+            --output=json --output-path=/tmp/velq-lcp-release.json --quiet
+      - name: Record performance, LCP and Google tag network
+        run: |
+          node - <<'JS'
+          const r=require('/tmp/velq-lcp-release.json'),a=r.audits;
+          const requests=a['network-requests']?.details?.items||[];
+          console.log('VELQ_RELEASE_METRICS',JSON.stringify({
+            performance:Math.round(r.categories.performance.score*100),
+            seo:Math.round(r.categories.seo.score*100),
+            lcpMs:a['largest-contentful-paint'].numericValue,
+            fcpMs:a['first-contentful-paint'].numericValue,
+            tbtMs:a['total-blocking-time'].numericValue,
+            cls:a['cumulative-layout-shift'].numericValue,
+            ga4TagCount:requests.filter(x=>x.url.includes('googletagmanager.com/gtag/js?id=G-F93RK1P0H5')).length,
+            lcpElement:(a['largest-contentful-paint-element']?.details?.items?.[0]?.items?.[0]?.node?.selector)||'unknown',
+            imageBytes:(a['resource-summary']?.details?.items||[]).find(x=>x.resourceType==='image')?.transferSize
+          }));
+          JS
+      - name: Upload mobile release evidence
+        if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: velq-home-lcp-release
+          path: /tmp/velq-lcp-release.json
+          if-no-files-found: warn
