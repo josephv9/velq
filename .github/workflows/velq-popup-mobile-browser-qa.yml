@@ -67,6 +67,8 @@ jobs:
                 await page.clock.fastForward(14500);
                 await page.locator('#velq-early-access').waitFor({state:'visible',timeout:4000});
                 const card=await page.locator('.velq-lead-card').boundingBox();
+      const metrics=await page.evaluate(()=>({innerWidth:innerWidth,innerHeight:innerHeight,visualHeight:visualViewport?.height,cssMaxHeight:getComputedStyle(document.querySelector('.velq-lead-card')).maxHeight,display:getComputedStyle(document.querySelector('.velq-lead-overlay')).display}));
+      console.log('MOBILE_BOX',JSON.stringify({width,card,metrics}));
                 assert(card&&card.x>=-1&&card.x+card.width<=width+1,'Horizontal overflow at '+width+': '+JSON.stringify(card));
                 assert(card.y>=-1&&card.y+card.height<=845,'Vertical overflow at '+width);
                 const check=page.locator('#velq-lead-form [name=consent]');
