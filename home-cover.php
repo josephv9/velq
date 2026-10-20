@@ -21,7 +21,7 @@ function velq_home_cover(string $html, string $path): string {
     $html = str_replace('<body>', '<body class="velq-cover-home">', $html);
     $html = preg_replace('~<link\b[^>]*data-velq-responsive-preload[^>]*>~i', '', $html) ?? $html;
     $preload = '<link data-velq-responsive-preload rel="preload" as="image" href="'.$base.'-800.webp" imagesrcset="'.$base.'-480.webp 480w, '.$base.'-800.webp 800w, '.$base.'-1200.webp 1200w" imagesizes="100vw" fetchpriority="high">';
-    return str_replace('</head>', '<link rel="stylesheet" href="/assets/velq-home-cover.css?v=20261020-benefit-cards-gray-9">'.$preload.'</head>', $html);
+    return str_replace('</head>', '<link rel="stylesheet" href="/assets/velq-home-cover.css?v=20261020-benefit-cards-uniform-10">'.$preload.'</head>', $html);
 }
 
 /** Single-product layout. Image slots accept ordinary img elements when supplied. */
