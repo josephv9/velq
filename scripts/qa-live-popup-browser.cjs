@@ -38,6 +38,21 @@ const base='https://velqnutrition.com/';
      eventNames:(window.dataLayer||[]).filter(x=>x&&x[0]==='event').map(x=>x[1]).slice(-15)
    }));
    console.log('LIVE_DEBUG '+JSON.stringify({width,diag,errors:errors.slice(0,10)}));
+   if(!diag.popup){
+      const currentPopup=await page.evaluate(()=>{
+        const panel=document.querySelector('.vlp-card,[role="dialog"],dialog[open]');
+        const source=[...document.scripts].filter(s=>(s.textContent||'').includes('lead_popup_view')||(s.textContent||'').includes('vlp-card')).map(s=>({src:s.src||'inline',length:s.textContent.length,summary:s.textContent.slice(0,450)}));
+        return {
+          found:!!panel,
+          visible:!!(panel&&panel.getClientRects().length),
+          html:panel?.outerHTML.slice(0,5500)||null,
+          scripts:source,
+          candidates:[...document.querySelectorAll('form')].map(f=>({id:f.id,className:f.className,fields:[...f.querySelectorAll('input')].map(x=>({type:x.type,name:x.name,required:x.required,checked:x.checked})),button:f.querySelector('button[type=submit]')?.textContent?.trim()})).slice(0,8),
+          storageKeys:Object.keys(localStorage).filter(k=>/velq|popup|vlp|cookie/i.test(k)).slice(0,15)
+        };
+      });
+      console.log('LIVE_EXISTING_POPUP_DIAGNOSTIC '+JSON.stringify({width,currentPopup}));
+   }
    await page.locator('#velq-early-access').waitFor({state:'visible',timeout:6000});
    const box=await page.locator('.velq-lead-card').boundingBox();
    assert(box&&box.x>=-1&&box.x+box.width<=width+1,'Horizontal overflow '+width+' '+JSON.stringify(box));
