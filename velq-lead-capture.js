@@ -46,22 +46,53 @@
     save(JOINED_KEY, '1');
     if (overlay) close('other_signup', true);
   }
-  function syncIdentifiedKlaviyo(email, source) {
-    // Never load a new vendor or share an address unless an existing Klaviyo
-    // installation is available and an explicit marketing opt-in was given.
-    if (!email || !window._learnq || typeof window._learnq.push !== 'function') return;
-    window._learnq.push(['identify', { $email: email }]);
-    window._learnq.push(['track', 'Joined Velq Early Access', {
+  var KLAVIYO_PUBLIC_KEY = 'RCNCJb';
+  var TRACKING_CONSENT_KEY = 'velq_tracking_consent_v1';
+  function loadConsentedKlaviyo() {
+    // Email subscription and optional cookie tracking are separate choices.
+    if (read(TRACKING_CONSENT_KEY) !== '1') return;
+    window.klaviyo = window.klaviyo || [];
+    if (document.querySelector('script[data-velq-consented-klaviyo]')) return;
+    var script = document.createElement('script');
+    script.async = true;
+    script.src = 'https://static.klaviyo.com/onsite/js/' + KLAVIYO_PUBLIC_KEY + '/klaviyo.js';
+    script.setAttribute('data-velq-consented-klaviyo', 'true');
+    document.head.appendChild(script);
+  }
+  function syncIdentifiedKlaviyo(email, source, trackingOptIn) {
+    if (!trackingOptIn || typeof email !== 'string' || !email.includes('@')) return;
+    save(TRACKING_CONSENT_KEY, '1');
+    try { document.cookie = '__kla_off=; Path=/; Max-Age=0; SameSite=Lax; Secure'; } catch (_) {}
+    loadConsentedKlaviyo();
+    if (!window.klaviyo || typeof window.klaviyo.push !== 'function') return;
+    window.klaviyo.push(['identify', { email: email }]);
+    window.klaviyo.push(['track', 'Joined Velq Early Access', {
       Product: 'Strawberry Protein + Fiber Gummies', Source: source
     }]);
   }
+  function installInlineTrackingChoice() {
+    var form = document.getElementById('waitlist-form');
+    if (!form || form.querySelector('[name="tracking_consent"]')) return;
+    var submit = form.querySelector('[type="submit"]');
+    if (!submit) return;
+    var label = document.createElement('label');
+    label.className = 'velq-inline-tracking';
+    label.innerHTML = '<input type="checkbox" name="tracking_consent"><span>Optional: let Velq recognize repeat visits for relevant launch updates. <a href="/privacy/">Privacy details</a>.</span>';
+    form.insertBefore(label, submit);
+  }
+  // Existing subscribers are recognized through Klaviyo cookies on return visits,
+  // but we never store their email address in localStorage.
+  loadConsentedKlaviyo();
+  if (document.readyState === 'loading') document.addEventListener('DOMContentLoaded', installInlineTrackingChoice, { once: true });
+  else installInlineTrackingChoice();
   window.addEventListener('velq:waitlist-success', function (e) {
     if (!e.detail || !e.detail.eventId) return;
     if (e.detail.source !== 'popup') {
       var inline = document.getElementById('waitlist-form');
       var email = inline && inline.elements && inline.elements.email;
       var consent = inline && inline.elements && inline.elements.consent;
-      if (email && consent && consent.checked) syncIdentifiedKlaviyo(email.value.trim(), 'inline_waitlist');
+      var tracking = inline && inline.elements && inline.elements.tracking_consent;
+      if (email && consent && consent.checked) syncIdentifiedKlaviyo(email.value.trim(), 'inline_waitlist', Boolean(tracking && tracking.checked));
     }
     if (e.detail.source === 'popup') save(JOINED_KEY, '1');
     else markJoined();
@@ -112,6 +143,7 @@
       '<label class="velq-lead-label" for="velq-lead-email">Email address</label>',
       '<input id="velq-lead-email" name="email" type="email" placeholder="you@example.com" autocomplete="email" inputmode="email" maxlength="254" required>',
       '<label class="velq-lead-consent"><input name="consent" type="checkbox" required><span>I agree to receive Velq launch and product updates by email. I can unsubscribe anytime.</span></label>',
+      '<label class="velq-lead-consent velq-tracking-optional"><input name="tracking_consent" type="checkbox"><span>Optional: allow Velq to recognize return visits using Klaviyo cookies. See our <a href="/privacy/">privacy details</a>.</span></label>',
       '<input class="velq-lead-honeypot" name="company" type="text" tabindex="-1" autocomplete="off" aria-hidden="true">',
       '<button class="velq-lead-submit" type="submit">GET EARLY ACCESS <span aria-hidden="true">&rarr;</span></button>',
       '<p class="velq-lead-feedback" role="status" aria-live="polite"></p>',
@@ -156,9 +188,13 @@
           window.dispatchEvent(new CustomEvent('velq:waitlist-success', {
             detail: { eventId: result.eventId, source: 'popup' }
           }));
-          syncIdentifiedKlaviyo(email, 'popup');
+          syncIdentifiedKlaviyo(email, 'popup', Boolean(form.elements.tracking_consent && form.elements.tracking_consent.checked));
         } else {
           markJoined();
+        }
+        // A successful existing-list entry may still request cookie tracking.
+        if (result.status === 'confirmed' && result.newLead !== true) {
+          syncIdentifiedKlaviyo(email, 'popup', Boolean(form.elements.tracking_consent && form.elements.tracking_consent.checked));
         }
         if (overlay === el) {
           form.innerHTML = '<div class="velq-lead-thanks" role="status"><strong>You are on the list!</strong><p>We will email you when Velq launches.</p><button class="velq-lead-done" type="button">DONE</button></div>';
