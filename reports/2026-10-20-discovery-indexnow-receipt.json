@@ -1,0 +1,283 @@
+{
+  "schema_version": 1,
+  "started_at": "2026-10-20T20:26:33+00:00",
+  "mode": "submit",
+  "origin": "https://velqnutrition.com",
+  "endpoint": "https://api.indexnow.org/indexnow",
+  "preflight": [
+    {
+      "url": "https://velqnutrition.com/",
+      "http_status": 200,
+      "canonical": "https://velqnutrition.com/",
+      "robots_allowed": true,
+      "noindex": false
+    },
+    {
+      "url": "https://velqnutrition.com/media",
+      "http_status": 200,
+      "canonical": "https://velqnutrition.com/media",
+      "robots_allowed": true,
+      "noindex": false
+    },
+    {
+      "url": "https://velqnutrition.com/research",
+      "http_status": 200,
+      "canonical": "https://velqnutrition.com/research",
+      "robots_allowed": true,
+      "noindex": false
+    },
+    {
+      "url": "https://velqnutrition.com/research/gummy-serving-study-2026",
+      "http_status": 200,
+      "canonical": "https://velqnutrition.com/research/gummy-serving-study-2026",
+      "robots_allowed": true,
+      "noindex": false
+    },
+    {
+      "url": "https://velqnutrition.com/tools/serving-comparison-calculator",
+      "http_status": 200,
+      "canonical": "https://velqnutrition.com/tools/serving-comparison-calculator",
+      "robots_allowed": true,
+      "noindex": false
+    },
+    {
+      "url": "https://velqnutrition.com/tools/nutrition-label-value-calculator",
+      "http_status": 200,
+      "canonical": "https://velqnutrition.com/tools/nutrition-label-value-calculator",
+      "robots_allowed": true,
+      "noindex": false
+    },
+    {
+      "url": "https://velqnutrition.com/blog/best-fiber-gummies-2026",
+      "http_status": 200,
+      "canonical": "https://velqnutrition.com/blog/best-fiber-gummies-2026",
+      "robots_allowed": true,
+      "noindex": false
+    },
+    {
+      "url": "https://velqnutrition.com/blog/protein-gummies-with-fiber-comparison",
+      "http_status": 200,
+      "canonical": "https://velqnutrition.com/blog/protein-gummies-with-fiber-comparison",
+      "robots_allowed": true,
+      "noindex": false
+    },
+    {
+      "url": "https://velqnutrition.com/blog/protein-gummies-for-adults",
+      "http_status": 200,
+      "canonical": "https://velqnutrition.com/blog/protein-gummies-for-adults",
+      "robots_allowed": true,
+      "noindex": false
+    },
+    {
+      "url": "https://velqnutrition.com/blog/fiber-gummies-for-adults-guide",
+      "http_status": 200,
+      "canonical": "https://velqnutrition.com/blog/fiber-gummies-for-adults-guide",
+      "robots_allowed": true,
+      "noindex": false
+    },
+    {
+      "url": "https://velqnutrition.com/blog/fiber-gummies-vs-psyllium-husk",
+      "http_status": 200,
+      "canonical": "https://velqnutrition.com/blog/fiber-gummies-vs-psyllium-husk",
+      "robots_allowed": true,
+      "noindex": false
+    },
+    {
+      "url": "https://velqnutrition.com/blog/caffeine-l-theanine-vs-caffeine",
+      "http_status": 200,
+      "canonical": "https://velqnutrition.com/blog/caffeine-l-theanine-vs-caffeine",
+      "robots_allowed": true,
+      "noindex": false
+    },
+    {
+      "url": "https://velqnutrition.com/blog/protein-vs-fiber-why-your-body-needs-both",
+      "http_status": 200,
+      "canonical": "https://velqnutrition.com/blog/protein-vs-fiber-why-your-body-needs-both",
+      "robots_allowed": true,
+      "noindex": false
+    },
+    {
+      "url": "https://velqnutrition.com/blog/how-much-fiber-do-you-need-every-day",
+      "http_status": 200,
+      "canonical": "https://velqnutrition.com/blog/how-much-fiber-do-you-need-every-day",
+      "robots_allowed": true,
+      "noindex": false
+    },
+    {
+      "url": "https://velqnutrition.com/blog/simple-daily-wellness-routine-that-sticks",
+      "http_status": 200,
+      "canonical": "https://velqnutrition.com/blog/simple-daily-wellness-routine-that-sticks",
+      "robots_allowed": true,
+      "noindex": false
+    },
+    {
+      "url": "https://velqnutrition.com/blog/caffeine-gummies-vs-coffee-whats-the-difference",
+      "http_status": 200,
+      "canonical": "https://velqnutrition.com/blog/caffeine-gummies-vs-coffee-whats-the-difference",
+      "robots_allowed": true,
+      "noindex": false
+    },
+    {
+      "url": "https://velqnutrition.com/blog/how-much-protein-do-you-actually-need",
+      "http_status": 200,
+      "canonical": "https://velqnutrition.com/blog/how-much-protein-do-you-actually-need",
+      "robots_allowed": true,
+      "noindex": false
+    },
+    {
+      "url": "https://velqnutrition.com/blog/caffeine-gummies-vs-energy-drinks",
+      "http_status": 200,
+      "canonical": "https://velqnutrition.com/blog/caffeine-gummies-vs-energy-drinks",
+      "robots_allowed": true,
+      "noindex": false
+    },
+    {
+      "url": "https://velqnutrition.com/blog/protein-and-fiber-gummies-vs-separate-supplements",
+      "http_status": 200,
+      "canonical": "https://velqnutrition.com/blog/protein-and-fiber-gummies-vs-separate-supplements",
+      "robots_allowed": true,
+      "noindex": false
+    },
+    {
+      "url": "https://velqnutrition.com/blog/protein-and-fiber-gummies-buying-guide",
+      "http_status": 200,
+      "canonical": "https://velqnutrition.com/blog/protein-and-fiber-gummies-buying-guide",
+      "robots_allowed": true,
+      "noindex": false
+    },
+    {
+      "url": "https://velqnutrition.com/blog/protein-gummies-vs-protein-bars",
+      "http_status": 200,
+      "canonical": "https://velqnutrition.com/blog/protein-gummies-vs-protein-bars",
+      "robots_allowed": true,
+      "noindex": false
+    },
+    {
+      "url": "https://velqnutrition.com/blog/fiber-gummies-vs-fiber-powder",
+      "http_status": 200,
+      "canonical": "https://velqnutrition.com/blog/fiber-gummies-vs-fiber-powder",
+      "robots_allowed": true,
+      "noindex": false
+    },
+    {
+      "url": "https://velqnutrition.com/blog/high-protein-high-fiber-snacks-no-refrigeration",
+      "http_status": 200,
+      "canonical": "https://velqnutrition.com/blog/high-protein-high-fiber-snacks-no-refrigeration",
+      "robots_allowed": true,
+      "noindex": false
+    },
+    {
+      "url": "https://velqnutrition.com/blog/30-grams-fiber-high-protein-diet",
+      "http_status": 200,
+      "canonical": "https://velqnutrition.com/blog/30-grams-fiber-high-protein-diet",
+      "robots_allowed": true,
+      "noindex": false
+    },
+    {
+      "url": "https://velqnutrition.com/blog/build-muscle-without-protein-shakes",
+      "http_status": 200,
+      "canonical": "https://velqnutrition.com/blog/build-muscle-without-protein-shakes",
+      "robots_allowed": true,
+      "noindex": false
+    },
+    {
+      "url": "https://velqnutrition.com/blog/portion-sizes-muscle-gain-without-counting-calories",
+      "http_status": 200,
+      "canonical": "https://velqnutrition.com/blog/portion-sizes-muscle-gain-without-counting-calories",
+      "robots_allowed": true,
+      "noindex": false
+    },
+    {
+      "url": "https://velqnutrition.com/blog/what-to-eat-glp1-not-hungry",
+      "http_status": 200,
+      "canonical": "https://velqnutrition.com/blog/what-to-eat-glp1-not-hungry",
+      "robots_allowed": true,
+      "noindex": false
+    },
+    {
+      "url": "https://velqnutrition.com/blog/glp1-protein-snacks-without-shakes",
+      "http_status": 200,
+      "canonical": "https://velqnutrition.com/blog/glp1-protein-snacks-without-shakes",
+      "robots_allowed": true,
+      "noindex": false
+    },
+    {
+      "url": "https://velqnutrition.com/blog/glp1-constipation-fiber",
+      "http_status": 200,
+      "canonical": "https://velqnutrition.com/blog/glp1-constipation-fiber",
+      "robots_allowed": true,
+      "noindex": false
+    },
+    {
+      "url": "https://velqnutrition.com/blog/maintain-muscle-glp1-low-appetite",
+      "http_status": 200,
+      "canonical": "https://velqnutrition.com/blog/maintain-muscle-glp1-low-appetite",
+      "robots_allowed": true,
+      "noindex": false
+    },
+    {
+      "url": "https://velqnutrition.com/blog/tired-on-glp1-food-fluids-causes",
+      "http_status": 200,
+      "canonical": "https://velqnutrition.com/blog/tired-on-glp1-food-fluids-causes",
+      "robots_allowed": true,
+      "noindex": false
+    }
+  ],
+  "batches": [
+    {
+      "urls": [
+        "https://velqnutrition.com/",
+        "https://velqnutrition.com/media",
+        "https://velqnutrition.com/research",
+        "https://velqnutrition.com/research/gummy-serving-study-2026",
+        "https://velqnutrition.com/tools/serving-comparison-calculator",
+        "https://velqnutrition.com/tools/nutrition-label-value-calculator",
+        "https://velqnutrition.com/blog/best-fiber-gummies-2026",
+        "https://velqnutrition.com/blog/protein-gummies-with-fiber-comparison",
+        "https://velqnutrition.com/blog/protein-gummies-for-adults",
+        "https://velqnutrition.com/blog/fiber-gummies-for-adults-guide",
+        "https://velqnutrition.com/blog/fiber-gummies-vs-psyllium-husk",
+        "https://velqnutrition.com/blog/caffeine-l-theanine-vs-caffeine",
+        "https://velqnutrition.com/blog/protein-vs-fiber-why-your-body-needs-both",
+        "https://velqnutrition.com/blog/how-much-fiber-do-you-need-every-day",
+        "https://velqnutrition.com/blog/simple-daily-wellness-routine-that-sticks",
+        "https://velqnutrition.com/blog/caffeine-gummies-vs-coffee-whats-the-difference",
+        "https://velqnutrition.com/blog/how-much-protein-do-you-actually-need",
+        "https://velqnutrition.com/blog/caffeine-gummies-vs-energy-drinks",
+        "https://velqnutrition.com/blog/protein-and-fiber-gummies-vs-separate-supplements",
+        "https://velqnutrition.com/blog/protein-and-fiber-gummies-buying-guide",
+        "https://velqnutrition.com/blog/protein-gummies-vs-protein-bars",
+        "https://velqnutrition.com/blog/fiber-gummies-vs-fiber-powder",
+        "https://velqnutrition.com/blog/high-protein-high-fiber-snacks-no-refrigeration",
+        "https://velqnutrition.com/blog/30-grams-fiber-high-protein-diet",
+        "https://velqnutrition.com/blog/build-muscle-without-protein-shakes",
+        "https://velqnutrition.com/blog/portion-sizes-muscle-gain-without-counting-calories",
+        "https://velqnutrition.com/blog/what-to-eat-glp1-not-hungry",
+        "https://velqnutrition.com/blog/glp1-protein-snacks-without-shakes",
+        "https://velqnutrition.com/blog/glp1-constipation-fiber",
+        "https://velqnutrition.com/blog/maintain-muscle-glp1-low-appetite",
+        "https://velqnutrition.com/blog/tired-on-glp1-food-fluids-causes"
+      ],
+      "url_count": 31,
+      "http_status": 200,
+      "outcome": "received",
+      "checked_at": "2026-10-20T20:26:38+00:00"
+    }
+  ],
+  "indexing_confirmed": false,
+  "meaning": "IndexNow receipt is a notification result; it does not establish indexing, ranking, traffic or AI citations.",
+  "input_count": 31,
+  "unique_url_count": 31,
+  "key_verification": {
+    "url": "https://velqnutrition.com/d1d335a0e252917f7c1345bb896190c265b2826baf993531.txt",
+    "http_status": 200,
+    "matches_local_key": true
+  },
+  "robots_check": {
+    "url": "https://velqnutrition.com/robots.txt",
+    "http_status": 200,
+    "policy": "checked_bingbot_and_generic"
+  },
+  "outcome": "all_batches_received",
+  "completed_at": "2026-10-20T20:26:38+00:00"
+}

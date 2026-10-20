@@ -73,9 +73,41 @@ robots directives and unchanged unrelated responses. Existing checks cover packe
 assets, commercial page links, calculator arithmetic, HTTP route behavior,
 confirmed-signup attribution, responsive images and the single GA4 initializer.
 
-Deployment, public page/image response checks and IndexNow receipt evidence are
-recorded separately after publication. Code validation does not establish search
-index inclusion, search impressions, AI citations or actual GA4 receipt.
+### Published release and live verification
+
+Implementation was merged through [PR #25](https://github.com/josephv9/velq/pull/25)
+as commit `0748ea973470b42c06360863480c4064b55bc8f3` and verified on production
+on 20 October 2026. The release passed its pull-request check and all five
+automatically triggered checks after merging.
+
+| Live check | Observed result |
+|---|---|
+| Canonical page responses | All 47 sitemap pages returned HTTP 200 with one matching canonical URL and no detected restrictive indexing or snippet directive. |
+| Mapped image metadata | All 31 mapped pages returned the exact published absolute image URL, dimensions, descriptive alternative and large-card metadata. |
+| Sitemap coverage | 47 unique canonical pages; 35 image entries across 31 pages, representing 32 unique sitemap image URLs. |
+| Image responses | All 34 checked image assets returned valid image responses; declared primary-image dimensions matched the decoded files, and local file bytes matched deployed bytes where available. The total includes primary preview assets outside the sitemap's 32 unique images. |
+| Serving calculator | The live worked example returned 2.5 g fiber per piece for fictional A and 2 g for fictional B. The original illustration loaded at 1200 × 675 and was inspected in its page context. |
+| Cost calculator | The live worked example returned $2 and $1 per complete serving, and standardized costs of $2 and $1.25 respectively. The 1200 × 675 illustration and adjacent explanation were inspected in their page context. |
+| IndexNow | One batch containing 31 unique changed canonical URLs returned HTTP 200 at 20:26:38 UTC (13:26:38 Pacific). The existing public verification key matched, and all submitted pages passed robots and canonical preflight checks. |
+
+Evidence is retained in the
+[public verification record](2026-10-20-discovery-public-verification.json),
+[IndexNow receipt](2026-10-20-discovery-indexnow-receipt.json),
+[serving-page screenshot](2026-10-20-serving-discovery-live.jpg), and
+[cost-page screenshot](2026-10-20-value-discovery-live.jpg).
+
+GitHub checks on the deployed commit all passed:
+
+- [Prelaunch checks](https://github.com/josephv9/velq/actions/runs/39491854506)
+- [Homepage LCP release check](https://github.com/josephv9/velq/actions/runs/39491854444)
+- [Real browser GA4 validation](https://github.com/josephv9/velq/actions/runs/39491854441)
+- [Mocked waitlist and GA4 browser QA](https://github.com/josephv9/velq/actions/runs/39491854456)
+- [Live sitemap and mobile performance audit](https://github.com/josephv9/velq/actions/runs/39491854503)
+
+HTTP 200 from IndexNow confirms receipt of the submitted batch. It does not
+establish search-index inclusion, search impressions, AI citations or referral
+traffic. Passing the analytics checks does not establish receipt in Velq's GA4
+account or key-event designation.
 
 The repository's older CLAUDE.md mentions deployment from `site`. Current evidence
 from the Milestone 3 release and this preflight confirms production contains
