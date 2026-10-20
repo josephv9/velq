@@ -1,6 +1,6 @@
 # Velq Milestone 3 — research, serving comparisons and calculators
 
-Prepared 20 October 2026 (UTC). Scope: original label research and reusable tools that help Velq compete for relevant search rankings and citations.
+Published 20 October 2026. Scope: original label research and reusable tools that help Velq compete for relevant search rankings and citations.
 
 ## Deliverables
 
@@ -39,8 +39,14 @@ Successful, explicit calculator submissions emit `calculator_complete`; identica
 
 ## Deployment and outcome status
 
-Prepared for publication through the current main branch. During this session, live `velq-lead-capture.js` and the Milestone 2 CSS matched main exactly; the older site branch did not contain the current deployed source set. Main advanced concurrently with popup QA and Milestone 2 report changes; those commits were preserved before this release.
+Implementation and production publication are complete. [PR #23](https://github.com/josephv9/velq/pull/23) merged into main at [`5d83e087a60ea47476534baa45318bc814e6e9b8`](https://github.com/josephv9/velq/commit/5d83e087a60ea47476534baa45318bc814e6e9b8). The complete uploaded tree matched the staged, tested files. The [pull-request validation run](https://github.com/josephv9/velq/actions/runs/39482712897) and [post-merge prelaunch checks](https://github.com/josephv9/velq/actions/runs/39482815337) passed, including the reproducible dataset generation gate.
 
-Publication is verified separately after the release by checking the public page markers, source downloads, sitemap entries and browser behavior. Current Google index inclusion, rankings, search traffic, earned citations and actual GA4 property receipt cannot be inferred from passing code tests. No new ranking or citation outcome is claimed here.
+At 12:23 p.m. Pacific on 20 October 2026 (19:23 UTC), public HTTPS checks passed for all 15 requested resources: the five canonical pages, eight research assets, sitemap and analytics script. The five pages returned HTTP 200 with the intended canonical URLs and milestone content. All eight public assets matched the release bytes, including CSV, JSON, chart files, styles and scripts. The live sitemap contains the three new URLs, and the deployed analytics sanitizer accepts research paths. Exact checks are recorded in [the deployment evidence](2026-10-20-milestone3-public-verification.json).
+
+An actual browser then loaded both production calculators. Selecting OLLY and Metamucil presets and a one-piece portion produced 2.5 g and 1.67 g fiber per gummy, respectively, while preserving unknown protein values. Keyboard submission of the value calculator's clearly fictional worked example produced $2.00 versus $1.00 per serving and $2.00 versus $1.25 per 10 g protein and per 5 g fiber. The [live comparison screenshot](velq-milestone3-serving-live-20261020.jpg) records the displayed results. No signup was submitted during these production checks; GA4 property receipt was not inspected.
+
+Main's existing public lead-capture and Milestone 2 assets matched the current deployment before release; the older site branch lacked the deployed source set. Concurrent popup QA and Milestone 2 report commits were preserved. Publication through main is now independently confirmed by the live milestone assets.
+
+Current Google index inclusion, rankings, search traffic, earned citations and actual GA4 property receipt cannot be inferred from passing code or browser tests. No new ranking or citation outcome is claimed here.
 
 The keyword map records distinct page intentions. Assess nonbranded impressions, clicks, CTR and position over 14–28 days after indexing, alongside genuine referring-domain citations and organic `waitlist_signup_success` conversions. These measurements remain separate from technical completion.

@@ -1,0 +1,143 @@
+{
+  "checked_at": "2026-10-20T19:23:06.791809+00:00",
+  "passed": true,
+  "results": [
+    {
+      "path": "/research",
+      "status": "200",
+      "effective_url": "https://velqnutrition.com/research",
+      "bytes": 8106,
+      "ok": true,
+      "milestone_marker": true,
+      "canonical": [
+        "https://velqnutrition.com/research"
+      ]
+    },
+    {
+      "path": "/research/gummy-serving-study-2026",
+      "status": "200",
+      "effective_url": "https://velqnutrition.com/research/gummy-serving-study-2026",
+      "bytes": 29535,
+      "ok": true,
+      "milestone_marker": true,
+      "canonical": [
+        "https://velqnutrition.com/research/gummy-serving-study-2026"
+      ]
+    },
+    {
+      "path": "/tools/serving-comparison-calculator",
+      "status": "200",
+      "effective_url": "https://velqnutrition.com/tools/serving-comparison-calculator",
+      "bytes": 18731,
+      "ok": true,
+      "milestone_marker": true,
+      "canonical": [
+        "https://velqnutrition.com/tools/serving-comparison-calculator"
+      ]
+    },
+    {
+      "path": "/tools/nutrition-label-value-calculator",
+      "status": "200",
+      "effective_url": "https://velqnutrition.com/tools/nutrition-label-value-calculator",
+      "bytes": 15465,
+      "ok": true,
+      "milestone_marker": true,
+      "canonical": [
+        "https://velqnutrition.com/tools/nutrition-label-value-calculator"
+      ]
+    },
+    {
+      "path": "/blog/protein-gummies-with-fiber-comparison",
+      "status": "200",
+      "effective_url": "https://velqnutrition.com/blog/protein-gummies-with-fiber-comparison",
+      "bytes": 30103,
+      "ok": true,
+      "milestone_marker": true,
+      "canonical": [
+        "https://velqnutrition.com/blog/protein-gummies-with-fiber-comparison"
+      ]
+    },
+    {
+      "path": "/assets/research/gummy-serving-comparison-2026.svg",
+      "status": "200",
+      "effective_url": "https://velqnutrition.com/assets/research/gummy-serving-comparison-2026.svg",
+      "bytes": 3244,
+      "ok": true,
+      "matches_release": true
+    },
+    {
+      "path": "/assets/research/research.css",
+      "status": "200",
+      "effective_url": "https://velqnutrition.com/assets/research/research.css",
+      "bytes": 6856,
+      "ok": true,
+      "matches_release": true
+    },
+    {
+      "path": "/assets/research/gummy-labels-2026-10-20.json",
+      "status": "200",
+      "effective_url": "https://velqnutrition.com/assets/research/gummy-labels-2026-10-20.json",
+      "bytes": 9600,
+      "ok": true,
+      "matches_release": true
+    },
+    {
+      "path": "/assets/research/gummy-serving-comparison-2026.png",
+      "status": "200",
+      "effective_url": "https://velqnutrition.com/assets/research/gummy-serving-comparison-2026.png",
+      "bytes": 75717,
+      "ok": true,
+      "matches_release": true
+    },
+    {
+      "path": "/assets/research/calculators.js",
+      "status": "200",
+      "effective_url": "https://velqnutrition.com/assets/research/calculators.js",
+      "bytes": 16450,
+      "ok": true,
+      "matches_release": true
+    },
+    {
+      "path": "/assets/research/calculators.css",
+      "status": "200",
+      "effective_url": "https://velqnutrition.com/assets/research/calculators.css",
+      "bytes": 7958,
+      "ok": true,
+      "matches_release": true
+    },
+    {
+      "path": "/assets/research/research-events.js",
+      "status": "200",
+      "effective_url": "https://velqnutrition.com/assets/research/research-events.js",
+      "bytes": 2011,
+      "ok": true,
+      "matches_release": true
+    },
+    {
+      "path": "/assets/research/gummy-labels-2026-10-20.csv",
+      "status": "200",
+      "effective_url": "https://velqnutrition.com/assets/research/gummy-labels-2026-10-20.csv",
+      "bytes": 5373,
+      "ok": true,
+      "matches_release": true
+    },
+    {
+      "path": "/sitemap.xml",
+      "status": "200",
+      "effective_url": "https://velqnutrition.com/sitemap.xml",
+      "bytes": 5026,
+      "ok": true,
+      "new_urls_present": true
+    },
+    {
+      "path": "/analytics.js",
+      "status": "200",
+      "effective_url": "https://velqnutrition.com/analytics.js",
+      "bytes": 6456,
+      "ok": true,
+      "research_attribution_present": true
+    }
+  ],
+  "release_commit": "5d83e087a60ea47476534baa45318bc814e6e9b8",
+  "pull_request": "https://github.com/josephv9/velq/pull/23"
+}
