@@ -58,7 +58,7 @@ function velq_conversion_response(string $body, string $path): string {
         . '<script src="/analytics.js?v=conversion-20261020" defer></script>';
     $scripts = '<script src="/velq-waitlist.js?v=conversion-20261020" defer></script>'
         . '<script src="/app.js?v=popup-cta-20261020" defer></script>'
-        . '<script src="/velq-lead-capture.js?v=popup-cta-20261020" defer></script>';
+        . '<script src="/velq-lead-capture.js?v=popup-copy-20261020b" defer></script>';
     // Preserve current blocks in place when this filter is applied again, so
     // later image/preload metadata stays in its original order. Remove any
     // additional old or duplicated asset tags around the preserved blocks.
