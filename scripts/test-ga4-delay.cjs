@@ -16,6 +16,7 @@ const ctx={
   window:{addEventListener:(type,fn)=>{loadHandlers[type]=fn;},requestAnimationFrame:fn=>{frames++;fn();}},
   document:{readyState:'loading',createElement:()=>({}),head:{appendChild:node=>{apps++;assert.match(node.src,/googletagmanager/)}},addEventListener:(type,fn)=>{interactions[type]=fn;}},
   dataLayer,Date,setTimeout:fn=>{queuedTimers.push(fn);},
+  requestAnimationFrame:fn=>{frames++;fn();},
   gtag:function(){dataLayer.push(Array.from(arguments));}
 };
 ctx.window.dataLayer=dataLayer;ctx.window.gtag=ctx.gtag;
