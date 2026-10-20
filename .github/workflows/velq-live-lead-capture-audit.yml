@@ -1,0 +1,20 @@
+name: Velq live lead capture deployment check
+on:
+  push:
+    branches: [main]
+    paths:
+      - '.github/workflows/velq-live-lead-capture-audit.yml'
+      - 'scripts/check-live-lead-capture.py'
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+jobs:
+  verify-production:
+    runs-on: ubuntu-latest
+    timeout-minutes: 8
+    steps:
+      - uses: actions/checkout@v4
+      - name: Check production HTML, popup, analytics, consent and Klaviyo files
+        run: python3 scripts/check-live-lead-capture.py
