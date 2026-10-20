@@ -37,12 +37,12 @@ ob_start(static function (string $html): string {
     );
     // Approved Velq Journal editorial cover refresh. Keep retired articles untouched.
     $html = strtr($html, [
-        "https://cdn.shopify.com/s/files/1/0723/8372/5647/files/protein-vs-fiber-why-your-body-needs-both-cover-oct2026-v3.jpg?v=1791935150" => "https://cdn.shopify.com/s/files/1/0723/8372/5647/files/velq-journal-protein-vs-fiber-oct2026.jpg?v=1792109199",
+        "https://cdn.shopify.com/s/files/1/0723/8372/5647/files/protein-vs-fiber-why-your-body-needs-both-cover-oct2026-v3.jpg?v=1791935150" => "https://velqnutrition.com/assets/journal/velq-journal-protein-vs-fiber-20261020-v6.jpg",
         "https://cdn.shopify.com/s/files/1/0723/8372/5647/files/how-much-fiber-do-you-need-every-day-cover-oct2026-v3.jpg?v=1791935155" => "https://velqnutrition.com/assets/journal/velq-journal-fiber-daily-20261020-v4.jpg",
-        "https://cdn.shopify.com/s/files/1/0723/8372/5647/files/simple-daily-wellness-routine-that-sticks-cover-oct2026-v3.jpg?v=1791935160" => "https://velqnutrition.com/assets/journal/velq-journal-wellness-routine-20261020-v4.jpg",
-        "https://cdn.shopify.com/s/files/1/0723/8372/5647/articles/velq-caffeine-coffee-cover.jpg?v=1791605986" => "https://cdn.shopify.com/s/files/1/0723/8372/5647/files/velq-journal-caffeine-vs-coffee-oct2026.jpg?v=1792109249",
+        "https://cdn.shopify.com/s/files/1/0723/8372/5647/files/simple-daily-wellness-routine-that-sticks-cover-oct2026-v3.jpg?v=1791935160" => "https://velqnutrition.com/assets/journal/velq-journal-wellness-routine-20261020-v6.jpg",
+        "https://cdn.shopify.com/s/files/1/0723/8372/5647/articles/velq-caffeine-coffee-cover.jpg?v=1791605986" => "https://velqnutrition.com/assets/journal/velq-journal-coffee-20261020-v6.jpg",
         "https://cdn.shopify.com/s/files/1/0723/8372/5647/articles/velq-protein-daily-cover.jpg?v=1791605989" => "https://velqnutrition.com/assets/journal/velq-journal-protein-needs-20261020-v4.jpg",
-        "https://cdn.shopify.com/s/files/1/0723/8372/5647/articles/velq-caffeine-energy-drinks-cover.jpg?v=1791606001" => "https://cdn.shopify.com/s/files/1/0723/8372/5647/files/velq-journal-caffeine-vs-energy-drinks-oct2026.jpg?v=1792109254",
+        "https://cdn.shopify.com/s/files/1/0723/8372/5647/articles/velq-caffeine-energy-drinks-cover.jpg?v=1791606001" => "https://velqnutrition.com/assets/journal/velq-journal-energy-drinks-20261020-v6.jpg",
         "https://cdn.shopify.com/s/files/1/0723/8372/5647/articles/velq-separate-supplements-cover.jpg?v=1791606004" => "https://velqnutrition.com/assets/journal/velq-journal-gummies-vs-supplements-20261020-v4.jpg",
         "https://cdn.shopify.com/s/files/1/0723/8372/5647/articles/velq-buying-guide-cover.jpg?v=1791606007" => "https://velqnutrition.com/assets/journal/velq-journal-buyer-guide-20261020-v4.jpg",
         "https://cdn.shopify.com/s/files/1/0723/8372/5647/files/velq-journal-fiber-gummies-vs-powder-oct2026.jpg?v=1792109205" => "https://velqnutrition.com/assets/journal/velq-journal-fiber-gummies-vs-powder-20261020-v4.jpg",
@@ -51,7 +51,7 @@ ob_start(static function (string $html): string {
         "https://cdn.shopify.com/s/files/1/0723/8372/5647/files/velq-journal-buyer-guide-oct2026.jpg?v=1792109222" => "https://velqnutrition.com/assets/journal/velq-journal-buyer-guide-20261020-v4.jpg",
         "https://cdn.shopify.com/s/files/1/0723/8372/5647/files/velq-journal-gummies-vs-supplements-oct2026.jpg?v=1792109244" => "https://velqnutrition.com/assets/journal/velq-journal-gummies-vs-supplements-20261020-v4.jpg",
         "https://cdn.shopify.com/s/files/1/0723/8372/5647/files/velq-journal-protein-needs-oct2026.jpg?v=1792109233" => "https://velqnutrition.com/assets/journal/velq-journal-protein-needs-20261020-v4.jpg",
-        "https://cdn.shopify.com/s/files/1/0723/8372/5647/files/velq-journal-wellness-routine-oct2026.jpg?v=1792109238" => "https://velqnutrition.com/assets/journal/velq-journal-wellness-routine-20261020-v4.jpg",
+        "https://cdn.shopify.com/s/files/1/0723/8372/5647/files/velq-journal-wellness-routine-oct2026.jpg?v=1792109238" => "https://velqnutrition.com/assets/journal/velq-journal-wellness-routine-20261020-v6.jpg",
         "https://cdn.shopify.com/s/files/1/0723/8372/5647/files/velq-tired_on_glp1-2026-10.webp?v=1792103374" => "https://velqnutrition.com/assets/journal/velq-journal-glp1-tired-20261020-v5.jpg",
         "https://cdn.shopify.com/s/files/1/0723/8372/5647/files/velq-glp1_low_appetite-2026-10.webp?v=1792103442" => "https://velqnutrition.com/assets/journal/velq-journal-glp1-not-hungry-20261020-v5.jpg",
         "https://cdn.shopify.com/s/files/1/0723/8372/5647/files/velq-30g_fiber-2026-10.webp?v=1792103452" => "https://velqnutrition.com/assets/journal/velq-journal-fiber-thirty-20261020-v5.jpg",
@@ -60,11 +60,16 @@ ob_start(static function (string $html): string {
         "https://cdn.shopify.com/s/files/1/0723/8372/5647/files/velq-glp1_constipation_fiber-2026-10.webp?v=1792103433" => "https://velqnutrition.com/assets/journal/velq-journal-glp1-constipation-20261020-v5.jpg",
         "https://cdn.shopify.com/s/files/1/0723/8372/5647/files/velq-protein_fiber_snacks-2026-10.webp?v=1792103513" => "https://velqnutrition.com/assets/journal/velq-journal-snacks-to-go-20261020-v5.jpg",
         "https://cdn.shopify.com/s/files/1/0723/8372/5647/files/velq-portion_sizes_muscle-2026-10.webp?v=1792103448" => "https://velqnutrition.com/assets/journal/velq-journal-portions-muscle-20261020-v5.jpg",
+        "https://cdn.shopify.com/s/files/1/0723/8372/5647/files/velq-journal-caffeine-vs-energy-drinks-oct2026.jpg?v=1792109254" => "https://velqnutrition.com/assets/journal/velq-journal-energy-drinks-20261020-v6.jpg",
+        "https://cdn.shopify.com/s/files/1/0723/8372/5647/files/velq-journal-caffeine-vs-coffee-oct2026.jpg?v=1792109249" => "https://velqnutrition.com/assets/journal/velq-journal-coffee-20261020-v6.jpg",
+        "https://velqnutrition.com/assets/journal/velq-journal-wellness-routine-20261020-v4.jpg" => "https://velqnutrition.com/assets/journal/velq-journal-wellness-routine-20261020-v6.jpg",
+        "https://cdn.shopify.com/s/files/1/0723/8372/5647/files/velq-journal-protein-vs-fiber-oct2026.jpg?v=1792109199" => "https://velqnutrition.com/assets/journal/velq-journal-protein-vs-fiber-20261020-v6.jpg",
+        "https://cdn.shopify.com/s/files/1/0723/8372/5647/files/velq-glp1_protein_snacks-2026-10.webp?v=1792103438" => "https://velqnutrition.com/assets/journal/velq-journal-glp1-protein-snacks-20261020-v6.jpg",
     ]);
 
     // The approved full-width covers are 1536 x 864. Match intrinsic
     // dimensions without cropping or changing any other Journal artwork.
-    $approvedCoverPattern = '~https://velqnutrition\.com/assets/journal/velq-journal-[a-z0-9-]+-20261020-v[45]\.jpg~';
+    $approvedCoverPattern = '~https://velqnutrition\.com/assets/journal/velq-journal-[a-z0-9-]+-20261020-v[456]\.jpg~';
     $html = preg_replace_callback(
         '~<img\b[^>]*>~i',
         static function (array $match) use ($approvedCoverPattern): string {
