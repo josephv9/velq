@@ -11,10 +11,12 @@
   config.ga4 = ID;
   window.VELQ_ANALYTICS = config;
 
-  // Bridge the older live popup's backend-confirmed success into the site's
-  // primary GA4 lead events. Do not count attempts, duplicate signups or PII.
-  var queue = window.dataLayer = window.dataLayer || [];
-  if (!window.__velqNativePopupLeadBridgeInstalled) {
+  // The older production popup emits a server-confirmed lead event, but
+  // doesn't emit Velq's canonical GA4 event. Add only the missing aliases.
+  function installNativePopupBridge() {
+    var queue = window.dataLayer;
+    if (!queue || typeof queue.push !== 'function') return;
+    if (window.__velqNativePopupLeadBridgeInstalled) return;
     window.__velqNativePopupLeadBridgeInstalled = true;
     var originalPush = queue.push;
     var bridgedOnce = false;
@@ -39,8 +41,14 @@
       return result;
     };
   }
-
-  if (document.querySelector('script[src="/analytics.js"]')) return;
+  if (document.querySelector('script[src="/analytics.js"]')) {
+    if (document.readyState === 'loading' && document.addEventListener) {
+      document.addEventListener('DOMContentLoaded', installNativePopupBridge, {once:true});
+    } else {
+      installNativePopupBridge();
+    }
+    return;
+  }
   var s = document.createElement('script');
   s.async = true;
   s.src = 'https://www.googletagmanager.com/gtag/js?id=' + ID;
@@ -55,4 +63,5 @@
   gtag('config', ID, {
     linker: { domains: ['velqnutrition.com', 'qusbk4-9s.myshopify.com'] }
   });
+  installNativePopupBridge();
 })();
