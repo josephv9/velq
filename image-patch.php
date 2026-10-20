@@ -9,32 +9,6 @@ ob_start(static function (string $html): string {
     if ($assetPath === '/analytics-config.js') {
         return str_replace('G-KTHFTZ9XEM', 'G-F93RK1P0H5', $html);
     }
-    // Preserve the packed analytics event queue but postpone fetching the large
-    // third-party GA4 tag until initial render, a user action, or at most 2s.
-    // This optimization does not change the waitlist confirmation conditions.
-    if ($assetPath === '/analytics.js' && str_contains($html, 'googletagmanager.com/gtag/js')) {
-        $replacement = <<<'JS'
-let tagStarted = false;
-    const startTag = () => {
-      if (tagStarted) return;
-      tagStarted = true;
-      document.head.appendChild(script);
-    };
-    const afterLoad = () => {
-      if (typeof window.requestAnimationFrame === 'function') {
-        requestAnimationFrame(() => requestAnimationFrame(startTag));
-      } else { startTag(); }
-    };
-    if (document.readyState === 'complete') afterLoad();
-    else window.addEventListener('load', afterLoad, {once:true});
-    document.addEventListener('pointerdown', startTag, {once:true, passive:true});
-    document.addEventListener('keydown', startTag, {once:true});
-    window.addEventListener('pagehide', startTag, {once:true});
-    setTimeout(startTag, 2000);
-JS;
-        $modified = preg_replace('~document\.head\.appendChild\(script\);~', $replacement, $html, 1, $count);
-        return $count === 1 && is_string($modified) ? $modified : $html;
-    }
     if (stripos($html, '<html') === false) {
         return $html;
     }
