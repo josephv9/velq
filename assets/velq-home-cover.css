@@ -149,3 +149,9 @@ body.velq-cover-home{--ink:#080808;--muted:#595959;--line:#e8e8e8;--red:#080808;
 
 /* Keep homepage Journal cover lettering inside the frame at every width. */
 .velq-cover-home .home-journal .journal-card img.journal-cover{display:block;width:100%!important;max-width:100%;height:auto!important;aspect-ratio:16/9;object-fit:contain!important;object-position:center center!important;margin:0 auto;}
+
+/* Gym lifestyle background for the existing formula section. */
+.velq-cover-home #ingredients.formula-section{background-color:#111;background-image:linear-gradient(90deg,rgba(0,0,0,.78),rgba(0,0,0,.42)),url('/assets/velq-gym-formula-20261020.webp');background-size:cover;background-repeat:no-repeat;background-position:center 38%;min-height:640px;align-items:center;overflow:hidden;}
+.velq-cover-home #ingredients .formula-accordion details{background:rgba(12,12,12,.56);border-color:rgba(255,255,255,.32);backdrop-filter:blur(5px);-webkit-backdrop-filter:blur(5px);}
+.velq-cover-home #ingredients .formula-heading p,.velq-cover-home #ingredients .formula-accordion p{color:#f2f2f2;}
+@media(max-width:620px){.velq-cover-home #ingredients.formula-section{background-image:linear-gradient(180deg,rgba(0,0,0,.44),rgba(0,0,0,.65)),url('/assets/velq-gym-formula-20261020.webp');background-position:60% center;min-height:900px;}.velq-cover-home #ingredients .formula-heading{text-shadow:0 2px 12px #0008;}}
