@@ -1,0 +1,8 @@
+.vc-visual-guide{margin:2rem 0;padding:clamp(1rem,3vw,2rem);border:1px solid #dedfcc;border-radius:1.1rem;background:#fffcec;color:#253a2e}
+.vc-visual-guide h2{font-size:clamp(1.35rem,3vw,1.8rem);line-height:1.2;margin:0 0 .65rem}
+.vc-visual-guide>p{max-width:75ch;line-height:1.65;margin:.5rem 0 1.25rem}
+.vc-visual-guide figure{margin:0}
+.vc-visual-guide img{display:block;width:100%;height:auto;border-radius:.6rem}
+.vc-visual-guide figcaption{font-size:.95rem;line-height:1.65;margin-top:1rem;max-width:80ch;color:#465548}
+.vc-visual-guide a{color:inherit;text-underline-offset:.2em}
+.vc-visual-guide a:focus-visible{outline:3px solid #aa3830;outline-offset:3px}
