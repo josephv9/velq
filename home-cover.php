@@ -21,7 +21,7 @@ function velq_home_cover(string $html, string $path): string {
     $html = str_replace('<body>', '<body class="velq-cover-home">', $html);
     $html = preg_replace('~<link\b[^>]*data-velq-responsive-preload[^>]*>~i', '', $html) ?? $html;
     $preload = '<link data-velq-responsive-preload rel="preload" as="image" href="'.$base.'-800.webp" imagesrcset="'.$base.'-480.webp 480w, '.$base.'-800.webp 800w, '.$base.'-1200.webp 1200w" imagesizes="100vw" fetchpriority="high">';
-    return str_replace('</head>', '<link rel="stylesheet" href="/assets/velq-home-cover.css?v=20261020-waitlist-gray-8">'.$preload.'</head>', $html);
+    return str_replace('</head>', '<link rel="stylesheet" href="/assets/velq-home-cover.css?v=20261020-benefit-cards-gray-9">'.$preload.'</head>', $html);
 }
 
 /** Single-product layout. Image slots accept ordinary img elements when supplied. */
@@ -36,9 +36,9 @@ function velq_single_product_layout(string $html): string {
 <section class="cadence-section" id="why-velq" aria-labelledby="why-title">
   <h2 id="why-title">Why <strong>Velq?</strong></h2>
   <div class="benefit-track" tabindex="0" aria-label="Velq formula highlights, swipe to explore">
-    <article class="benefit-card"><h3>More in your everyday.</h3><p>Protein and prebiotic fiber in one strawberry gummy format, made to fit your routine.</p><div class="benefit-media" data-image-slot="protein-fiber"><span class="metric-art">20g <small>protein</small><br>10g <small>fiber</small></span></div></article>
-    <article class="benefit-card"><h3>A little lift. A little focus.</h3><p>Caffeine and L-theanine, together in a measured, portable packet.</p><div class="benefit-media energy-art" data-image-slot="energy-focus"><span class="metric-art">80mg <small>caffeine</small><br>200mg <small>L-theanine</small></span></div></article>
-    <article class="benefit-card"><h3>Made to go with you.</h3><p>From your morning commute to your afternoon break. One product, plenty of everyday moments.</p><div class="benefit-media routine-art" data-image-slot="daily-lifestyle"><span class="routine-type">Small pack.<br><strong>Big routine.</strong></span></div></article>
+    <article class="benefit-card benefit-image-card"><img src="/assets/velq-why-everyday-20261020-800.webp" srcset="/assets/velq-why-everyday-20261020-480.webp 480w, /assets/velq-why-everyday-20261020-800.webp 800w, /assets/velq-why-everyday-20261020-1200.webp 1200w" sizes="(max-width: 620px) 80vw, (max-width: 900px) 68vw, 420px" width="1274" height="1234" loading="lazy" decoding="async" alt="Built for your everyday. Protein, fiber and caffeine. One easy gummy routine."></article>
+    <article class="benefit-card benefit-image-card"><img src="/assets/velq-why-essentials-20261020-800.webp" srcset="/assets/velq-why-essentials-20261020-480.webp 480w, /assets/velq-why-essentials-20261020-800.webp 800w, /assets/velq-why-essentials-20261020-1200.webp 1200w" sizes="(max-width: 620px) 80vw, (max-width: 900px) 68vw, 420px" width="1270" height="1239" loading="lazy" decoding="async" alt="Big on the essentials. 20g protein, 10g fiber, 80mg caffeine. All in your daily pack."></article>
+    <article class="benefit-card benefit-image-card"><img src="/assets/velq-why-ready-20261020-800.webp" srcset="/assets/velq-why-ready-20261020-480.webp 480w, /assets/velq-why-ready-20261020-800.webp 800w, /assets/velq-why-ready-20261020-1200.webp 1200w" sizes="(max-width: 620px) 80vw, (max-width: 900px) 68vw, 420px" width="1273" height="1236" loading="lazy" decoding="async" alt="Ready when you are. Strawberry gummies that fit wherever your day takes you."></article>
   </div>
   <p class="formula-note">Target amounts per packet. Product in development; final formula and label may change.</p>
 </section>

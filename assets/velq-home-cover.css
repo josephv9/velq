@@ -159,3 +159,6 @@ body.velq-cover-home{--ink:#080808;--muted:#595959;--line:#e8e8e8;--red:#080808;
 /* Keep optional signup fields legible on the light grey panel. */
 .velq-cover-home #waitlist summary,.velq-cover-home #waitlist legend{color:#444;}
 .velq-cover-home #waitlist input[type=checkbox]{accent-color:#111;}
+/* Approved complete benefit cards: retain artwork and embedded text without cropping. */
+.velq-cover-home .benefit-card.benefit-image-card{padding:0;background:transparent;overflow:hidden;align-self:start}
+.velq-cover-home .benefit-image-card>img{display:block;width:100%;height:auto;max-width:100%;object-fit:contain;border-radius:13px}
