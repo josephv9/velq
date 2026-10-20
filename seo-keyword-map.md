@@ -7,7 +7,7 @@ The keyword assignments below are **search-intent targets**, not proven rankings
 | Primary target query | Canonical destination | Visitor decision |
 |---|---|---|
 | strawberry protein and fiber gummies, Velq gummies | `/` | Learn about Velq and join the free launch waitlist |
-| protein gummies with fiber, protein fiber gummies comparison | `/blog/protein-gummies-with-fiber-comparison` | Compare named brands (Cutfruit, PROTEDY, Kuma, OAKA, Velq) using published complete-serving labels |
+| protein gummies with fiber, protein fiber gummies comparison | `/blog/protein-gummies-with-fiber-comparison` | Compare current Cutfruit, Kuma and OAKA labels; disclose unavailable PROTEDY source and Velq development status |
 | best fiber gummies 2026 | `/blog/best-fiber-gummies-2026` | Explore the disclosed, label-based buyer shortlist, separating buy-now brands from prelaunch Velq |
 | protein and fiber gummies buying guide | `/blog/protein-and-fiber-gummies-buying-guide` | Apply the ingredient, serving, caffeine, allergen and cost checklist |
 | protein gummies vs protein bars | `/blog/protein-gummies-vs-protein-bars` | Decide between two portable formats and distinguish a snack from a supplement |
@@ -43,3 +43,23 @@ Velq is not selling lemonade powder, protein drinks, electrolyte powders or stan
 Retired powder-product pages must remain omitted from navigation/sitemap and keep their existing HTTP 410 responses. Retain the fiber powder **comparison** because it serves a legitimate adjacent buying question.
 
 Avoid near-duplicate doorway pages and paid Google Search Console tooling. Improve existing content based on measured impressions, then revisit underperforming canonical pages.
+
+## Milestone 3 — original research and serving tools (2026-10-20)
+
+These are intent assignments, not measured search volumes, rank forecasts or guaranteed citations.
+
+| Primary target query | Canonical destination | Distinct visitor job |
+|---|---|---|
+| protein and fiber gummy research, gummy label data | `/research` | Find original datasets and related free tools |
+| fiber per gummy, protein gummy serving size comparison | `/research/gummy-serving-study-2026` | Inspect dated primary-source evidence, per-serving/per-piece analysis, methods and downloadable data |
+| gummy serving size calculator, protein per gummy calculator | `/tools/serving-comparison-calculator` | Calculate two exact labels per serving, piece and entered portion; use source-backed presets |
+| cost per serving calculator, fiber supplement cost calculator | `/tools/nutrition-label-value-calculator` | Compare current user-entered package costs using the established calculator URL |
+| protein gummies with fiber, Cutfruit vs Kuma serving | `/blog/protein-gummies-with-fiber-comparison` | Read the updated commercial comparison and open the corresponding source presets |
+
+The study uses seven selected manufacturer-published product versions: four fiber gummies and three protein gummies. Six rows have a verified piece count; missing or bounded fields remain unavailable for exact arithmetic. Velq targets and unavailable PROTEDY source data are excluded. This is original descriptive label analysis, not laboratory or clinical research.
+
+The research module adds 36 contextual links across 12 active dynamic pages. The existing comparison is served from its updated plain HTML source; its older packed copy is not the public source for that canonical route. `Dataset`, `Article`, `DataDownload`, `WebApplication` and breadcrumb metadata describe the real public content. The dated CSV/JSON and stable study URL support accurate citation.
+
+Measurement: `calculator_complete` records only a successful explicit submission, deduplicating identical calculations. `research_download` records a deliberate CSV/JSON click; `citation_copy` records a successful copy. These engagement events are not signup conversions. The existing primary conversion remains `waitlist_signup_success`, with research landing-page and article context preserved through the homepage journey. Inputs and product names are not added to custom analytics event parameters.
+
+After indexing, compare the new query/page pairs over 14–28 days using nonbranded impressions, clicks, CTR and average position. Assess actual referring domains and citations to the study URL and attributable organic signups separately. Deployment and valid structured data do not establish ranking gains, Google Dataset Search inclusion or earned citations.
