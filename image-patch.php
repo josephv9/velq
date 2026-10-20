@@ -23,6 +23,17 @@ ob_start(static function (string $html): string {
         return velq_discovery_response($html, $assetPath);
     }
 
+    // Remove the Compare labels tab from both header navigation variants.
+    $html = preg_replace_callback(
+        '~<nav\b[^>]*\bclass="(?:desktop-nav|mobile-nav)"[^>]*>.*?</nav>~is',
+        static fn(array $nav): string => str_replace(
+            '<a href="/tools/nutrition-label-value-calculator">Compare labels</a>',
+            '',
+            $nav[0]
+        ),
+        $html
+    ) ?? $html;
+
     // Refresh the founder cover stylesheet for visitors with the previous palette cached.
     $html = str_replace('href="/home.css?v=40"', 'href="/home.css?v=founder-white-20261020"', $html);
 
