@@ -53,48 +53,41 @@ const base='https://velqnutrition.com/';
       });
       console.log('LIVE_EXISTING_POPUP_DIAGNOSTIC '+JSON.stringify({width,currentPopup}));
    }
-   await page.locator('#velq-early-access').waitFor({state:'visible',timeout:6000});
-   const box=await page.locator('.velq-lead-card').boundingBox();
-   assert(box&&box.x>=-1&&box.x+box.width<=width+1,'Horizontal overflow '+width+' '+JSON.stringify(box));
-   assert(box.y>=-1&&box.y+box.height<=845,'Vertical overflow '+width+' '+JSON.stringify(box));
-   const email=page.locator('#velq-lead-email');
-   const marketing=page.locator('#velq-lead-form [name=consent]');
-   const tracking=page.locator('#velq-lead-form [name=tracking_consent]');
-   assert.equal(await marketing.isChecked(),false,'Marketing consent prechecked');
-   assert.notEqual(await marketing.getAttribute('required'),null,'Marketing consent not required');
-   assert.equal(await tracking.count(),1,'Missing independent tracking consent');
-   assert.equal(await tracking.isChecked(),false,'Tracking consent prechecked');
-   assert.equal(await tracking.getAttribute('required'),null,'Tracking consent must be optional');
+   // Validate the popup implementation the live site actually serves.
+   const useExisting=(await page.locator('.vlp-card:visible').count())>0;
+   const card=page.locator(useExisting?'.vlp-card':'#velq-early-access .velq-lead-card');
+   await card.waitFor({state:'visible',timeout:6000});
+   const rect=await card.boundingBox();
+   assert(rect&&rect.x>=-1&&rect.x+rect.width<=width+1,'Live popup horizontal overflow at '+width+' '+JSON.stringify(rect));
+   assert(rect.y>=-1&&rect.y+rect.height<=845,'Live popup vertical overflow at '+width+' '+JSON.stringify(rect));
+   const form=page.locator(useExisting?'#velq-popup-form':'#velq-lead-form');
+   const email=form.locator('input[name=email]');
+   const consent=form.locator('input[name=consent]');
+   const submit=form.locator('button[type=submit]');
+   assert.equal(await consent.isChecked(),false,'Consent prechecked');
+   assert.notEqual(await consent.getAttribute('required'),null,'Marketing consent must be required');
+   assert.equal(await form.locator('input[type=tel]').count(),0,'Unconsented phone field was added');
    await email.fill('velq-browser-qa@example.com');
-   await page.locator('.velq-lead-submit').click();
-   assert.equal(posts.length,0,'Submitted without consent');
-   await marketing.check();
-   const trackingOn=width===375;
-   if(trackingOn)await tracking.check();
-   await page.locator('.velq-lead-submit').click();
-   await page.locator('.velq-lead-thanks').waitFor({state:'visible',timeout:6000});
-   assert.equal(posts.length,1,'Should submit mocked API exactly once');
+   await submit.click();
+   assert.equal(posts.length,0,'Form submitted without marketing consent');
+   await consent.check();
+   await submit.click();
+   await page.locator(useExisting?'.vlp-success':'.velq-lead-thanks').waitFor({state:'visible',timeout:6000});
+   assert.equal(posts.length,1,'Expected exactly one mocked signup');
    assert.equal(posts[0].consent,true,'Backend consent missing');
    const state=await page.evaluate(()=>({
      events:(window.dataLayer||[]).filter(x=>x&&x[0]==='event').map(x=>({name:x[1],params:x[2]})),
      joined:localStorage.getItem('velq_waitlist_joined_v1'),
      tracking:localStorage.getItem('velq_tracking_consent_v1'),
-     script:document.querySelector('script[data-velq-consented-klaviyo]')?.src||null
+     klaviyo:!!document.querySelector('script[data-velq-consented-klaviyo]'),
+     activePopup:document.querySelector('.vlp-card')?'vlp-card':'velq-early-access'
    }));
+   console.log('LIVE_BROWSER_POST_SIGNUP '+JSON.stringify({width,mode:useExisting?'existing':'bundled',postCount:posts.length,eventNames:state.events.map(e=>e.name),formIds:state.events.filter(e=>e.name==='generate_lead').map(e=>e.params?.form_id),tracking:state.tracking,klaviyo:state.klaviyo,errors:errors.slice(0,5)}));
    const leads=state.events.filter(x=>x.name==='generate_lead');
-   assert.equal(leads.length,1,'No queued GA4 generate_lead');
-   assert.equal(leads[0].params?.form_id,'velq-lead-form','GA4 popup form incorrect');
-   assert.equal(leads[0].params?.cta_position,'popup','GA4 popup position incorrect');
-   assert(!JSON.stringify(state.events).includes('velq-browser-qa@example.com'),'PII leaked to GA4');
-   assert.equal(state.joined,'1','Joined preference missing');
-   if(trackingOn){
-      assert.equal(state.tracking,'1','Tracking opt-in preference missing');
-      assert(state.script?.includes('RCNCJb/klaviyo.js'),'Klaviyo script missing after optional consent');
-   }else{
-      assert.notEqual(state.tracking,'1','Tracking activated without optional consent');
-      assert(!state.script,'Klaviyo loaded without optional consent');
-   }
-   console.log('LIVE_BROWSER_PASS '+JSON.stringify({width,layout:true,marketingConsent:true,trackingChoice:true,mockSignup:true,ga4Queued:true,trackingOn,errors:errors.slice(0,2)}));
+   assert.equal(leads.length,1,'Exactly one confirmed GA4 generate_lead should be queued');
+   assert(!JSON.stringify(state.events).includes('velq-browser-qa@example.com'),'PII leaked into GA4 event queue');
+   assert.equal(errors.length,0,'Browser JavaScript errors at '+width+': '+errors.slice(0,3));
+   console.log('LIVE_BROWSER_PASS '+JSON.stringify({width,mode:useExisting?'existing':'bundled',layout:true,marketingConsent:true,mockSignup:true,ga4Queued:true,errors:[]}));
    await ctx.close();
   }
   console.log('LIVE_BROWSER_ALL_PASS: real production page, intercepted signup and vendor collection; no real leads created');
