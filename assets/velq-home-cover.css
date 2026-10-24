@@ -28,7 +28,7 @@
  .velq-cover-home .header .nav-signup{font-size:11px;padding:10px 11px}
  .velq-cover-home .header .menu-toggle{width:40px;height:44px}
  .velq-cover-home .mobile-nav{top:96px}
- .velq-cover-home .hero.lifestyle-cover{min-height:860px;max-height:1100px}
+ .velq-cover-home .hero.lifestyle-cover{height:90svh;min-height:640px;max-height:760px}
  .velq-cover-home .lifestyle-cover .hero-image-wrap img{object-position:center 32%}
  .velq-cover-home .hero.lifestyle-cover .hero-copy{bottom:30px;width:calc(100% - 32px)}
  .velq-cover-home .lifestyle-cover #hero-title{font-size:clamp(29px,8.2vw,44px);line-height:1.12}
