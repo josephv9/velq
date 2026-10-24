@@ -15,7 +15,7 @@ function velq_home_cover(string $html, string $path): string {
         . '<h1 id="hero-title"><span>Your Daily</span><span><strong>Wellness</strong> Upgrade</span></h1>'
         . '<p class="hero-description" id="hero-description">Protein, fiber and focused energy. In a gummy.</p>'
         . '<a class="button button-dark" id="hero-cta" href="#waitlist" data-waitlist-cta="hero">JOIN THE WAITLIST</a>'
-        . '<p class="hero-small" id="hero-small">In development · Target formula; final details may change.</p></div></section>';
+        . '</div></section>';
     $html = preg_replace('~<section class="hero"[^>]*>.*?</section>~s', $hero, $html, 1) ?? $html;
     $html = velq_single_product_layout($html);
     $html = str_replace('<body>', '<body class="velq-cover-home">', $html);
