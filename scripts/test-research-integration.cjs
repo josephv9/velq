@@ -147,13 +147,23 @@ for (const route of dispatcherRoutes) {
   assert(entry, 'New canonical URL absent from generated sitemap: ' + route);
   assert.equal(entry.lastmod, '2026-10-20');
 }
+// SEO growth updates modification dates for pages actually changed this release.
+const updatedSEO = new Set([
+  'https://velqnutrition.com/',
+  'https://velqnutrition.com/products/strawberry-protein-fiber-gummies',
+  'https://velqnutrition.com/blog/protein-and-fiber-gummies-buying-guide'
+]);
 for (const entry of parseSitemap(originalSitemap)) {
   const actual = entries.find(item => item.loc === entry.loc);
   assert(actual, 'Original sitemap URL lost');
-  if (!dispatcherRoutes.some(route => entry.loc === 'https://velqnutrition.com' + route)) assert.deepEqual(actual, entry);
+  if (updatedSEO.has(entry.loc)) {
+    assert.equal(actual.lastmod, '2026-10-26', 'Modified SEO page must have the release date');
+  } else if (!dispatcherRoutes.some(route => entry.loc === 'https://velqnutrition.com' + route)) {
+    assert.deepEqual(actual, entry, 'Unedited sitemap entry unexpectedly changed');
+  }
 }
 parseSitemap(fs.readFileSync('sitemap.xml', 'utf8'));
-console.log('PASS: valid static/generated sitemap XML, three new URLs, two updated URLs, no duplicates or unrelated date changes.');
+console.log('PASS: valid sitemap XML with updated release dates only for edited pages; original URLs preserved.');
 
 function request(port, url, method = 'GET', host = 'velqnutrition.com') {
   return new Promise((resolve, reject) => {
