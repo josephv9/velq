@@ -8,7 +8,7 @@
   var JOINED_KEY = 'velq_waitlist_joined_v1';
   var DISMISSED_KEY = 'velq_early_access_dismissed_until_v1';
   var path = window.location.pathname;
-  if (!/^\/(?:$|blog(?:\/|$)|guides(?:\/|$)|compare(?:\/|$)|tools(?:\/|$))/.test(path)) return;
+  var autoEligiblePath = /^\/(?:$|blog(?:\/|$)|guides(?:\/|$)|products(?:\/|$)|compare(?:\/|$)|tools(?:\/|$))/.test(path);
 
   var shown = false;
   var overlay = null;
@@ -22,10 +22,10 @@
     try { window.localStorage.setItem(key, String(value)); } catch (_) {}
   }
   function eligible() {
-    if (shown || read(JOINED_KEY) === '1' || Number(read(DISMISSED_KEY)) > Date.now()) return false;
+    if (!window.VelqWaitlist || shown || window.VelqWaitlist.joined() || window.VelqWaitlist.hasPending() || window.VelqWaitlist.isBusy() || Number(read(DISMISSED_KEY)) > Date.now()) return false;
     if (document.hidden) return false;
     var active = document.activeElement;
-    if (active && /^(INPUT|TEXTAREA|SELECT)$/.test(active.tagName)) return false;
+    if (active && (/^(INPUT|TEXTAREA|SELECT)$/.test(active.tagName) || active.isContentEditable)) return false;
     if (document.querySelector('dialog[open], [aria-modal="true"], .klaviyo-form[role="dialog"]')) return false;
     var waitlist = document.getElementById('waitlist');
     if (waitlist) {
@@ -42,45 +42,60 @@
       window.dataLayer.push(Object.assign({ event: name }, details));
     }
   }
-  function markJoined() {
-    save(JOINED_KEY, '1');
-    if (overlay) close('other_signup', true);
-  }
   var KLAVIYO_PUBLIC_KEY = 'RCNCJb';
-  var KLAVIYO_CONSENT_KEY = 'velq_klaviyo_opted_in_v1';
+  var TRACKING_CONSENT_KEY = 'velq_tracking_consent_v1';
   function loadConsentedKlaviyo() {
-    // No Klaviyo onsite cookie before a successful, explicitly opted-in signup.
-    if (read(KLAVIYO_CONSENT_KEY) !== '1') return;
-    window._learnq = window._learnq || [];
-    if (document.querySelector('script[src*="static.klaviyo.com/onsite/js/"]')) return;
+    // Email subscription and optional cookie tracking are separate choices.
+    if (read(TRACKING_CONSENT_KEY) !== '1') return;
+    window.klaviyo = window.klaviyo || [];
+    if (document.querySelector('script[data-velq-consented-klaviyo]')) return;
     var script = document.createElement('script');
     script.async = true;
     script.src = 'https://static.klaviyo.com/onsite/js/' + KLAVIYO_PUBLIC_KEY + '/klaviyo.js';
     script.setAttribute('data-velq-consented-klaviyo', 'true');
     document.head.appendChild(script);
   }
-  function syncIdentifiedKlaviyo(email, source) {
-    if (typeof email !== 'string' || !/^[^@\s]+@[^@\s]+\.[^@\s]+$/.test(email)) return;
-    save(KLAVIYO_CONSENT_KEY, '1');
+  function syncIdentifiedKlaviyo(email, source, trackingOptIn) {
+    if (!trackingOptIn || typeof email !== 'string' || !email.includes('@')) return;
+    save(TRACKING_CONSENT_KEY, '1');
+    try { document.cookie = '__kla_off=; Path=/; Max-Age=0; SameSite=Lax; Secure'; } catch (_) {}
     loadConsentedKlaviyo();
-    // Identity commands are queued until the consent-gated Klaviyo script loads.
-    if (!window._learnq || typeof window._learnq.push !== 'function') return;
-    window._learnq.push(['identify', { $email: email }]);
-    window._learnq.push(['track', 'Joined Velq Early Access', {
+    if (!window.klaviyo || typeof window.klaviyo.push !== 'function') return;
+    window.klaviyo.push(['identify', { email: email }]);
+    window.klaviyo.push(['track', 'Joined Velq Early Access', {
       Product: 'Strawberry Protein + Fiber Gummies', Source: source
     }]);
   }
+  function installInlineTrackingChoice() {
+    var form = document.getElementById('waitlist-form');
+    if (!form || form.querySelector('[name="tracking_consent"]')) return;
+    var submit = form.querySelector('[type="submit"]');
+    if (!submit) return;
+    var details = document.createElement('details');
+    details.className = 'velq-tracking-details';
+    var summary = document.createElement('summary');
+    summary.textContent = 'Personalize my updates (optional)';
+    details.appendChild(summary);
+    var label = document.createElement('label');
+    label.className = 'velq-inline-tracking';
+    label.innerHTML = '<input type="checkbox" name="tracking_consent"><span>Optional: let Velq recognize repeat visits for relevant launch updates. <a href="/privacy/">Privacy details</a>.</span>';
+    details.appendChild(label);
+    form.insertBefore(details, submit);
+  }
+  // Existing subscribers are recognized through Klaviyo cookies on return visits,
+  // but we never store their email address in localStorage.
   loadConsentedKlaviyo();
-  window.addEventListener('velq:waitlist-success', function (e) {
-    if (!e.detail || !e.detail.eventId) return;
-    if (e.detail.source !== 'popup') {
-      var inline = document.getElementById('waitlist-form');
-      var email = inline && inline.elements && inline.elements.email;
-      var consent = inline && inline.elements && inline.elements.consent;
-      if (email && consent && consent.checked) syncIdentifiedKlaviyo(email.value.trim(), 'inline_waitlist');
-    }
-    if (e.detail.source === 'popup') save(JOINED_KEY, '1');
-    else markJoined();
+  if (document.readyState === 'loading') document.addEventListener('DOMContentLoaded', installInlineTrackingChoice, { once: true });
+  else installInlineTrackingChoice();
+  window.addEventListener('velq:waitlist-confirmed', function (e) {
+    if (!e.detail) return;
+    var confirmedForm = document.getElementById(e.detail.formId);
+    var email = confirmedForm && confirmedForm.elements && confirmedForm.elements.email;
+    var consent = confirmedForm && confirmedForm.elements && confirmedForm.elements.consent;
+    var tracking = confirmedForm && confirmedForm.elements && confirmedForm.elements.tracking_consent;
+    if (email && consent && consent.checked) syncIdentifiedKlaviyo(email.value.trim(), e.detail.source === 'popup' ? 'popup' : 'inline_waitlist', Boolean(tracking && tracking.checked));
+    save(JOINED_KEY, '1');
+    if (overlay && e.detail.formId !== 'velq-lead-form') close('other_signup', true);
   });
 
   function onKey(e) {
@@ -102,15 +117,17 @@
     if (!overlay) return;
     overlay.remove();
     overlay = null;
+    document.documentElement.classList.remove('velq-lead-open');
     document.removeEventListener('keydown', onKey, true);
     if (!silent) {
       save(DISMISSED_KEY, Date.now() + 7 * 24 * 60 * 60 * 1000);
       event('velq_early_access_dismiss', reason);
     }
-    if (previousFocus && typeof previousFocus.focus === 'function') previousFocus.focus();
+    if (previousFocus && previousFocus.isConnected && typeof previousFocus.focus === 'function') previousFocus.focus({ preventScroll: true });
   }
-  function show(reason) {
-    if (!eligible()) return;
+  function show(reason, manual) {
+    if (overlay) { overlay.querySelector('input, button')?.focus({ preventScroll: true }); return true; }
+    if (!window.VelqWaitlist || (!manual && !eligible())) return false;
     shown = true;
     previousFocus = document.activeElement;
     var el = document.createElement('div');
@@ -122,14 +139,14 @@
       '<button class="velq-lead-close" type="button" data-velq-close="button" aria-label="Close early-access signup">&times;</button>',
       '<p class="velq-lead-eyebrow">VELQ / EARLY ACCESS</p>',
       '<h2 id="velq-lead-title">Something good is coming.</h2>',
-      '<p class="velq-lead-description" id="velq-lead-description">Get first access to Velq strawberry protein + fiber gummies and receive launch updates.</p>',
-      '<p class="velq-lead-proof">Free to join &middot; No payment today</p>',
+      '<p class="velq-lead-description" id="velq-lead-description">Strawberry protein + fiber gummies are in development. Join for launch news, final product details and your first chance to shop.</p>',
       '<form id="velq-lead-form">',
       '<label class="velq-lead-label" for="velq-lead-email">Email address</label>',
       '<input id="velq-lead-email" name="email" type="email" placeholder="you@example.com" autocomplete="email" inputmode="email" maxlength="254" required>',
       '<label class="velq-lead-consent"><input name="consent" type="checkbox" required><span>I agree to receive Velq launch and product updates by email. I can unsubscribe anytime.</span></label>',
+      '<details class="velq-tracking-details"><summary>Personalize my updates (optional)</summary><label class="velq-lead-consent velq-tracking-optional"><input name="tracking_consent" type="checkbox"><span>Let Velq recognize repeat visits for relevant launch updates. <a href="/privacy/">Privacy details</a>.</span></label></details>',
       '<input class="velq-lead-honeypot" name="company" type="text" tabindex="-1" autocomplete="off" aria-hidden="true">',
-      '<button class="velq-lead-submit" type="submit">GET EARLY ACCESS <span aria-hidden="true">&rarr;</span></button>',
+      '<button class="velq-lead-submit" type="submit">JOIN THE WAITLIST <span aria-hidden="true">&rarr;</span></button>',
       '<p class="velq-lead-feedback" role="status" aria-live="polite"></p>',
       '</form>',
       '<p class="velq-lead-fineprint">We respect your inbox. Read our <a href="/privacy/">privacy policy</a>.</p>',
@@ -137,6 +154,7 @@
     ].join('');
     document.body.appendChild(el);
     overlay = el;
+    document.documentElement.classList.add('velq-lead-open');
     document.addEventListener('keydown', onKey, true);
     el.querySelectorAll('[data-velq-close]').forEach(function (btn) {
       btn.addEventListener('click', function () { close(btn.getAttribute('data-velq-close')); });
@@ -144,62 +162,40 @@
     var form = el.querySelector('#velq-lead-form');
     var feedback = el.querySelector('.velq-lead-feedback');
     var submit = el.querySelector('.velq-lead-submit');
-    form.addEventListener('submit', async function (e) {
-      e.preventDefault();
-      if (!form.reportValidity() || submit.disabled) return;
-      var email = form.elements.email.value.trim();
-      if (!email || !form.elements.consent.checked) return;
-      event('velq_early_access_submit', 'submit');
-      submit.disabled = true;
-      submit.textContent = 'JOINING...';
-      feedback.textContent = '';
-      var controller = new AbortController();
-      var timeout = setTimeout(function () { controller.abort(); }, 15000);
-      try {
-        var response = await fetch('/api/waitlist', {
-          method: 'POST',
-          headers: { 'Content-Type': 'application/json' },
-          credentials: 'same-origin',
-          body: JSON.stringify({
-            email: email, interest: 'strawberry', consent: true, company: form.elements.company.value
-          }),
-          signal: controller.signal
-        });
-        var result = await response.json();
-        if (!response.ok || result.ok !== true) {
-          throw new Error(result.error || 'We could not save your signup. Please try again.');
-        }
-        if (result.newLead === true && typeof result.eventId === 'string' && result.eventId) {
-          window.dispatchEvent(new CustomEvent('velq:waitlist-success', {
-            detail: { eventId: result.eventId, source: 'popup', trigger: reason }
-          }));
-        }
-        // Re-identify consented returners; analytics lead events still require newLead.
-        syncIdentifiedKlaviyo(email, 'popup');
-        save(JOINED_KEY, '1');
-        if (overlay === el) {
-          form.innerHTML = '<div class="velq-lead-thanks" role="status"><strong>You are on the list!</strong><p>We will email you when Velq launches.</p><button class="velq-lead-done" type="button">DONE</button></div>';
-          form.querySelector('button').addEventListener('click', function () { close('completed', true); });
-          form.querySelector('button').focus();
-        }
-      } catch (error) {
-        if (overlay === el) {
-          feedback.textContent = error.name === 'AbortError'
-            ? 'That took longer than expected. Please try again.'
-            : (error.message || 'Please check your connection and try again.');
-        }
-      } finally {
-        clearTimeout(timeout);
-        if (overlay === el) {
-          submit.disabled = false;
-          submit.innerHTML = 'GET EARLY ACCESS <span aria-hidden="true">&rarr;</span>';
-        }
+    window.VelqWaitlist.bindForm({
+      form: form, submit: submit, feedback: feedback, source: 'popup', trigger: reason,
+      onConfirmed: function () {
+        if (overlay !== el) return;
+        form.innerHTML = '<div class="velq-lead-thanks" role="status"><strong>You’re on the list.</strong><p>We’ll email you at launch with final product details and how to order.</p><button class="velq-lead-done" type="button">BACK TO VELQ</button></div>';
+        form.querySelector('button').addEventListener('click', function () { close('completed', true); });
+        form.querySelector('button').focus();
       }
     });
     event('velq_early_access_view', reason);
     el.querySelector('#velq-lead-email').focus({ preventScroll: true });
+    return true;
   }
+  // An explicit signup click always opens the dialog, even after dismissal.
+  window.VelqLeadCapture = Object.freeze({ open: function () { return show('onsite', true); } });
+  document.addEventListener('click', function (e) {
+    if (e.defaultPrevented || e.button > 0 || e.metaKey || e.ctrlKey || e.shiftKey || e.altKey) return;
+    var target = e.target instanceof Element ? e.target.closest('a[href], button[data-waitlist-cta]') : null;
+    if (!target || target.closest('#velq-early-access')) return;
+    var isSignup = target.hasAttribute('data-waitlist-cta');
+    if (target.tagName === 'A') {
+      var url = new URL(target.href, window.location.href);
+      isSignup = isSignup || (url.origin === window.location.origin && url.hash === '#waitlist');
+    }
+    if (!isSignup || !show('onsite', true)) return;
+    e.preventDefault();
+    e.stopPropagation();
+    var nav = document.getElementById('mobile-nav');
+    var toggle = document.getElementById('menu-toggle');
+    if (nav) nav.hidden = true;
+    if (toggle) { toggle.setAttribute('aria-expanded', 'false'); toggle.setAttribute('aria-label', 'Open menu'); }
+  }, true);
   function start() {
+    if (!autoEligiblePath) return;
     window.setTimeout(function () { show('time_on_page'); }, 14000);
     document.addEventListener('mouseout', function (e) {
       if (Date.now() - startedAt > 7000 && e.clientY <= 0 && !e.relatedTarget) show('exit_intent');

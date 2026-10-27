@@ -1,0 +1,139 @@
+<?xml version="1.0" encoding="utf-8" standalone="no"?>
+<!DOCTYPE svg PUBLIC "-//W3C//DTD SVG 1.1//EN"
+  "http://www.w3.org/Graphics/SVG/1.1/DTD/svg11.dtd">
+<svg xmlns:xlink="http://www.w3.org/1999/xlink" width="1200" height="675" viewBox="0 0 864 486" xmlns="http://www.w3.org/2000/svg" version="1.1">
+ <title>Compare fiber per labeled serving with fiber per gummy</title>
+ <metadata>
+  <rdf:RDF xmlns:dc="http://purl.org/dc/elements/1.1/" xmlns:cc="http://creativecommons.org/ns#" xmlns:rdf="http://www.w3.org/1999/02/22-rdf-syntax-ns#">
+   <cc:Work>
+    <dc:type rdf:resource="http://purl.org/dc/dcmitype/StillImage"/>
+    <dc:title>Compare fiber per labeled serving with fiber per gummy</dc:title>
+    <dc:description>Hypothetical example; all arithmetic is also available as HTML on the calculator page.</dc:description>
+    <dc:format>image/svg+xml</dc:format>
+    <dc:creator>
+     <cc:Agent>
+      <dc:title>Matplotlib v3.10.8, https://matplotlib.org/</dc:title>
+     </cc:Agent>
+    </dc:creator>
+   </cc:Work>
+  </rdf:RDF>
+ </metadata>
+ <defs>
+  <style type="text/css">*{stroke-linejoin: round; stroke-linecap: butt}</style>
+ </defs>
+ <g id="figure_1">
+  <g id="patch_1">
+   <path d="M 0 486
+L 864 486
+L 864 0
+L 0 0
+z
+" style="fill: #fffcec"/>
+  </g>
+  <g id="axes_1">
+   <g id="patch_2">
+    <path d="M 51.84 169.92
+L 812.16 169.92
+Q 825.12 169.92 825.12 182.88
+L 825.12 247.68
+Q 825.12 260.64 812.16 260.64
+L 51.84 260.64
+Q 38.88 260.64 38.88 247.68
+L 38.88 182.88
+Q 38.88 169.92 51.84 169.92
+z
+" clip-path="url(#pacec8d6e0b)" style="fill: #ffffff; stroke: #dedfcc; stroke-width: 1.3; stroke-linejoin: miter"/>
+   </g>
+   <g id="patch_3">
+    <path d="M 51.84 273.6
+L 812.16 273.6
+Q 825.12 273.6 825.12 286.56
+L 825.12 351.36
+Q 825.12 364.32 812.16 364.32
+L 51.84 364.32
+Q 38.88 364.32 38.88 351.36
+L 38.88 286.56
+Q 38.88 273.6 51.84 273.6
+z
+" clip-path="url(#pacec8d6e0b)" style="fill: #ffffff; stroke: #dedfcc; stroke-width: 1.3; stroke-linejoin: miter"/>
+   </g>
+   <g id="text_1">
+    <text style="font-weight: 700; font-size: 15px; font-family: 'DejaVu Sans'; text-anchor: start; fill: #aa3830" x="38.88" y="38.699063" transform="rotate(-0 38.88 38.699063)">VELQ  /  LABEL READING</text>
+   </g>
+   <g id="text_2">
+    <text style="font-weight: 700; font-size: 31px; font-family: 'DejaVu Sans'; text-anchor: start; fill: #253a2e" x="38.88" y="86.912969" transform="rotate(-0 38.88 86.912969)">A serving is not always one gummy.</text>
+   </g>
+   <g id="text_3">
+    <text style="font-size: 17px; font-family: 'DejaVu Sans'; text-anchor: start; fill: #536256" x="38.88" y="114.850937" transform="rotate(-0 38.88 114.850937)">Use the complete labeled serving before comparing individual pieces.</text>
+   </g>
+   <g id="text_4">
+    <text style="font-weight: 700; font-size: 13px; font-family: 'DejaVu Sans'; text-anchor: middle; fill: #536256" x="169.2" y="153.347188" transform="rotate(-0 169.2 153.347188)">FIBER PER SERVING</text>
+   </g>
+   <g id="text_5">
+    <text style="font-weight: 700; font-size: 13px; font-family: 'DejaVu Sans'; text-anchor: middle; fill: #536256" x="439.2" y="153.347188" transform="rotate(-0 439.2 153.347188)">GUMMIES PER SERVING</text>
+   </g>
+   <g id="text_6">
+    <text style="font-weight: 700; font-size: 13px; font-family: 'DejaVu Sans'; text-anchor: middle; fill: #536256" x="698.4" y="153.347188" transform="rotate(-0 698.4 153.347188)">FIBER PER GUMMY</text>
+   </g>
+   <g id="text_7">
+    <text style="font-weight: 700; font-size: 13px; font-family: 'DejaVu Sans'; text-anchor: start; fill: #536256" x="56.16" y="194.387187" transform="rotate(-0 56.16 194.387187)">FICTIONAL GUMMY A</text>
+   </g>
+   <g id="text_8">
+    <text style="font-weight: 700; font-size: 28px; font-family: 'DejaVu Sans'; text-anchor: middle; fill: #253a2e" x="169.2" y="233.696875" transform="rotate(-0 169.2 233.696875)">5 g fiber</text>
+   </g>
+   <g id="text_9">
+    <text style="font-size: 31px; font-family: 'DejaVu Sans'; text-anchor: middle; fill: #536256" x="308.88" y="234.634062" transform="rotate(-0 308.88 234.634062)">÷</text>
+   </g>
+   <g id="text_10">
+    <text style="font-weight: 700; font-size: 25px; font-family: 'DejaVu Sans'; text-anchor: middle; fill: #253a2e" x="439.2" y="232.880781" transform="rotate(-0 439.2 232.880781)">2 gummies</text>
+   </g>
+   <g id="text_11">
+    <text style="font-size: 29px; font-family: 'DejaVu Sans'; text-anchor: middle; fill: #536256" x="573.84" y="234.082187" transform="rotate(-0 573.84 234.082187)">=</text>
+   </g>
+   <g id="text_12">
+    <text style="font-weight: 700; font-size: 31px; font-family: 'DejaVu Sans'; text-anchor: middle; fill: #2d6048" x="698.4" y="225.751875" transform="rotate(-0 698.4 225.751875)">2.5 g</text>
+   </g>
+   <g id="text_13">
+    <text style="font-size: 13px; font-family: 'DejaVu Sans'; text-anchor: middle; fill: #536256" x="698.4" y="247.667187" transform="rotate(-0 698.4 247.667187)">in one gummy</text>
+   </g>
+   <g id="text_14">
+    <text style="font-weight: 700; font-size: 13px; font-family: 'DejaVu Sans'; text-anchor: start; fill: #536256" x="56.16" y="298.067187" transform="rotate(-0 56.16 298.067187)">FICTIONAL GUMMY B</text>
+   </g>
+   <g id="text_15">
+    <text style="font-weight: 700; font-size: 28px; font-family: 'DejaVu Sans'; text-anchor: middle; fill: #253a2e" x="169.2" y="337.376875" transform="rotate(-0 169.2 337.376875)">6 g fiber</text>
+   </g>
+   <g id="text_16">
+    <text style="font-size: 31px; font-family: 'DejaVu Sans'; text-anchor: middle; fill: #536256" x="308.88" y="338.314062" transform="rotate(-0 308.88 338.314062)">÷</text>
+   </g>
+   <g id="text_17">
+    <text style="font-weight: 700; font-size: 25px; font-family: 'DejaVu Sans'; text-anchor: middle; fill: #253a2e" x="439.2" y="336.560781" transform="rotate(-0 439.2 336.560781)">3 gummies</text>
+   </g>
+   <g id="text_18">
+    <text style="font-size: 29px; font-family: 'DejaVu Sans'; text-anchor: middle; fill: #536256" x="573.84" y="337.762187" transform="rotate(-0 573.84 337.762187)">=</text>
+   </g>
+   <g id="text_19">
+    <text style="font-weight: 700; font-size: 31px; font-family: 'DejaVu Sans'; text-anchor: middle; fill: #2d6048" x="698.4" y="329.431875" transform="rotate(-0 698.4 329.431875)">2 g</text>
+   </g>
+   <g id="text_20">
+    <text style="font-size: 13px; font-family: 'DejaVu Sans'; text-anchor: middle; fill: #536256" x="698.4" y="351.347188" transform="rotate(-0 698.4 351.347188)">in one gummy</text>
+   </g>
+   <g id="text_21">
+    <text style="font-size: 16px; font-family: 'DejaVu Sans'; text-anchor: start; fill: #253a2e" x="38.88" y="401.135" transform="rotate(-0 38.88 401.135)">B has more per full serving. A has more per gummy in this example.</text>
+   </g>
+   <g id="text_22">
+    <text style="font-size: 13px; font-family: 'DejaVu Sans'; text-anchor: start; fill: #536256" x="38.88" y="435.587188" transform="rotate(-0 38.88 435.587188)">Hypothetical values · assumes nutrients are evenly distributed across pieces.</text>
+   </g>
+   <g id="text_23">
+    <text style="font-size: 13px; font-family: 'DejaVu Sans'; text-anchor: start; fill: #536256" x="38.88" y="457.907187" transform="rotate(-0 38.88 457.907187)">Label arithmetic, not a recommended dose or a product ranking.</text>
+   </g>
+   <g id="text_24">
+    <text style="font-size: 12px; font-family: 'DejaVu Sans'; text-anchor: end; fill: #aa3830" x="825.12" y="457.63125" transform="rotate(-0 825.12 457.63125)">velqnutrition.com</text>
+   </g>
+  </g>
+ </g>
+ <defs>
+  <clipPath id="pacec8d6e0b">
+   <rect x="0" y="0" width="864" height="486"/>
+  </clipPath>
+ </defs>
+</svg>

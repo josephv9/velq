@@ -26,5 +26,11 @@
 .velq-lead-thanks p{margin:0 0 18px;color:#62555c}
 @media(max-width:540px){.velq-lead-overlay{align-items:flex-end;padding:0}.velq-lead-card{width:100%;border-radius:22px 22px 0 0;max-height:92dvh;padding:32px 24px max(22px,env(safe-area-inset-bottom))}.velq-lead-card h2{font-size:36px!important}.velq-lead-description{font-size:15px!important}}
 @media(prefers-reduced-motion:no-preference){.velq-lead-card{animation:velq-lead-up .22s ease-out}@keyframes velq-lead-up{from{opacity:.65;transform:translateY(18px)}to{opacity:1;transform:translateY(0)}}}
-/* On narrow screens anchor the consent sheet to the viewport; allow internal scroll at 320px. */
-@media(max-width:540px){#velq-early-access .velq-lead-card{position:absolute;left:0;right:0;bottom:0;min-height:0;max-height:92dvh;overflow-x:hidden;overflow-y:auto;overscroll-behavior:contain}}
+/* Independent opt-in for returning-visitor cookies. */
+.velq-tracking-optional{margin-top:-8px;margin-bottom:18px;font-size:11px;line-height:1.5}
+.velq-tracking-optional a,.velq-inline-tracking a{color:#9d2644;text-decoration:underline}
+.velq-inline-tracking{display:flex;gap:10px;align-items:flex-start;color:#554b50;font-size:12px;line-height:1.55;margin:11px 0 16px}
+.velq-inline-tracking input{flex:0 0 auto;width:17px;height:17px;margin:2px 0 0;accent-color:#b52b47}
+
+/* Keep the current page position while signup is open. */
+html.velq-lead-open{overflow:hidden}
