@@ -50,7 +50,7 @@ function renderRoute(route, withoutDiscovery = false) {
     $_SERVER['REQUEST_METHOD']='GET'; $_SERVER['QUERY_STRING']='';
     if ($argv[3] === 'baseline') {
       $source=file_get_contents('image-patch.php');
-      $source=str_replace('velq_discovery_response($html, $assetPath)', '$html', $source, $count);
+      $source=str_replace('velq_discovery_response(velq_growth_response($html, $assetPath), $assetPath)', 'velq_growth_response($html, $assetPath)', $source, $count);
       if ($count !== 2) throw new RuntimeException('Review discovery integration points');
       eval(substr($source, 5));
     } else { require 'image-patch.php'; }
