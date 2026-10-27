@@ -299,7 +299,7 @@ ob_start(static function (string $html): string {
                 . $safeBuyerText($label) . ' <span aria-hidden="true">→</span></a></li>';
         }
         $buyerBlock .= '</ul><p class="velq-m2-note">'
-            . 'Velq gummies are in development; final nutrition, pricing and availability may change. '
+            . 'Velq gummies are prelaunch; retail labeling, pricing and availability are not yet published. '
             . '<a href="/#waitlist" data-waitlist-cta="commercial-journey">Get free launch updates</a>'
             . ' — this is not a preorder.</p></section>';
         $buyerOutput = preg_replace('~</main>~i', $buyerBlock . '</main>', $html, 1, $buyerCount);
