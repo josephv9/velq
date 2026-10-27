@@ -152,7 +152,14 @@ for (const [route, record] of Object.entries(pages)) {
   assert.deepEqual(canonical(output), canonical(baseline), `${route}: canonical changed`);
   assert.equal(canonical(output)[0]?.href, origin + route, `${route}: wrong canonical source`);
   assert.equal(filter(route, output), output, `${route}: discovery pass is not idempotent`);
-  assert.equal(filter(route, output, true), output, `${route}: integrated filter is not idempotent`);
+  const twice = filter(route, output, true);
+  if (twice !== output) {
+    let offset = 0;
+    while (offset < twice.length && offset < output.length && twice[offset] === output[offset]) offset++;
+    const first = output.slice(Math.max(0, offset - 80), offset + 240);
+    const second = twice.slice(Math.max(0, offset - 80), offset + 240);
+    assert.fail(`${route}: integrated filter is not idempotent at character ${offset}. Single=${JSON.stringify(first)} Double=${JSON.stringify(second)}`);
+  }
 
   let expectedBody = body(baseline);
   if (route === '/') {
