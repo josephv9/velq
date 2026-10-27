@@ -43,7 +43,7 @@ function velq_growth_response(string $html, string $requestPath): string
         return velq_growth_snippet(
             $html,
             'Strawberry Protein + Fiber Gummies | Velq Waitlist',
-            'Velq is developing strawberry protein and prebiotic fiber gummies. Explore the planned formula and join the free waitlist for final details and launch news.'
+            'Velq is developing strawberry protein and prebiotic fiber gummies. Explore the set formula and join the free waitlist for launch news and retail label updates.'
         );
     }
 
@@ -67,7 +67,7 @@ function velq_growth_response(string $html, string $requestPath): string
         return velq_growth_snippet(
             $html,
             'Protein Gummies With Fiber: 2026 Label Comparison | Velq',
-            'Compare published Cutfruit, Kuma and OAKA protein gummy labels by protein, fiber, sugar and serving size. See Velq’s planned formula and free launch waitlist.'
+            'Compare published Cutfruit, Kuma and OAKA protein gummy labels by protein, fiber, sugar and serving size. See Velq’s formula and free launch waitlist.'
         );
     }
     return $html;
