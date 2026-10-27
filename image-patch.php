@@ -166,11 +166,17 @@ ob_start(static function (string $html): string {
             break;
 
         case '/blog/protein-and-fiber-gummies-buying-guide':
-            $html = str_replace(
-                'Shopping for protein and fiber gummies? Compare serving sizes, protein source, prebiotic fiber, caffeine, sugar and cost before buying.',
-                'How to choose protein and prebiotic fiber gummies: compare complete servings, protein sources, sugar, caffeine and cost using a practical buying checklist.',
-                $html
-            );
+            // Keep the snippet compelling and the examples consistent with the
+            // October 20 manufacturer-label comparison. PROTEDY quantities were
+            // not reverified, so do not state them as current product facts.
+            $html = strtr($html, [
+                'Shopping for protein and fiber gummies? Compare serving sizes, protein source, prebiotic fiber, caffeine, sugar and cost before buying.'
+                    => 'Protein and fiber gummy buying guide: compare full servings, protein sources, fiber types, sugar, caffeine and price. Explore published labels and Velq launch updates.',
+                'while PROTEDY lists 8 g protein and 4 g fiber across eight gummies.'
+                    => 'while Kuma\'s checked Berry Fusion pouch label lists 20 g protein and 3.5 g fiber per pouch.',
+                'Compare Cutfruit, PROTEDY, Kuma and Velq in our protein-gummy label table'
+                    => 'Compare Cutfruit, Kuma and OAKA serving labels alongside the Velq prelaunch target',
+            ]);
             break;
 
         case '/blog/protein-gummies-with-fiber-comparison':
