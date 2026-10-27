@@ -6,6 +6,7 @@ require_once __DIR__ . '/authority-extension.php';
 require_once __DIR__ . '/discovery-extension.php';
 require_once __DIR__ . '/conversion-extension.php';
 require_once __DIR__ . '/home-cover.php';
+require_once __DIR__ . '/seo-growth-extension.php';
 
 ob_start(static function (string $html): string {
     // The packed analytics-config.js still contains an obsolete GA4 stream ID.
@@ -21,7 +22,7 @@ ob_start(static function (string $html): string {
     $html = velq_authority_response($html, $assetPath);
     $html = velq_conversion_response($html, $assetPath);
     if (stripos($html, '<html') === false) {
-        return velq_discovery_response($html, $assetPath);
+        return velq_discovery_response(velq_growth_response($html, $assetPath), $assetPath);
     }
 
     // Remove the Compare labels tab from both header navigation variants.
@@ -380,5 +381,5 @@ ob_start(static function (string $html): string {
     }
     $html = velq_home_cover($html, $assetPath);
     // Run last so image metadata describes the approved, currently served images.
-    return velq_discovery_response($html, $assetPath);
+    return velq_discovery_response(velq_growth_response($html, $assetPath), $assetPath);
 });
