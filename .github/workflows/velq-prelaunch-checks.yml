@@ -6,6 +6,9 @@ on:
     paths:
       - 'velq-site.php'
       - 'image-patch.php'
+      - 'home-cover.php'
+      - 'seo-growth-extension.php'
+      - 'conversion-extension.php'
       - 'authority-extension.php'
       - 'discovery-extension.php'
       - 'assets/discovery/**'
@@ -51,7 +54,11 @@ jobs:
       - name: Validate PHP syntax
         run: php -l velq-site.php
       - name: Validate SEO response filter PHP syntax
-        run: php -l image-patch.php
+        run: |
+          php -l image-patch.php
+          php -l home-cover.php
+          php -l seo-growth-extension.php
+          php -l conversion-extension.php
       - name: Validate research routes and response extension
         run: |
           php -l research-content.php
