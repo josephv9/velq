@@ -140,7 +140,9 @@ ob_start(static function (string $html): string {
                 },
                 $html
             ) ?? $html;
-            $html = str_replace('</head>', '<link rel="stylesheet" href="/assets/velq-buying-guide-spacing.css?v=1"></head>', $html);
+            if (!str_contains($html, '/assets/velq-buying-guide-spacing.css?v=1')) {
+                $html = str_replace('</head>', '<link rel="stylesheet" href="/assets/velq-buying-guide-spacing.css?v=1"></head>', $html);
+            }
             break;
 
         case '/guides':
