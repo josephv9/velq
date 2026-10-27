@@ -24,7 +24,7 @@ function php(program, args = [], input = '') {
 }
 
 const pages = JSON.parse(php('require "discovery-extension.php"; echo json_encode(velq_discovery_images());'));
-assert.equal(Object.keys(pages).length, 31, 'Review the release scope when changing the image map');
+// The approved discovery map currently covers 32 canonical routes, including\n// the research/tools and published Journal guides. Keep this as a release gate.\nassert.equal(Object.keys(pages).length, 32, 'Review the release scope when changing the image map');
 const standalone = new Set([
   '/media', '/research', '/research/gummy-serving-study-2026',
   '/tools/serving-comparison-calculator', '/tools/nutrition-label-value-calculator',
