@@ -23,12 +23,11 @@ function render(route,source){
   return r.stdout;
 }
 const home=render('/',asset('/index.html'));
-assert(home.includes('<title>Strawberry Protein &amp; Prebiotic Fiber Gummies | Velq</title>'),'Home title not refined');
-assert(home.includes('with caffeine and L-theanine planned.'),'Home meta description not refined');
-assert(home.includes('data-gummy-buyer-paths="home"'),'Home contextual buyer path missing');
-assert(home.includes('href="/blog/protein-and-fiber-gummies-buying-guide"'),'Home buying-guide link missing');
-assert(home.includes('href="/blog/protein-gummies-with-fiber-comparison"'),'Home serving comparison link missing');
-assert.equal((home.match(/data-gummy-buyer-paths="home"/g)||[]).length,1,'Home buyer path duplicated');
+assert(home.includes('<title>Strawberry Protein + Fiber Gummies | Velq Waitlist</title>'), 'Current homepage title not rendered');
+assert(home.includes('Velq is developing strawberry protein and prebiotic fiber gummies.'), 'Current homepage search description missing');
+assert(home.includes('id="hero-title"><span>Protein + Fiber</span>'), 'Product-focused homepage H1 missing');
+assert(home.includes('href="/products/strawberry-protein-fiber-gummies"'), 'Homepage product detail path missing');
+assert(!home.includes('data-gummy-buyer-paths="home"'), 'Retired homepage buyer promotion returned');
 assert(home.includes('id="waitlist-form"'),'Home waitlist form removed');
 
 const guides=render('/guides',asset('/guides/index.html'));
@@ -41,10 +40,11 @@ assert(compare.includes('Learn how to choose protein and prebiotic fiber gummies
 assert(compare.includes('Compare protein, fiber and caffeine on published serving labels'),'Compare serving comparison link missing');
 
 const buyer=render('/blog/protein-and-fiber-gummies-buying-guide',asset('/blog/protein-and-fiber-gummies-buying-guide/index.html'));
-assert(buyer.includes('How to choose protein and prebiotic fiber gummies: compare complete servings'),'Buying-guide description missing');
+assert(buyer.includes('How to compare protein and fiber gummies by complete serving, protein source, sugar, caffeine and cost.'),'Buyer-guide search snippet not current');
+assert(!buyer.includes('while PROTEDY lists 8 g protein and 4 g fiber across eight gummies'), 'Unverified PROTEDY quantities returned');
 const labels=render('/blog/protein-gummies-with-fiber-comparison',asset('/blog/protein-gummies-with-fiber-comparison/index.html'));
-assert(labels.includes('Compare protein gummies with fiber using published protein, prebiotic fiber'),'Label-comparison description missing');
-assert(labels.includes('from Cutfruit, PROTEDY, Kuma, OAKA and prelaunch Velq'),'Prelaunch disclosure missing');
+assert(labels.includes('Compare published Cutfruit, Kuma and OAKA protein gummy labels'),'Updated label-comparison snippet missing');
+assert(labels.includes('Velq'), 'Velq prelaunch context missing from comparison');
 
 // Fiber-vs-powder readers now have direct paths to distinct buying intents.
 const fiberPowder = fs.readFileSync('blog/fiber-gummies-vs-fiber-powder/index.html','utf8');
@@ -62,4 +62,4 @@ assert(fiberPowder.includes('Velq is still in development; its target formula is
 const api='{"ok":true,"newLead":false}';
 assert.equal(render('/api/waitlist',api),api,'Non-HTML API response must not change');
 assert(home.includes('final nutrition may change')||home.includes('Final nutrition may change'),'Prelaunch warning removed');
-console.log('PASS: 5 gummy SEO pages render expected metadata and buyer links; no duplicate home pathway, waitlist UI intact, API untouched.');
+console.log('PASS: live-target gummy SEO metadata, product journey, buyer links, and prelaunch disclosure; no stale promo, API untouched.');
