@@ -25,7 +25,7 @@ function velq_discovery_images(): array
     $hero = $image('/assets/velq-lifestyle-cover-20261020-1200.webp', 1200, 1499,
         'Woman holding a red and white Velq strawberry protein and fiber gummy packet by the coast. Development preview; final details may change.');
     $packshot = $image('/assets/velq-gummies-packshot-20261015-v2-1200.webp', 1200, 1200,
-        'Development preview of Velq strawberry gummy packaging. Final packaging and nutrition may change.');
+        'Development preview of Velq strawberry gummy packaging. Retail labeling is not yet published.');
     $legacy = $image($cdn . 'files/velq-red-white-strawberry-final-hero-oct-2026.jpg?v=1791934937', 1254, 1254,
         'Velq strawberry gummy packaging preview. The product is in development and final details may change.');
     $strawberry = $image('/assets/strawberry.webp', 1254, 1254,
