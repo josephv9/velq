@@ -13,7 +13,7 @@ function velq_home_cover(string $html, string $path): string {
         . '<div class="hero-image-wrap">'.$image.'</div>'
         . '<div class="hero-copy"><p class="eyebrow" id="hero-eyebrow">STRAWBERRY · COMING SOON</p>'
         . '<h1 id="hero-title"><span>Protein + Fiber</span><span><strong>Gummies.</strong></span></h1>'
-        . '<p class="hero-description" id="hero-description">Strawberry protein and prebiotic fiber gummies are in development, with caffeine and L-theanine in the planned formula. Get the final details at launch.</p>'
+        . '<p class="hero-description" id="hero-description">Strawberry protein and prebiotic fiber gummies are in development, with caffeine and L-theanine in the formula. Get launch and availability updates.</p>'
         . '<a class="button button-dark" id="hero-cta" href="#waitlist" data-waitlist-cta="hero">JOIN THE FREE WAITLIST</a>'
         . '</div></section>';
     $html = preg_replace('~<section class="hero"[^>]*>.*?</section>~s', $hero, $html, 1) ?? $html;
@@ -40,15 +40,15 @@ function velq_single_product_layout(string $html): string {
     <article class="benefit-card benefit-uniform-card"><div class="benefit-uniform-copy"><h3>Big on the essentials.</h3><p>20g protein. 10g fiber. 80mg caffeine.<br>All in your daily pack.</p></div><div class="benefit-uniform-photo"><svg viewBox="58 486 1154 656" preserveAspectRatio="xMidYMid slice" role="img" aria-label="Red strawberry gummy bears"><image href="/assets/velq-why-essentials-20261020-1200.webp" width="1270" height="1239" preserveAspectRatio="none"/></svg></div></article>
     <article class="benefit-card benefit-uniform-card"><div class="benefit-uniform-copy"><h3>Ready when you are.</h3><p>Strawberry gummies that fit<br>wherever your day takes you.</p></div><div class="benefit-uniform-photo"><svg viewBox="50 455 1173 707" preserveAspectRatio="xMidYMid slice" role="img" aria-label="Woman holding Velq strawberry gummies outdoors"><image href="/assets/velq-why-ready-20261020-1200.webp" width="1273" height="1236" preserveAspectRatio="none"/></svg></div></article>
   </div>
-  <p class="formula-note">Target amounts per packet. Product in development; final formula and label may change.</p>
+  <p class="formula-note">Amounts per packet. Product is prelaunch; check the product label when ordering opens.</p>
 </section>
 <section class="formula-section cadence-section" id="ingredients" aria-labelledby="ingredient-title">
- <div class="formula-heading"><h2 id="ingredient-title">One gummy format.<br><strong>More inside.</strong></h2><p>Get to know the target formula.</p><a href="/products/strawberry-protein-fiber-gummies">Explore the product →</a></div>
+ <div class="formula-heading"><h2 id="ingredient-title">One gummy format.<br><strong>More inside.</strong></h2><p>Get to know the formula.</p><a href="/products/strawberry-protein-fiber-gummies">Explore the product →</a></div>
  <div class="formula-accordion">
-  <details open><summary><span>01</span> Protein <b>20g</b></summary><p>An easy addition to your daily protein intake. The target formula provides 20g per complete packet.</p><a href="/blog/how-much-protein-do-you-actually-need">Learn about protein →</a></details>
-  <details><summary><span>02</span> Prebiotic fiber <b>10g</b></summary><p>More fiber, built into your everyday routine. Target: 10g per packet. Final serving directions and ingredients will appear on the label.</p><a href="/blog/how-much-fiber-do-you-need-every-day">Learn about fiber →</a></details>
+  <details open><summary><span>01</span> Protein <b>20g</b></summary><p>An easy addition to your daily protein intake. Each complete packet provides 20g.</p><a href="/blog/how-much-protein-do-you-actually-need">Learn about protein →</a></details>
+  <details><summary><span>02</span> Prebiotic fiber <b>10g</b></summary><p>More fiber, built into your everyday routine. 10g per packet. Refer to the product label for serving directions and allergens.</p><a href="/blog/how-much-fiber-do-you-need-every-day">Learn about fiber →</a></details>
   <details><summary><span>03</span> Caffeine <b>80mg</b></summary><p>A measured lift for your day. Velq is being developed for adults and contains caffeine; final usage directions will be on the label.</p><a href="/blog/caffeine-gummies-vs-coffee-whats-the-difference">Explore caffeine →</a></details>
-  <details><summary><span>04</span> L-theanine <b>200mg</b></summary><p>A thoughtful addition to the target formula, paired with caffeine. Final nutrition details may change.</p><a href="/blog/caffeine-l-theanine-vs-caffeine">Learn about the pairing →</a></details>
+  <details><summary><span>04</span> L-theanine <b>200mg</b></summary><p>Paired with caffeine in the formula. Refer to the product label for use directions.</p><a href="/blog/caffeine-l-theanine-vs-caffeine">Learn about the pairing →</a></details>
  </div>
 </section>
 HTML;
