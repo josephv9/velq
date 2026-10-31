@@ -5,6 +5,12 @@ declare(strict_types=1);
 function velq_home_cover(string $html, string $path): string {
     // Remove only the homepage Journal preview; keep the Journal and articles available.
     if ($path === '/') {
+        // Approved white pouch and packet with strawberries, homepage product card only.
+        $html = preg_replace_callback(
+            '~(<div class="product-visual[^"]*"[^>]*>.*?<img)\\b[^>]*>~s',
+            static fn(array $m): string => $m[1].' src="/assets/velq-white-strawberry-product-20261031.webp" alt="White Velq strawberry protein and fiber gummies bag and individual packet surrounded by strawberries and red gummies" width="1254" height="1254" loading="lazy" decoding="async">',
+            $html, 1
+        ) ?? $html;
         // Remove the three-step "Keep moving. Keep it simple." homepage section.
         $html = preg_replace('~<section\\b[^>]*class="ritual section"[^>]*>.*?</section>~s', '', $html, 1) ?? $html;
         $html = preg_replace('~<section\\b[^>]*aria-labelledby="journal-title"[^>]*>.*?</section>~s', '', $html, 1) ?? $html;
