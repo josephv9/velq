@@ -36,11 +36,13 @@ function velq_home_cover(string $html, string $path): string {
     $artwork = '/assets/velq-cover-clean-logo-20261031.webp';
     $hero = '<section class="hero lifestyle-cover velq-approved-cover" aria-labelledby="hero-title">'
         . '<div class="cover-photo">'
-        . '<img class="approved-cover-art" src="'.$artwork.'" width="852" height="1847" alt="Smiling woman holding a white Velq strawberry protein and fiber gummies packet" fetchpriority="high" decoding="async">'
-        . '<div class="cover-shipping" role="note" aria-label="Free shipping on orders over $50"><div class="cover-shipping-track" aria-hidden="true"><span>FREE SHIPPING ON ORDERS OVER $50 &nbsp; • &nbsp; </span><span>FREE SHIPPING ON ORDERS OVER $50 &nbsp; • &nbsp; </span></div></div>'
-        . '<button class="cover-menu" id="menu-toggle" aria-label="Open menu" aria-expanded="false" aria-controls="mobile-nav"></button>'
+        . '<div class="cover-shipping" role="note" aria-label="Free shipping on orders over $50"><div class="cover-shipping-track" aria-hidden="true"><span>FREE SHIPPING ON ORDERS OVER $50 &nbsp; • &nbsp; FREE SHIPPING ON ORDERS OVER $50 &nbsp; • &nbsp; </span><span>FREE SHIPPING ON ORDERS OVER $50 &nbsp; • &nbsp; FREE SHIPPING ON ORDERS OVER $50 &nbsp; • &nbsp; </span></div></div>'
+        . '<nav class="cover-navigation" aria-label="Main navigation">'
+        . '<button class="cover-menu" id="menu-toggle" aria-label="Open menu" aria-expanded="false" aria-controls="mobile-nav"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M4 6h16M4 12h16M4 18h16"/></svg></button>'
         . '<a class="cover-home" href="/" aria-label="Velq home"></a>'
-        . '<a class="cover-bag" href="#waitlist" data-waitlist-cta="header" aria-label="Get early access"></a>'
+        . '<a class="cover-bag" href="#waitlist" data-waitlist-cta="header" aria-label="Get early access"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M5 7h14l2 14H3L5 7Z"/><path d="M8 8V6a4 4 0 0 1 8 0v2"/></svg></a>'
+        . '</nav>'
+        . '<div class="cover-image-window"><img class="approved-cover-art" src="'.$artwork.'" width="852" height="1846" alt="Smiling woman holding a white Velq strawberry protein and fiber gummies packet" fetchpriority="high" decoding="async"></div>'
         . '</div>'
         . '<div class="cover-conversion" id="waitlist">'
         . '<p class="cover-kicker">STRAWBERRY · COMING SOON</p>'
@@ -76,7 +78,7 @@ function velq_home_cover(string $html, string $path): string {
     $html = str_replace('<body>', '<body class="velq-cover-home">', $html);
     $html = preg_replace('~<link\b[^>]*data-velq-responsive-preload[^>]*>~i', '', $html) ?? $html;
     $preload = '<link data-velq-responsive-preload rel="preload" as="image" href="'.$artwork.'" fetchpriority="high">';
-    return str_replace('</head>', '<link rel="stylesheet" href="/assets/velq-home-cover.css?v=20261031-shipping-tight-4">'.$preload.'</head>', $html);
+    return str_replace('</head>', '<link rel="stylesheet" href="/assets/velq-home-cover.css?v=20261031-shipping-tight-4">'.$preload.'<link rel="stylesheet" href="/assets/velq-cover-layout-20261031.css?v=layout-1"></head>', $html);
 }
 
 /** Single-product layout. Image slots accept ordinary img elements when supplied. */

@@ -1,0 +1,54 @@
+/* The cover is a photo beneath real navigation, never a screenshot UI overlay. */
+body.velq-cover-home .hero.velq-approved-cover .cover-photo{
+ display:block;position:relative;width:100%;height:auto;overflow:hidden;
+ container-type:inline-size;background:#009ddd;
+}
+body.velq-cover-home .hero.velq-approved-cover .cover-photo .cover-shipping{
+ position:relative;inset:auto;display:flex;align-items:center;justify-content:flex-start;
+ width:100%;height:36px;min-height:36px;margin:0;border-radius:0;padding:0;
+ overflow:hidden;background:#ec1737;font:700 12px/1 Arial,sans-serif;
+}
+body.velq-cover-home .hero.velq-approved-cover .cover-shipping-track{
+ display:flex;width:max-content;min-width:0;flex:none;animation:velq-shipping-right 24s linear infinite;
+}
+body.velq-cover-home .hero.velq-approved-cover .cover-shipping-track span{
+ display:block;flex:none;width:max-content;min-width:0;padding:0 12px;white-space:nowrap;
+ font-size:12px;letter-spacing:.03em;
+}
+body.velq-cover-home .hero.velq-approved-cover .cover-photo .cover-navigation{
+ position:relative;display:grid;grid-template-columns:48px 1fr 48px;align-items:center;
+ gap:16px;height:84px;padding:0 5%;margin:0;box-sizing:border-box;z-index:5;
+}
+body.velq-cover-home .hero.velq-approved-cover .cover-navigation :is(.cover-menu,.cover-home,.cover-bag){
+ position:static!important;inset:auto!important;transform:none!important;display:flex;
+ align-items:center;justify-content:center;width:44px;height:44px;padding:8px;
+ border:0;background:transparent!important;aspect-ratio:auto;box-sizing:border-box;color:#fff;
+}
+body.velq-cover-home .hero.velq-approved-cover .cover-navigation a.cover-home{
+ justify-self:center;width:110px;height:64px;padding:0;
+}
+body.velq-cover-home .hero.velq-approved-cover .cover-navigation .velq-bag-logo{
+ display:block;width:100%;height:auto;max-height:60px;object-fit:contain;
+}
+body.velq-cover-home .hero.velq-approved-cover .cover-navigation svg{
+ display:block;width:28px;height:28px;fill:none;stroke:currentColor;stroke-width:1.8;stroke-linecap:round;stroke-linejoin:round;
+}
+body.velq-cover-home .hero.velq-approved-cover .cover-image-window{
+ position:relative;width:100%;height:82cqw;overflow:hidden;
+}
+body.velq-cover-home .hero.velq-approved-cover .cover-image-window img.approved-cover-art{
+ position:absolute;left:0;top:-29.34cqw;transform:none;width:100%;height:auto!important;
+ aspect-ratio:852/1846;max-width:none;max-height:none!important;display:block;object-fit:fill;
+}
+body.velq-cover-home .mobile-nav{top:120px;left:5%;right:5%;z-index:30}
+body.velq-cover-home .back-top{display:none}
+body.velq-cover-home .hero.velq-approved-cover #waitlist-form{min-width:0}
+body.velq-cover-home .hero.velq-approved-cover #waitlist-form input[type=email]{max-width:100%}
+@media(min-width:621px){
+ body.velq-cover-home .hero.velq-approved-cover .cover-photo .cover-navigation{height:100px}
+ body.velq-cover-home .hero.velq-approved-cover .cover-navigation a.cover-home{width:140px;height:76px}
+ body.velq-cover-home .mobile-nav{top:136px}
+}
+@media(prefers-reduced-motion:reduce){
+ body.velq-cover-home .hero.velq-approved-cover .cover-shipping-track{animation:none;transform:none}
+}
