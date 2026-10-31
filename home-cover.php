@@ -3,6 +3,7 @@ declare(strict_types=1);
 
 /** Approved lifestyle cover, applied only to the existing homepage. */
 function velq_home_cover(string $html, string $path): string {
+    if ($path === '/') $html = velq_compact_product_section($html);
     // Approved white pouch creative, scoped to the homepage product card.
     if ($path === '/') {
         // Approved white pouch and packet with strawberries, homepage product card only.
@@ -85,4 +86,30 @@ HTML;
     $html = preg_replace('~<section\b[^>]*aria-labelledby="compare-heading"[^>]*>.*?</section>~s', '', $html, 1) ?? $html;
     $html = preg_replace('~<nav\b[^>]*aria-label="Product buying guides"[^>]*>.*?</nav>~s', '', $html, 1) ?? $html;
     return $html;
+}
+
+/** Approved compact product section; nutrition remains in the strip above. */
+function velq_compact_product_section(string $html): string {
+    $section = <<<'HTML'
+<section class="products section velq-compact-product" id="products" aria-labelledby="products-title">
+  <h2 id="products-title">Meet your daily<br>upgrade.</h2>
+  <a class="velq-compact-image" href="/products/strawberry-protein-fiber-gummies" data-product-detail-cta="product-image" aria-label="View Velq strawberry gummy details"><img src="/assets/velq-white-strawberry-product-20261031.webp" alt="Velq strawberry gummy pouch and individual packet with strawberries" width="1254" height="1254" loading="lazy" decoding="async"></a>
+  <p class="velq-compact-flavor">Strawberry · Zero sugar</p>
+  <p class="velq-compact-size">10 packets per box</p>
+  <a class="velq-compact-cta" href="#waitlist" data-waitlist-cta="home" data-interest="strawberry">Get Early Access</a>
+  <a class="velq-compact-details" href="/products/strawberry-protein-fiber-gummies" data-product-detail-cta="product-card">Product details <span aria-hidden="true">↓</span></a>
+</section>
+<style id="velq-compact-product-css">
+#products.velq-compact-product{display:flex;flex-direction:column;align-items:center;max-width:760px;margin:0 auto;padding:44px 20px 48px;text-align:center;background:#fff;box-sizing:border-box;gap:0}
+#products.velq-compact-product #products-title{font-size:clamp(36px,6vw,58px);font-weight:750;letter-spacing:-.045em;line-height:1.06;margin:0 0 28px;color:#080808}
+#products.velq-compact-product .velq-compact-image{display:block;width:100%;border-radius:22px;overflow:hidden;margin:0 0 22px}
+#products.velq-compact-product img{display:block;width:100%;height:auto;aspect-ratio:1;object-fit:cover}
+#products.velq-compact-product .velq-compact-flavor{font-size:clamp(20px,3vw,26px);line-height:1.3;margin:0 0 6px;color:#111}
+#products.velq-compact-product .velq-compact-size{font-size:17px;line-height:1.4;color:#626262;margin:0 0 24px}
+#products.velq-compact-product .velq-compact-cta{display:flex;align-items:center;justify-content:center;width:100%;min-height:58px;padding:14px 20px;box-sizing:border-box;border-radius:12px;background:#080808;color:#fff;font-size:20px;font-weight:650;text-decoration:none;line-height:1.3}
+#products.velq-compact-product .velq-compact-details{margin:20px 0 0;color:#111;font-size:16px;text-underline-offset:5px}
+#products.velq-compact-product a:focus-visible{outline:3px solid #e53346;outline-offset:4px}
+</style>
+HTML;
+    return preg_replace('~<section\b[^>]*\bid="products"[^>]*>.*?</section>~s', $section, $html, 1) ?? $html;
 }
