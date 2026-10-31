@@ -76,3 +76,19 @@ body.velq-product-detail .header .velq-bag-logo{filter:brightness(0)!important}
    white-space:nowrap;
  }
 }
+
+/* Smaller footer typography and calmer spacing. */
+body .velq-black-footer h2{font-size:clamp(20px,2.6vw,30px);line-height:1.25;max-width:760px;margin-bottom:24px}
+body .velq-black-footer h3{font-size:clamp(17px,1.9vw,22px);line-height:1.3;margin-bottom:8px}
+body .black-footer-columns a{font-size:clamp(13px,1.5vw,17px);line-height:1.5;letter-spacing:.015em}
+body .black-footer-columns nav{gap:16px}
+body .black-footer-signup>p{font-size:clamp(13px,1.5vw,17px);line-height:1.6;margin:22px 0 44px}
+body .black-footer-field input{font-size:clamp(16px,1.8vw,20px);letter-spacing:.035em}
+body .black-footer-field{border-width:1px;padding:8px;max-width:900px}
+body .black-footer-field button{width:54px;height:54px;font-size:36px}
+body .black-footer-policies a{font-size:clamp(10px,1.1vw,12px);letter-spacing:.025em}
+body .black-footer-policies{gap:18px 28px;margin-bottom:28px}
+body .black-footer-social{margin:48px 0 36px}
+body .black-footer-social>div{margin-top:22px;gap:26px}
+body .black-footer-social svg{width:27px;height:27px}
+@media(max-width:650px){body.velq-cover-home footer.velq-black-footer{padding-top:44px}body .black-footer-field button{width:42px;height:42px;font-size:30px}body .black-footer-columns nav{gap:14px}body .black-footer-social{margin:42px 0 32px}}
