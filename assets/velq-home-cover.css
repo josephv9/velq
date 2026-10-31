@@ -178,3 +178,32 @@ body.velq-cover-home{--ink:#080808;--muted:#595959;--line:#e8e8e8;--red:#080808;
 .velq-cover-home .header .velq-rounded-logo{display:block;width:100%;height:auto;max-height:48px;object-fit:contain}
 .velq-cover-home .club-wordmark .velq-rounded-logo{display:block;width:100%;height:auto;filter:invert(1)}
 @media(max-width:600px){.velq-cover-home .header .wordmark{width:76px;height:44px}}
+
+
+/* Velq blue strawberry launch cover · 2026-10-31 */
+.velq-cover-home .hero.lifestyle-cover.velq-blue-launch{background:#005497;color:#fff}
+.velq-cover-home .velq-blue-launch .hero-image-wrap{position:absolute;inset:0;width:100%;height:100%!important;min-height:100%!important;margin:0;padding:0!important;overflow:hidden;background:#005497}
+.velq-cover-home .velq-blue-launch .hero-image-wrap img{display:block;width:100%;height:100%!important;max-height:none!important;max-width:none!important;object-fit:cover;object-position:center top;border-radius:0}
+.velq-cover-home .hero.lifestyle-cover.velq-blue-launch:after{background:linear-gradient(180deg,transparent 48%,rgba(0,58,111,.15) 65%,rgba(0,45,100,.45) 100%)}
+.velq-cover-home .velq-blue-launch .hero-copy{position:absolute;bottom:34px;left:0;right:0;top:auto;transform:none!important;text-align:center;width:calc(100% - 36px);max-width:820px;margin:0 auto;padding:0;color:#fff}
+.velq-cover-home .velq-blue-launch #hero-eyebrow{color:#fff;font-size:clamp(13px,1.5vw,17px);margin:0 0 12px}
+.velq-cover-home .velq-blue-launch #hero-title{color:#fff;font-size:clamp(37px,4.8vw,65px);line-height:1.08;text-shadow:0 1px 7px rgba(0,52,112,.15)}
+.velq-cover-home .velq-blue-launch #hero-description{color:#fff;font-size:clamp(16px,1.6vw,19px);max-width:34ch;line-height:1.45;margin:15px auto 22px}
+.velq-cover-home .velq-blue-launch #hero-cta{display:inline-flex;align-items:center;justify-content:center;background:transparent;border:2px solid #fff;border-radius:16px;color:#fff;min-height:57px;font-weight:700;text-decoration:none;max-width:100%;padding:15px 24px}
+.velq-cover-home .velq-blue-launch #hero-cta:hover{background:#fff;color:#005497}
+@media(min-width:768px){
+ .velq-cover-home .hero.lifestyle-cover.velq-blue-launch{min-height:700px;height:min(95svh,890px);max-height:none}
+ .velq-cover-home .velq-blue-launch .hero-image-wrap{left:45%;right:0;top:0;bottom:0;width:55%}
+ .velq-cover-home .velq-blue-launch .hero-image-wrap img{object-position:center top}
+ .velq-cover-home .hero.lifestyle-cover.velq-blue-launch:after{background:linear-gradient(90deg,#005497 0%,#005497 28%,rgba(0,84,151,.96) 43%,rgba(0,84,151,.18) 74%,transparent 100%)}
+ .velq-cover-home .velq-blue-launch .hero-copy{top:51%;bottom:auto;left:6%;right:auto;transform:translateY(-40%)!important;width:40%;max-width:520px;margin:0;text-align:left}
+ .velq-cover-home .velq-blue-launch #hero-description{margin:18px 0 25px;max-width:34ch}
+}
+@media(max-width:767px){
+ .velq-cover-home .hero.lifestyle-cover.velq-blue-launch{min-height:650px;height:94svh;max-height:810px}
+ .velq-cover-home .velq-blue-launch .hero-copy{bottom:30px;width:calc(100% - 32px)}
+ .velq-cover-home .velq-blue-launch #hero-eyebrow{font-size:12px;margin-bottom:11px}
+ .velq-cover-home .velq-blue-launch #hero-title{font-size:clamp(31px,8.8vw,43px)}
+ .velq-cover-home .velq-blue-launch #hero-description{font-size:15px;line-height:1.4;max-width:31ch;margin:12px auto 18px}
+ .velq-cover-home .velq-blue-launch #hero-cta{display:flex;width:min(100%,520px);min-height:56px;margin:0 auto;font-size:15px;border-radius:13px}
+}
