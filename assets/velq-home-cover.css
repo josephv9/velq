@@ -411,3 +411,9 @@ body.velq-cover-home .velq-approved-cover .cover-fallback-cta{
   font-size:clamp(11px,3vw,15px);
  }
 }
+
+/* Restore continuous rightward announcement text. */
+body.velq-cover-home .velq-approved-cover .cover-shipping{justify-content:flex-start}
+body.velq-cover-home .velq-approved-cover .cover-shipping-track{display:flex;flex:none;width:max-content;min-width:200%;animation:velq-shipping-right 16s linear infinite}
+body.velq-cover-home .velq-approved-cover .cover-shipping-track span{box-sizing:border-box;flex:1 0 auto;min-width:45cqw;text-align:center;padding:0 16px}
+@media(prefers-reduced-motion:reduce){body.velq-cover-home .velq-approved-cover .cover-shipping-track{animation:none;transform:none}}
