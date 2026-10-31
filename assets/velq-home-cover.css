@@ -207,3 +207,17 @@ body.velq-cover-home{--ink:#080808;--muted:#595959;--line:#e8e8e8;--red:#080808;
  .velq-cover-home .velq-blue-launch #hero-description{font-size:15px;line-height:1.4;max-width:31ch;margin:12px auto 18px}
  .velq-cover-home .velq-blue-launch #hero-cta{display:flex;width:min(100%,520px);min-height:56px;margin:0 auto;font-size:15px;border-radius:13px}
 }
+
+/* Approved full-photo composition; crop only the browser chrome in the reference artwork. */
+body.velq-cover-home .hero.lifestyle-cover.velq-approved-cover{position:relative;display:block;isolation:isolate;width:100%;height:auto;min-height:0;max-height:none;aspect-ratio:852 / 1604;margin:0;padding:0;overflow:hidden;background:#0097d7}
+.velq-cover-home .hero.velq-approved-cover:after{display:none}
+.velq-cover-home .velq-approved-cover .approved-cover-art{position:absolute;display:block;width:100%;height:auto!important;max-height:none!important;max-width:none!important;top:-2.86783%;left:0;margin:0;padding:0;aspect-ratio:852 / 1847;object-fit:fill;border-radius:0}
+.velq-cover-home .velq-approved-cover .cover-accessible-copy{position:absolute;width:1px;height:1px;overflow:hidden;clip-path:inset(50%);white-space:nowrap}
+.velq-cover-home .velq-approved-cover :is(.cover-menu,.cover-home,.cover-bag,.cover-waitlist){position:absolute;display:block;margin:0;padding:0;min-width:0;min-height:0;max-width:none;background:transparent!important;border:0!important;border-radius:0;box-shadow:none;cursor:pointer;z-index:2}
+.velq-cover-home .velq-approved-cover .cover-menu{left:3%;top:7.5%;width:11%;height:6%}
+.velq-cover-home .velq-approved-cover .cover-home{left:37%;top:6.4%;width:26%;height:6.7%}
+.velq-cover-home .velq-approved-cover .cover-bag{right:3%;top:7.5%;width:11%;height:6%}
+.velq-cover-home .velq-approved-cover #hero-cta.cover-waitlist{left:12%;right:auto;top:87.8%;bottom:auto;width:76%;height:7%;min-height:0;margin:0;padding:0;background:transparent!important;border:0!important}
+.velq-cover-home .velq-approved-cover :is(a,button):focus-visible{outline:3px solid white;outline-offset:-4px;border-radius:14px}
+.velq-cover-home .mobile-nav{top:15%;left:4%;right:4%}
+@media(min-width:768px){body.velq-cover-home .hero.lifestyle-cover.velq-approved-cover{max-width:720px;margin:0 auto}.velq-cover-home main{background:#fff}}

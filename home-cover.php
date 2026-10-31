@@ -3,29 +3,33 @@ declare(strict_types=1);
 
 /** Approved lifestyle cover, applied only to the existing homepage. */
 function velq_home_cover(string $html, string $path): string {
+    // Remove only the homepage Journal preview; keep the Journal and articles available.
+    if ($path === '/') {
+        // Remove the three-step "Keep moving. Keep it simple." homepage section.
+        $html = preg_replace('~<section\\b[^>]*class="ritual section"[^>]*>.*?</section>~s', '', $html, 1) ?? $html;
+        $html = preg_replace('~<section\\b[^>]*aria-labelledby="journal-title"[^>]*>.*?</section>~s', '', $html, 1) ?? $html;
+    }
     if (strpos($html, 'class="hero lifestyle-cover') !== false) return $html;
     if ($path !== '/' || strpos($html, 'aria-labelledby="hero-title"') === false) return $html;
     $html = preg_replace('~<header class="header">.*?</header>~s',
         '<header class="header"><button id="menu-toggle" class="icon-button menu-toggle" aria-label="Open menu" aria-expanded="false" aria-controls="mobile-nav"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M3 6h18M3 12h18M3 18h18"/></svg></button><a href="/" class="wordmark" aria-label="Velq home"><img class="velq-rounded-logo" src="/assets/velq-rounded-wordmark-black.png?v=20261020" alt="Velq" width="1652" height="799"></a><a class="button nav-signup" href="#waitlist" data-waitlist-cta="header">Join waitlist</a></header>', $html, 1) ?? $html;
-    $images = [
-        480 => 'https://cdn.shopify.com/s/files/1/0723/8372/5647/files/velq-blue-lifestyle-hero-20261031-480.webp?v=1793478053',
-        800 => 'https://cdn.shopify.com/s/files/1/0723/8372/5647/files/velq-blue-lifestyle-hero-20261031-800.webp?v=1793478056',
-        1200 => 'https://cdn.shopify.com/s/files/1/0723/8372/5647/files/velq-blue-lifestyle-hero-20261031-1200.webp?v=1793478060'
-    ];
-    $image = '<img id="hero-image" src="'.$images[800].'" srcset="'.$images[480].' 480w, '.$images[800].' 800w, '.$images[1200].' 1200w" sizes="(max-width: 767px) 100vw, 55vw" width="852" height="1430" alt="Smiling woman holding a white Velq strawberry protein and fiber gummy packet against a bright blue background" fetchpriority="high" decoding="async">';
-    $hero = '<section class="hero lifestyle-cover velq-blue-launch" aria-labelledby="hero-title">'
-        . '<div class="hero-image-wrap">'.$image.'</div>'
-        . '<div class="hero-copy"><p class="eyebrow" id="hero-eyebrow">STRAWBERRY · COMING SOON</p>'
-        . '<h1 id="hero-title"><span>Protein + Fiber</span><span><strong>Gummies.</strong></span></h1>'
-        . '<p class="hero-description" id="hero-description">Protein, fiber, caffeine, and L-theanine. All in one convenient packet.</p>'
-        . '<a class="button button-dark" id="hero-cta" href="#waitlist" data-waitlist-cta="hero">JOIN THE FREE WAITLIST</a>'
-        . '</div></section>';
+    $artwork = '/assets/velq-approved-full-cover-20261031.webp';
+    $hero = '<section class="hero lifestyle-cover velq-approved-cover" aria-labelledby="hero-title">'
+        . '<img class="approved-cover-art" src="'.$artwork.'" width="852" height="1847" alt="Smiling woman in blue holding Velq strawberry protein and fiber gummies" fetchpriority="high" decoding="async">'
+        . '<div class="cover-accessible-copy"><p>Strawberry · Coming soon</p><h1 id="hero-title">Protein + Fiber Gummies</h1><p>Protein, fiber, caffeine, and L-theanine in one gummy.</p></div>'
+        . '<button class="cover-menu" id="menu-toggle" aria-label="Open menu" aria-expanded="false" aria-controls="mobile-nav"></button>'
+        . '<a class="cover-home" href="/" aria-label="Velq home"></a>'
+        . '<a class="cover-bag" href="#waitlist" data-waitlist-cta="header" aria-label="Get early access"></a>'
+        . '<a class="cover-waitlist" id="hero-cta" href="#waitlist" data-waitlist-cta="hero" aria-label="Join the free waitlist"></a>'
+        . '</section>';
+    // Navigation is overlaid on the approved artwork instead of a white floating panel.
+    $html = preg_replace('~<header class="header">.*?</header>~s', '', $html, 1) ?? $html;
     $html = preg_replace('~<section class="hero"[^>]*>.*?</section>~s', $hero, $html, 1) ?? $html;
     $html = velq_single_product_layout($html);
     $html = str_replace('<body>', '<body class="velq-cover-home">', $html);
     $html = preg_replace('~<link\b[^>]*data-velq-responsive-preload[^>]*>~i', '', $html) ?? $html;
-    $preload = '<link data-velq-responsive-preload rel="preload" as="image" href="'.$images[800].'" imagesrcset="'.$images[480].' 480w, '.$images[800].' 800w, '.$images[1200].' 1200w" imagesizes="(max-width: 767px) 100vw, 55vw" fetchpriority="high">';
-    return str_replace('</head>', '<link rel="stylesheet" href="/assets/velq-home-cover.css?v=20261031-blue-launch-1">'.$preload.'</head>', $html);
+    $preload = '<link data-velq-responsive-preload rel="preload" as="image" href="'.$artwork.'" fetchpriority="high">';
+    return str_replace('</head>', '<link rel="stylesheet" href="/assets/velq-home-cover.css?v=20261031-approved-full-cover-2">'.$preload.'</head>', $html);
 }
 
 /** Single-product layout. Image slots accept ordinary img elements when supplied. */
@@ -44,21 +48,21 @@ function velq_single_product_layout(string $html): string {
     <article class="benefit-card benefit-uniform-card"><div class="benefit-uniform-copy"><h3>Big on the essentials.</h3><p>20g protein. 10g fiber. 80mg caffeine.<br>All in your daily pack.</p></div><div class="benefit-uniform-photo"><svg viewBox="58 486 1154 656" preserveAspectRatio="xMidYMid slice" role="img" aria-label="Red strawberry gummy bears"><image href="/assets/velq-why-essentials-20261020-1200.webp" width="1270" height="1239" preserveAspectRatio="none"/></svg></div></article>
     <article class="benefit-card benefit-uniform-card"><div class="benefit-uniform-copy"><h3>Ready when you are.</h3><p>Strawberry gummies that fit<br>wherever your day takes you.</p></div><div class="benefit-uniform-photo"><svg viewBox="50 455 1173 707" preserveAspectRatio="xMidYMid slice" role="img" aria-label="Woman holding Velq strawberry gummies outdoors"><image href="/assets/velq-why-ready-20261020-1200.webp" width="1273" height="1236" preserveAspectRatio="none"/></svg></div></article>
   </div>
-  <p class="formula-note">Amounts per packet. Product is prelaunch; check the product label when ordering opens.</p>
+  <p class="formula-note">Target amounts per packet. Product in development; final formula and label may change.</p>
 </section>
 <section class="formula-section cadence-section" id="ingredients" aria-labelledby="ingredient-title">
- <div class="formula-heading"><h2 id="ingredient-title">One gummy format.<br><strong>More inside.</strong></h2><p>Get to know the formula.</p><a href="/products/strawberry-protein-fiber-gummies">Explore the product →</a></div>
+ <div class="formula-heading"><h2 id="ingredient-title">One gummy format.<br><strong>More inside.</strong></h2><p>Get to know the target formula.</p><a href="/products/strawberry-protein-fiber-gummies">Explore the product →</a></div>
  <div class="formula-accordion">
-  <details open><summary><span>01</span> Protein <b>20g</b></summary><p>An easy addition to your daily protein intake. Each complete packet provides 20g.</p><a href="/blog/how-much-protein-do-you-actually-need">Learn about protein →</a></details>
-  <details><summary><span>02</span> Prebiotic fiber <b>10g</b></summary><p>More fiber, built into your everyday routine. 10g per packet. Refer to the product label for serving directions and allergens.</p><a href="/blog/how-much-fiber-do-you-need-every-day">Learn about fiber →</a></details>
+  <details open><summary><span>01</span> Protein <b>20g</b></summary><p>An easy addition to your daily protein intake. The target formula provides 20g per complete packet.</p><a href="/blog/how-much-protein-do-you-actually-need">Learn about protein →</a></details>
+  <details><summary><span>02</span> Prebiotic fiber <b>10g</b></summary><p>More fiber, built into your everyday routine. Target: 10g per packet. Final serving directions and ingredients will appear on the label.</p><a href="/blog/how-much-fiber-do-you-need-every-day">Learn about fiber →</a></details>
   <details><summary><span>03</span> Caffeine <b>80mg</b></summary><p>A measured lift for your day. Velq is being developed for adults and contains caffeine; final usage directions will be on the label.</p><a href="/blog/caffeine-gummies-vs-coffee-whats-the-difference">Explore caffeine →</a></details>
-  <details><summary><span>04</span> L-theanine <b>200mg</b></summary><p>Paired with caffeine in the formula. Refer to the product label for use directions.</p><a href="/blog/caffeine-l-theanine-vs-caffeine">Learn about the pairing →</a></details>
+  <details><summary><span>04</span> L-theanine <b>200mg</b></summary><p>A thoughtful addition to the target formula, paired with caffeine. Final nutrition details may change.</p><a href="/blog/caffeine-l-theanine-vs-caffeine">Learn about the pairing →</a></details>
  </div>
 </section>
 HTML;
     $html = preg_replace('~<section class="ingredient-section".*?</section>~s', $why, $html, 1) ?? $html;
     $html = preg_replace('~<section class="closing">.*?</section>~s', '', $html, 1) ?? $html;
-    $footer = $waitlist.'<footer class="velq-club-footer"><div class="club-links"><nav aria-label="Meet Velq"><h3>Meet Velq</h3><a href="#products">Strawberry gummies</a><a href="#ingredients">What’s inside</a><a href="#story">Our story</a><a href="#faq">FAQs</a></nav><nav aria-label="Resources"><h3>Resources</h3><a href="/blog">The Velq Journal</a><a href="/guides/protein-and-fiber-snacks">Snack guides</a><a href="/tools/nutrition-label-value-calculator">Compare nutrition labels</a><a href="/research">Research</a><a href="/media">Media &amp; resources</a><a href="/blog/editorial-policy">Editorial policy</a></nav><nav aria-label="Client services"><h3>Client Services</h3><a href="/contact/">Contact</a><a href="/shipping/">Shipping</a><a href="/privacy/">Privacy policy</a><a href="/terms/">Terms &amp; conditions</a></nav></div><a class="club-wordmark" href="/" aria-label="Velq home"><img class="velq-rounded-logo" src="/assets/velq-rounded-wordmark-black.png?v=20261020" alt="Velq" width="1652" height="799"></a><div class="club-bottom"><span>UNITED STATES · USD $</span><span>© 2026 Velq Nutrition LLC</span></div><p class="club-development">Velq is prelaunch. Packaging, retail labeling and price details will be announced before ordering opens.</p></footer><a class="back-top" href="#main" aria-label="Back to top">↑</a>';
+    $footer = $waitlist.'<footer class="velq-club-footer"><div class="club-links"><nav aria-label="Meet Velq"><h3>Meet Velq</h3><a href="#products">Strawberry gummies</a><a href="#ingredients">What’s inside</a><a href="#story">Our story</a><a href="#faq">FAQs</a></nav><nav aria-label="Resources"><h3>Resources</h3><a href="/blog">The Velq Journal</a><a href="/guides/protein-and-fiber-snacks">Snack guides</a><a href="/tools/nutrition-label-value-calculator">Compare nutrition labels</a><a href="/research">Research</a><a href="/media">Media &amp; resources</a><a href="/blog/editorial-policy">Editorial policy</a></nav><nav aria-label="Client services"><h3>Client Services</h3><a href="/contact/">Contact</a><a href="/shipping/">Shipping</a><a href="/privacy/">Privacy policy</a><a href="/terms/">Terms &amp; conditions</a></nav></div><a class="club-wordmark" href="/" aria-label="Velq home"><img class="velq-rounded-logo" src="/assets/velq-rounded-wordmark-black.png?v=20261020" alt="Velq" width="1652" height="799"></a><div class="club-bottom"><span>UNITED STATES · USD $</span><span>© 2026 Velq Nutrition LLC</span></div><p class="club-development">Product in development. Final packaging, price and nutrition details may change.</p></footer><a class="back-top" href="#main" aria-label="Back to top">↑</a>';
     $html = preg_replace_callback('~<footer>.*?</footer>~s', static fn(array $m): string => $footer, $html, 1) ?? $html;
     // Remove the homepage founder panel and navigation to the removed section.
     $html = preg_replace('~<section\\b[^>]*\\bid="story"[^>]*>.*?</section>~s', '', $html, 1) ?? $html;
