@@ -20,6 +20,16 @@ function velq_authority_response(string $body, string $requestPath): string
     }
 
     if (stripos($body, '<html') === false || str_starts_with($requestPath, '/assets/')) return $body;
+    // Remove the Editorial policy link from footer resource navigation.
+    $body = preg_replace_callback(
+        '~<footer\\b[^>]*>[\\s\\S]*?</footer>~i',
+        static fn(array $footer): string => preg_replace(
+            '~<a\\b[^>]*href=["\'](?:https?://(?:www\\.)?velqnutrition\\.com)?/blog/editorial-policy/?["\'][^>]*>[\\s\\S]*?</a>~i',
+            '',
+            $footer[0]
+        ) ?? $footer[0],
+        $body
+    ) ?? $body;
     if (strpos($body, 'id="velq-authority-links"') !== false || stripos($body, '</footer>') === false) return $body;
 
     if (preg_match('~<footer\b[^>]*>[\s\S]*?</footer>~i', $body, $footerMatch) !== 1) return $body;
@@ -27,7 +37,6 @@ function velq_authority_response(string $body, string $requestPath): string
     $destinations = [
         '/media' => 'Media &amp; resources',
         '/contact/' => 'Contact',
-        '/blog/editorial-policy' => 'Editorial policy',
     ];
     foreach ($destinations as $path => $label) {
         $pattern = '~href=["\']' . preg_quote(rtrim($path, '/'), '~') . '/?["\']~i';
