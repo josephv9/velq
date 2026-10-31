@@ -3,6 +3,13 @@ declare(strict_types=1);
 
 /** Approved lifestyle cover, applied only to the existing homepage. */
 function velq_home_cover(string $html, string $path): string {
+    // Approved white pouch creative, scoped to the homepage product card.
+    if ($path === '/') {
+        $html = preg_replace_callback('~(<div class="product-visual strawberry">.*?)(<img\\b[^>]*>)~s', static function(array $m): string {
+            $image = '<img src="/assets/velq-strawberry-white-product-20261031-800.webp" srcset="/assets/velq-strawberry-white-product-20261031-480.webp 480w, /assets/velq-strawberry-white-product-20261031-800.webp 800w, /assets/velq-strawberry-white-product-20261031-1200.webp 1200w" sizes="(max-width: 650px) 90vw, (max-width: 1100px) 48vw, 560px" width="1254" height="1254" loading="lazy" decoding="async" alt="Velq white strawberry gummies pouch and individual packet surrounded by strawberries and red gummy bears">';
+            return $m[1] . $image;
+        }, $html, 1) ?? $html;
+    }
     // Remove only the homepage Journal preview; keep the Journal and articles available.
     if ($path === '/') {
         // Remove the three-step "Keep moving. Keep it simple." homepage section.
