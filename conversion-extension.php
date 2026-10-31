@@ -17,7 +17,7 @@ function velq_conversion_waitlist(): string {
     <input id="waitlist-interest" name="interest" type="hidden" value="strawberry">
     <div class="signup-trap" aria-hidden="true"><label for="company">Leave this field empty</label><input id="company" name="company" type="text" tabindex="-1" autocomplete="off"></div>
     <label class="consent-label"><input id="waitlist-consent" name="consent" type="checkbox" required><span>Email me Velq launch and product updates. I can unsubscribe anytime.</span></label>
-    <button class="button button-dark" id="waitlist-submit" type="submit">GET LAUNCH UPDATES <span aria-hidden="true">↗</span></button>
+    <button class="button button-dark" id="waitlist-submit" type="submit">JOIN EARLY ACCESS <span aria-hidden="true">↗</span></button>
     <p id="signup-feedback" class="signup-feedback" role="status" aria-live="polite" aria-atomic="true"></p>
     <p class="signup-privacy" id="waitlist-expectations">Velq is in development. <a href="/privacy/">Privacy details</a></p>
     <div class="velq-waitlist-next" data-waitlist-next hidden><p>You’re all set. Explore what we’re developing while you wait.</p><a href="/products/strawberry-protein-fiber-gummies" data-product-detail-cta="signup-success">See the gummy details <span aria-hidden="true">→</span></a></div>
@@ -44,7 +44,7 @@ function velq_conversion_response(string $body, string $path): string {
             $body = str_replace('<div class="product-specs"><span>20g protein</span><span>10g prebiotic fiber</span><span>80mg caffeine</span><span>200mg L-theanine</span></div>', '<div class="product-specs"><span>20g protein</span><span>10g prebiotic fiber</span><span>80mg caffeine</span><span>200mg L-theanine</span></div><p class="velq-product-note">Amounts per packet. See product details for ingredients and serving information.</p><a class="velq-product-details-link" href="/products/strawberry-protein-fiber-gummies" data-product-detail-cta="product-card">View product details <span aria-hidden="true">→</span></a>', $body);
         }
         $body = str_replace('enjoy strawberry flavor without mixing.', 'enjoy strawberry flavor.', $body);
-        $body = str_replace('href="#waitlist" data-waitlist-cta="home">JOIN THE WAITLIST</a><button id="menu-toggle"', 'href="#waitlist" data-waitlist-cta="header">JOIN THE WAITLIST</a><button id="menu-toggle"', $body);
+        $body = str_replace('href="#waitlist" data-waitlist-cta="home">JOIN EARLY ACCESS</a><button id="menu-toggle"', 'href="#waitlist" data-waitlist-cta="header">JOIN EARLY ACCESS</a><button id="menu-toggle"', $body);
         $body = str_replace('id="hero-cta" href="#waitlist" data-waitlist-cta="home"', 'id="hero-cta" href="#waitlist" data-waitlist-cta="hero"', $body);
     }
     // Remove the retired six-gummy serving count from rendered website copy.
@@ -60,7 +60,7 @@ function velq_conversion_response(string $body, string $path): string {
         . '<script src="/analytics.js?v=conversion-20261020" defer></script>';
     $scripts = '<script src="/velq-waitlist.js?v=conversion-20261020" defer></script>'
         . '<script src="/app.js?v=popup-cta-20261020" defer></script>'
-        . '<script src="/velq-lead-capture.js?v=popup-copy-20261020b" defer></script>';
+        . '<script src="/velq-lead-capture.js?v=join-early-access-20261031" defer></script>';
     // Preserve current blocks in place when this filter is applied again, so
     // later image/preload metadata stays in its original order. Remove any
     // additional old or duplicated asset tags around the preserved blocks.
