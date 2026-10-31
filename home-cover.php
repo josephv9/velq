@@ -3,6 +3,7 @@ declare(strict_types=1);
 
 /** Approved lifestyle cover, applied only to the existing homepage. */
 function velq_home_cover(string $html, string $path): string {
+    if ($path === '/') $html = velq_compact_product_section($html);
     // Remove only the homepage Journal preview; keep the Journal and articles available.
     if ($path === '/') {
         // Approved white pouch and packet with strawberries, homepage product card only.
@@ -55,7 +56,7 @@ function velq_single_product_layout(string $html): string {
     <article class="benefit-card benefit-uniform-card"><div class="benefit-uniform-copy"><h3>Big on the essentials.</h3><p>20g protein. 10g fiber. 80mg caffeine.<br>All in your daily pack.</p></div><div class="benefit-uniform-photo"><svg viewBox="58 486 1154 656" preserveAspectRatio="xMidYMid slice" role="img" aria-label="Red strawberry gummy bears"><image href="/assets/velq-why-essentials-20261020-1200.webp" width="1270" height="1239" preserveAspectRatio="none"/></svg></div></article>
     <article class="benefit-card benefit-uniform-card"><div class="benefit-uniform-copy"><h3>Ready when you are.</h3><p>Strawberry gummies that fit<br>wherever your day takes you.</p></div><div class="benefit-uniform-photo"><img src="https://cdn.shopify.com/s/files/1/0723/8372/5647/files/velq-ready-when-you-are-tan-white-packet.jpg?v=1793481790" alt="Woman in a tan jacket holding a small white Velq strawberry gummies packet outdoors" width="716" height="424" loading="lazy" decoding="async" style="display:block;width:100%;height:100%;object-fit:cover;"></div></article>
   </div>
-  <p class="formula-note">Target amounts per packet. Product in development; final formula and label may change.</p>
+  
 </section>
 <section class="formula-section cadence-section" id="ingredients" aria-labelledby="ingredient-title">
  <div class="formula-heading"><h2 id="ingredient-title">One gummy format.<br><strong>More inside.</strong></h2><p>Get to know the target formula.</p><a href="/products/strawberry-protein-fiber-gummies">Explore the product →</a></div>
@@ -79,3 +80,30 @@ HTML;
     $html = preg_replace('~<nav\b[^>]*aria-label="Product buying guides"[^>]*>.*?</nav>~s', '', $html, 1) ?? $html;
     return $html;
 }
+
+/** Approved compact product section; nutrition remains in the strip above. */
+function velq_compact_product_section(string $html): string {
+    $section = <<<'HTML'
+<section class="products section velq-compact-product" id="products" aria-labelledby="products-title">
+  <h2 id="products-title">Meet your daily<br>upgrade.</h2>
+  <a class="velq-compact-image" href="/products/strawberry-protein-fiber-gummies" data-product-detail-cta="product-image" aria-label="View Velq strawberry gummy details"><img src="/assets/velq-white-strawberry-product-20261031.webp" alt="Velq strawberry gummy pouch and individual packet with strawberries" width="1254" height="1254" loading="lazy" decoding="async"></a>
+  <p class="velq-compact-flavor">Strawberry · Zero sugar</p>
+  <p class="velq-compact-size">10 packets per box</p>
+  <a class="velq-compact-cta" href="#waitlist" data-waitlist-cta="home" data-interest="strawberry">Get Early Access</a>
+  <a class="velq-compact-details" href="/products/strawberry-protein-fiber-gummies" data-product-detail-cta="product-card">Product details <span aria-hidden="true">↓</span></a>
+</section>
+<style id="velq-compact-product-css">
+#products.velq-compact-product{display:flex;flex-direction:column;align-items:center;max-width:760px;margin:0 auto;padding:44px 20px 48px;text-align:center;background:#fff;box-sizing:border-box;gap:0}
+#products.velq-compact-product #products-title{font-size:clamp(36px,6vw,58px);font-weight:750;letter-spacing:-.045em;line-height:1.06;margin:0 0 28px;color:#080808}
+#products.velq-compact-product .velq-compact-image{display:block;width:100%;border-radius:22px;overflow:hidden;margin:0 0 22px}
+#products.velq-compact-product img{display:block;width:100%;height:auto;aspect-ratio:1;object-fit:cover}
+#products.velq-compact-product .velq-compact-flavor{font-size:clamp(20px,3vw,26px);line-height:1.3;margin:0 0 6px;color:#111}
+#products.velq-compact-product .velq-compact-size{font-size:17px;line-height:1.4;color:#626262;margin:0 0 24px}
+#products.velq-compact-product .velq-compact-cta{display:flex;align-items:center;justify-content:center;width:100%;min-height:58px;padding:14px 20px;box-sizing:border-box;border-radius:12px;background:#080808;color:#fff;font-size:20px;font-weight:650;text-decoration:none;line-height:1.3}
+#products.velq-compact-product .velq-compact-details{margin:20px 0 0;color:#111;font-size:16px;text-underline-offset:5px}
+#products.velq-compact-product a:focus-visible{outline:3px solid #e53346;outline-offset:4px}
+</style>
+HTML;
+    return preg_replace('~<section\b[^>]*\bid="products"[^>]*>.*?</section>~s', $section, $html, 1) ?? $html;
+}
+
