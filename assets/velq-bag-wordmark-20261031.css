@@ -3,10 +3,10 @@ a.wordmark .velq-bag-logo{display:block;width:100px;height:auto;max-width:100%;o
 header a.wordmark{display:flex;align-items:center;line-height:1}
 footer a.wordmark .velq-bag-logo{width:140px;filter:brightness(0) invert(1)}
 .velq-cover-home .club-wordmark .velq-bag-logo{display:block;width:100%;height:auto;filter:brightness(0) invert(1)}
-/* Cover the previous printed logo with a real, accessible bag wordmark. */
+/* Transparent wordmark over the cleaned blue cover artwork. */
 body.velq-cover-home .velq-approved-cover .cover-photo a.cover-home{
  top:calc(min(100vw,720px) * .172 - 2.86783%);left:36%;width:28%;height:auto;
  aspect-ratio:1.85;box-sizing:border-box;padding:5px 9px;display:flex;align-items:center;
- justify-content:center;background:#fff!important;border-radius:10px;
+ justify-content:center;background:transparent!important;border-radius:0;
 }
-body.velq-cover-home .cover-home .velq-bag-logo{display:block;width:100%;height:auto;max-height:100%;object-fit:contain}
+body.velq-cover-home .cover-home .velq-bag-logo{display:block;width:100%;height:auto;max-height:100%;object-fit:contain;filter:brightness(0) invert(1)}
