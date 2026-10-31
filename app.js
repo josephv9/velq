@@ -28,6 +28,10 @@
     window.VelqWaitlist.bindForm({ form, submit: document.querySelector('#waitlist-submit'), feedback: document.querySelector('#signup-feedback'), source: 'inline', autoResume: true });
     document.querySelectorAll('[data-interest]').forEach(link => link.addEventListener('click', () => { if (interest) interest.value = 'strawberry'; }));
   }
+  const heroForm = document.querySelector('#hero-waitlist-form');
+  if (heroForm && window.VelqWaitlist) {
+    window.VelqWaitlist.bindForm({ form: heroForm, submit: document.querySelector('#hero-waitlist-submit'), feedback: document.querySelector('#hero-signup-feedback'), source: 'inline', autoResume: false });
+  }
   const privacy = document.querySelector('#privacy-dialog');
   document.querySelector('#privacy-open')?.addEventListener('click', () => privacy?.showModal());
   document.querySelector('#privacy-close')?.addEventListener('click', () => privacy?.close());

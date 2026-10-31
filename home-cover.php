@@ -28,12 +28,11 @@ function velq_home_cover(string $html, string $path): string {
     $artwork = '/assets/velq-gummy-bears-cover-20261031.webp';
     $hero = '<section class="hero lifestyle-cover velq-approved-cover" aria-labelledby="hero-title">'
         . '<img class="approved-cover-art" src="'.$artwork.'" width="852" height="1847" alt="Smiling woman in blue holding Velq strawberry protein and fiber gummies" fetchpriority="high" decoding="async">'
-        . '<div class="cover-shipping" role="note" aria-label="Free shipping on orders over $50"><div class="cover-shipping-track" aria-hidden="true"><span>FREE SHIPPING ON ORDERS OVER $50 &nbsp; • &nbsp; PRE-ORDER &nbsp; • &nbsp;</span><span>FREE SHIPPING ON ORDERS OVER $50 &nbsp; • &nbsp; PRE-ORDER &nbsp; • &nbsp;</span></div></div>'
-        . '<div class="cover-accessible-copy"><p>Strawberry · Coming soon</p><h1 id="hero-title">Protein + Fiber Gummies</h1><p>Protein, fiber, caffeine, and L-theanine in one gummy.</p></div>'
+        . '<div class="cover-shipping" role="note" aria-label="Free shipping on orders over $50"><span>FREE SHIPPING ON ORDERS OVER $50</span></div>'
+        . '<div class="cover-conversion-panel" aria-labelledby="hero-title"><p class="cover-conversion-eyebrow">STRAWBERRY · COMING SOON</p><h1 id="hero-title">Protein + fiber, made easier.</h1><p class="cover-conversion-subtitle">20g protein, 10g prebiotic fiber, 80mg caffeine and 200mg L-theanine <strong>per packet.</strong></p><form id="hero-waitlist-form" class="cover-conversion-form" method="post"><div class="cover-conversion-row"><label class="cover-screen-reader" for="hero-waitlist-email">Email address</label><input id="hero-waitlist-email" type="email" name="email" autocomplete="email" placeholder="Your email address" required><button id="hero-waitlist-submit" type="submit">Get Early Access</button></div><label class="cover-conversion-consent"><input type="checkbox" name="consent" required><span>Email me Velq launch and product updates. <a href="/privacy/">Privacy policy</a>.</span></label><input class="cover-honeypot" type="text" name="company" tabindex="-1" autocomplete="off" aria-hidden="true"><p id="hero-signup-feedback" class="signup-feedback"></p></form><p class="cover-conversion-fineprint">Free to join · No payment today · Unsubscribe anytime</p></div>'
         . '<button class="cover-menu" id="menu-toggle" aria-label="Open menu" aria-expanded="false" aria-controls="mobile-nav"></button>'
         . '<a class="cover-home" href="/" aria-label="Velq home"></a>'
         . '<a class="cover-bag" href="#waitlist" data-waitlist-cta="header" aria-label="Get early access"></a>'
-        . '<a class="cover-waitlist" id="hero-cta" href="#waitlist" data-waitlist-cta="hero" aria-label="Join the free waitlist"></a>'
         . '</section>'
         . '<div class="velq-benefit-marquee" role="region" aria-label="20g Protein, 10g Fiber, 80mg Caffeine, 200mg L-Theanine, Zero Sugar, Grab and Go" tabindex="0"><div class="velq-benefit-marquee-track" aria-hidden="true"><span>20g Protein • 10g Fiber • 80mg Caffeine • 200mg L-Theanine • Zero Sugar • Grab &amp; Go &nbsp; • &nbsp; </span><span>20g Protein • 10g Fiber • 80mg Caffeine • 200mg L-Theanine • Zero Sugar • Grab &amp; Go &nbsp; • &nbsp; </span></div></div>';
     // Navigation is overlaid on the approved artwork instead of a white floating panel.
@@ -43,7 +42,7 @@ function velq_home_cover(string $html, string $path): string {
     $html = str_replace('<body>', '<body class="velq-cover-home">', $html);
     $html = preg_replace('~<link\b[^>]*data-velq-responsive-preload[^>]*>~i', '', $html) ?? $html;
     $preload = '<link data-velq-responsive-preload rel="preload" as="image" href="'.$artwork.'" fetchpriority="high">';
-    return str_replace('</head>', '<link rel="stylesheet" href="/assets/velq-home-cover.css?v=20261031-compact-layout-4">'.$preload.'</head>', $html);
+    return str_replace('</head>', '<link rel="stylesheet" href="/assets/velq-home-cover.css?v=20261031-hero-conversion-1">'.$preload.'</head>', $html);
 }
 
 /** Single-product layout. Image slots accept ordinary img elements when supplied. */
