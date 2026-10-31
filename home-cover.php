@@ -3,6 +3,10 @@ declare(strict_types=1);
 
 /** Approved lifestyle cover, applied only to the existing homepage. */
 function velq_home_cover(string $html, string $path): string {
+    // Remove only the homepage Journal preview; keep the Journal and articles available.
+    if ($path === '/') {
+        $html = preg_replace('~<section\\b[^>]*aria-labelledby="journal-title"[^>]*>.*?</section>~s', '', $html, 1) ?? $html;
+    }
     if (strpos($html, 'class="hero lifestyle-cover"') !== false) return $html;
     if ($path !== '/' || strpos($html, 'aria-labelledby="hero-title"') === false) return $html;
     $html = preg_replace('~<header class="header">.*?</header>~s',
