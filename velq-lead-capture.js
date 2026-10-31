@@ -146,7 +146,7 @@
       '<label class="velq-lead-consent"><input name="consent" type="checkbox" required><span>I agree to receive Velq launch and product updates by email. I can unsubscribe anytime.</span></label>',
       '<details class="velq-tracking-details"><summary>Personalize my updates (optional)</summary><label class="velq-lead-consent velq-tracking-optional"><input name="tracking_consent" type="checkbox"><span>Let Velq recognize repeat visits for relevant launch updates. <a href="/privacy/">Privacy details</a>.</span></label></details>',
       '<input class="velq-lead-honeypot" name="company" type="text" tabindex="-1" autocomplete="off" aria-hidden="true">',
-      '<button class="velq-lead-submit" type="submit">JOIN THE WAITLIST <span aria-hidden="true">&rarr;</span></button>',
+      '<button class="velq-lead-submit" type="submit">JOIN EARLY ACCESS <span aria-hidden="true">&rarr;</span></button>',
       '<p class="velq-lead-feedback" role="status" aria-live="polite"></p>',
       '</form>',
       '<p class="velq-lead-fineprint">We respect your inbox. Read our <a href="/privacy/">privacy policy</a>.</p>',
