@@ -5,6 +5,12 @@ declare(strict_types=1);
 function velq_home_cover(string $html, string $path): string {
     // Approved white pouch creative, scoped to the homepage product card.
     if ($path === '/') {
+        // Approved white pouch and packet with strawberries, homepage product card only.
+        $html = preg_replace_callback(
+            '~(<div class="product-visual[^"]*"[^>]*>.*?<img)\\b[^>]*>~s',
+            static fn(array $m): string => $m[1].' src="/assets/velq-white-strawberry-product-20261031.webp" alt="White Velq strawberry protein and fiber gummies bag and individual packet surrounded by strawberries and red gummies" width="1254" height="1254" loading="lazy" decoding="async">',
+            $html, 1
+        ) ?? $html;
         $html = preg_replace_callback('~(<div class="product-visual strawberry">.*?)(<img\\b[^>]*>)~s', static function(array $m): string {
             $image = '<img src="/assets/velq-strawberry-white-product-20261031-800.webp" srcset="/assets/velq-strawberry-white-product-20261031-480.webp 480w, /assets/velq-strawberry-white-product-20261031-800.webp 800w, /assets/velq-strawberry-white-product-20261031-1200.webp 1200w" sizes="(max-width: 650px) 90vw, (max-width: 1100px) 48vw, 560px" width="1254" height="1254" loading="lazy" decoding="async" alt="Velq white strawberry gummies pouch and individual packet surrounded by strawberries and red gummy bears">';
             return $m[1] . $image;
