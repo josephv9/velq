@@ -392,6 +392,8 @@ body.velq-cover-home .velq-approved-cover .cover-fallback-cta{
 
 /* Align to artwork coordinates and scroll continuously to the right. */
 body.velq-cover-home .velq-approved-cover .cover-shipping{justify-content:flex-start}
-body.velq-cover-home .velq-approved-cover .cover-shipping-track{display:flex;flex:none;width:max-content;min-width:200%;animation:velq-shipping-right 16s linear infinite}
-body.velq-cover-home .velq-approved-cover .cover-shipping-track span{box-sizing:border-box;flex:1 0 auto;min-width:45cqw;text-align:center;padding:0 16px}
+body.velq-cover-home .velq-approved-cover .cover-shipping-track{display:flex;flex:none;width:max-content;min-width:0;gap:0;animation:velq-shipping-right 16s linear infinite}
+body.velq-cover-home .velq-approved-cover .cover-shipping-track span{box-sizing:border-box;flex:0 0 auto;min-width:0;text-align:center;padding:0 4px}
 @media(prefers-reduced-motion:reduce){body.velq-cover-home .velq-approved-cover .cover-shipping-track{animation:none;transform:none}}
+
+body.velq-cover-home .velq-approved-cover .cover-shipping{font-size:clamp(12px,3.5cqw,24px)}
