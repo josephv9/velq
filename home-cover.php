@@ -63,7 +63,7 @@ function velq_single_product_layout(string $html): string {
     <article class="benefit-card benefit-uniform-card"><div class="benefit-uniform-copy"><h3>Big on the essentials.</h3><p>20g protein. 10g fiber. 80mg caffeine.<br>All in your daily pack.</p></div><div class="benefit-uniform-photo"><svg viewBox="58 486 1154 656" preserveAspectRatio="xMidYMid slice" role="img" aria-label="Red strawberry gummy bears"><image href="/assets/velq-why-essentials-20261020-1200.webp" width="1270" height="1239" preserveAspectRatio="none"/></svg></div></article>
     <article class="benefit-card benefit-uniform-card"><div class="benefit-uniform-copy"><h3>Ready when you are.</h3><p>Strawberry gummies that fit<br>wherever your day takes you.</p></div><div class="benefit-uniform-photo"><svg viewBox="50 455 1173 707" preserveAspectRatio="xMidYMid slice" role="img" aria-label="Woman holding Velq strawberry gummies outdoors"><image href="/assets/velq-why-ready-20261020-1200.webp" width="1273" height="1236" preserveAspectRatio="none"/></svg></div></article>
   </div>
-  <p class="formula-note">Target amounts per packet. Product in development; final formula and label may change.</p>
+  
 </section>
 <section class="velq-image-carousel cadence-section" id="ingredients" aria-label="Discover Velq gummies">
 <div class="velq-image-track" tabindex="0" role="region" aria-label="Swipe or use arrow keys to explore three Velq images">
