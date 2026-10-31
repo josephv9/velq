@@ -16,6 +16,7 @@ function velq_home_cover(string $html, string $path): string {
     $artwork = '/assets/velq-approved-full-cover-20261031.webp';
     $hero = '<section class="hero lifestyle-cover velq-approved-cover" aria-labelledby="hero-title">'
         . '<img class="approved-cover-art" src="'.$artwork.'" width="852" height="1847" alt="Smiling woman in blue holding Velq strawberry protein and fiber gummies" fetchpriority="high" decoding="async">'
+        . '<div class="cover-shipping" role="note" aria-label="Free shipping on orders over $50"><div class="cover-shipping-track" aria-hidden="true"><span>FREE SHIPPING ON ORDERS OVER $50 &nbsp; • &nbsp; PRE-ORDER &nbsp; • &nbsp;</span><span>FREE SHIPPING ON ORDERS OVER $50 &nbsp; • &nbsp; PRE-ORDER &nbsp; • &nbsp;</span></div></div>'
         . '<div class="cover-accessible-copy"><p>Strawberry · Coming soon</p><h1 id="hero-title">Protein + Fiber Gummies</h1><p>Protein, fiber, caffeine, and L-theanine in one gummy.</p></div>'
         . '<button class="cover-menu" id="menu-toggle" aria-label="Open menu" aria-expanded="false" aria-controls="mobile-nav"></button>'
         . '<a class="cover-home" href="/" aria-label="Velq home"></a>'
@@ -29,7 +30,7 @@ function velq_home_cover(string $html, string $path): string {
     $html = str_replace('<body>', '<body class="velq-cover-home">', $html);
     $html = preg_replace('~<link\b[^>]*data-velq-responsive-preload[^>]*>~i', '', $html) ?? $html;
     $preload = '<link data-velq-responsive-preload rel="preload" as="image" href="'.$artwork.'" fetchpriority="high">';
-    return str_replace('</head>', '<link rel="stylesheet" href="/assets/velq-home-cover.css?v=20261031-approved-full-cover-2">'.$preload.'</head>', $html);
+    return str_replace('</head>', '<link rel="stylesheet" href="/assets/velq-home-cover.css?v=20261031-shipping-marquee-3">'.$preload.'</head>', $html);
 }
 
 /** Single-product layout. Image slots accept ordinary img elements when supplied. */
