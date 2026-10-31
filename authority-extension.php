@@ -27,7 +27,6 @@ function velq_authority_response(string $body, string $requestPath): string
     $destinations = [
         '/media' => 'Media &amp; resources',
         '/contact/' => 'Contact',
-        '/blog/editorial-policy' => 'Editorial policy',
     ];
     foreach ($destinations as $path => $label) {
         $pattern = '~href=["\']' . preg_quote(rtrim($path, '/'), '~') . '/?["\']~i';
