@@ -221,3 +221,11 @@ body.velq-cover-home .hero.lifestyle-cover.velq-approved-cover{position:relative
 .velq-cover-home .velq-approved-cover :is(a,button):focus-visible{outline:3px solid white;outline-offset:-4px;border-radius:14px}
 .velq-cover-home .mobile-nav{top:15%;left:4%;right:4%}
 @media(min-width:768px){body.velq-cover-home .hero.lifestyle-cover.velq-approved-cover{max-width:720px;margin:0 auto}.velq-cover-home main{background:#fff}}
+
+/* Replace the artwork's printed announcement with a real moving shipping banner. */
+.velq-cover-home .velq-approved-cover .cover-shipping{position:absolute;z-index:3;left:5.2%;right:5.2%;top:1.1%;height:4.15%;display:flex;align-items:center;overflow:hidden;background:#ec1737;border-radius:999px;color:#fff;font:500 clamp(11px,3.25vw,24px)/1 Arial,sans-serif;white-space:nowrap}
+.velq-cover-home .velq-approved-cover .cover-shipping-track{display:flex;flex:none;width:max-content;animation:velq-shipping-right 16s linear infinite;will-change:transform}
+.velq-cover-home .velq-approved-cover .cover-shipping-track span{display:block;flex:none;letter-spacing:.01em}
+@keyframes velq-shipping-right{from{transform:translateX(-50%)}to{transform:translateX(0)}}
+.velq-cover-home .cover-shipping:hover .cover-shipping-track{animation-play-state:paused}
+@media(prefers-reduced-motion:reduce){.velq-cover-home .velq-approved-cover .cover-shipping-track{animation:none;transform:none}.velq-cover-home .velq-approved-cover .cover-shipping-track span{font-size:clamp(10px,2.7vw,20px)}}
