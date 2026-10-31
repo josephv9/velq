@@ -28,5 +28,5 @@ function velq_bag_wordmark(string $html): string {
         '$1Join Early Access$2',
         $html
     ) ?? $html;
-    return str_replace('</head>', '<link rel="stylesheet" href="/assets/velq-bag-wordmark-20261031.css?v=velq-early-access-labels-20261031"><script defer src="/assets/velq-logo-contrast-20261031.js"></script></head>', $html);
+    return str_replace('</head>', '<link rel="stylesheet" href="/assets/velq-bag-wordmark-20261031.css?v=smaller-footer-4"><script defer src="/assets/velq-logo-contrast-20261031.js"></script></head>', $html);
 }
