@@ -10,7 +10,7 @@
 .velq-tracking-details .velq-inline-tracking,.velq-tracking-details .velq-tracking-optional{font-size:.78rem;line-height:1.6;font-weight:400;margin:8px 0 12px}
 .velq-product-note{font-size:.78rem;line-height:1.5;color:#695d61;margin:-10px 0 15px}
 .velq-product-details-link{display:inline-flex;align-items:center;gap:10px;margin:0 0 18px;font-weight:700;text-decoration:underline;text-underline-offset:4px}
-.velq-product-detail{--product-ink:#39262c;--product-red:#b42d48;--product-blush:#fff3f1;color:var(--product-ink)}
+.velq-product-detail{--product-ink:#39262c;--product-red:#E4002B;--product-blush:#fff3f1;color:var(--product-ink)}
 .velq-product-breadcrumbs{max-width:1260px;margin:0 auto;padding:28px 5%;font-size:.8rem;color:#6d6065}
 .velq-product-breadcrumbs a{text-decoration:underline;text-underline-offset:3px}
 .velq-product-hero{max-width:1260px;margin:0 auto;padding:16px 5% 76px;display:grid;grid-template-columns:1.05fr 1fr;gap:clamp(32px,5vw,72px);align-items:start}
@@ -45,6 +45,6 @@
 .velq-product-footer{padding:30px 5%;border-top:1px solid #ead8de;display:flex;justify-content:space-between;gap:20px;flex-wrap:wrap;font-size:.8rem;line-height:1.7}
 .velq-product-footer nav{display:flex;gap:22px;flex-wrap:wrap}
 .velq-product-detail .mobile-early-access{display:none}
-@media(max-width:760px){.velq-product-detail .mobile-early-access{position:fixed;z-index:30;left:16px;right:16px;bottom:max(12px,env(safe-area-inset-bottom));display:flex;align-items:center;justify-content:center;gap:24px;min-height:50px;padding:14px 20px;background:#b42d48;color:#fff;border-radius:999px;box-shadow:0 4px 20px #49212b29;font-size:.78rem;letter-spacing:.04em;font-weight:700}.velq-product-detail .mobile-early-access[hidden]{display:none}}
+@media(max-width:760px){.velq-product-detail .mobile-early-access{position:fixed;z-index:30;left:16px;right:16px;bottom:max(12px,env(safe-area-inset-bottom));display:flex;align-items:center;justify-content:center;gap:24px;min-height:50px;padding:14px 20px;background:#E4002B;color:#fff;border-radius:999px;box-shadow:0 4px 20px #49212b29;font-size:.78rem;letter-spacing:.04em;font-weight:700}.velq-product-detail .mobile-early-access[hidden]{display:none}}
 @media(max-width:760px){.velq-product-breadcrumbs{padding-top:20px}.velq-product-hero{grid-template-columns:1fr;padding-bottom:44px;gap:26px}.velq-product-gallery{position:static}.velq-product-image{max-width:520px;margin:0 auto}.velq-product-gallery figcaption{text-align:center}.velq-product-copy h1{font-size:clamp(2.5rem,10vw,3.6rem)}.velq-product-intro{font-size:1rem}.velq-product-faq{grid-template-columns:1fr;gap:26px;padding-block:38px}.velq-product-detail .waitlist-section{margin-bottom:32px}.velq-product-targets{gap:9px}.velq-product-targets div{padding:14px}.velq-product-footer{padding-bottom:90px}.velq-product-note{margin-top:0}}
 @media(prefers-reduced-motion:reduce){.velq-product-detail{scroll-behavior:auto}}
