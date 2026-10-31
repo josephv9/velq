@@ -58,3 +58,6 @@
   if (window.VelqWaitlist?.joined()) hideJoinedSticky();
   window.addEventListener('velq:waitlist-confirmed', hideJoinedSticky);
 })();
+
+// Footer email continues through the existing explicit-consent signup journey.
+document.querySelector('#velq-footer-email-form')?.addEventListener('submit',function(event){event.preventDefault();const input=document.querySelector('#velq-footer-email');if(!input.reportValidity())return;const form=document.querySelector('#waitlist-form');if(!form)return;const email=form.querySelector('[name="email"]');if(email){email.value=input.value;email.dispatchEvent(new Event('input',{bubbles:true}));}document.querySelector('#waitlist')?.scrollIntoView({behavior:'smooth'});(form.querySelector('[name="consent"]')||email)?.focus({preventScroll:true});});
