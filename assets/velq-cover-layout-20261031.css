@@ -16,7 +16,8 @@ body.velq-cover-home .hero.velq-approved-cover .cover-shipping-track span{
  font-size:12px;letter-spacing:.03em;
 }
 body.velq-cover-home .hero.velq-approved-cover .cover-photo .cover-navigation{
- position:relative;display:grid;grid-template-columns:48px 1fr 48px;align-items:center;
+ position:absolute;top:36px;left:0;right:0;width:100%;background:transparent!important;
+ border:0;box-shadow:none;backdrop-filter:none;display:grid;grid-template-columns:48px 1fr 48px;align-items:center;
  gap:16px;height:84px;padding:0 5%;margin:0;box-sizing:border-box;z-index:5;
 }
 body.velq-cover-home .hero.velq-approved-cover .cover-navigation :is(.cover-menu,.cover-home,.cover-bag){
