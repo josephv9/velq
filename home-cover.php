@@ -3,25 +3,29 @@ declare(strict_types=1);
 
 /** Approved lifestyle cover, applied only to the existing homepage. */
 function velq_home_cover(string $html, string $path): string {
-    if (strpos($html, 'class="hero lifestyle-cover"') !== false) return $html;
+    if (strpos($html, 'class="hero lifestyle-cover') !== false) return $html;
     if ($path !== '/' || strpos($html, 'aria-labelledby="hero-title"') === false) return $html;
     $html = preg_replace('~<header class="header">.*?</header>~s',
         '<header class="header"><button id="menu-toggle" class="icon-button menu-toggle" aria-label="Open menu" aria-expanded="false" aria-controls="mobile-nav"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M3 6h18M3 12h18M3 18h18"/></svg></button><a href="/" class="wordmark" aria-label="Velq home"><img class="velq-rounded-logo" src="/assets/velq-rounded-wordmark-black.png?v=20261020" alt="Velq" width="1652" height="799"></a><a class="button nav-signup" href="#waitlist" data-waitlist-cta="header">Join waitlist</a></header>', $html, 1) ?? $html;
-    $base = '/assets/velq-lifestyle-cover-20261020';
-    $image = '<img id="hero-image" src="'.$base.'-800.webp" srcset="'.$base.'-480.webp 480w, '.$base.'-800.webp 800w, '.$base.'-1200.webp 1200w" sizes="100vw" width="1122" height="1402" alt="Woman holding a red and white Velq strawberry protein and fiber gummy packet by the coast" fetchpriority="high" decoding="async">';
-    $hero = '<section class="hero lifestyle-cover" aria-labelledby="hero-title">'
+    $images = [
+        480 => 'https://cdn.shopify.com/s/files/1/0723/8372/5647/files/velq-blue-lifestyle-hero-20261031-480.webp?v=1793478053',
+        800 => 'https://cdn.shopify.com/s/files/1/0723/8372/5647/files/velq-blue-lifestyle-hero-20261031-800.webp?v=1793478056',
+        1200 => 'https://cdn.shopify.com/s/files/1/0723/8372/5647/files/velq-blue-lifestyle-hero-20261031-1200.webp?v=1793478060'
+    ];
+    $image = '<img id="hero-image" src="'.$images[800].'" srcset="'.$images[480].' 480w, '.$images[800].' 800w, '.$images[1200].' 1200w" sizes="(max-width: 767px) 100vw, 55vw" width="852" height="1430" alt="Smiling woman holding a white Velq strawberry protein and fiber gummy packet against a bright blue background" fetchpriority="high" decoding="async">';
+    $hero = '<section class="hero lifestyle-cover velq-blue-launch" aria-labelledby="hero-title">'
         . '<div class="hero-image-wrap">'.$image.'</div>'
         . '<div class="hero-copy"><p class="eyebrow" id="hero-eyebrow">STRAWBERRY · COMING SOON</p>'
         . '<h1 id="hero-title"><span>Protein + Fiber</span><span><strong>Gummies.</strong></span></h1>'
-        . '<p class="hero-description" id="hero-description">Strawberry protein and prebiotic fiber gummies are in development, with caffeine and L-theanine in the formula. Get launch and availability updates.</p>'
+        . '<p class="hero-description" id="hero-description">Protein, fiber, caffeine, and L-theanine. All in one convenient packet.</p>'
         . '<a class="button button-dark" id="hero-cta" href="#waitlist" data-waitlist-cta="hero">JOIN THE FREE WAITLIST</a>'
         . '</div></section>';
     $html = preg_replace('~<section class="hero"[^>]*>.*?</section>~s', $hero, $html, 1) ?? $html;
     $html = velq_single_product_layout($html);
     $html = str_replace('<body>', '<body class="velq-cover-home">', $html);
     $html = preg_replace('~<link\b[^>]*data-velq-responsive-preload[^>]*>~i', '', $html) ?? $html;
-    $preload = '<link data-velq-responsive-preload rel="preload" as="image" href="'.$base.'-800.webp" imagesrcset="'.$base.'-480.webp 480w, '.$base.'-800.webp 800w, '.$base.'-1200.webp 1200w" imagesizes="100vw" fetchpriority="high">';
-    return str_replace('</head>', '<link rel="stylesheet" href="/assets/velq-home-cover.css?v=20261024-compact-mobile-13">'.$preload.'</head>', $html);
+    $preload = '<link data-velq-responsive-preload rel="preload" as="image" href="'.$images[800].'" imagesrcset="'.$images[480].' 480w, '.$images[800].' 800w, '.$images[1200].' 1200w" imagesizes="(max-width: 767px) 100vw, 55vw" fetchpriority="high">';
+    return str_replace('</head>', '<link rel="stylesheet" href="/assets/velq-home-cover.css?v=20261031-blue-launch-1">'.$preload.'</head>', $html);
 }
 
 /** Single-product layout. Image slots accept ordinary img elements when supplied. */
