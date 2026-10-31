@@ -388,6 +388,16 @@ ob_start(static function (string $html): string {
         }
     }
     $html = velq_home_cover($html, $assetPath);
+    // Remove the Editorial policy link from footer resource navigation.
+    $html = preg_replace_callback(
+        '~<footer\\b[^>]*>[\\s\\S]*?</footer>~i',
+        static fn(array $footer): string => preg_replace(
+            '~<a\\b[^>]*href=["\'](?:https?://(?:www\\.)?velqnutrition\\.com)?/blog/editorial-policy/?["\'][^>]*>[\\s\\S]*?</a>~i',
+            '',
+            $footer[0]
+        ) ?? $footer[0],
+        $html
+    ) ?? $html;
     // Run last so image metadata describes the approved, currently served images.
     return velq_discovery_response(velq_growth_response($html, $assetPath), $assetPath);
 });
