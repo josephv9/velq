@@ -39,7 +39,7 @@ function velq_conversion_response(string $body, string $path): string {
     if ($canonical === '/') {
         $body = preg_replace('~<section\b[^>]*id="waitlist"[^>]*>.*?</section>~s', velq_conversion_waitlist(), $body, 1) ?? $body;
         $body = str_replace('class="product-image-button" href="#waitlist" data-waitlist-cta="home" data-interest="strawberry"', 'class="product-image-button" href="/products/strawberry-protein-fiber-gummies" data-product-detail-cta="product-image" aria-label="View Velq strawberry gummy details"', $body);
-        $body = str_replace('<p class="product-size">10 individual packs · 6 gummies per pack</p>', '<p class="product-size">Box: 10 packets · 6 gummies per packet</p>', $body);
+        $body = str_replace('<p class="product-size">10 individual packs · 6 gummies per pack</p>', '<p class="product-size">Box: 10 packets</p>', $body);
         if (!str_contains($body, 'class="velq-product-details-link"')) {
             $body = str_replace('<div class="product-specs"><span>20g protein</span><span>10g prebiotic fiber</span><span>80mg caffeine</span><span>200mg L-theanine</span></div>', '<div class="product-specs"><span>20g protein</span><span>10g prebiotic fiber</span><span>80mg caffeine</span><span>200mg L-theanine</span></div><p class="velq-product-note">Amounts per packet. See product details for ingredients and serving information.</p><a class="velq-product-details-link" href="/products/strawberry-protein-fiber-gummies" data-product-detail-cta="product-card">View product details <span aria-hidden="true">→</span></a>', $body);
         }
@@ -47,6 +47,8 @@ function velq_conversion_response(string $body, string $path): string {
         $body = str_replace('href="#waitlist" data-waitlist-cta="home">JOIN THE WAITLIST</a><button id="menu-toggle"', 'href="#waitlist" data-waitlist-cta="header">JOIN THE WAITLIST</a><button id="menu-toggle"', $body);
         $body = str_replace('id="hero-cta" href="#waitlist" data-waitlist-cta="home"', 'id="hero-cta" href="#waitlist" data-waitlist-cta="hero"', $body);
     }
+    // Remove the retired six-gummy serving count from rendered website copy.
+    $body = str_replace([' · 6 gummies per packet', ' · 6 gummies per pack', '6 gummies per packet', '6 gummies per pack'], '', $body);
     $body = str_replace('<!-- VELQ_WAITLIST -->', velq_conversion_waitlist(), $body);
 
     // One ordered analytics owner and one waitlist/popup implementation on every route.
