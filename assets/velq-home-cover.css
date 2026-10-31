@@ -274,15 +274,15 @@ body.velq-cover-home .hero.lifestyle-cover.velq-approved-cover{
 }
 body.velq-cover-home .velq-approved-cover .cover-photo{
   position:relative;display:block;width:100%;height:clamp(400px,104vw,690px);
-  overflow:hidden;isolation:isolate;background:#0797d0;
+  overflow:hidden;isolation:isolate;container-type:inline-size;background:#0797d0;
 }
 body.velq-cover-home .velq-approved-cover .cover-photo .approved-cover-art{
-  position:absolute;top:-2.86783%;left:0;display:block;width:100%;
+  position:absolute;top:0;transform:translateY(-2.490525%);left:0;display:block;width:100%;
   height:auto!important;max-height:none!important;max-width:none!important;
   object-fit:fill;aspect-ratio:852/1847;border:0;
 }
 body.velq-cover-home .velq-approved-cover .cover-shipping{
-  position:absolute;top:1%;left:5.2%;right:5.2%;height:clamp(32px,7vw,52px);
+  position:absolute;top:2cqw;left:5%;right:5%;height:8.2cqw;box-sizing:border-box;
   z-index:4;display:flex;align-items:center;justify-content:center;
   overflow:hidden;border-radius:999px;background:#ec1737;color:#fff;
   font:700 clamp(11px,2.9vw,20px)/1.2 Arial,sans-serif;letter-spacing:.01em;
@@ -389,3 +389,9 @@ body.velq-cover-home .velq-approved-cover .cover-fallback-cta{
   font-size:clamp(11px,3vw,15px);
  }
 }
+
+/* Align to artwork coordinates and scroll continuously to the right. */
+body.velq-cover-home .velq-approved-cover .cover-shipping{justify-content:flex-start}
+body.velq-cover-home .velq-approved-cover .cover-shipping-track{display:flex;flex:none;width:max-content;min-width:200%;animation:velq-shipping-right 16s linear infinite}
+body.velq-cover-home .velq-approved-cover .cover-shipping-track span{box-sizing:border-box;flex:1 0 auto;min-width:45cqw;text-align:center;padding:0 16px}
+@media(prefers-reduced-motion:reduce){body.velq-cover-home .velq-approved-cover .cover-shipping-track{animation:none;transform:none}}
