@@ -37,7 +37,7 @@ function velq_home_cover(string $html, string $path): string {
         . '<div class="velq-benefit-marquee" role="region" aria-label="20g Protein, 10g Fiber, 80mg Caffeine, 200mg L-Theanine, Zero Sugar, Grab and Go" tabindex="0"><div class="velq-benefit-marquee-track" aria-hidden="true"><span>20g Protein • 10g Fiber • 80mg Caffeine • 200mg L-Theanine • Zero Sugar • Grab &amp; Go &nbsp; • &nbsp; </span><span>20g Protein • 10g Fiber • 80mg Caffeine • 200mg L-Theanine • Zero Sugar • Grab &amp; Go &nbsp; • &nbsp; </span></div></div>';
     // Navigation is overlaid on the approved artwork instead of a white floating panel.
     $html = preg_replace('~<header class="header">.*?</header>~s', '', $html, 1) ?? $html;
-    $html = preg_replace('~<section class="hero"[^>]*>.*?</section>~s', $hero, $html, 1) ?? $html;
+    $html = preg_replace_callback('~<section class="hero"[^>]*>.*?</section>~s', static fn(array $match): string => $hero, $html, 1) ?? $html;
     $html = velq_single_product_layout($html);
     $html = str_replace('<body>', '<body class="velq-cover-home">', $html);
     $html = preg_replace('~<link\b[^>]*data-velq-responsive-preload[^>]*>~i', '', $html) ?? $html;
