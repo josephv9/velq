@@ -26,7 +26,7 @@ ob_start(static function (string $html): string {
     // Owner-approved white packet across product imagery, responsive sources and metadata.
     $html = preg_replace(
         '~(?:https?://(?:cdn\\.shopify\\.com/s/files/[^"\\s<>]+/files/|(?:www\\.)?velqnutrition\\.com/))?(?:/?assets/)?(?:velq-(?:approved-strawberry-packet-20261020|gummies-packshot-20261015-v2|strawberry-gummies-(?:hero-20261015-v3|product-20261015|target-20261015|10-pack(?:-2026101[45])?|primary)|white-strawberry-product-20261031|strawberry-white-product-20261031|red-white-strawberry-final-hero-oct-2026|strawberry-gummies-pedestal-packshot-oct2026|fruit-snacks-original|neutral-product))(?:-(?:480|800|1200))?\\.(?:jpe?g|webp|png)(?:\\?[^"\\s<>]*)?~i',
-        '/assets/velq-white-pack-approved-20261031.jpg',
+        ($assetPath === '/' ? '/assets/velq-white-pack-approved-20261031.jpg' : '/assets/velq-white-pack-strawberry-label-20261031.jpg'),
         $html
     ) ?? $html;
     $html = str_replace('approved red and white 10-pack pouch', 'approved white 10-pack pouch', $html);
@@ -403,7 +403,7 @@ ob_start(static function (string $html): string {
     // Owner-approved white packet across product imagery, responsive sources and metadata.
     $html = preg_replace(
         '~(?:https?://(?:cdn\\.shopify\\.com/s/files/[^"\\s<>]+/files/|(?:www\\.)?velqnutrition\\.com/))?(?:/?assets/)?(?:velq-(?:approved-strawberry-packet-20261020|gummies-packshot-20261015-v2|strawberry-gummies-(?:hero-20261015-v3|product-20261015|target-20261015|10-pack(?:-2026101[45])?|primary)|white-strawberry-product-20261031|strawberry-white-product-20261031|red-white-strawberry-final-hero-oct-2026|strawberry-gummies-pedestal-packshot-oct2026|fruit-snacks-original|neutral-product))(?:-(?:480|800|1200))?\\.(?:jpe?g|webp|png)(?:\\?[^"\\s<>]*)?~i',
-        '/assets/velq-white-pack-approved-20261031.jpg',
+        ($assetPath === '/' ? '/assets/velq-white-pack-approved-20261031.jpg' : '/assets/velq-white-pack-strawberry-label-20261031.jpg'),
         $html
     ) ?? $html;
     $html = str_replace('approved red and white 10-pack pouch', 'approved white 10-pack pouch', $html);
