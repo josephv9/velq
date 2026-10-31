@@ -5,6 +5,8 @@ declare(strict_types=1);
 function velq_home_cover(string $html, string $path): string {
     // Remove only the homepage Journal preview; keep the Journal and articles available.
     if ($path === '/') {
+        // Remove the three-step "Keep moving. Keep it simple." homepage section.
+        $html = preg_replace('~<section\\b[^>]*class="ritual section"[^>]*>.*?</section>~s', '', $html, 1) ?? $html;
         $html = preg_replace('~<section\\b[^>]*aria-labelledby="journal-title"[^>]*>.*?</section>~s', '', $html, 1) ?? $html;
     }
     if (strpos($html, 'class="hero lifestyle-cover"') !== false) return $html;
