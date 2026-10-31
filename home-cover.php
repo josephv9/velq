@@ -29,7 +29,8 @@ function velq_home_cover(string $html, string $path): string {
         . '<a class="cover-home" href="/" aria-label="Velq home"></a>'
         . '<a class="cover-bag" href="#waitlist" data-waitlist-cta="header" aria-label="Get early access"></a>'
         . '<a class="cover-waitlist" id="hero-cta" href="#waitlist" data-waitlist-cta="hero" aria-label="Join the free waitlist"></a>'
-        . '</section>';
+        . '</section>'
+        . '<div class="velq-benefit-marquee" role="region" aria-label="20g Protein, 10g Fiber, 80mg Caffeine, 200mg L-Theanine, Zero Sugar, Grab and Go" tabindex="0"><div class="velq-benefit-marquee-track" aria-hidden="true"><span>20g Protein • 10g Fiber • 80mg Caffeine • 200mg L-Theanine • Zero Sugar • Grab &amp; Go &nbsp; • &nbsp; </span><span>20g Protein • 10g Fiber • 80mg Caffeine • 200mg L-Theanine • Zero Sugar • Grab &amp; Go &nbsp; • &nbsp; </span></div></div>';
     // Navigation is overlaid on the approved artwork instead of a white floating panel.
     $html = preg_replace('~<header class="header">.*?</header>~s', '', $html, 1) ?? $html;
     $html = preg_replace('~<section class="hero"[^>]*>.*?</section>~s', $hero, $html, 1) ?? $html;
@@ -37,7 +38,7 @@ function velq_home_cover(string $html, string $path): string {
     $html = str_replace('<body>', '<body class="velq-cover-home">', $html);
     $html = preg_replace('~<link\b[^>]*data-velq-responsive-preload[^>]*>~i', '', $html) ?? $html;
     $preload = '<link data-velq-responsive-preload rel="preload" as="image" href="'.$artwork.'" fetchpriority="high">';
-    return str_replace('</head>', '<link rel="stylesheet" href="/assets/velq-home-cover.css?v=20261031-shipping-marquee-3">'.$preload.'</head>', $html);
+    return str_replace('</head>', '<link rel="stylesheet" href="/assets/velq-home-cover.css?v=20261031-benefit-strip-2">'.$preload.'</head>', $html);
 }
 
 /** Single-product layout. Image slots accept ordinary img elements when supplied. */

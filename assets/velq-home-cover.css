@@ -229,3 +229,10 @@ body.velq-cover-home .hero.lifestyle-cover.velq-approved-cover{position:relative
 @keyframes velq-shipping-right{from{transform:translateX(-50%)}to{transform:translateX(0)}}
 .velq-cover-home .cover-shipping:hover .cover-shipping-track{animation-play-state:paused}
 @media(prefers-reduced-motion:reduce){.velq-cover-home .velq-approved-cover .cover-shipping-track{animation:none;transform:none}.velq-cover-home .velq-approved-cover .cover-shipping-track span{font-size:clamp(10px,2.7vw,20px)}}
+/* Scrolling product highlights directly beneath the cover. */
+.velq-benefit-marquee{width:100%;overflow:hidden;background:#ec1737;color:#fff;padding:22px 0;font:700 clamp(16px,2.2vw,23px)/1.3 Arial,sans-serif;white-space:nowrap}
+.velq-benefit-marquee-track{display:flex;width:max-content;animation:velq-benefits-scroll 32s linear infinite}
+.velq-benefit-marquee-track span{display:block;flex-shrink:0;letter-spacing:.01em}
+.velq-benefit-marquee:hover .velq-benefit-marquee-track,.velq-benefit-marquee:focus-within .velq-benefit-marquee-track{animation-play-state:paused}
+@keyframes velq-benefits-scroll{from{transform:translateX(0)}to{transform:translateX(-50%)}}
+@media(prefers-reduced-motion:reduce){.velq-benefit-marquee{white-space:normal;padding:18px 20px;text-align:center}.velq-benefit-marquee-track{display:block;width:auto;animation:none}.velq-benefit-marquee-track span+span{display:none}}
