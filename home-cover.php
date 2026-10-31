@@ -27,18 +27,44 @@ function velq_home_cover(string $html, string $path): string {
         '<header class="header"><button id="menu-toggle" class="icon-button menu-toggle" aria-label="Open menu" aria-expanded="false" aria-controls="mobile-nav"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M3 6h18M3 12h18M3 18h18"/></svg></button><a href="/" class="wordmark" aria-label="Velq home"><img class="velq-rounded-logo" src="/assets/velq-rounded-wordmark-black.png?v=20261020" alt="Velq" width="1652" height="799"></a><a class="button nav-signup" href="#waitlist" data-waitlist-cta="header">Join waitlist</a></header>', $html, 1) ?? $html;
     $artwork = '/assets/velq-gummy-bears-cover-20261031.webp';
     $hero = '<section class="hero lifestyle-cover velq-approved-cover" aria-labelledby="hero-title">'
-        . '<img class="approved-cover-art" src="'.$artwork.'" width="852" height="1847" alt="Smiling woman in blue holding Velq strawberry protein and fiber gummies" fetchpriority="high" decoding="async">'
+        . '<div class="cover-photo">'
+        . '<img class="approved-cover-art" src="'.$artwork.'" width="852" height="1847" alt="Smiling woman holding a white Velq strawberry protein and fiber gummies packet" fetchpriority="high" decoding="async">'
         . '<div class="cover-shipping" role="note" aria-label="Free shipping on orders over $50"><span>FREE SHIPPING ON ORDERS OVER $50</span></div>'
-        . '<div class="cover-conversion-panel" aria-labelledby="hero-title"><p class="cover-conversion-eyebrow">STRAWBERRY · COMING SOON</p><h1 id="hero-title">Protein + fiber, made easier.</h1><p class="cover-conversion-subtitle">20g protein, 10g prebiotic fiber, 80mg caffeine and 200mg L-theanine <strong>per packet.</strong></p><form id="hero-waitlist-form" class="cover-conversion-form" method="post"><div class="cover-conversion-row"><label class="cover-screen-reader" for="hero-waitlist-email">Email address</label><input id="hero-waitlist-email" type="email" name="email" autocomplete="email" placeholder="Your email address" required><button id="hero-waitlist-submit" type="submit">Get Early Access</button></div><label class="cover-conversion-consent"><input type="checkbox" name="consent" required><span>Email me Velq launch and product updates. <a href="/privacy/">Privacy policy</a>.</span></label><input class="cover-honeypot" type="text" name="company" tabindex="-1" autocomplete="off" aria-hidden="true"><p id="hero-signup-feedback" class="signup-feedback"></p></form><p class="cover-conversion-fineprint">Free to join · No payment today · Unsubscribe anytime</p></div>'
         . '<button class="cover-menu" id="menu-toggle" aria-label="Open menu" aria-expanded="false" aria-controls="mobile-nav"></button>'
         . '<a class="cover-home" href="/" aria-label="Velq home"></a>'
         . '<a class="cover-bag" href="#waitlist" data-waitlist-cta="header" aria-label="Get early access"></a>'
+        . '</div>'
+        . '<div class="cover-conversion" id="waitlist">'
+        . '<p class="cover-kicker">STRAWBERRY · COMING SOON</p>'
+        . '<h1 id="hero-title">Your daily nutrition. <strong>In one little packet.</strong></h1>'
+        . '<p class="cover-benefit">20g protein + 10g prebiotic fiber + 80mg caffeine + 200mg L-theanine per packet.</p>'
+        . '<div class="cover-form-container"><!--VELQ_HERO_FORM--></div>'
+        . '<p class="cover-no-payment">Free to join · No payment today · Unsubscribe anytime</p>'
+        . '</div>'
         . '</section>'
         . '<div class="velq-benefit-marquee" role="region" aria-label="20g Protein, 10g Fiber, 80mg Caffeine, 200mg L-Theanine, Zero Sugar, Grab and Go" tabindex="0"><div class="velq-benefit-marquee-track" aria-hidden="true"><span>20g Protein • 10g Fiber • 80mg Caffeine • 200mg L-Theanine • Zero Sugar • Grab &amp; Go &nbsp; • &nbsp; </span><span>20g Protein • 10g Fiber • 80mg Caffeine • 200mg L-Theanine • Zero Sugar • Grab &amp; Go &nbsp; • &nbsp; </span></div></div>';
     // Navigation is overlaid on the approved artwork instead of a white floating panel.
     $html = preg_replace('~<header class="header">.*?</header>~s', '', $html, 1) ?? $html;
     $html = preg_replace_callback('~<section class="hero"[^>]*>.*?</section>~s', static fn(array $match): string => $hero, $html, 1) ?? $html;
     $html = velq_single_product_layout($html);
+    // Reuse the existing consent-aware waitlist form in the hero.
+    // Move, rather than duplicate, the form to keep one ID and one backend journey.
+    $heroForm = '';
+    $html = preg_replace_callback(
+        '~<form\b(?=[^>]*\bid="waitlist-form")[^>]*>.*?</form>~si',
+        static function (array $m) use (&$heroForm): string { $heroForm = $m[0]; return ''; },
+        $html,
+        1
+    ) ?? $html;
+    if ($heroForm !== '') {
+        $heroForm = str_replace('>GET LAUNCH UPDATES', '>GET EARLY ACCESS', $heroForm);
+        $html = preg_replace('~<section\b(?=[^>]*\bid="waitlist")[^>]*>.*?</section>~si', '', $html, 1) ?? $html;
+        $html = str_replace('<!--VELQ_HERO_FORM-->', $heroForm, $html);
+    } else {
+        // Progressive fallback if the bundled form markup changes.
+        $html = str_replace('class="cover-conversion" id="waitlist"', 'class="cover-conversion" id="hero-signup"', $html);
+        $html = str_replace('<!--VELQ_HERO_FORM-->', '<a class="cover-fallback-cta" href="#waitlist">Get Early Access</a>', $html);
+    }
     $html = str_replace('<body>', '<body class="velq-cover-home">', $html);
     $html = preg_replace('~<link\b[^>]*data-velq-responsive-preload[^>]*>~i', '', $html) ?? $html;
     $preload = '<link data-velq-responsive-preload rel="preload" as="image" href="'.$artwork.'" fetchpriority="high">';
