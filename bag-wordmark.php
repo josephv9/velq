@@ -10,5 +10,5 @@ function velq_bag_wordmark(string $html): string {
         static fn(array $m): string => $m[1] . $logo . '</a>',
         $html
     ) ?? $html;
-    return str_replace('</head>', '<link rel="stylesheet" href="/assets/velq-bag-wordmark-20261031.css?v=transparent-2"></head>', $html);
+    return str_replace('</head>', '<link rel="stylesheet" href="/assets/velq-bag-wordmark-20261031.css?v=contrast-3"><script defer src="/assets/velq-logo-contrast-20261031.js"></script></head>', $html);
 }
