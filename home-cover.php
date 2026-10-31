@@ -14,7 +14,7 @@ function velq_home_cover(string $html, string $path): string {
         // Approved white pouch and packet with strawberries, homepage product card only.
         $html = preg_replace_callback(
             '~(<div class="product-visual[^"]*"[^>]*>.*?<img)\\b[^>]*>~s',
-            static fn(array $m): string => $m[1].' src="/assets/velq-white-strawberry-product-20261031.webp" alt="White Velq strawberry protein and fiber gummies bag and individual packet surrounded by strawberries and red gummies" width="1254" height="1254" loading="lazy" decoding="async">',
+            static fn(array $m): string => $m[1].' src="https://cdn.shopify.com/s/files/1/0723/8372/5647/files/velq-strawberry-splash-product-20261031.jpg?v=1793484541" alt="Velq white strawberry protein and fiber gummies pouch and single packet surrounded by floating strawberries and red gummies" width="1254" height="1254" loading="lazy" decoding="async">',
             $html, 1
         ) ?? $html;
         $html = preg_replace_callback('~(<div class="product-visual strawberry">.*?)(<img\\b[^>]*>)~s', static function(array $m): string {
@@ -121,7 +121,7 @@ function velq_compact_product_section(string $html): string {
     $section = <<<'HTML'
 <section class="products section velq-compact-product" id="products" aria-labelledby="products-title">
   <h2 id="products-title">Meet your daily<br>upgrade.</h2>
-  <a class="velq-compact-image" href="/products/strawberry-protein-fiber-gummies" data-product-detail-cta="product-image" aria-label="View Velq strawberry gummy details"><img src="/assets/velq-white-strawberry-product-20261031.webp" alt="Velq strawberry gummy pouch and individual packet with strawberries" width="1254" height="1254" loading="lazy" decoding="async"></a>
+  <a class="velq-compact-image" href="/products/strawberry-protein-fiber-gummies" data-product-detail-cta="product-image" aria-label="View Velq strawberry gummy details"><img src="https://cdn.shopify.com/s/files/1/0723/8372/5647/files/velq-strawberry-splash-product-20261031.jpg?v=1793484541" alt="Velq white strawberry protein and fiber gummies pouch and single packet surrounded by floating strawberries and red gummies" width="1254" height="1254" loading="lazy" decoding="async"></a>
   <p class="velq-compact-flavor">Strawberry · Zero sugar</p>
   <p class="velq-compact-size">10 packets per box</p>
   <a class="velq-compact-cta" href="#waitlist" data-waitlist-cta="home" data-interest="strawberry">Get Early Access</a>
