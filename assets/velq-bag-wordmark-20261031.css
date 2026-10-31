@@ -27,3 +27,52 @@ body.velq-cover-home footer.velq-black-footer{display:block;background:#000;colo
 .black-footer-policies{display:flex;flex-wrap:wrap;gap:24px 36px;margin:0 0 42px}.black-footer-policies a{color:#ddd;font-size:clamp(11px,1.7vw,18px);letter-spacing:.04em;text-decoration:none}
 body.velq-cover-home .velq-black-footer .club-wordmark{display:block;width:100%;margin:0;padding:0;background:transparent}body.velq-cover-home .velq-black-footer .club-wordmark img.velq-bag-logo{display:block;width:100%;height:auto;max-width:100%;filter:brightness(0) invert(1)}.black-footer-copyright{font-size:11px;color:#aaa;margin-top:20px}.footer-visually-hidden{position:absolute;width:1px;height:1px;overflow:hidden;clip-path:inset(50%);white-space:nowrap}
 @media(max-width:650px){body.velq-cover-home footer.velq-black-footer{padding:60px 6% 24px}.black-footer-field{padding:8px}.black-footer-field input{padding:10px 14px}.black-footer-field button{width:48px;height:48px;font-size:34px}.black-footer-signup>p{margin:26px 0 50px}.black-footer-columns nav{gap:22px}.black-footer-social{margin:60px 0 44px}.black-footer-policies{gap:24px;margin-bottom:28px}}
+
+
+/* Consistent packet-brand details: black header CTA and vibrant strawberry red. */
+body .header .nav-signup,
+body .header a.nav-signup,
+body .header .header-actions .nav-signup {
+  background:#090909!important;
+  color:#fff!important;
+  border:1px solid #090909!important;
+  border-radius:12px;
+}
+body .header .nav-signup:hover,
+body .header .nav-signup:focus-visible {
+  background:#262626!important;
+  border-color:#262626!important;
+}
+body.velq-product-detail {
+  --product-red:#E4002B;
+  --product-ink:#20171B;
+}
+body.velq-product-detail .announcement{display:none}
+body.velq-product-detail .velq-product-eyebrow{color:#E4002B}
+body.velq-product-detail .velq-product-copy h1 em{color:#E4002B}
+body.velq-product-detail .velq-product-targets dd{color:#E4002B}
+body.velq-product-detail .velq-product-cta{
+  background:#E4002B!important;
+  border-color:#E4002B!important;
+  color:#fff!important;
+  border-radius:999px;
+}
+body.velq-product-detail .mobile-early-access{
+  background:#E4002B!important;
+  color:#fff!important;
+}
+body.velq-product-detail .velq-product-cta:hover,
+body.velq-product-detail .mobile-early-access:hover {
+  background:#b40020!important;
+  border-color:#b40020!important;
+}
+body.velq-product-detail .header .velq-bag-logo{filter:brightness(0)!important}
+@media(max-width:760px){
+ body.velq-product-detail .header{background:#fff}
+ body.velq-product-detail .header .header-actions .nav-signup{
+   padding:10px 13px!important;
+   font-size:11px!important;
+   letter-spacing:.01em;
+   white-space:nowrap;
+ }
+}
