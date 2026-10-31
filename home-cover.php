@@ -3,6 +3,11 @@ declare(strict_types=1);
 
 /** Approved lifestyle cover, applied only to the existing homepage. */
 function velq_home_cover(string $html, string $path): string {
+    // Remove duplicate white nutrition grid and serving-label caption below the marquee.
+    if ($path === '/') {
+        $html = preg_replace('~<div\\b[^>]*class="nutrition-strip"[^>]*>.*?</div>~s', '', $html, 1) ?? $html;
+    }
+
     if ($path === '/') $html = velq_compact_product_section($html);
     // Remove only the homepage Journal preview; keep the Journal and articles available.
     if ($path === '/') {
