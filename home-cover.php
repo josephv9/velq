@@ -98,7 +98,18 @@ function velq_single_product_layout(string $html): string {
 HTML;
     $html = preg_replace('~<section class="ingredient-section".*?</section>~s', $why, $html, 1) ?? $html;
     $html = preg_replace('~<section class="closing">.*?</section>~s', '', $html, 1) ?? $html;
-    $footer = $waitlist.'<footer class="velq-club-footer"><div class="club-links"><nav aria-label="Meet Velq"><h3>Meet Velq</h3><a href="#products">Strawberry gummies</a><a href="#ingredients">What’s inside</a><a href="#story">Our story</a><a href="#faq">FAQs</a></nav><nav aria-label="Resources"><h3>Resources</h3><a href="/blog">The Velq Journal</a><a href="/guides/protein-and-fiber-snacks">Snack guides</a><a href="/tools/nutrition-label-value-calculator">Compare nutrition labels</a><a href="/research">Research</a><a href="/media">Media &amp; resources</a></nav><nav aria-label="Client services"><h3>Client Services</h3><a href="/contact/">Contact</a><a href="/shipping/">Shipping</a><a href="/privacy/">Privacy policy</a><a href="/terms/">Terms &amp; conditions</a></nav></div><a class="club-wordmark" href="/" aria-label="Velq home"><img class="velq-rounded-logo" src="/assets/velq-rounded-wordmark-black.png?v=20261020" alt="Velq" width="1652" height="799"></a><div class="club-bottom"><span>UNITED STATES · USD $</span><span>© 2026 Velq Nutrition LLC</span></div><p class="club-development">Product in development. Final packaging, price and nutrition details may change.</p></footer><a class="back-top" href="#main" aria-label="Back to top">↑</a>';
+    $footer = $waitlist . <<<'HTML'
+<footer class="velq-club-footer velq-black-footer" data-footer-version="black-20261031">
+<section class="black-footer-signup"><h2>SIGN UP TO GET 10% OFF YOUR FIRST ORDER</h2>
+<form id="velq-footer-email-form"><label for="velq-footer-email" class="footer-visually-hidden">Email address</label><div class="black-footer-field"><input id="velq-footer-email" type="email" autocomplete="email" placeholder="EMAIL ADDRESS" required><button type="submit" aria-label="Continue to early access signup">→</button></div></form>
+<p>Launches, restocks, and where to find us in store.</p></section>
+<div class="black-footer-columns"><nav aria-label="Information"><h3>INFO</h3><a href="/contact/">CONTACT</a><a href="/blog">OUR JOURNAL</a><a href="#faq">FAQ</a></nav><nav aria-label="Shop"><h3>SHOP</h3><a href="#products">SHOP ALL</a><a href="/products/strawberry-protein-fiber-gummies">STRAWBERRY</a><a href="#waitlist" data-waitlist-cta="footer">GET EARLY ACCESS</a></nav></div>
+<section class="black-footer-social"><h3>SOCIAL</h3><div><a href="https://www.instagram.com/drinkvelq" aria-label="Velq on Instagram"><svg viewBox="0 0 24 24" aria-hidden="true"><rect x="3" y="3" width="18" height="18" rx="5"/><circle cx="12" cy="12" r="4"/><circle cx="17.5" cy="6.5" r=".7"/></svg></a><a href="https://www.tiktok.com/@velqnutrition" aria-label="Velq on TikTok"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M14 3v12a4 4 0 1 1-4-4M14 3c0 4 3 6 6 6"/></svg></a></div></section>
+<nav class="black-footer-policies" aria-label="Policies"><a href="/privacy/">PRIVACY POLICY</a><a href="/terms/">TERMS OF SERVICE</a><a href="/shipping/">SHIPPING POLICY</a></nav>
+<a class="club-wordmark" href="/" aria-label="Velq home"><img class="velq-bag-logo" src="/assets/velq-bag-wordmark-20261031.svg" alt="Velq" width="455" height="230"></a>
+<div class="black-footer-copyright">© 2026 Velq Nutrition LLC</div></footer><a class="back-top" href="#main" aria-label="Back to top">↑</a>
+HTML;
+
     $html = preg_replace_callback('~<footer>.*?</footer>~s', static fn(array $m): string => $footer, $html, 1) ?? $html;
     // Remove the homepage founder panel and navigation to the removed section.
     $html = preg_replace('~<section\\b[^>]*\\bid="story"[^>]*>.*?</section>~s', '', $html, 1) ?? $html;
