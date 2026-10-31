@@ -13,3 +13,17 @@ body.velq-cover-home .cover-home .velq-bag-logo{display:block;width:100%;height:
 
 .velq-bag-logo.velq-logo-on-dark{filter:brightness(0) invert(1)!important}
 .velq-bag-logo.velq-logo-on-light{filter:brightness(0)!important}
+
+/* Approved black signup footer, scoped to preserve all other site sections. */
+body.velq-cover-home footer.velq-black-footer{display:block;background:#000;color:#fff;padding:72px 6% 24px;text-align:left}
+.velq-black-footer h2,.velq-black-footer h3{font-family:Arial,Helvetica,sans-serif;font-style:normal;letter-spacing:.02em;font-weight:700;color:#fff}
+.velq-black-footer h2{font-size:clamp(24px,4vw,48px);line-height:1.15;max-width:1000px;margin:0 0 32px}
+.black-footer-field{display:flex;align-items:center;border:2px solid #fff;border-radius:100px;padding:10px;gap:10px;max-width:1100px}
+.black-footer-field:focus-within{outline:2px solid #aaa;outline-offset:4px}.black-footer-field input{flex:1;min-width:0;width:100%;background:transparent;color:#fff;border:0;padding:12px 22px;font-size:clamp(16px,3vw,32px);letter-spacing:.05em;outline:0}.black-footer-field input::placeholder{color:#ddd;opacity:1}
+.black-footer-field button{display:block;flex:none;border:0;width:72px;height:72px;border-radius:50%;background:#fff;color:#000;font-size:48px;line-height:1;cursor:pointer}
+.black-footer-signup>p{color:#ddd;font-size:clamp(16px,2.6vw,28px);line-height:1.5;margin:30px 0 72px}
+.black-footer-columns{display:grid;grid-template-columns:1fr 1fr;gap:30px}.black-footer-columns nav{display:flex;flex-direction:column;gap:24px}.velq-black-footer h3{font-size:clamp(24px,3.5vw,40px);margin:0 0 14px}.black-footer-columns a{color:#fff;text-decoration:none;font-size:clamp(16px,2.8vw,30px);line-height:1.3;letter-spacing:.02em}.black-footer-columns a:hover,.black-footer-policies a:hover{text-decoration:underline}
+.black-footer-social{margin:76px 0 56px}.black-footer-social>div{display:flex;justify-content:center;gap:32px;margin-top:30px}.black-footer-social a{color:#fff;display:block}.black-footer-social svg{display:block;width:34px;height:34px;fill:none;stroke:currentColor;stroke-width:2}
+.black-footer-policies{display:flex;flex-wrap:wrap;gap:24px 36px;margin:0 0 42px}.black-footer-policies a{color:#ddd;font-size:clamp(11px,1.7vw,18px);letter-spacing:.04em;text-decoration:none}
+body.velq-cover-home .velq-black-footer .club-wordmark{display:block;width:100%;margin:0;padding:0;background:transparent}body.velq-cover-home .velq-black-footer .club-wordmark img.velq-bag-logo{display:block;width:100%;height:auto;max-width:100%;filter:brightness(0) invert(1)}.black-footer-copyright{font-size:11px;color:#aaa;margin-top:20px}.footer-visually-hidden{position:absolute;width:1px;height:1px;overflow:hidden;clip-path:inset(50%);white-space:nowrap}
+@media(max-width:650px){body.velq-cover-home footer.velq-black-footer{padding:60px 6% 24px}.black-footer-field{padding:8px}.black-footer-field input{padding:10px 14px}.black-footer-field button{width:48px;height:48px;font-size:34px}.black-footer-signup>p{margin:26px 0 50px}.black-footer-columns nav{gap:22px}.black-footer-social{margin:60px 0 44px}.black-footer-policies{gap:24px;margin-bottom:28px}}
