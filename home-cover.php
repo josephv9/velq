@@ -130,7 +130,7 @@ function velq_compact_product_section(string $html): string {
   <a class="velq-compact-image" href="/products/strawberry-protein-fiber-gummies" data-product-detail-cta="product-image" aria-label="View Velq strawberry gummy details"><img src="https://cdn.shopify.com/s/files/1/0723/8372/5647/files/velq-strawberry-splash-product-20261031.jpg?v=1793484541" alt="Velq white strawberry protein and fiber gummies pouch and single packet surrounded by floating strawberries and red gummies" width="1254" height="1254" loading="lazy" decoding="async"></a>
   <p class="velq-compact-flavor">Strawberry · Zero sugar</p>
   <p class="velq-compact-size">10 packets per box</p>
-  <a class="velq-compact-cta" href="#waitlist" data-waitlist-cta="home" data-interest="strawberry">Get Early Access</a>
+  <a class="velq-compact-cta" href="#waitlist" data-waitlist-cta="home" data-interest="strawberry">NOTIFY ME AT LAUNCH</a>
   <a class="velq-compact-details" href="/products/strawberry-protein-fiber-gummies" data-product-detail-cta="product-card">Product details <span aria-hidden="true">↓</span></a>
 </section>
 
