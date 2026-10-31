@@ -229,3 +229,15 @@ body.velq-cover-home .hero.lifestyle-cover.velq-approved-cover{position:relative
 @keyframes velq-shipping-right{from{transform:translateX(-50%)}to{transform:translateX(0)}}
 .velq-cover-home .cover-shipping:hover .cover-shipping-track{animation-play-state:paused}
 @media(prefers-reduced-motion:reduce){.velq-cover-home .velq-approved-cover .cover-shipping-track{animation:none;transform:none}.velq-cover-home .velq-approved-cover .cover-shipping-track span{font-size:clamp(10px,2.7vw,20px)}}
+
+/* Approved strawberry artwork carousel replaces the formula accordion. */
+.velq-cover-home #ingredients.velq-image-carousel{display:block;background:transparent;padding:0;margin:40px auto;max-width:1320px;overflow:hidden;scroll-margin-top:24px}
+.velq-image-track{display:flex;gap:16px;overflow-x:auto;scroll-snap-type:x mandatory;scroll-padding-inline:24px;padding:0 24px 12px;overscroll-behavior-x:contain;-webkit-overflow-scrolling:touch;scrollbar-width:thin;scrollbar-color:#8a1018 #f6eee8}
+.velq-image-track:focus-visible{outline:2px solid #8a1018;outline-offset:-2px}
+.velq-image-slide{flex:0 0 min(88%,420px);margin:0;scroll-snap-align:start;scroll-snap-stop:always;border-radius:24px;overflow:hidden;background:#610b12}
+.velq-image-slide img{display:block;width:100%;height:auto}
+.velq-carousel-nav{display:flex;align-items:center;justify-content:center;gap:10px;padding:12px 24px;color:#690e16}
+.velq-carousel-nav a{display:grid;place-items:center;width:32px;height:32px;border:1px solid #690e16;border-radius:50%;font-size:14px;text-decoration:none;color:inherit}
+.velq-carousel-nav a:hover,.velq-carousel-nav a:focus-visible{background:#690e16;color:#fff}
+.velq-carousel-nav span{font-size:13px;margin-left:8px}
+@media(max-width:620px){.velq-image-track{gap:12px;padding-inline:16px;scroll-padding-inline:16px}.velq-image-slide{flex-basis:94%;border-radius:22px}.velq-cover-home #ingredients.velq-image-carousel{margin:28px auto}}
