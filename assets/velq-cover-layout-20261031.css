@@ -6,7 +6,7 @@ body.velq-cover-home .hero.velq-approved-cover .cover-photo{
 body.velq-cover-home .hero.velq-approved-cover .cover-photo .cover-shipping{
  position:relative;inset:auto;display:flex;align-items:center;justify-content:flex-start;
  width:100%;height:36px;min-height:36px;margin:0;border-radius:0;padding:0;
- overflow:hidden;background:#ec1737;font:700 12px/1 Arial,sans-serif;
+ overflow:hidden;background:#E4002B;font:700 12px/1 Arial,sans-serif;
 }
 body.velq-cover-home .hero.velq-approved-cover .cover-shipping-track{
  display:flex;width:max-content;min-width:0;flex:none;animation:velq-shipping-right 24s linear infinite;

@@ -3,7 +3,7 @@
 #velq-lead-popup{position:fixed;inset:0;z-index:1002;display:grid;place-items:center;padding:20px;background:rgba(30,35,31,.64);font-family:'Avenir Next',Avenir,Arial,sans-serif;color:#272e29}
 #velq-lead-popup .vlp-card{position:relative;width:min(100%,490px);max-height:min(92dvh,760px);overflow:auto;border-radius:22px;background:#fffdf9;box-shadow:0 24px 70px rgba(17,33,28,.25);padding:clamp(25px,5vw,42px)}
 #velq-lead-popup .vlp-close{position:absolute;right:14px;top:14px;display:grid;place-items:center;width:42px;height:42px;border:0;border-radius:50%;background:#f8ebe9;color:#29362e;font-size:26px;cursor:pointer}
-#velq-lead-popup .vlp-eyebrow{margin:0 0 12px;color:#b52b36;font-size:12px;font-weight:800;letter-spacing:.14em;text-transform:uppercase}
+#velq-lead-popup .vlp-eyebrow{margin:0 0 12px;color:#E4002B;font-size:12px;font-weight:800;letter-spacing:.14em;text-transform:uppercase}
 #velq-lead-popup .vlp-heading{margin:0 24px 14px 0;font-family:inherit;font-size:clamp(30px,6vw,42px);line-height:1.08;letter-spacing:-.04em;font-weight:800;color:#27362c}
 #velq-lead-popup .vlp-copy{font-size:16px;line-height:1.55;color:#56605b;margin:0 0 22px}
 #velq-lead-popup .vlp-label{display:block;margin-bottom:7px;font-size:14px;font-weight:700}
@@ -15,7 +15,7 @@
 #velq-lead-popup .vlp-button:disabled{opacity:.7;cursor:wait}
 #velq-lead-popup .vlp-fine{margin:14px 0 0;text-align:center;font-size:12px;line-height:1.5;color:#666f67}
 #velq-lead-popup .vlp-fine a{color:#1d6846;text-decoration:underline;text-underline-offset:3px}
-#velq-lead-popup .vlp-error{margin:0 0 12px;color:#9e1930;font-size:13px;line-height:1.45}
+#velq-lead-popup .vlp-error{margin:0 0 12px;color:#E4002B;font-size:13px;line-height:1.45}
 #velq-lead-popup .vlp-success{text-align:center;padding:30px 0 4px}
 #velq-lead-popup .vlp-success .vlp-heading{margin-right:0}
 body.velq-lead-popup-open{overflow:hidden}

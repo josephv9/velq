@@ -1,5 +1,5 @@
 /* Velq premium staging direction. Applied after the existing stylesheet. */
-:root{--yellow:#f7e85b;--ink:#27251f;--muted:#655f54;--line:#e5e1d7;--lemon:#fffcec;--red:#b90917;--pink:#fff1ed;--font:'Avenir Next',Avenir,Arial,sans-serif}
+:root{--yellow:#f7e85b;--ink:#27251f;--muted:#655f54;--line:#e5e1d7;--lemon:#fffcec;--red:#E4002B;--pink:#fff1ed;--font:'Avenir Next',Avenir,Arial,sans-serif}
 body{background:#fffefb;color:var(--ink)}
 h1,h2,h3{font-weight:700;letter-spacing:-.045em}em{font-family:inherit;font-style:normal;font-weight:inherit;letter-spacing:inherit}
 .announcement{background:var(--yellow);color:var(--ink);padding:11px 16px;min-height:40px}
@@ -7,7 +7,7 @@ h1,h2,h3{font-weight:700;letter-spacing:-.045em}em{font-family:inherit;font-styl
 .wordmark{color:var(--red)}.desktop-nav a{font-size:.875rem}.desktop-nav a:hover{color:var(--red)}
 .button{border-radius:12px;min-height:54px;letter-spacing:.04em;font-size:.78rem;padding:16px 24px}
 .button-dark,.nav-signup{background:var(--red);color:white;border-color:var(--red)}
-.button-dark:hover,.nav-signup:hover{background:#950713;border-color:#950713}
+.button-dark:hover,.nav-signup:hover{background:#E4002B;border-color:#E4002B}
 .hero{background:var(--lemon);color:var(--ink);grid-template-columns:minmax(0,1fr) minmax(0,1fr);min-height:640px;padding:28px clamp(20px,4vw,80px);gap:28px;border-bottom:1px solid var(--line)}
 .hero-copy{color:var(--ink);padding:44px 0;max-width:660px;justify-self:end;width:100%}
 .hero h1{font-size:clamp(3.1rem,5.6vw,6.1rem);line-height:1.02;margin:22px 0 28px;letter-spacing:-.065em}
@@ -26,7 +26,7 @@ h1,h2,h3{font-weight:700;letter-spacing:-.045em}em{font-family:inherit;font-styl
 .product-specs{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:10px;margin-bottom:28px;font-size:.8rem}
 .product-specs span{padding:12px;background:var(--lemon);border:1px solid var(--line);border-radius:8px}
 .product-specs span+span{border:1px solid var(--line);padding:12px}
-.product-button{background:var(--red);border-color:var(--red);color:white}.product-button:hover{background:#950713;border-color:#950713}
+.product-button{background:var(--red);border-color:var(--red);color:white}.product-button:hover{background:#E4002B;border-color:#E4002B}
 .ingredient-section{background:var(--yellow);padding:80px max(6%,calc((100% - 1200px)/2));gap:56px}
 .ingredient-intro h2 em{color:var(--ink)}.ingredient-grid{gap:20px}.ingredient-grid>div{background:#fffefbbf;padding:24px;border:1px solid #ded35c;border-radius:16px}
 .ingredient-grid strong{font-weight:700;color:var(--ink);font-size:3.3rem}.ingredient-grid p{color:#514b3e;font-size:.875rem}

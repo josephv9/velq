@@ -7,6 +7,7 @@ require_once __DIR__ . '/discovery-extension.php';
 require_once __DIR__ . '/conversion-extension.php';
 require_once __DIR__ . '/home-cover.php';
 require_once __DIR__ . '/bag-wordmark.php';
+require_once __DIR__ . '/brand-colors.php';
 require_once __DIR__ . '/seo-growth-extension.php';
 
 ob_start(static function (string $html): string {
@@ -33,6 +34,7 @@ ob_start(static function (string $html): string {
     $html = str_replace('approved red and white 10-pack pouch', 'approved white 10-pack pouch', $html);
 
     }
+    if (substr($assetPath, -4) === '.css') $html = velq_brand_red_css($html);
     if (stripos($html, '<html') === false) {
         return velq_discovery_response(velq_growth_response($html, $assetPath), $assetPath);
     }
@@ -410,5 +412,5 @@ ob_start(static function (string $html): string {
     $html = str_replace('approved red and white 10-pack pouch', 'approved white 10-pack pouch', $html);
 
     // Run last so image metadata describes the approved, currently served images.
-    return velq_bag_wordmark(velq_discovery_response(velq_growth_response($html, $assetPath), $assetPath));
+    return velq_brand_red_html(velq_bag_wordmark(velq_discovery_response(velq_growth_response($html, $assetPath), $assetPath)));
 });

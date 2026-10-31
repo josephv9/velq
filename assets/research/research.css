@@ -1,17 +1,17 @@
 /* Velq research: scoped, static content and accessible data tables. */
 .research-wrap{max-width:1160px;margin:0 auto;padding:34px 5% 76px;color:#202822}
 .research-wrap *{box-sizing:border-box}
-.research-wrap a{color:#a92525;text-underline-offset:3px}
+.research-wrap a{color:#E4002B;text-underline-offset:3px}
 .research-hero{max-width:900px;padding:28px 0 34px}
-.research-kicker{font-size:.76rem;letter-spacing:.12em;font-weight:800;text-transform:uppercase;color:#9a2926}
+.research-kicker{font-size:.76rem;letter-spacing:.12em;font-weight:800;text-transform:uppercase;color:#E4002B}
 .research-hero h1{font-size:clamp(2.3rem,5.7vw,4.4rem);line-height:1.05;letter-spacing:-.045em;margin:18px 0 22px;max-width:900px}
 .research-dek{font-size:1.18rem;line-height:1.6;max-width:790px}
 .research-meta{font-size:.85rem;line-height:1.6;color:#596159;margin:18px 0}
 .research-pills{display:flex;flex-wrap:wrap;gap:8px;padding:0;list-style:none}
 .research-pills li{padding:7px 11px;border:1px solid #d8dfd4;border-radius:99px;font-size:.78rem;background:#fff}
 .research-actions{display:flex;gap:12px;flex-wrap:wrap;margin-top:22px}
-.research-wrap .research-button,.research-wrap button.research-button{display:inline-flex;align-items:center;justify-content:center;gap:8px;min-height:46px;padding:12px 20px;background:#b9302d;color:white;border:1px solid #b9302d;border-radius:8px;text-decoration:none;font:700 .9rem/1.3 inherit;cursor:pointer}
-.research-wrap .research-button.secondary{background:#fff;color:#9c2421;border-color:#d6ccc6}
+.research-wrap .research-button,.research-wrap button.research-button{display:inline-flex;align-items:center;justify-content:center;gap:8px;min-height:46px;padding:12px 20px;background:#E4002B;color:white;border:1px solid #E4002B;border-radius:8px;text-decoration:none;font:700 .9rem/1.3 inherit;cursor:pointer}
+.research-wrap .research-button.secondary{background:#fff;color:#E4002B;border-color:#d6ccc6}
 .research-wrap a:focus-visible,.research-wrap button:focus-visible,.research-table-scroll:focus-visible{outline:3px solid #21644d;outline-offset:4px}
 .research-summary{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:15px;margin:18px 0 32px}
 .research-stat{border:1px solid #d5dccf;background:#f1f4ec;border-radius:14px;padding:24px;min-width:0}
@@ -22,7 +22,7 @@
 .research-section h2{font-size:clamp(1.6rem,3.3vw,2.25rem);line-height:1.15;letter-spacing:-.025em;margin:0 0 18px}
 .research-section h3{font-size:1.2rem;line-height:1.35;margin:24px 0 12px}
 .research-section p,.research-section li{font-size:1rem;line-height:1.75;max-width:880px}
-.research-note{border-left:4px solid #9b322b;background:#fff6ee;padding:17px 22px;font-size:.9rem;line-height:1.65;margin:20px 0}
+.research-note{border-left:4px solid #E4002B;background:#fff6ee;padding:17px 22px;font-size:.9rem;line-height:1.65;margin:20px 0}
 .research-table-scroll{overflow-x:auto;border:1px solid #d8ded4;border-radius:10px;margin:20px 0;-webkit-overflow-scrolling:touch}
 .research-table{width:100%;border-collapse:collapse;font-size:.88rem;min-width:735px;background:white}
 .research-table caption{text-align:left;background:#f1f4ec;padding:15px 18px;font-size:.85rem;font-weight:700;line-height:1.5}
@@ -62,6 +62,6 @@
 .m3-related h2{font-size:clamp(1.3rem,2vw,1.7rem);line-height:1.25;margin:0 0 10px}
 .m3-related p{font-size:.92rem;line-height:1.6;margin:8px 0 16px}
 .research-links{display:flex;gap:12px 22px;flex-wrap:wrap;line-height:1.5}
-.research-links a{color:#a12824;text-underline-offset:3px;font-size:.9rem;font-weight:700}
+.research-links a{color:#E4002B;text-underline-offset:3px;font-size:.9rem;font-weight:700}
 @media(max-width:760px){.research-wrap{padding:22px 5% 48px}.research-hero{padding:20px 0 26px}.research-summary{grid-template-columns:1fr;gap:10px}.research-stat{display:grid;grid-template-columns:90px 1fr;gap:12px;align-items:center;padding:18px}.research-stat strong{font-size:2.1rem;margin:0}.research-stat .research-kicker{grid-column:1/-1;margin:0}.research-grid{grid-template-columns:1fr}.research-card{padding:22px}.research-table{min-width:680px}.research-hero h1{font-size:clamp(2.25rem,10.5vw,3.2rem)}.research-dek{font-size:1.06rem}.research-nav{gap:12px 16px}.research-citation{padding:22px}.research-method{grid-template-columns:1fr}.research-method dt{border:0;padding-bottom:0}.research-method dd{padding-top:4px}.research-cta{padding:25px}.m3-related{margin:28px 5%}.research-figure figcaption{padding:14px 17px}}
 @media(prefers-reduced-motion:reduce){.research-wrap *{scroll-behavior:auto!important}}
