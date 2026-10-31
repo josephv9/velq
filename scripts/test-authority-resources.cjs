@@ -17,7 +17,8 @@ const emptyFooter = '<html><head></head><body><main>Existing page</main><footer>
 for (const route of ['/', '/compare', '/blog', '/research']) {
   const out = render(route, emptyFooter);
   assert(out.includes('<main>Existing page</main>'));
-  for (const url of ['/media','/contact/','/blog/editorial-policy']) assert.equal(out.split('href="'+url+'"').length-1, 1);
+  for (const url of ['/media','/contact/']) assert.equal(out.split('href="'+url+'"').length-1, 1);
+  assert(!out.includes('href="/blog/editorial-policy"'));
   assert.equal(render(route, out), out, 'Discovery must be idempotent');
 }
 const withContact = emptyFooter.replace('<p>Existing footer</p>','<a href="/contact/">Contact</a><a href="/blog/editorial-policy">Editorial policy</a>');
