@@ -428,7 +428,7 @@ ob_start(static function (string $html): string {
         $preview = 'https://cdn.shopify.com/s/files/1/0723/8372/5647/files/velq-home-cover-blue-20261031.jpg?v=1793489698';
         // Remove old homepage social-image tags so crawlers see one canonical image.
         $html = preg_replace(
-            '~<meta\\b(?=[^>]*\\b(?:property|name)\\s*=\\s*["\\x27](?:og:image(?::(?:secure_url|width|height|type|alt))?|twitter:image(?::alt)?)["\\x27])[^>]*>\\s*~i',
+            '~<meta\\b(?=[^>]*\\b(?:property|name)\\s*=\\s*["\\x27](?:og:image(?::(?:secure_url|width|height|type|alt))?|twitter:(?:card|image(?::alt)?))["\\x27])[^>]*>\\s*~i',
             '',
             $html
         ) ?? $html;
