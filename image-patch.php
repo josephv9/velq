@@ -411,6 +411,27 @@ ob_start(static function (string $html): string {
     ) ?? $html;
     $html = str_replace('approved red and white 10-pack pouch', 'approved white 10-pack pouch', $html);
 
-    // Run last so image metadata describes the approved, currently served images.
-    return velq_brand_red_html(velq_bag_wordmark(velq_discovery_response(velq_growth_response($html, $assetPath), $assetPath)));
+    // Apply the existing page transformations first. Social preview metadata is
+    // overridden only on the homepage; its layout, CSS and visible images stay intact.
+    $html = velq_brand_red_html(velq_bag_wordmark(velq_discovery_response(velq_growth_response($html, $assetPath), $assetPath)));
+    if ($assetPath === '/' || $assetPath === '/index.html') {
+        $preview = 'https://cdn.shopify.com/s/files/1/0723/8372/5647/files/velq-home-cover-blue-20261031.jpg?v=1793489698';
+        // Remove old homepage social-image tags so crawlers see one canonical image.
+        $html = preg_replace(
+            '~<meta\\b(?=[^>]*\\b(?:property|name)\\s*=\\s*["\\x27](?:og:image(?::(?:secure_url|width|height|type|alt))?|twitter:(?:card|image(?::alt)?))["\\x27])[^>]*>\\s*~i',
+            '',
+            $html
+        ) ?? $html;
+        $social = '<meta property="og:image" content="' . $preview . '">'
+            . '<meta property="og:image:secure_url" content="' . $preview . '">'
+            . '<meta property="og:image:type" content="image/jpeg">'
+            . '<meta property="og:image:width" content="800">'
+            . '<meta property="og:image:height" content="1000">'
+            . '<meta property="og:image:alt" content="Smiling woman holding Velq strawberry protein and fiber gummies">'
+            . '<meta name="twitter:card" content="summary_large_image">'
+            . '<meta name="twitter:image" content="' . $preview . '">'
+            . '<meta name="twitter:image:alt" content="Smiling woman holding Velq strawberry protein and fiber gummies">';
+        $html = str_replace('</head>', $social . '</head>', $html);
+    }
+    return $html;
 });
