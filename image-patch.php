@@ -34,6 +34,10 @@ ob_start(static function (string $html): string {
     $html = str_replace('approved red and white 10-pack pouch', 'approved white 10-pack pouch', $html);
 
     }
+    // Sitemap URL fields must remain absolute after the image override above.
+    if ($assetPath === '/sitemap.xml') {
+        $html = preg_replace('~(<(?:[A-Za-z_][A-Za-z0-9_.-]*:)?loc>)/~', '$1https://velqnutrition.com/', $html) ?? $html;
+    }
     if (substr($assetPath, -4) === '.css') $html = velq_brand_red_css($html);
     if (stripos($html, '<html') === false) {
         return velq_discovery_response(velq_growth_response($html, $assetPath), $assetPath);
