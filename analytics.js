@@ -42,7 +42,7 @@
   const cleanPath=value=>{
     if(typeof value!=='string')return '';
     const path=value.replace(/\/+$/,'')||'/';
-    return /^(?:\/|\/compare|\/media|\/research(?:\/[a-z0-9-]+)?|\/products\/[a-z0-9-]+|\/blog(?:\/(?:category\/)?[a-z0-9-]+)?|\/guides(?:\/[a-z0-9-]+)?|\/tools\/[a-z0-9-]+)$/.test(path)?path:'';
+    return /^(?:\/|\/compare|\/wholesale|\/contact|\/media|\/research(?:\/[a-z0-9-]+)?|\/products\/[a-z0-9-]+|\/blog(?:\/(?:category\/)?[a-z0-9-]+)?|\/guides(?:\/[a-z0-9-]+)?|\/tools\/[a-z0-9-]+)$/.test(path)?path:'';
   };
   // Native GA4 source / medium is the source of truth for organic acquisition.
   // Referrer category is an auxiliary hint when a search origin is visible.

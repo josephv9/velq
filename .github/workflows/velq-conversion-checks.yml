@@ -53,6 +53,11 @@ jobs:
           node --check app.js
           node --check velq-waitlist.js
           node --check velq-lead-capture.js
+      - name: Check channel attribution and wholesale scripts
+        run: |
+          node --check assets/velq-channel-tracking.js
+          node --check assets/velq-wholesale.js
+          node scripts/test-channel-tracking.cjs
       - name: Check twelve signup protocol and consent cases with intercepted endpoints
         run: node scripts/test-waitlist-flow.cjs
       - name: Check mobile and desktop journeys against the local site

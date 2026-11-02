@@ -48,7 +48,7 @@ function velq_conversion_response(string $body, string $path): string {
         $body = str_replace('id="hero-cta" href="#waitlist" data-waitlist-cta="home"', 'id="hero-cta" href="#waitlist" data-waitlist-cta="hero"', $body);
     }
     // Owner confirmed 10 gummies per packet on 2026-11-02; keep FAQ and schema consistent.
-    $body = str_replace('6 strawberry gummies', '10 strawberry gummies', $body);
+    $body = str_replace(['6 strawberry gummies', 'six-gummy', '6 gummies per packet', '6 gummies per pack'], ['10 strawberry gummies', '10-gummy', '10 gummies per packet', '10 gummies per pack'], $body);
     // Remove the retired six-gummy serving count from rendered website copy.
     $body = str_replace([' · 6 gummies per packet', ' · 6 gummies per pack', '6 gummies per packet', '6 gummies per pack'], '', $body);
     $body = str_replace('<!-- VELQ_WAITLIST -->', velq_conversion_waitlist(), $body);
