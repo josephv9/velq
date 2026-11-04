@@ -440,7 +440,6 @@ ob_start(static function (string $html): string {
     if (stripos($html, '<html') !== false) {
         if ($assetPath === '/') {
             $html = str_replace('</head>', '<meta name="google-site-verification" content="KRq9XnauMAaQd1DaRWBjyPZW1Prvu2KWSwkl9-seDzk"></head>', $html);
-            $html = preg_replace_callback('~<nav\b[^>]*class="mobile-nav"[^>]*>.*?</nav>~s', static fn(array $m): string => str_replace('</nav>', '<a href="/wholesale/" data-wholesale-cta="header">Stock Velq</a></nav>', $m[0]), $html) ?? $html;
             $html = str_replace('href="/wholesale/">WHOLESALE', 'href="/wholesale/" data-wholesale-cta="footer">STOCK VELQ', $html);
         }
         $html = str_replace('</head>', '<link rel="stylesheet" href="/assets/velq-channel-tracking.css?v=20261102"><script src="/assets/velq-channel-tracking.js?v=20261102" defer></script></head>', $html);
