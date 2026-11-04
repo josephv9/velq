@@ -33,7 +33,7 @@ function velq_home_cover(string $html, string $path): string {
     if ($path !== '/' || strpos($html, 'aria-labelledby="hero-title"') === false) return $html;
     $html = preg_replace('~<header class="header">.*?</header>~s',
         '<header class="header"><button id="menu-toggle" class="icon-button menu-toggle" aria-label="Open menu" aria-expanded="false" aria-controls="mobile-nav"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M3 6h18M3 12h18M3 18h18"/></svg></button><a href="/" class="wordmark" aria-label="Velq home"><img class="velq-rounded-logo" src="/assets/velq-rounded-wordmark-black.png?v=20261020" alt="Velq" width="1652" height="799"></a><a class="button nav-signup" href="#waitlist" data-waitlist-cta="header">Join waitlist</a></header>', $html, 1) ?? $html;
-    $artwork = '/assets/velq-cover-clean-logo-20261031.webp';
+    $artwork = 'https://cdn.shopify.com/s/files/1/0723/8372/5647/files/velq-home-cover-strawberry-20261103.jpg?v=1793766288';
     $hero = '<section class="hero lifestyle-cover velq-approved-cover" aria-labelledby="hero-title">'
         . '<div class="cover-photo">'
         . '<div class="cover-shipping" role="note" aria-label="Free shipping on orders over $50"><div class="cover-shipping-track" aria-hidden="true"><span>FREE SHIPPING ON ORDERS OVER $50 &nbsp; • &nbsp; FREE SHIPPING ON ORDERS OVER $50 &nbsp; • &nbsp; </span><span>FREE SHIPPING ON ORDERS OVER $50 &nbsp; • &nbsp; FREE SHIPPING ON ORDERS OVER $50 &nbsp; • &nbsp; </span></div></div>'
@@ -42,7 +42,7 @@ function velq_home_cover(string $html, string $path): string {
         . '<a class="cover-home" href="/" aria-label="Velq home"></a>'
         . '<a class="cover-bag" href="#waitlist" data-waitlist-cta="header" aria-label="Get early access"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M5 7h14l2 14H3L5 7Z"/><path d="M8 8V6a4 4 0 0 1 8 0v2"/></svg></a>'
         . '</nav>'
-        . '<div class="cover-image-window"><img class="approved-cover-art" src="'.$artwork.'" width="852" height="1846" alt="Smiling woman holding a white Velq strawberry protein and fiber gummies packet" fetchpriority="high" decoding="async"></div>'
+        . '<div class="cover-image-window"><img class="approved-cover-art" src="'.$artwork.'" width="1122" height="1402" alt="Smiling woman holding a white Velq strawberry protein, fiber and energy gummies pouch" fetchpriority="high" decoding="async"></div>'
         . '</div>'
         . '<div class="cover-conversion" id="waitlist">'
         . '<p class="cover-kicker">STRAWBERRY · COMING SOON</p>'
