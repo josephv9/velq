@@ -25,7 +25,7 @@ function velq_home_cover(string $html, string $path): string {
     if ($path !== '/' || strpos($html, 'aria-labelledby="hero-title"') === false) return $html;
     $html = preg_replace('~<header class="header">.*?</header>~s',
         '<header class="header"><button id="menu-toggle" class="icon-button menu-toggle" aria-label="Open menu" aria-expanded="false" aria-controls="mobile-nav"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M3 6h18M3 12h18M3 18h18"/></svg></button><a href="/" class="wordmark" aria-label="Velq home"><img class="velq-rounded-logo" src="/assets/velq-rounded-wordmark-black.png?v=20261020" alt="Velq" width="1652" height="799"></a><a class="button nav-signup" href="#waitlist" data-waitlist-cta="header">Join waitlist</a></header>', $html, 1) ?? $html;
-    $artwork = 'https://cdn.shopify.com/s/files/1/0723/8372/5647/files/velq-home-cover-blue-20261031.jpg?v=1793489698';
+    $artwork = 'https://cdn.shopify.com/s/files/1/0723/8372/5647/files/velq-home-cover-strawberry-20261103.jpg?v=1793766288';
     $hero = '<section class="hero lifestyle-cover velq-approved-cover" aria-labelledby="hero-title">'
         . '<div class="cover-photo">'
         . '<div class="cover-shipping" role="note" aria-label="Free shipping on orders over $50"><div class="cover-shipping-track" aria-hidden="true"><span>FREE SHIPPING ON ORDERS OVER $50 &nbsp; • &nbsp; FREE SHIPPING ON ORDERS OVER $50 &nbsp; • &nbsp; </span><span>FREE SHIPPING ON ORDERS OVER $50 &nbsp; • &nbsp; FREE SHIPPING ON ORDERS OVER $50 &nbsp; • &nbsp; </span></div></div>'
