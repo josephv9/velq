@@ -6,6 +6,11 @@ on:
     paths:
       - '.github/workflows/velq-live-seo-mobile-audit.yml'
       - 'image-patch.php'
+      - '.htaccess'
+      - 'seo-growth-extension.php'
+      - 'guides/index.html'
+      - 'wholesale/index.html'
+      - 'blog/protein-gummies-with-fiber-comparison/index.html'
       - 'assets/velq-strawberry-gummies-hero-20261015-v3-*.webp'
       - 'assets/velq-gummies-packshot-20261015-v2-*.webp'
   workflow_dispatch:
@@ -15,7 +20,7 @@ permissions:
 
 jobs:
   audit-live-site:
-    runs-on: ubuntu-latest
+    runs-on: ubuntu-24.04
     timeout-minutes: 16
     steps:
       - uses: actions/checkout@v4

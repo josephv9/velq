@@ -139,6 +139,19 @@ for (const [route, record] of Object.entries(pages)) {
     'og:image:type': image.type, 'og:image:alt': image.alt,
     'twitter:card': 'summary_large_image', 'twitter:image': image.url, 'twitter:image:alt': image.alt
   };
+  // The homepage social preview is intentionally different from the editorial discovery image.
+  // image-patch.php overrides the final OG and Twitter images after discovery has run.
+  if (route === '/') {
+    const preview = 'https://cdn.shopify.com/s/files/1/0723/8372/5647/files/velq-home-cover-blue-20261031.jpg?v=1793489698';
+    Object.assign(expected, {
+      'og:image': preview, 'og:image:secure_url': preview,
+      'og:image:width': '800', 'og:image:height': '1000',
+      'og:image:type': 'image/jpeg',
+      'og:image:alt': 'Smiling woman holding Velq strawberry protein and fiber gummies',
+      'twitter:image': preview,
+      'twitter:image:alt': 'Smiling woman holding Velq strawberry protein and fiber gummies'
+    });
+  }
   for (const [key, value] of Object.entries(expected)) {
     assert.deepEqual(meta.get(key), [value], `${route}: expected one exact ${key}`);
   }
@@ -151,7 +164,9 @@ for (const [route, record] of Object.entries(pages)) {
     .map(attrs).filter(tag => tag.rel?.toLowerCase().split(/\s+/).includes('canonical'));
   assert.deepEqual(canonical(output), canonical(baseline), `${route}: canonical changed`);
   assert.equal(canonical(output)[0]?.href, origin + route, `${route}: wrong canonical source`);
-  assert.equal(filter(route, output), output, `${route}: discovery pass is not idempotent`);
+  // The standalone discovery filter deliberately overwrites the homepage social image;
+  // the integrated pipeline below is the authoritative idempotence check for that route.
+  if (route !== '/') assert.equal(filter(route, output), output, `${route}: discovery pass is not idempotent`);
   const twice = filter(route, output, true);
   if (twice !== output) {
     let offset = 0;
