@@ -35,10 +35,23 @@ function velq_growth_response(string $html, string $requestPath): string
             $pattern = '~(<url>\s*<loc>' . preg_quote($url, '~') . '</loc>\s*)(?:<lastmod>[^<]*</lastmod>)?~';
             $html = preg_replace_callback($pattern, static fn(array $m): string => $m[1] . '<lastmod>2026-10-26</lastmod>', $html, 1) ?? $html;
         }
+        // Surface the canonical wholesale inquiry page in the generated sitemap.
+        $wholesaleUrl = 'https://velqnutrition.com/wholesale/';
+        if (str_contains($html, '</urlset>') && !str_contains($html, '<loc>' . $wholesaleUrl . '</loc>')) {
+            $html = str_replace('</urlset>', '<url><loc>' . $wholesaleUrl . '</loc><lastmod>2026-11-06</lastmod></url>' . "\n" . '</urlset>', $html);
+        }
         return $html;
     }
     if (stripos($html, '<html') === false) return $html;
 
+    // Keep the existing gummy guide canonical while linking to the product and wholesale pages.
+    if ($path === '/guides' && !str_contains($html, 'href="/products/strawberry-protein-fiber-gummies"')) {
+        $links = '<p class="velq-guide-product-links">Learn about <a href="/products/strawberry-protein-fiber-gummies">Velq strawberry protein + fiber gummies</a>, or <a href="/wholesale/">request wholesale information for your gym, studio or shop</a>.</p>';
+        if (str_contains($html, '</aside>')) {
+            $html = preg_replace('~</aside>~i', $links . '</aside>', $html, 1) ?? $html;
+        }
+        return $html;
+    }
     if ($path === '/') {
         return velq_growth_snippet(
             $html,
