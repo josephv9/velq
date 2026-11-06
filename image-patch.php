@@ -158,7 +158,7 @@ ob_start(static function (string $html): string {
                 },
                 $html
             ) ?? $html;
-            if (!str_contains($html, '/assets/velq-buying-guide-spacing.css?v=1')) {
+            if (!str_contains($html, '/assets/velq-buying-guide-spacing.css')) {
                 $html = str_replace('</head>', '<link rel="stylesheet" href="/assets/velq-buying-guide-spacing.css?v=1"></head>', $html);
             }
             break;

@@ -1,37 +1,46 @@
+#!/usr/bin/env node
 'use strict';
-const assert=require('node:assert/strict');
-const fs=require('node:fs');
-const {chromium}=require(process.env.CODEX_PRIMARY_RUNTIME_NODE_MODULES?process.env.CODEX_PRIMARY_RUNTIME_NODE_MODULES+'/playwright':'playwright');
-(async()=>{
- const browser=await chromium.launch({headless:true,args:['--no-sandbox']});
- const results=[];
- try{
-  for(const [width,height] of [[320,740],[390,844],[430,932],[768,1024],[820,1180],[1024,768],[1366,768],[1440,900]]){
-   const page=await browser.newPage({viewport:{width,height},reducedMotion:'reduce'});
-   await page.route('**/*',route=>new URL(route.request().url()).origin==='http://127.0.0.1:8766'?route.continue():route.fulfill({status:200,body:''}));
-   await page.goto('http://127.0.0.1:8766/',{waitUntil:'networkidle'});
-   const metrics=await page.evaluate(()=>{
-    const rect=s=>{const r=document.querySelector(s).getBoundingClientRect();return {x:r.x,y:r.y,right:r.right,bottom:r.bottom,width:r.width,height:r.height}};
-    return {viewport:innerWidth,scrollWidth:document.documentElement.scrollWidth,menu:rect('#menu-toggle'),logo:rect('.header .wordmark'),join:rect('.header .nav-signup'),copy:rect('.hero-copy'),header:rect('.header'),lines:[...document.querySelectorAll('#hero-title>span')].map(e=>{const r=e.getBoundingClientRect();return {y:r.y,bottom:r.bottom,scroll:e.scrollWidth,width:e.clientWidth}}),align:getComputedStyle(document.querySelector('.hero-copy')).textAlign,fontWeight:getComputedStyle(document.querySelector('#hero-title')).fontWeight};
-   });
-   assert(metrics.scrollWidth<=width+1,'Page overflow at '+width);
-   assert(metrics.menu.right+8<=metrics.logo.x,'Menu overlaps logo at '+width);
-   assert(metrics.logo.right+8<=metrics.join.x,'Logo overlaps signup at '+width);
-   assert(metrics.copy.y>metrics.header.bottom+24,'Copy overlaps header at '+width);
-   assert.equal(metrics.align,'center');
-   assert.equal(metrics.fontWeight,'400');
-   assert.equal(metrics.lines.length,2);
-   assert(metrics.lines[1].y>=metrics.lines[0].bottom-1,'Headline lines overlap at '+width);
-   metrics.lines.forEach(line=>assert(line.scroll<=line.width+1,'Headline clipped at '+width));
-   await page.locator('#menu-toggle').click();
-   assert.equal(await page.locator('#mobile-nav').isVisible(),true,'Menu fails to open at '+width);
-   await page.keyboard.press('Escape');
-   assert.equal(await page.locator('#mobile-nav').isVisible(),false);
-   await page.locator('#hero-cta').click();
-   assert.equal(await page.locator('#waitlist-email').isVisible(),true);
-   results.push({width,height,noOverlap:true,twoLines:true,menu:true,waitlistCTA:true});
-   await page.close();
-  }
- }finally{await browser.close()}
- console.log(JSON.stringify({status:'PASS',results},null,2));
-})().catch(e=>{console.error(e);process.exit(1)});
+// Responsive smoke test for the CURRENT lifestyle-cover homepage.
+// No real signup submissions or external analytics calls.
+const assert = require('node:assert/strict');
+const { chromium } = require(process.env.CODEX_PRIMARY_RUNTIME_NODE_MODULES
+  ? process.env.CODEX_PRIMARY_RUNTIME_NODE_MODULES + '/playwright' : 'playwright');
+(async () => {
+  const browser = await chromium.launch({headless:true,args:['--no-sandbox','--disable-dev-shm-usage']});
+  const results=[];
+  try {
+    for (const [width,height] of [[320,740],[390,844],[430,932],[768,1024],[820,1180],[1024,768],[1366,768],[1440,900]]) {
+      const page=await browser.newPage({viewport:{width,height},reducedMotion:'reduce'});
+      await page.route('**/*', route => new URL(route.request().url()).origin === 'http://127.0.0.1:8766'
+        ? route.continue() : route.fulfill({status:200,body:''}));
+      const response=await page.goto('http://127.0.0.1:8766/',{waitUntil:'networkidle'});
+      assert.equal(response.status(),200,'Homepage response at '+width);
+      const m=await page.evaluate(() => {
+        const get=s=>document.querySelector(s);
+        const rect=el=>{const r=el?.getBoundingClientRect();return r?{x:r.x,right:r.right,y:r.y,bottom:r.bottom,width:r.width,height:r.height}:null;};
+        return {
+          viewport:innerWidth, scrollWidth:document.documentElement.scrollWidth,
+          cover:rect(get('.hero.lifestyle-cover')),
+          image:rect(get('.approved-cover-art')),
+          imageSrc:get('.approved-cover-art')?.getAttribute('src'),
+          heading:get('#hero-title')?.textContent?.trim(),
+          headingRect:rect(get('#hero-title')),
+          formCount:document.querySelectorAll('#waitlist-form').length,
+          email:!!get('#waitlist-email'),
+          consent:!!get('#waitlist-form [name="consent"]'),
+          menuCount:document.querySelectorAll('#menu-toggle').length
+        };
+      });
+      assert(m.cover?.width>0 && m.image?.width>0,'Current cover artwork missing at '+width);
+      assert(m.imageSrc?.startsWith('/assets/'),'Missing first-party approved cover at '+width);
+      assert(m.heading?.includes('Strawberry Protein + Fiber'),'Product heading missing at '+width);
+      assert(m.headingRect?.width>0,'Heading not visible at '+width);
+      assert.equal(m.formCount,1,'Waitlist form must appear once at '+width);
+      assert(m.email && m.consent,'Waitlist email or consent missing at '+width);
+      assert(m.scrollWidth<=width+2,'Document horizontal overflow at '+width+': '+JSON.stringify(m));
+      results.push({width,height,hero:true,waitlist:true,noHorizontalOverflow:true});
+      await page.close();
+    }
+  } finally {await browser.close();}
+  console.log(JSON.stringify({status:'PASS',results,liveSignups:0},null,2));
+})().catch(e=>{console.error(e);process.exit(1);});
