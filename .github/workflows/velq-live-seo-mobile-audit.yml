@@ -80,7 +80,7 @@ jobs:
                   assert resp.status==200 and resp.geturl()==origin+path,path
                   html=resp.read(3_000_000).decode('utf-8','replace')
               assert ('rel="canonical" href="'+origin+path+'"') in html,path+': wrong canonical'
-              scripts=re.findall(r'<script\\b[^>]*type=["\\x27]application/ld\\+json["\\x27][^>]*>(.*?)</script>',html,re.I|re.S)
+              scripts=re.findall(r'<script\b[^>]*type=["\x27]application/ld\+json["\x27][^>]*>(.*?)</script>',html,re.I|re.S)
               parsed=[json.loads(text) for text in scripts]
               assert parsed,path+': JSON-LD missing'
               types=[]
