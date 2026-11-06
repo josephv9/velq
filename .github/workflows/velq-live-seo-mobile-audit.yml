@@ -105,7 +105,7 @@ jobs:
         shell: bash
         run: |
           python3 - <<'PY'
-          import json,urllib.request,time
+          import json,urllib.request,time,re
           base='https://velqnutrition.com'
           names=['velq-strawberry-gummies-hero-20261015-v3','velq-gummies-packshot-20261015-v2']
           checks=[]
@@ -131,8 +131,11 @@ jobs:
           # The November homepage uses one approved 208 KB WebP hero with a matching
           # preload. Previous responsive assets remain live for older page layouts.
           current='/assets/velq-cover-cyan-stems-20261104.webp'
-          hero_status,hero_final,hero_headers,hero_body=fetch(base+current)
-          assert hero_status==200 and 'image/webp' in hero_headers.get('Content-Type','') and len(hero_body)>10000
+          with urllib.request.urlopen(base+current,timeout=25) as hero_response:
+              hero_status=hero_response.status
+              hero_type=hero_response.headers.get('Content-Type','')
+              hero_body=hero_response.read(350000)
+          assert hero_status==200 and 'image/webp' in hero_type and len(hero_body)>10000
           content={'has_current_hero':current in html,
                    'has_priority':bool(re.search(r'<img[^>]*class="approved-cover-art"[^>]*fetchpriority="high"',html)),
                    'preload_matches_current_hero':bool(re.search(r'<link[^>]*data-velq-responsive-preload[^>]*href="'+re.escape(current)+r'"',html))}

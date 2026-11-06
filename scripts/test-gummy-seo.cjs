@@ -25,7 +25,7 @@ function render(route,source){
 const home=render('/',asset('/index.html'));
 assert(home.includes('<title>Strawberry Protein + Fiber Gummies | Velq Waitlist</title>'), 'Current homepage title not rendered');
 assert(home.includes('Velq is developing strawberry protein and prebiotic fiber gummies.'), 'Current homepage search description missing');
-assert(home.includes('id="hero-title"><span>Protein + Fiber</span>'), 'Product-focused homepage H1 missing');
+assert(home.includes('id="hero-title">Strawberry Protein + Fiber &amp; Energy Gummies</h1>'), 'Product-focused homepage H1 missing');
 assert(home.includes('href="/products/strawberry-protein-fiber-gummies"'), 'Homepage product detail path missing');
 assert(!home.includes('data-gummy-buyer-paths="home"'), 'Retired homepage buyer promotion returned');
 assert(home.includes('id="waitlist-form"'),'Home waitlist form removed');
