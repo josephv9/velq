@@ -80,18 +80,26 @@ jobs:
           python3 scripts/build-research-pages.py
           git diff --exit-code -- research/ assets/research/gummy-labels-2026-10-20.csv assets/research/gummy-serving-comparison-2026.svg
       - name: Check serving arithmetic and calculation completion semantics
+        if: ${{ always() }}
         run: node scripts/test-research-calculators.cjs
       - name: Verify research routing, sitemaps, sources of attribution and API integrity
+        if: ${{ always() }}
         run: node scripts/test-research-integration.cjs
       - name: Validate the packed Velq site and signup code
+        if: ${{ always() }}
         run: node scripts/validate-velq-site.cjs
       - name: Test gummy buyer paths and page metadata without external requests
+        if: ${{ always() }}
         run: node scripts/test-gummy-seo.cjs
       - name: Verify commercial buyer comparison journeys without external calls
+        if: ${{ always() }}
         run: node scripts/test-commercial-seo.cjs
       - name: Test confirmed waitlist attribution without creating leads
+        if: ${{ always() }}
         run: node scripts/test-waitlist-attribution.cjs
       - name: Verify one GA4 initializer and preserved event configuration
+        if: ${{ always() }}
         run: node scripts/test-ga4-loader.cjs
       - name: Verify responsive WebP variants and rendered image markup
+        if: ${{ always() }}
         run: node scripts/test-responsive-velq-images.cjs
