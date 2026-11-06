@@ -61,5 +61,5 @@ assert(fiberPowder.includes('Velq is still in development; its formula is set, t
 
 const api='{"ok":true,"newLead":false}';
 assert.equal(render('/api/waitlist',api),api,'Non-HTML API response must not change');
-assert(home.includes('final nutrition may change')||home.includes('Final nutrition may change'),'Prelaunch warning removed');
+assert(home.includes('Packaging and nutrition shown are previews and may change.'), 'Current prelaunch disclosure removed');
 console.log('PASS: live-target gummy SEO metadata, product journey, buyer links, and prelaunch disclosure; no stale promo, API untouched.');
