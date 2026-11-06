@@ -59,7 +59,11 @@
     if(!sessionStorage.getItem('velq_entry_referrer_type'))sessionStorage.setItem('velq_entry_referrer_type',entryReferrerType());
   }catch{}
   const readContext=()=>{try{return JSON.parse(sessionStorage.getItem('velq_journal_signup')||'{}');}catch{return {};}};
-  document.querySelectorAll('[data-waitlist-cta]').forEach(link=>link.addEventListener('click',()=>{
+  // Capture CTA attribution before the lead-popup handler stops propagation.
+  // Delegation also covers CTAs inserted after DOMContentLoaded.
+  window.addEventListener('click',event=>{
+    const link=event.target instanceof Element ? event.target.closest('[data-waitlist-cta]') : null;
+    if(!link)return;
     const previous=readContext();
     const now=Date.now();
     const current=cleanPath(location.pathname);
@@ -72,7 +76,7 @@
     const context={article_path:article,landing_page:entry,cta_position:link.dataset.waitlistCta,clicked_at:now};
     try{sessionStorage.setItem('velq_journal_signup',JSON.stringify(context));}catch{}
     if(config.ga4)window.gtag('event','waitlist_cta_click',{article_path:context.article_path,cta_position:context.cta_position});
-  }));
+  },true);
   const seen=new Set();
   try { for (const id of JSON.parse(sessionStorage.getItem('velq_counted_signup_events_v2') || '[]')) if (typeof id === 'string') seen.add(id); } catch {}
   window.addEventListener('velq:waitlist-success',event=>{
