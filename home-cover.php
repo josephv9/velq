@@ -135,7 +135,7 @@ function velq_compact_product_section(string $html): string {
     $section = <<<'HTML'
 <section class="products section velq-compact-product" id="products" aria-labelledby="products-title">
   <h2 id="products-title">Meet your daily<br>upgrade.</h2>
-  <a class="velq-compact-image" href="/products/strawberry-protein-fiber-gummies" data-product-detail-cta="product-image" aria-label="View Velq strawberry gummy details"><img src="https://cdn.shopify.com/s/files/1/0723/8372/5647/files/velq-strawberry-pouch-gummies-homepage-20261106.jpg?v=1793990825" alt="Velq strawberry protein, fiber and energy gummies pouch and packet surrounded by strawberries and red gummy bears" width="1254" height="1254" loading="lazy" decoding="async"></a>
+  <a class="velq-compact-image" href="/products/strawberry-protein-fiber-gummies" data-product-detail-cta="product-image" aria-label="View Velq strawberry gummy details"><img src="https://cdn.shopify.com/s/files/1/0723/8372/5647/files/velq-strawberry-gummies-homepage-white-20261106.jpg?v=1793991829" alt="Velq strawberry protein, fiber and energy gummies pouch and packet with strawberries and red gummy bears on a bright white background" width="1254" height="1254" loading="lazy" decoding="async"></a>
   <p class="velq-compact-flavor">Strawberry · Zero sugar</p>
   <p class="velq-compact-size">10 packets per box</p>
   <a class="velq-compact-cta" href="#waitlist" data-waitlist-cta="home" data-interest="strawberry">NOTIFY ME AT LAUNCH</a>
