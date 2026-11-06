@@ -448,7 +448,7 @@ ob_start(static function (string $html): string {
     if (!in_array($assetPath, ['/', '/index.html', '/index.php'], true)) {
         $html = preg_replace(
             '~(?:https?://(?:cdn\.shopify\.com/s/files/[^"\s<>]+/files/|(?:www\.)?velqnutrition\.com/))?(?:/?assets/)?velq-(?:white-pack-(?:approved|strawberry-label)-20261031|approved-strawberry-packet-20261020|gummies-packshot-20261015-v2|strawberry-gummies-(?:hero-20261015-v3|product-20261015|target-20261015|10-pack(?:-2026101[45])?|primary)|white-strawberry-product-20261031|strawberry-white-product-20261031|red-white-strawberry-final-hero-oct-2026|strawberry-gummies-pedestal-packshot-oct2026|fruit-snacks-original|neutral-product)(?:-(?:480|800|1200))?\.(?:jpe?g|webp|png)(?:\?[^"\s<>]*)?~i',
-            '/assets/velq-strawberry-pouches-20261103.webp',
+            'https://velqnutrition.com/assets/velq-strawberry-pouches-20261103.webp',
             $html
         ) ?? $html;
     }

@@ -24,10 +24,9 @@ function velq_discovery_images(): array
 
     $hero = $image('/assets/velq-cover-cyan-stems-20261104.webp', 1122, 1402,
         'Smiling woman holding a Velq strawberry protein and fiber gummy packet. Approved homepage lifestyle artwork.');
-    $packshot = $image('/assets/velq-gummies-packshot-20261015-v2-1200.webp', 1200, 1200,
-        'Development preview of Velq strawberry gummy packaging. Retail labeling is not yet published.');
-    $legacy = $image($cdn . 'files/velq-red-white-strawberry-final-hero-oct-2026.jpg?v=1791934937', 1254, 1254,
-        'Velq strawberry gummy packaging preview. The product is in development and final details may change.');
+    $packshot = $image('/assets/velq-strawberry-pouches-20261103.webp', 1000, 1000,
+        'Current Velq strawberry gummies packaging preview with pouch and individual packets.');
+    $legacy = $packshot;
     $strawberry = $image('/assets/strawberry.webp', 1254, 1254,
         'Velq strawberry gummy package concept. Final product and label details may change.');
     $study = $image('/assets/research/gummy-serving-comparison-2026.png', 1200, 675,
@@ -39,7 +38,7 @@ function velq_discovery_images(): array
 
     $pages = [
         '/' => $page($hero, [$hero['url']]),
-        '/media' => $page($packshot, [$base . '/assets/velq-gummies-packshot-20261015-v2-800.webp']),
+        '/media' => $page($packshot),
         '/research' => $page($study, [$base . '/assets/research/gummy-serving-comparison-2026.svg']),
         '/research/gummy-serving-study-2026' => $page($study, [$base . '/assets/research/gummy-serving-comparison-2026.svg']),
         '/tools/serving-comparison-calculator' => $page($serving, [
