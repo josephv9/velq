@@ -125,7 +125,8 @@ function withoutImageFields(value) {
 }
 
 function heroTag(html) {
-  return (html.match(/<img\b[^>]*>/gi) || []).find(tag => attrs(tag).id === 'hero-image');
+  return (html.match(/<img\b[^>]*>/gi) || []).find(tag =>
+    attrs(tag).class?.split(/\s+/).includes('approved-cover-art'));
 }
 
 const rendered = new Map();
@@ -189,11 +190,11 @@ for (const [route, record] of Object.entries(pages)) {
       assert.equal(afterAttrs[key], beforeAttrs[key], 'Homepage hero ' + key + ' changed');
     }
     assert.equal(afterAttrs.fetchpriority, 'high');
-    assert.match(afterAttrs.srcset, /480w, .*800w, .*1200w$/);
+    assert.equal(afterAttrs.src, '/assets/velq-cover-cyan-stems-20261104.webp', 'Approved cover asset changed');
     const preload = (head(output).match(/<link\b[^>]*>/gi) || []).find(tag => tag.includes('data-velq-responsive-preload'));
-    assert(preload, 'Responsive hero preload missing');
-    assert.equal(attrs(preload).imagesrcset, afterAttrs.srcset);
-    assert.equal(attrs(preload).imagesizes, afterAttrs.sizes);
+    assert(preload, 'Homepage hero preload missing');
+    assert.equal(attrs(preload).href, afterAttrs.src, 'Hero preload does not match displayed cover');
+    assert.equal(attrs(preload).fetchpriority, 'high');
     expectedBody = expectedBody.replace(before, before.replace(/\bwidth="[^"]*"/, 'width="1122"').replace(/\bheight="[^"]*"/, 'height="1402"'));
   }
   assert.equal(body(output), expectedBody, `${route}: visible content changed beyond the corrected hero dimensions`);
