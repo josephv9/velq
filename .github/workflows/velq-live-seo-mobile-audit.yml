@@ -32,15 +32,24 @@ jobs:
         shell: bash
         run: |
           python3 - <<'PY'
-          import concurrent.futures, json, re, time, urllib.request, xml.etree.ElementTree as ET
+          import concurrent.futures, json, re, time, urllib.request, urllib.error, xml.etree.ElementTree as ET
           base='https://velqnutrition.com'
           def fetch(url):
               req=urllib.request.Request(url,headers={'User-Agent':'Velq-SEO-QA/1.0','Cache-Control':'no-cache'})
               with urllib.request.urlopen(req,timeout=25) as resp:
                   return resp.status,resp.geturl(),dict(resp.headers),resp.read(3_000_000).decode('utf-8','replace')
-          status,final,headers,robots=fetch(base+'/robots.txt')
+          def fetch_initial(url):
+              # Deploy-time caches sometimes transiently return a 404 for the
+              # dynamic sitemap. Retry briefly, but fail genuine persistent errors.
+              for attempt in range(4):
+                  try: return fetch(url)
+                  except urllib.error.HTTPError as error:
+                      if error.code not in (404,429,500,502,503,504) or attempt==3: raise
+                      print('INITIAL_URL_RETRY',json.dumps({'url':url,'status':error.code,'attempt':attempt+1}))
+                      time.sleep(1+attempt)
+          status,final,headers,robots=fetch_initial(base+'/robots.txt')
           print('ROBOTS',json.dumps({'status':status,'url':final,'contains_sitemap':base+'/sitemap.xml' in robots,'length':len(robots)}))
-          status,final,headers,xml=fetch(base+'/sitemap.xml')
+          status,final,headers,xml=fetch_initial(base+'/sitemap.xml')
           print('SITEMAP',json.dumps({'status':status,'url':final,'content_type':headers.get('Content-Type'),'length':len(xml)}))
           root=ET.fromstring(xml)
           ns={'s':'http://www.sitemaps.org/schemas/sitemap/0.9'}
