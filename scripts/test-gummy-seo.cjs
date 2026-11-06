@@ -57,7 +57,7 @@ for(const path of [
   assert(fiberPowder.includes('href="'+path+'"'),'Missing high-intent gummy link '+path);
   assert.equal((fiberPowder.match(new RegExp('href="'+path+'"','g'))||[]).length,1,'Duplicate buyer link '+path);
 }
-assert(fiberPowder.includes('Velq is still in development; its target formula is not a finished nutrition label.'),'Missing prelaunch disclosure on buyer path');
+assert(fiberPowder.includes('Velq is still in development; its formula is set, though the retail nutrition label has not been published.'),'Missing prelaunch disclosure on buyer path');
 
 const api='{"ok":true,"newLead":false}';
 assert.equal(render('/api/waitlist',api),api,'Non-HTML API response must not change');
