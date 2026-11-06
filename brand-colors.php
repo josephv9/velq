@@ -28,7 +28,7 @@ function velq_brand_red_html(string $html): string {
     return preg_replace_callback('~<link\\b[^>]*>~i', static function(array $m): string {
         return preg_replace_callback('~\\bhref=(["\\\'])(/[^"\\\']+\\.css(?:\\?[^"\\\']*)?)\\1~i',
             static function(array $a): string {
-                $url = preg_replace('~([?&])brand-red=[^&]*~', '$1', $a[2]) ?? $a[2];
+                $url = preg_replace('~(?:&amp;|[?&])brand-red=[^&]*~i', '', $a[2]) ?? $a[2];
                 $url = rtrim($url, '?&');
                 return 'href='.$a[1].$url.(strpos($url, '?') === false ? '?' : '&amp;').'brand-red=E4002B-v1'.$a[1];
             }, $m[0]) ?? $m[0];

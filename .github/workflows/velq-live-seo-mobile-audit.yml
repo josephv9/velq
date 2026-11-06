@@ -66,6 +66,41 @@ jobs:
           print('PASS: All sitemap URLs return indexable canonical pages from the preferred host. This is not a Google indexed-page count.')
           PY
 
+      - name: Verify canonical guide aliases, commercial links and JSON-LD
+        shell: bash
+        run: |
+          python3 - <<'PY'
+          import json,re,urllib.request
+          origin='https://velqnutrition.com'
+          for alias in ['/guides/','/guides/index.html']:
+              with urllib.request.urlopen(origin+alias,timeout=25) as resp:
+                  assert resp.status==200 and resp.geturl()==origin+'/guides',f'{alias}: wrong canonical redirect'
+          for path,expected_type in [('/guides','CollectionPage'),('/products/strawberry-protein-fiber-gummies','WebPage'),('/wholesale/','WebPage')]:
+              with urllib.request.urlopen(origin+path,timeout=25) as resp:
+                  assert resp.status==200 and resp.geturl()==origin+path,path
+                  html=resp.read(3_000_000).decode('utf-8','replace')
+              assert ('rel="canonical" href="'+origin+path+'"') in html,path+': wrong canonical'
+              scripts=re.findall(r'<script\\b[^>]*type=["\\x27]application/ld\\+json["\\x27][^>]*>(.*?)</script>',html,re.I|re.S)
+              parsed=[json.loads(text) for text in scripts]
+              assert parsed,path+': JSON-LD missing'
+              types=[]
+              def walk(x):
+                  if isinstance(x,dict):
+                      if '@type' in x: types.extend(x['@type'] if isinstance(x['@type'],list) else [x['@type']])
+                      for v in x.values(): walk(v)
+                  elif isinstance(x,list):
+                      for v in x: walk(v)
+              for p in parsed: walk(p)
+              assert expected_type in types,f'{path}: expected {expected_type}, got {types}'
+              if path=='/guides':
+                  assert '/products/strawberry-protein-fiber-gummies' in html and '/wholesale/' in html,'Guide commercial links missing'
+              print('SCHEMA_AND_CANONICAL',json.dumps({'path':path,'types':types,'valid_jsonld_scripts':len(parsed)}))
+          with urllib.request.urlopen(origin+'/blog/protein-gummies-with-fiber-comparison',timeout=25) as resp:
+              html=resp.read(3_000_000).decode('utf-8','replace')
+          assert '/products/strawberry-protein-fiber-gummies' in html and '/wholesale/' in html
+          print('PASS: guide aliases, commercial links, canonical tags and structured data')
+          PY
+
       - name: Verify live responsive image files and rendered homepage
         shell: bash
         run: |
@@ -93,12 +128,16 @@ jobs:
           assert len(checks)==6 and all(x.get('http')==200 for x in checks),'Responsive image assets are not all live.'
           req=urllib.request.Request(base+'/',headers={'Cache-Control':'no-cache'})
           with urllib.request.urlopen(req,timeout=25) as res: html=res.read(250000).decode('utf-8','replace')
-          content={'has_hero_webp':'/assets/velq-strawberry-gummies-hero-20261015-v3-800.webp' in html,
-                   'has_packshot_webp':'/assets/velq-gummies-packshot-20261015-v2-800.webp' in html,
-                   'has_srcset':'srcset="/assets/velq-strawberry-gummies-hero-20261015-v3-480.webp' in html,
-                   'preload':'data-velq-responsive-preload' in html}
+          # The November homepage uses one approved 208 KB WebP hero with a matching
+          # preload. Previous responsive assets remain live for older page layouts.
+          current='/assets/velq-cover-cyan-stems-20261104.webp'
+          hero_status,hero_final,hero_headers,hero_body=fetch(base+current)
+          assert hero_status==200 and 'image/webp' in hero_headers.get('Content-Type','') and len(hero_body)>10000
+          content={'has_current_hero':current in html,
+                   'has_priority':bool(re.search(r'<img[^>]*class="approved-cover-art"[^>]*fetchpriority="high"',html)),
+                   'preload_matches_current_hero':bool(re.search(r'<link[^>]*data-velq-responsive-preload[^>]*href="'+re.escape(current)+r'"',html))}
           print('HOMEPAGE_IMAGE_MARKUP',json.dumps(content))
-          assert all(content.values()),'Rendered live HTML does not contain expected responsive imagery.'
+          assert all(content.values()),'Rendered homepage hero or matching preload is missing.'
           PY
 
       - name: Install Lighthouse
