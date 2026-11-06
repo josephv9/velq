@@ -47,10 +47,12 @@ function velq_conversion_response(string $body, string $path): string {
         $body = str_replace('href="#waitlist" data-waitlist-cta="home">JOIN EARLY ACCESS</a><button id="menu-toggle"', 'href="#waitlist" data-waitlist-cta="header">JOIN EARLY ACCESS</a><button id="menu-toggle"', $body);
         $body = str_replace('id="hero-cta" href="#waitlist" data-waitlist-cta="home"', 'id="hero-cta" href="#waitlist" data-waitlist-cta="hero"', $body);
     }
-    // Owner confirmed 10 gummies per packet on 2026-11-02; keep FAQ and schema consistent.
-    $body = str_replace(['6 strawberry gummies', 'six-gummy', '6 gummies per packet', '6 gummies per pack'], ['10 strawberry gummies', '10-gummy', '10 gummies per packet', '10 gummies per pack'], $body);
-    // Remove the retired six-gummy serving count from rendered website copy.
-    $body = str_replace([' · 6 gummies per packet', ' · 6 gummies per pack', '6 gummies per packet', '6 gummies per pack'], '', $body);
+    // Keep retained HTML and JSON-LD consistent with the 10-gummy packet.
+    $body = str_replace(
+        ['6 strawberry gummies', 'six-gummy', '6-gummy', '6 gummies per packet', '6 gummies per pack', '6 gummies planned', 'fiber in six gummies', 'fiber across six gummies'],
+        ['10 strawberry gummies', '10-gummy', '10-gummy', '10 gummies per packet', '10 gummies per pack', '10 gummies planned', 'fiber in 10 gummies', 'fiber across 10 gummies'],
+        $body
+    );
     $body = str_replace('<!-- VELQ_WAITLIST -->', velq_conversion_waitlist(), $body);
 
     // One ordered analytics owner and one waitlist/popup implementation on every route.

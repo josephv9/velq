@@ -419,3 +419,6 @@ body.velq-cover-home .velq-approved-cover .cover-shipping-track span{box-sizing:
 @media(prefers-reduced-motion:reduce){body.velq-cover-home .velq-approved-cover .cover-shipping-track{animation:none;transform:none}}
 
 body.velq-cover-home .velq-approved-cover .cover-shipping{font-size:clamp(12px,3.5cqw,24px)}
+
+/* Product-first headline with the original brand tagline underneath. */
+body.velq-cover-home .velq-approved-cover .cover-tagline{max-width:520px;margin:14px auto 0;color:#E4002B;font:600 clamp(16px,2.5vw,20px)/1.4 Arial,sans-serif;text-wrap:balance}
