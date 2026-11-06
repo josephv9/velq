@@ -20,6 +20,8 @@ on:
       - 'products/strawberry-protein-fiber-gummies/**'
       - 'scripts/test-waitlist-flow.cjs'
       - 'scripts/test-conversion-journey.cjs'
+      - 'scripts/test-gummy-seo.cjs'
+      - 'scripts/validate-velq-site.cjs'
       - 'scripts/conversion-qa-router.php'
       - '.github/workflows/velq-conversion-checks.yml'
   pull_request:
