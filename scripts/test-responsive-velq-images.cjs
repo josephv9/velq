@@ -36,7 +36,8 @@ const preloads=(home.match(/<link\b[^>]*data-velq-responsive-preload[^>]*>/gi)||
 assert.equal(preloads.length,1,'One current hero preload is required');
 assert(preloads[0].includes('href="'+current+'"'),'Preload does not match the visible approved WebP');
 assert(home.includes('id="waitlist-form"'),'Current homepage waitlist form missing');
-const unrelated=php('$_SERVER["REQUEST_URI"]="/compare";require "image-patch.php";echo "<html><head></head><body><img src=\"/assets/unrelated.png\" width=\"20\" height=\"20\"></body></html>";');
+const unrelatedInput=Buffer.from('<html><head></head><body><img src="/assets/unrelated.png" width="20" height="20"></body></html>').toString('base64');
+const unrelated=php('$_SERVER["REQUEST_URI"]="/compare";require "image-patch.php";echo base64_decode("'+unrelatedInput+'");');
 assert(unrelated.includes('src="/assets/unrelated.png"'),'Unrelated assets should not be rewritten');
 assert(!unrelated.includes('data-velq-responsive-preload'),'No homepage preload on unrelated pages');
 console.log('PASS: six valid responsive WebPs retained; current approved homepage hero, matching preload, priority and waitlist; unrelated images unchanged.');
