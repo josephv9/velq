@@ -46,7 +46,8 @@ function velq_home_cover(string $html, string $path): string {
         . '</div>'
         . '<div class="cover-conversion" id="waitlist">'
         . '<p class="cover-kicker">STRAWBERRY · COMING SOON</p>'
-        . '<h1 id="hero-title">Your daily nutrition. <strong>In one little packet.</strong></h1>'
+        . '<h1 id="hero-title">Strawberry Protein + Fiber &amp; Energy Gummies</h1>'
+        . '<p class="cover-tagline">Your daily nutrition. In one little packet.</p>'
         . '<p class="cover-benefit">20g protein + 10g prebiotic fiber + 80mg caffeine + 200mg L-theanine per packet.</p>'
         . '<div class="cover-form-container"><!--VELQ_HERO_FORM--></div>'
         . '<p class="cover-no-payment">Free to join · No payment today · Unsubscribe anytime</p>'
@@ -78,7 +79,7 @@ function velq_home_cover(string $html, string $path): string {
     $html = str_replace('<body>', '<body class="velq-cover-home">', $html);
     $html = preg_replace('~<link\b[^>]*data-velq-responsive-preload[^>]*>~i', '', $html) ?? $html;
     $preload = '<link data-velq-responsive-preload rel="preload" as="image" href="'.$artwork.'" fetchpriority="high">';
-    return str_replace('</head>', '<link rel="stylesheet" href="/assets/velq-home-cover.css?v=20261103-product-promo">'.$preload.'<link rel="stylesheet" href="/assets/velq-cover-layout-20261031.css?v=layout-1"></head>', $html);
+    return str_replace('</head>', '<link rel="stylesheet" href="/assets/velq-home-cover.css?v=20261106-product-details">'.$preload.'<link rel="stylesheet" href="/assets/velq-cover-layout-20261031.css?v=layout-1"></head>', $html);
 }
 
 /** Single-product layout. Image slots accept ordinary img elements when supplied. */
