@@ -73,6 +73,21 @@ assert(velqFiberRow.includes('<td>10 per packet</td>'), 'Fiber shortlist must sh
 assert(!velqFiberRow.includes('<td>6 per packet</td>'), 'Stale six-gummy Velq table row');
 assert(fiberShortlist.includes('10-gummy packet'), 'Fiber shortlist must match the product packet format');
 
+// Test packed Journal normalization: the legacy HTML bundle has a stale
+// six-gummy Velq comparison row. Competitor counts must not change.
+const outdatedTable = '<!doctype html><html><head><title>Fiber comparison</title></head><body><main><table>'
+  + '<tr><td>Nature Made</td><td>6 g</td><td>3</td></tr>'
+  + '<tr><td>Velq (prelaunch)</td><td>10 g proposed</td><td>6 per packet</td></tr>'
+  + '</table></main></body></html>';
+const correctedTable = render('/blog/best-fiber-gummies-2026', outdatedTable);
+assert(correctedTable.includes('<td>Velq (prelaunch)</td><td>10 g proposed</td><td>10 per packet</td>'),
+       'Test packed Journal normalization: rendered Velq table retains old packet count');
+assert(correctedTable.includes('<td>Nature Made</td><td>6 g</td><td>3</td>'),
+       'Comparison must preserve competitor data');
+assert.equal((correctedTable.match(/<td>10 per packet<\/td>/g)||[]).length,1,
+             'Velq packet quantity should appear exactly once in this comparison');
+
+
 const api='{"ok":true,"newLead":false}';
 assert.equal(render('/api/waitlist',api),api,'Non-HTML API response must not change');
 assert(home.includes('Packaging and nutrition shown are previews and may change.'), 'Current prelaunch disclosure removed');
