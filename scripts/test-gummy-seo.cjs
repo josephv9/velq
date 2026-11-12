@@ -23,10 +23,17 @@ function render(route,source){
   return r.stdout;
 }
 const home=render('/',asset('/index.html'));
-assert(home.includes('<title>Strawberry Protein + Fiber Gummies | Velq Waitlist</title>'), 'Current homepage title not rendered');
-assert(home.includes('Velq is developing strawberry protein and prebiotic fiber gummies.'), 'Current homepage search description missing');
-assert(home.includes('id="hero-title">Strawberry Protein + Fiber &amp; Energy Gummies</h1>'), 'Product-focused homepage H1 missing');
+assert(home.includes('<title>Protein Gummies with Fiber &amp; Caffeine | Velq</title>'), 'Current homepage title not rendered');
+assert(home.includes('Meet Velq strawberry protein gummies with prebiotic fiber, caffeine and L-theanine.'), 'Current homepage search description missing');
+assert(home.includes('id="hero-title">Strawberry Protein Gummies with Fiber &amp; Caffeine</h1>'), 'Product-focused homepage H1 missing');
 assert(home.includes('href="/products/strawberry-protein-fiber-gummies"'), 'Homepage product detail path missing');
+assert(home.includes('id="velq-seo-related"'), 'Homepage SEO related resources missing');
+assert(home.includes('href="/research/gummy-serving-study-2026"'), 'Original research not linked from homepage');
+assert(home.includes('/assets/velq-seo-related.css?v=20261111'), 'Responsive SEO link style missing');
+assert(home.includes('rel="preconnect" href="https://cdn.shopify.com"'), 'Shopify image CDN preconnect missing');
+const repeatHome=render('/',home);
+assert.equal((repeatHome.match(/id="velq-seo-related"/g)||[]).length, 1, 'Repeated HTML processing duplicates homepage related links');
+
 assert(!home.includes('data-gummy-buyer-paths="home"'), 'Retired homepage buyer promotion returned');
 assert(home.includes('id="waitlist-form"'),'Home waitlist form removed');
 
