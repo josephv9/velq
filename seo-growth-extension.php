@@ -144,5 +144,19 @@ function velq_growth_response(string $html, string $requestPath): string
             'Compare published Cutfruit, Kuma and OAKA protein gummy labels by protein, fiber, sugar and serving size. See Velq’s planned formula and free launch waitlist.'
         );
     }
+    if ($path === '/blog/best-fiber-gummies-2026') {
+        // The published Journal uses a compressed PHP content bundle. Normalize
+        // Velq's packet size in that rendered version, not competitor servings.
+        $html = str_replace('20 g protein / 6-gummy packet', '20 g protein / 10-gummy packet', $html);
+        $html = str_replace('It also describes 6 gummies per packet', 'It also describes 10 gummies per packet', $html);
+        $html = preg_replace_callback(
+            '~<tr\\b[^>]*>\\s*<td\\b[^>]*>\\s*Velq \\(prelaunch\\)\\s*</td>[\\s\\S]*?</tr>~i',
+            static fn(array $m): string => str_replace('6 per packet', '10 per packet', $m[0]),
+            $html,
+            1
+        ) ?? $html;
+        return $html;
+    }
+
     return $html;
 }
