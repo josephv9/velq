@@ -89,8 +89,8 @@ function velq_growth_response(string $html, string $requestPath): string
     $path = preg_replace('~/index\.html$~', '', $requestPath) ?? $requestPath;
     $path = rtrim($path, '/') ?: '/';
     if ($path === '/sitemap.xml') {
-        // Update modification dates only for the three pages actually edited.
-        foreach (['/', '/products/strawberry-protein-fiber-gummies', '/blog/protein-and-fiber-gummies-buying-guide', '/blog/what-to-eat-glp1-not-hungry', '/blog/glp1-protein-snacks-without-shakes', '/blog/glp1-constipation-fiber', '/blog/maintain-muscle-glp1-low-appetite', '/blog/tired-on-glp1-food-fluids-causes'] as $page) {
+        // Report substantive page edits with accurate modification dates.
+        foreach (['/', '/products/strawberry-protein-fiber-gummies', '/blog/protein-and-fiber-gummies-buying-guide', '/blog/best-fiber-gummies-2026', '/blog/what-to-eat-glp1-not-hungry', '/blog/glp1-protein-snacks-without-shakes', '/blog/glp1-constipation-fiber', '/blog/maintain-muscle-glp1-low-appetite', '/blog/tired-on-glp1-food-fluids-causes'] as $page) {
             $url = 'https://velqnutrition.com' . $page;
             $pattern = '~(<url>\s*<loc>' . preg_quote($url, '~') . '</loc>\s*)(?:<lastmod>[^<]*</lastmod>)?~';
             $html = preg_replace_callback($pattern, static fn(array $m): string => $m[1] . '<lastmod>2026-11-11</lastmod>', $html, 1) ?? $html;
