@@ -151,13 +151,18 @@ for (const route of dispatcherRoutes) {
 const updatedSEO = new Set([
   'https://velqnutrition.com/',
   'https://velqnutrition.com/products/strawberry-protein-fiber-gummies',
-  'https://velqnutrition.com/blog/protein-and-fiber-gummies-buying-guide'
+  'https://velqnutrition.com/blog/protein-and-fiber-gummies-buying-guide',
+  'https://velqnutrition.com/blog/what-to-eat-glp1-not-hungry',
+  'https://velqnutrition.com/blog/glp1-protein-snacks-without-shakes',
+  'https://velqnutrition.com/blog/glp1-constipation-fiber',
+  'https://velqnutrition.com/blog/maintain-muscle-glp1-low-appetite',
+  'https://velqnutrition.com/blog/tired-on-glp1-food-fluids-causes'
 ]);
 for (const entry of parseSitemap(originalSitemap)) {
   const actual = entries.find(item => item.loc === entry.loc);
   assert(actual, 'Original sitemap URL lost');
   if (updatedSEO.has(entry.loc)) {
-    assert.equal(actual.lastmod, '2026-10-26', 'Modified SEO page must have the release date');
+    assert.equal(actual.lastmod, '2026-11-11', 'Modified SEO page must have the release date');
   } else if (!dispatcherRoutes.some(route => entry.loc === 'https://velqnutrition.com' + route)) {
     assert.deepEqual(actual, entry, 'Unedited sitemap entry unexpectedly changed');
   }
