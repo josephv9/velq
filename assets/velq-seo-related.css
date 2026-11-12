@@ -1,0 +1,9 @@
+/* Velq 2026-11-11: existing canonical buying and research resources. */
+.velq-seo-related{box-sizing:border-box;width:min(1100px,calc(100% - 32px));margin:clamp(28px,5vw,64px) auto;padding:clamp(20px,3vw,36px);border:1px solid #efdad5;border-radius:20px;background:#fff7f4;color:#282220}
+.velq-seo-related h2{font-size:clamp(1.35rem,2.7vw,2rem);line-height:1.2;margin:0 0 .65rem;color:inherit}
+.velq-seo-related p{font-size:1rem;line-height:1.6;max-width:68ch;margin:0 0 1rem;color:inherit}
+.velq-seo-related ul{display:grid;grid-template-columns:repeat(auto-fit,minmax(min(100%,230px),1fr));gap:12px;margin:0;padding:0;list-style:none}
+.velq-seo-related li{list-style:none;margin:0;padding:0}
+.velq-seo-related a{display:block;color:#7f2935;text-decoration:underline;text-underline-offset:3px;font-weight:600;line-height:1.45;padding:12px;background:#fff;border:1px solid #f1dfd9;border-radius:12px}
+.velq-seo-related a:hover,.velq-seo-related a:focus-visible{background:#ffebe6;outline-offset:3px}
+@media(max-width:600px){.velq-seo-related{width:calc(100% - 24px);margin:26px auto;padding:20px}.velq-seo-related ul{grid-template-columns:1fr}}
