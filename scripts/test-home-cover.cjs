@@ -33,7 +33,7 @@ const { chromium } = require(process.env.CODEX_PRIMARY_RUNTIME_NODE_MODULES
       });
       assert(m.cover?.width>0 && m.image?.width>0,'Current cover artwork missing at '+width);
       assert(m.imageSrc?.startsWith('/assets/'),'Missing first-party approved cover at '+width);
-      assert(m.heading?.includes('Strawberry Protein + Fiber'),'Product heading missing at '+width);
+      assert(m.heading?.includes('Strawberry Protein Gummies with Fiber & Caffeine'),'Product heading missing at '+width);
       assert(m.headingRect?.width>0,'Heading not visible at '+width);
       assert.equal(m.formCount,1,'Waitlist form must appear once at '+width);
       assert(m.email && m.consent,'Waitlist email or consent missing at '+width);
