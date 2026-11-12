@@ -65,4 +65,6 @@ php_value auto_prepend_file image-patch.php
   ExpiresByType text/html "access plus 0 seconds"
   ExpiresByType image/png "access plus 1 month"
   ExpiresByType image/jpeg "access plus 1 month"
+  ExpiresByType image/webp "access plus 1 month"
+  ExpiresByType image/avif "access plus 1 month"
 </IfModule>
