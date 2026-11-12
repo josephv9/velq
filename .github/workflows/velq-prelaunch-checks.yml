@@ -30,6 +30,7 @@ on:
       - 'tools/serving-comparison-calculator/**'
       - 'tools/nutrition-label-value-calculator/**'
       - 'blog/protein-gummies-with-fiber-comparison/index.html'
+      - 'blog/best-fiber-gummies-2026/index.html'
       - 'scripts/build-research-pages.py'
       - 'scripts/test-research-*.cjs'
       - 'velq-analytics.js'
