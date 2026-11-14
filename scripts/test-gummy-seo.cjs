@@ -45,10 +45,13 @@ const compare=render('/compare',asset('/compare/index.html'));
 assert(compare.includes('Protein &amp; Fiber Gummies: Serving Comparisons | Velq'),'Compare title not refined');
 assert(compare.includes('Learn how to choose protein and prebiotic fiber gummies'),'Compare contextual buyer link missing');
 assert(compare.includes('Compare protein, fiber and caffeine on published serving labels'),'Compare serving comparison link missing');
+assert(!compare.includes('Velq’s planned six-gummy packet'), 'Comparison hub has an obsolete Velq six-gummy serving');
+assert(!compare.includes('across Cutfruit, PROTEDY, Kuma, OAKA and Velq'), 'Comparison hub still promotes unverified source in active label list');
 
 const buyer=render('/blog/protein-and-fiber-gummies-buying-guide',asset('/blog/protein-and-fiber-gummies-buying-guide/index.html'));
 assert(buyer.includes('How to compare protein and fiber gummies by complete serving, protein source, sugar, caffeine and cost.'),'Buyer-guide search snippet not current');
 assert(!buyer.includes('while PROTEDY lists 8 g protein and 4 g fiber across eight gummies'), 'Unverified PROTEDY quantities returned');
+assert(!buyer.includes('prebiotic fiber in six gummies'), 'Buyer guide still claims Velq six-gummy packet');
 const labels=render('/blog/protein-gummies-with-fiber-comparison',asset('/blog/protein-gummies-with-fiber-comparison/index.html'));
 assert(labels.includes('Compare published Cutfruit, Kuma and OAKA protein gummy labels'),'Updated label-comparison snippet missing');
 assert(labels.includes('Velq'), 'Velq prelaunch context missing from comparison');
