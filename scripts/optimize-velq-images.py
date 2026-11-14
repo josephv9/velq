@@ -1,6 +1,6 @@
 #!/usr/bin/env python3
 """Create responsive, visually lossless-enough WebP derivatives of approved Velq imagery.
-Keep original JPEG assets for fallback and non-web uses. No external requests.
+Keep original source files for fallback and non-web uses. No external requests.
 """
 from PIL import Image, ImageOps
 from pathlib import Path
@@ -9,6 +9,8 @@ import json
 SOURCE={
     'velq-strawberry-gummies-hero-20261015-v3':'assets/velq-strawberry-gummies-hero-20261015-v3.jpeg',
     'velq-gummies-packshot-20261015-v2':'assets/velq-gummies-packshot-20261015-v2.jpeg',
+    'velq-cover-cyan-stems-20261104':'assets/velq-cover-cyan-stems-20261104.webp',
+    'velq-gym-small-packet-20261104':'assets/velq-gym-small-packet-20261104.webp',
 }
 widths=(480,800,1200)
 stats=[]
@@ -32,7 +34,7 @@ for name,source in SOURCE.items():
             with Image.open(out) as chk:
                 chk.verify()
             size=out.stat().st_size
-            assert size<original_bytes, f'Not smaller than original JPEG: {out} {size}/{original_bytes}'
+            assert size<original_bytes, f'Not smaller than source asset: {out} {size}/{original_bytes}'
             stats.append(dict(file=str(out),bytes=size,original_bytes=original_bytes,width=w,height=h,savings_percent=round(100*(1-size/original_bytes),1)))
     print('ORIGINAL',json.dumps(dict(source=str(source),size=original_bytes,dimensions=original_dims)))
 for row in stats:
