@@ -36,7 +36,7 @@ function velq_home_cover(string $html, string $path): string {
     $artwork = 'https://cdn.shopify.com/s/files/1/0723/8372/5647/files/velq-home-cover-strawberry-20261103.jpg?v=1793766288';
     $hero = '<section class="hero lifestyle-cover velq-approved-cover" aria-labelledby="hero-title">'
         . '<div class="cover-photo">'
-        . '<div class="cover-shipping" role="note" aria-label="Free shipping on orders over $50"><div class="cover-shipping-track" aria-hidden="true"><span>FREE SHIPPING ON ORDERS OVER $50 &nbsp; • &nbsp; FREE SHIPPING ON ORDERS OVER $50 &nbsp; • &nbsp; </span><span>FREE SHIPPING ON ORDERS OVER $50 &nbsp; • &nbsp; FREE SHIPPING ON ORDERS OVER $50 &nbsp; • &nbsp; </span></div></div>'
+        . '<div class="cover-shipping" role="note" aria-label="Velq strawberry gummies coming soon"><div class="cover-shipping-track" aria-hidden="true"><span>STRAWBERRY GUMMIES COMING SOON &nbsp; • &nbsp; STRAWBERRY GUMMIES COMING SOON &nbsp; • &nbsp; </span><span>STRAWBERRY GUMMIES COMING SOON &nbsp; • &nbsp; STRAWBERRY GUMMIES COMING SOON &nbsp; • &nbsp; </span></div></div>'
         . '<nav class="cover-navigation" aria-label="Main navigation">'
         . '<button class="cover-menu" id="menu-toggle" aria-label="Open menu" aria-expanded="false" aria-controls="mobile-nav"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M4 6h16M4 12h16M4 18h16"/></svg></button>'
         . '<a class="cover-home" href="/" aria-label="Velq home"></a>'
