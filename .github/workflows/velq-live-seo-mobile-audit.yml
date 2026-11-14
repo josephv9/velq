@@ -158,6 +158,10 @@ jobs:
               hero_type=hero_response.headers.get('Content-Type','')
               hero_body=hero_response.read(350000)
           assert hero_status==200 and 'image/webp' in hero_type and len(hero_body)>10000
+          hero_tag=re.search(r'<img[^>]*class="approved-cover-art"[^>]*>',html)
+          preload_tag=re.search(r'<link[^>]*data-velq-responsive-preload[^>]*>',html)
+          print('SERVER_HERO_TAG',(hero_tag.group(0) if hero_tag else 'NOT_FOUND')[:1200])
+          print('SERVER_PRELOAD_TAG',(preload_tag.group(0) if preload_tag else 'NOT_FOUND')[:1200])
           content={'has_current_hero':current in html,
                    'has_priority':bool(re.search(r'<img[^>]*class="approved-cover-art"[^>]*fetchpriority="high"',html)),
                    'has_mobile_srcset':bool(re.search(r'<img[^>]*class="approved-cover-art"[^>]*srcset="[^"]*velq-cover-cyan-stems-20261104-480\\.webp 480w',html)),
