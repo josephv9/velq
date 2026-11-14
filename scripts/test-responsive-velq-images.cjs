@@ -34,7 +34,13 @@ assert(hero && hero.includes('src="'+current+'"'),'Current approved homepage Web
 assert(hero.includes('fetchpriority="high"'),'Approved hero lost its high load priority');
 const preloads=(home.match(/<link\b[^>]*data-velq-responsive-preload[^>]*>/gi)||[]);
 assert.equal(preloads.length,1,'One current hero preload is required');
-assert(preloads[0].includes('href="'+current+'"'),'Preload does not match the visible approved WebP');
+assert(preloads[0].includes('href="'+current.replace('.webp','-800.webp')+'"'),'Preload should use the optimized 800px fallback');
+assert(hero.includes(current.replace('.webp','-480.webp')+' 480w'),'Hero must provide a 480px mobile source');
+assert(hero.includes(current.replace('.webp','-800.webp')+' 800w'),'Hero must provide an 800px responsive source');
+const srcset=(hero.match(/srcset="([^"]+)"/)||[])[1];
+const sizes=(hero.match(/sizes="([^"]+)"/)||[])[1];
+assert(srcset && preloads[0].includes('imagesrcset="'+srcset+'"'),'Preload must match hero srcset');
+assert(sizes && preloads[0].includes('imagesizes="'+sizes+'"'),'Preload must match hero sizes');
 assert(home.includes('id="waitlist-form"'),'Current homepage waitlist form missing');
 const unrelatedInput=Buffer.from('<html><head></head><body><img src="/assets/unrelated.png" width="20" height="20"></body></html>').toString('base64');
 const unrelated=php('$_SERVER["REQUEST_URI"]="/compare";require "image-patch.php";echo base64_decode("'+unrelatedInput+'");');
