@@ -140,9 +140,19 @@ jobs:
           assert len(checks)==6 and all(x.get('http')==200 for x in checks),'Responsive image assets are not all live.'
           req=urllib.request.Request(base+'/',headers={'Cache-Control':'no-cache'})
           with urllib.request.urlopen(req,timeout=25) as res: html=res.read(250000).decode('utf-8','replace')
-          # The November homepage uses one approved 208 KB WebP hero with a matching
-          # preload. Previous responsive assets remain live for older page layouts.
+          # The approved homepage hero now has mobile-width variants and matching
+          # preload srcset. Previous responsive assets remain live for older layouts.
           current='/assets/velq-cover-cyan-stems-20261104.webp'
+          for relative in ['/assets/velq-cover-cyan-stems-20261104-480.webp',
+                           '/assets/velq-cover-cyan-stems-20261104-800.webp',
+                           '/assets/velq-gym-small-packet-20261104-480.webp',
+                           '/assets/velq-gym-small-packet-20261104-800.webp']:
+              req=urllib.request.Request(base+relative,headers={'Cache-Control':'no-cache'})
+              with urllib.request.urlopen(req,timeout=25) as response:
+                  content_type=response.headers.get('Content-Type','')
+                  size=len(response.read(200000))
+                  assert response.status==200 and 'image/webp' in content_type and size>10000,(relative,response.status,content_type,size)
+                  print('RESPONSIVE_ASSET',json.dumps({'asset':relative,'bytes':size,'status':response.status}))
           with urllib.request.urlopen(base+current,timeout=25) as hero_response:
               hero_status=hero_response.status
               hero_type=hero_response.headers.get('Content-Type','')
@@ -150,9 +160,10 @@ jobs:
           assert hero_status==200 and 'image/webp' in hero_type and len(hero_body)>10000
           content={'has_current_hero':current in html,
                    'has_priority':bool(re.search(r'<img[^>]*class="approved-cover-art"[^>]*fetchpriority="high"',html)),
-                   'preload_matches_current_hero':bool(re.search(r'<link[^>]*data-velq-responsive-preload[^>]*href="'+re.escape(current)+r'"',html))}
+                   'has_mobile_srcset':bool(re.search(r'<img[^>]*class="approved-cover-art"[^>]*srcset="[^"]*velq-cover-cyan-stems-20261104-480\\.webp 480w',html)),
+                   'preload_matches_responsive_hero':bool(re.search(r'<link[^>]*data-velq-responsive-preload[^>]*href="/assets/velq-cover-cyan-stems-20261104-800\\.webp"[^>]*imagesrcset="[^"]*velq-cover-cyan-stems-20261104-480\\.webp 480w',html))}
           print('HOMEPAGE_IMAGE_MARKUP',json.dumps(content))
-          assert all(content.values()),'Rendered homepage hero or matching preload is missing.'
+          assert all(content.values()),'Rendered homepage hero or responsive preload is missing.'
           PY
 
       - name: Install Lighthouse
