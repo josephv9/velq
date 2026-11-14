@@ -164,8 +164,8 @@ jobs:
           print('SERVER_PRELOAD_TAG',(preload_tag.group(0) if preload_tag else 'NOT_FOUND')[:1200])
           content={'has_current_hero':current in html,
                    'has_priority':bool(re.search(r'<img[^>]*class="approved-cover-art"[^>]*fetchpriority="high"',html)),
-                   'has_mobile_srcset':bool(re.search(r'<img[^>]*class="approved-cover-art"[^>]*srcset="[^"]*velq-cover-cyan-stems-20261104-480\\.webp 480w',html)),
-                   'preload_matches_responsive_hero':bool(re.search(r'<link[^>]*data-velq-responsive-preload[^>]*href="/assets/velq-cover-cyan-stems-20261104-800\\.webp"[^>]*imagesrcset="[^"]*velq-cover-cyan-stems-20261104-480\\.webp 480w',html))}
+                   'has_mobile_srcset':bool(re.search(r'<img[^>]*class="approved-cover-art"[^>]*srcset="[^"]*velq-cover-cyan-stems-20261104-480\.webp 480w',html)),
+                   'preload_matches_responsive_hero':bool(re.search(r'<link[^>]*data-velq-responsive-preload[^>]*href="/assets/velq-cover-cyan-stems-20261104-800\.webp"[^>]*imagesrcset="[^"]*velq-cover-cyan-stems-20261104-480\.webp 480w',html))}
           print('HOMEPAGE_IMAGE_MARKUP',json.dumps(content))
           assert all(content.values()),'Rendered homepage hero or responsive preload is missing.'
           PY
