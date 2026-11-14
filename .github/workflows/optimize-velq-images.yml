@@ -35,7 +35,7 @@ jobs:
           set -euo pipefail
           git config user.name 'github-actions[bot]'
           git config user.email '41898282+github-actions[bot]@users.noreply.github.com'
-          git add assets/velq-strawberry-gummies-hero-20261015-v3-*.webp assets/velq-gummies-packshot-20261015-v2-*.webp
+          git add assets/velq-strawberry-gummies-hero-20261015-v3-*.webp assets/velq-gummies-packshot-20261015-v2-*.webp assets/velq-cover-cyan-stems-20261104-*.webp assets/velq-gym-small-packet-20261104-*.webp
           if git diff --cached --quiet; then
             echo 'No new changes.'
             exit 0
