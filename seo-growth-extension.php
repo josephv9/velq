@@ -84,6 +84,37 @@ function velq_growth_editorial_link(string $html, string $path): string
     return preg_replace('~</main>~i', $note . '</main>', $html, 1) ?? $html;
 }
 
+/** Deliver source-sized WebP assets to narrow screens without changing hero art or waitlist code. */
+function velq_growth_responsive_home_media(string $html): string
+{
+    $hero = '/assets/velq-cover-cyan-stems-20261104';
+    $gym = '/assets/velq-gym-small-packet-20261104';
+    $heroSet = $hero . '-480.webp 480w, ' . $hero . '-800.webp 800w, ' . $hero . '.webp 1122w';
+    $gymSet = $gym . '-480.webp 480w, ' . $gym . '-800.webp 800w, '
+        . $gym . '-1200.webp 1200w, ' . $gym . '.webp 1536w';
+    $heroSizes = '(max-width: 700px) 100vw, (max-width: 1200px) 50vw, 560px';
+    $gymSizes = '(max-width: 700px) 90vw, 360px';
+    $html = preg_replace_callback('~<img\\b[^>]*>~i', static function (array $m) use ($hero, $gym, $heroSet, $gymSet, $heroSizes, $gymSizes): string {
+        $tag = $m[0];
+        if (preg_match('~\\ssrcset\\s*=~i', $tag)) return $tag;
+        if (str_contains($tag, 'src="' . $hero . '.webp"') && str_contains($tag, 'approved-cover-art')) {
+            return preg_replace('~\\s*(/?>)$~', ' srcset="' . $heroSet . '" sizes="' . $heroSizes . '"$1', $tag, 1) ?? $tag;
+        }
+        if (str_contains($tag, 'src="' . $gym . '.webp"')) {
+            return preg_replace('~\\s*(/?>)$~', ' srcset="' . $gymSet . '" sizes="' . $gymSizes . '"$1', $tag, 1) ?? $tag;
+        }
+        return $tag;
+    }, $html) ?? $html;
+
+    if (!str_contains($html, 'src="' . $hero . '.webp"')) return $html;
+    $preload = '<link data-velq-responsive-preload rel="preload" as="image" href="' . $hero . '-800.webp"'
+        . ' imagesrcset="' . $heroSet . '" imagesizes="' . $heroSizes . '" fetchpriority="high">';
+    if (preg_match('~<link\\b[^>]*data-velq-responsive-preload[^>]*>~i', $html)) {
+        return preg_replace('~<link\\b[^>]*data-velq-responsive-preload[^>]*>~i', $preload, $html, 1) ?? $html;
+    }
+    return preg_replace('~</head>~i', $preload . '</head>', $html, 1) ?? $html;
+}
+
 function velq_growth_response(string $html, string $requestPath): string
 {
     $path = preg_replace('~/index\.html$~', '', $requestPath) ?? $requestPath;
@@ -122,6 +153,10 @@ function velq_growth_response(string $html, string $requestPath): string
     }
     if ($path === '/') {
         $html = str_replace('Strawberry Protein + Fiber &amp; Energy Gummies', 'Strawberry Protein Gummies with Fiber &amp; Caffeine', $html);
+        // Avoid promising shipping for a product not yet available for ordering.
+        $html = str_replace('FREE SHIPPING ON ORDERS OVER $50', 'VELQ GUMMIES COMING SOON', $html);
+        $html = str_replace('aria-label="Free shipping on orders over $50"', 'aria-label="Velq gummies coming soon"', $html);
+        $html = velq_growth_responsive_home_media($html);
         if (!str_contains($html, 'rel="preconnect" href="https://cdn.shopify.com"')) {
             $html = preg_replace('~</head>~i', '<link rel="preconnect" href="https://cdn.shopify.com" crossorigin></head>', $html, 1) ?? $html;
         }
