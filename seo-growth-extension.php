@@ -100,6 +100,12 @@ function velq_growth_response(string $html, string $requestPath): string
         if (str_contains($html, '</urlset>') && !str_contains($html, '<loc>' . $wholesaleUrl . '</loc>')) {
             $html = str_replace('</urlset>', '<url><loc>' . $wholesaleUrl . '</loc><lastmod>2026-11-06</lastmod></url>' . "\n" . '</urlset>', $html);
         }
+        // Only these pages are substantively updated in the November 14 release.
+        foreach (['/', '/compare', '/blog/protein-and-fiber-gummies-buying-guide'] as $updatedPage) {
+            $loc = 'https://velqnutrition.com' . $updatedPage;
+            $pattern = '~(<url>\\s*<loc>' . preg_quote($loc, '~') . '</loc>\\s*)(?:<lastmod>[^<]*</lastmod>)?~';
+            $html = preg_replace_callback($pattern, static fn(array $m): string => $m[1] . '<lastmod>2026-11-14</lastmod>', $html, 1) ?? $html;
+        }
         return $html;
     }
     if (stripos($html, '<html') === false) return $html;
@@ -134,6 +140,21 @@ function velq_growth_response(string $html, string $requestPath): string
         );
     }
 
+    if ($path === '/compare') {
+        // Normalize the current ten-gummy format only where the legacy
+        // comparison hub describes Velq; competitor labels are unaffected.
+        $html = str_replace(
+            ['Velq’s planned six-gummy packet', "Velq's planned six-gummy packet"],
+            ['Velq’s planned 10-gummy packet', "Velq's planned 10-gummy packet"],
+            $html
+        );
+        $html = str_replace(
+            'across Cutfruit, PROTEDY, Kuma, OAKA and Velq',
+            'across Cutfruit, Kuma, OAKA and prelaunch Velq',
+            $html
+        );
+        return $html;
+    }
     if ($path === '/blog/protein-and-fiber-gummies-buying-guide') {
         // The newer October 20 label review could not reverify PROTEDY; do not present outdated figures as current.
         $html = str_replace(
@@ -141,6 +162,7 @@ function velq_growth_response(string $html, string $requestPath): string
             'while Kuma’s published Berry Fusion label lists 20 g protein and 3.5 g dietary fiber across ten gummies',
             $html
         );
+        $html = str_replace("Velq's prelaunch target is 20 g protein plus 10 g prebiotic fiber in six gummies", "Velq's prelaunch target is 20 g protein plus 10 g prebiotic fiber in 10 gummies", $html);
         $html = str_replace('Compare Cutfruit, PROTEDY, Kuma and Velq', 'Compare Cutfruit, Kuma, OAKA and prelaunch Velq', $html);
         $html = str_replace('Updated October 14, 2026', 'Updated October 26, 2026', $html);
         $html = str_replace('Get early access to Velq ↗', 'Get the Velq launch details ↗', $html);
