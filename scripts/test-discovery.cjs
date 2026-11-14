@@ -186,8 +186,11 @@ for (const [route, record] of Object.entries(pages)) {
     assert.equal(afterAttrs.src, '/assets/velq-cover-cyan-stems-20261104.webp', 'Approved cover asset changed');
     const preload = (head(output).match(/<link\b[^>]*>/gi) || []).find(tag => tag.includes('data-velq-responsive-preload'));
     assert(preload, 'Homepage hero preload missing');
-    assert.equal(attrs(preload).href, afterAttrs.src, 'Hero preload does not match displayed cover');
-    assert.equal(attrs(preload).fetchpriority, 'high');
+    const preloadAttrs = attrs(preload);
+    assert.equal(preloadAttrs.href, '/assets/velq-cover-cyan-stems-20261104-800.webp', 'Hero preload should use optimized mobile fallback');
+    assert.equal(preloadAttrs.imagesrcset, afterAttrs.srcset, 'Hero preload must match the displayed srcset');
+    assert.equal(preloadAttrs.imagesizes, afterAttrs.sizes, 'Hero preload must match the displayed sizes');
+    assert.equal(preloadAttrs.fetchpriority, 'high');
     expectedBody = expectedBody.replace(before, before.replace(/\bwidth="[^"]*"/, 'width="1122"').replace(/\bheight="[^"]*"/, 'height="1402"'));
   }
   assert.equal(body(output), expectedBody, `${route}: visible content changed beyond the corrected hero dimensions`);
