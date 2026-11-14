@@ -22,8 +22,9 @@ function velq_discovery_images(): array
     };
     $page = static fn(array $primary, array $visible = []): array => ['primary' => $primary, 'images' => $visible ?: [$primary['url']]];
 
-    $hero = $image('/assets/velq-lifestyle-cover-20261020-1200.webp', 1200, 1499,
-        'Woman holding a red and white Velq strawberry protein and fiber gummy packet by the coast. Development preview; final details may change.');
+    // The currently displayed, source-controlled homepage hero is 1122 by 1402.
+    $hero = $image('/assets/velq-cover-cyan-stems-20261104.webp', 1122, 1402,
+        'Smiling woman holding a Velq strawberry protein and fiber gummy packet. Approved homepage lifestyle artwork.');
     $packshot = $image('/assets/velq-gummies-packshot-20261015-v2-1200.webp', 1200, 1200,
         'Development preview of Velq strawberry gummy packaging. Final packaging and nutrition may change.');
     $legacy = $image($cdn . 'files/velq-red-white-strawberry-final-hero-oct-2026.jpg?v=1791934937', 1254, 1254,
@@ -38,10 +39,7 @@ function velq_discovery_images(): array
         'Fictional labels show package price divided by servings, then cost normalized to 10 grams protein or 5 grams fiber.');
 
     $pages = [
-        '/' => $page($hero, [
-            $base . '/assets/velq-lifestyle-cover-20261020-1200.webp',
-            $base . '/assets/velq-gummies-packshot-20261015-v2-1200.webp',
-        ]),
+        '/' => $page($hero, [$hero['url']]),
         '/media' => $page($packshot, [$base . '/assets/velq-gummies-packshot-20261015-v2-800.webp']),
         '/research' => $page($study, [$base . '/assets/research/gummy-serving-comparison-2026.svg']),
         '/research/gummy-serving-study-2026' => $page($study, [$base . '/assets/research/gummy-serving-comparison-2026.svg']),
