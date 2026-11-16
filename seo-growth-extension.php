@@ -311,7 +311,7 @@ function velq_growth_consumer_page(string $html, string $path): string
         $items[] = '<a href="' . htmlspecialchars($url, ENT_QUOTES, 'UTF-8') . '">' . htmlspecialchars($label, ENT_QUOTES | ENT_SUBSTITUTE, 'UTF-8') . '</a>';
     }
     $section .= implode(' · ', $items) . '</p></section>';
-    $updated = preg_replace_callback('~<h2\b~i', static fn(array $m): string => $section . $m[0], $html, 1, $count);
+    $updated = preg_replace_callback('~</h1\s*>~i', static fn(array $m): string => $m[0] . $section, $html, 1, $count);
     if (!is_string($updated) || $count !== 1) return $html;
     $html = $updated;
     if (!str_contains($html, '/assets/velq-consumer-search.css')) {
