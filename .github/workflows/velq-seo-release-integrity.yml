@@ -7,6 +7,7 @@ on:
       - 'seo-growth-extension.php'
       - 'assets/velq-consumer-search.css'
       - 'sitemap.xml'
+      - 'scripts/velq-gsc-tracker/Code.gs'
       - 'scripts/test-consumer-search.php'
       - '.github/workflows/velq-seo-release-integrity.yml'
   workflow_dispatch:
@@ -25,6 +26,10 @@ jobs:
           php -l seo-growth-extension.php
           php -l image-patch.php
           php scripts/test-consumer-search.php
+      - name: Check free Apps Script JavaScript syntax
+        run: |
+          cp scripts/velq-gsc-tracker/Code.gs /tmp/velq-tracker.js
+          node --check /tmp/velq-tracker.js
       - name: Validate canonical sitemap entries
         run: |
           python3 - <<'PY'
@@ -54,7 +59,25 @@ jobs:
             'https://velqnutrition.com/blog/protein-gummies-for-adults' \
             -o /tmp/velq-protein.html
           if ! grep -Fq 'Are protein gummies a good source of protein?' /tmp/velq-protein.html; then
-            echo 'NOT YET DEPLOYED: production consumer search section is missing'
+            echo 'NOT YET DEPLOYED: protein consumer search section is missing'
             exit 1
           fi
-          echo 'PASS: public production includes updated wholesale and consumer SEO sections'
+          curl -fsSL --retry 1 --max-time 25 \
+            'https://velqnutrition.com/blog/fiber-gummies-for-adults-guide' -o /tmp/velq-fiber.html
+          if ! grep -Fq 'What should you look for in prebiotic fiber gummies?' /tmp/velq-fiber.html; then
+            echo 'NOT YET DEPLOYED: fiber consumer search section is missing'
+            exit 1
+          fi
+          curl -fsSL --retry 1 --max-time 25 \
+            'https://velqnutrition.com/blog/caffeine-gummies-vs-coffee-whats-the-difference' -o /tmp/velq-coffee.html
+          if ! grep -Fq 'Are caffeine gummies stronger than coffee?' /tmp/velq-coffee.html; then
+            echo 'NOT YET DEPLOYED: caffeine gummy search section is missing'
+            exit 1
+          fi
+          curl -fsSL --retry 1 --max-time 25 \
+            'https://velqnutrition.com/blog/caffeine-l-theanine-vs-caffeine' -o /tmp/velq-theanine.html
+          if ! grep -Fq 'Does L-theanine make caffeine jitter-free?' /tmp/velq-theanine.html; then
+            echo 'NOT YET DEPLOYED: caffeine/L-theanine research section is missing'
+            exit 1
+          fi
+          echo 'PASS: public production includes wholesale and all four consumer SEO sections'
