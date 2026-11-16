@@ -160,6 +160,12 @@ const updatedSEO = new Set([
   'https://velqnutrition.com/blog/maintain-muscle-glp1-low-appetite',
   'https://velqnutrition.com/blog/tired-on-glp1-food-fluids-causes'
 ]);
+const november16SEO = new Set([
+  'https://velqnutrition.com/blog/protein-gummies-for-adults',
+  'https://velqnutrition.com/blog/fiber-gummies-for-adults-guide',
+  'https://velqnutrition.com/blog/caffeine-gummies-vs-coffee-whats-the-difference',
+  'https://velqnutrition.com/blog/caffeine-l-theanine-vs-caffeine'
+]);
 const november14SEO = new Set([
   'https://velqnutrition.com/',
   'https://velqnutrition.com/compare',
@@ -170,6 +176,8 @@ for (const entry of parseSitemap(originalSitemap)) {
   assert(actual, 'Original sitemap URL lost');
   if (updatedSEO.has(entry.loc)) {
     assert.equal(actual.lastmod, november14SEO.has(entry.loc) ? '2026-11-14' : '2026-11-11', 'Modified SEO page must have its actual release date');
+  } else if (november16SEO.has(entry.loc)) {
+    assert.equal(actual.lastmod, '2026-11-16', 'Updated consumer page needs current sitemap date');
   } else if (!dispatcherRoutes.some(route => entry.loc === 'https://velqnutrition.com' + route)) {
     assert.deepEqual(actual, entry, 'Unedited sitemap entry unexpectedly changed');
   }
