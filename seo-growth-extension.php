@@ -120,6 +120,18 @@ function velq_growth_response(string $html, string $requestPath): string
     $path = preg_replace('~/index\.html$~', '', $requestPath) ?? $requestPath;
     $path = rtrim($path, '/') ?: '/';
     if ($path === '/sitemap.xml') {
+        // The four consumer guides were substantively edited on November 16.
+        foreach ([
+            '/blog/protein-gummies-for-adults',
+            '/blog/fiber-gummies-for-adults-guide',
+            '/blog/caffeine-gummies-vs-coffee-whats-the-difference',
+            '/blog/caffeine-l-theanine-vs-caffeine'
+        ] as $consumerPage) {
+            $url = 'https://velqnutrition.com' . $consumerPage;
+            $pattern = '~(<url>\s*<loc>' . preg_quote($url, '~') . '</loc>\s*)(?:<lastmod>[^<]*</lastmod>)?~';
+            $html = preg_replace_callback($pattern, static fn(array $m): string => $m[1] . '<lastmod>2026-11-16</lastmod>', $html, 1) ?? $html;
+        }
+
         // Report substantive page edits with accurate modification dates.
         foreach (['/', '/products/strawberry-protein-fiber-gummies', '/blog/protein-and-fiber-gummies-buying-guide', '/blog/best-fiber-gummies-2026', '/blog/what-to-eat-glp1-not-hungry', '/blog/glp1-protein-snacks-without-shakes', '/blog/glp1-constipation-fiber', '/blog/maintain-muscle-glp1-low-appetite', '/blog/tired-on-glp1-food-fluids-causes'] as $page) {
             $url = 'https://velqnutrition.com' . $page;
