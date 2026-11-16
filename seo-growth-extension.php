@@ -129,7 +129,7 @@ function velq_growth_response(string $html, string $requestPath): string
         // Surface the canonical wholesale inquiry page in the generated sitemap.
         $wholesaleUrl = 'https://velqnutrition.com/wholesale/';
         if (str_contains($html, '</urlset>') && !str_contains($html, '<loc>' . $wholesaleUrl . '</loc>')) {
-            $html = str_replace('</urlset>', '<url><loc>' . $wholesaleUrl . '</loc><lastmod>2026-11-06</lastmod></url>' . "\n" . '</urlset>', $html);
+            $html = str_replace('</urlset>', '<url><loc>' . $wholesaleUrl . '</loc><lastmod>2026-11-16</lastmod></url>' . "\n" . '</urlset>', $html);
         }
         // Only these pages are substantively updated in the November 14 release.
         foreach (['/', '/compare', '/blog/protein-and-fiber-gummies-buying-guide'] as $updatedPage) {
