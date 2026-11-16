@@ -111,13 +111,13 @@ function refreshVelqReport(){
   try{refreshVelqGA4();}
   catch(e){
     const setup=SpreadsheetApp.getActiveSpreadsheet().getSheetByName('Setup');
-    if(setup)setup.getRange('B13').setValue('GA4 needs setup: '+String(e.message||e).slice(0,180));
+    if(setup)setup.getRange('B31').setValue('GA4 needs setup: '+String(e.message||e).slice(0,180));
     // Search Console collection should keep working even if GA4 permission fails.
   }
   try{refreshVelqIndexing();}
   catch(e){
     const setup=SpreadsheetApp.getActiveSpreadsheet().getSheetByName('Setup');
-    if(setup)setup.getRange('B14').setValue('Indexing needs setup: '+String(e.message||e).slice(0,180));
+    if(setup)setup.getRange('B32').setValue('Indexing needs setup: '+String(e.message||e).slice(0,180));
   }
   return gscResult;
 }
@@ -221,11 +221,11 @@ function refreshVelqGA4(){
     sh.getRange('B11').setValue(start+' to '+end);
     sh.getRange('B12').setValue(new Date());
     sh.getRange('B13').setValue('Connected — GA4 property '+id+'; website only');
-    setup.getRange('B13').setValue('Connected — GA4 property '+id+'; daily report');
+    setup.getRange('B31').setValue('Connected — GA4 property '+id+'; daily report');
     return 'GA4 updated through '+end;
   }catch(e){
     sh.getRange('B13').setValue('ERROR — '+String(e.message||e).slice(0,200));
-    setup.getRange('B13').setValue('GA4 ERROR — '+String(e.message||e).slice(0,200));
+    setup.getRange('B31').setValue('GA4 ERROR — '+String(e.message||e).slice(0,200));
     throw e;
   }
 }
