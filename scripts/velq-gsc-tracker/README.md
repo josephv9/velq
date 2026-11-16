@@ -11,7 +11,7 @@ This is a **free** Google Apps Script workflow. No GSC Wizard or third-party sub
 3. Delete the starter contents of `Code.gs`. Copy and paste the complete contents of [Code.gs](./Code.gs) into that editor tab.
 4. In Apps Script **Project Settings** (gear), enable **Show appsscript.json manifest file in editor**. Select the `appsscript.json` file in the editor and replace its contents with the [provided manifest](./appsscript.json).
 5. **Save**. Select `setupVelqTracker` in the function picker and click **Run**. Approve the Google sign-in prompts with the Google account that can read Search Console **and** GA4 for Velq. Approve the read-only Google Analytics scope.
-6. Return to the Google Sheet: **Setup!B10** should say `Connected — successful data refresh`, **B11** should say `Active — daily near 8 AM Pacific`, and **B13** should report GA4. The **GA4 Organic** tab shows Organic Search sessions, confirmed organic leads, and confirmed total leads for two aligned 28-day windows.
+6. Return to the Google Sheet: **Setup!B10** should say `Connected — successful data refresh`, **B11** should say `Active — daily near 8 AM Pacific`, and **B13** should report GA4. **B14** will show the seven-page Google URL Inspection status. The **GA4 Organic** tab shows Organic Search sessions, confirmed organic leads, and confirmed total leads for two aligned 28-day windows.
 7. If automatic GA4 property discovery cannot find web stream `G-F93RK1P0H5`, enter its **numeric** GA4 Property ID (not the G- measurement ID) into **Setup!B12**, then select **VELQ SEO → Refresh GA4 only**. If prompted, enable the Google Analytics Admin API and Google Analytics Data API in the Apps Script Cloud project. No paid plan is needed.
 
 ## What the script tracks
@@ -42,3 +42,7 @@ The script reads Search Console and GA4 via their native Google APIs and writes 
 - **All-channel confirmed leads** count the same `generate_lead` events regardless of channel (on the main site only).
 - **Lead / session rate** = confirmed organic leads / Organic Search sessions. These are event counts rather than deduplicated customers.
 - Google Search Console clicks/impressions and GA4 sessions can differ due to processing, cookie settings and measurement definitions. Values remain unavailable until the account owner runs Apps Script once and grants Google permissions.
+
+## Verified Google indexing (after authorization)
+
+The **Indexing** tab uses Google's official URL Inspection API, not a `site:` search guess. It inspects the homepage, consumer protein/fiber/caffeine pages, product page, and wholesale landing page once daily. Google returns the *last indexed version* rather than a live crawl; new site updates can take time to appear. `PASS` generally means indexed; `NEUTRAL` means excluded; `FAIL` means index error. Each row also records Google canonical, robots state and last crawl time. A failed/unauthorized inspection remains marked **API error (not verified)**, never mislabeled as indexed. To refresh manually, choose **VELQ SEO → Inspect Google indexing**.

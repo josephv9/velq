@@ -6,6 +6,7 @@ function onOpen(){
  SpreadsheetApp.getUi().createMenu('VELQ SEO')
  .addItem('Refresh Search Console + GA4','refreshVelqReport')
  .addItem('Refresh GA4 only','refreshVelqGA4')
+ .addItem('Inspect Google indexing','refreshVelqIndexing')
  .addItem('Set up daily refresh','setupVelqTracker').addToUi();
 }
 function setupVelqTracker(){
@@ -112,6 +113,11 @@ function refreshVelqReport(){
     const setup=SpreadsheetApp.getActiveSpreadsheet().getSheetByName('Setup');
     if(setup)setup.getRange('B13').setValue('GA4 needs setup: '+String(e.message||e).slice(0,180));
     // Search Console collection should keep working even if GA4 permission fails.
+  }
+  try{refreshVelqIndexing();}
+  catch(e){
+    const setup=SpreadsheetApp.getActiveSpreadsheet().getSheetByName('Setup');
+    if(setup)setup.getRange('B14').setValue('Indexing needs setup: '+String(e.message||e).slice(0,180));
   }
   return gscResult;
 }
@@ -222,4 +228,45 @@ function refreshVelqGA4(){
     setup.getRange('B13').setValue('GA4 ERROR — '+String(e.message||e).slice(0,200));
     throw e;
   }
+}
+
+
+// Inspect Google's indexed copy (NOT a live fetch) for high-value Velq pages.
+function refreshVelqIndexing(){
+  const ss=SpreadsheetApp.getActiveSpreadsheet();
+  let sh=ss.getSheetByName('Indexing');
+  if(!sh){
+    sh=ss.insertSheet('Indexing');
+    sh.getRange('A1:G1').setValues([[
+      'PAGE URL','INDEX STATUS','GOOGLE COVERAGE','LAST GOOGLE CRAWL',
+      'GOOGLE CANONICAL','ROBOTS STATUS','LAST INSPECTED'
+    ]]);
+    sh.setFrozenRows(1);
+  }
+  const urls=[
+    'https://velqnutrition.com/',
+    'https://velqnutrition.com/products/strawberry-protein-fiber-gummies',
+    'https://velqnutrition.com/blog/protein-gummies-for-adults',
+    'https://velqnutrition.com/blog/fiber-gummies-for-adults-guide',
+    'https://velqnutrition.com/blog/caffeine-gummies-vs-coffee-whats-the-difference',
+    'https://velqnutrition.com/blog/caffeine-l-theanine-vs-caffeine',
+    'https://velqnutrition.com/wholesale/'
+  ];
+  const checked=new Date();
+  const results=[];
+  for(const url of urls){
+    try{
+      const result=velqApi('https://searchconsole.googleapis.com/v1/urlInspection/index:inspect',{
+        inspectionUrl:url,siteUrl:SITE,languageCode:'en-US'
+      }).inspectionResult?.indexStatusResult||{};
+      const status=result.verdict==='PASS'?'Indexed (PASS)':result.verdict==='NEUTRAL'?'Excluded (NEUTRAL)':result.verdict==='FAIL'?'Index error (FAIL)':'Unknown / not inspected';
+      results.push([url,status,result.coverageState||'',result.lastCrawlTime||'',
+        result.googleCanonical||'',result.robotsTxtState||'',checked]);
+    }catch(e){
+      results.push([url,'API error (not verified)',String(e.message||e).slice(0,180),'','','',checked]);
+    }
+  }
+  fill(ss,'Indexing',results,7);
+  ss.getSheetByName('Setup').getRange('B14').setValue('Inspected '+results.length+' pages '+Utilities.formatDate(checked,TZ,'yyyy-MM-dd HH:mm'));
+  return results.map(r=>r[1]);
 }
