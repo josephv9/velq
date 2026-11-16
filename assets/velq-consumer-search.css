@@ -1,0 +1,9 @@
+/* Readable, answer-first blocks on existing buyer guides; lightweight, no JS. */
+.velq-consumer-quick{background:#fcfbf6;border:1px solid #e5e4da;border-radius:14px;padding:clamp(18px,3vw,30px);margin:24px 0 32px;max-width:100%}
+.velq-consumer-quick h2{font-size:clamp(21px,2.5vw,30px);line-height:1.2;margin:7px 0 14px}
+.velq-consumer-quick p{font-size:clamp(15px,1.5vw,17px);line-height:1.65;margin:12px 0}
+.velq-consumer-quick .velq-consumer-eyebrow{text-transform:uppercase;font-weight:800;font-size:12px;letter-spacing:.08em;color:#a3132a}
+.velq-consumer-quick .velq-consumer-disclosure{font-size:14px;color:#454545}
+.velq-consumer-quick .velq-consumer-links{font-size:14px}
+.velq-consumer-quick a{text-decoration:underline;text-underline-offset:3px}
+@media(prefers-reduced-motion:reduce){.velq-consumer-quick *{scroll-behavior:auto}}

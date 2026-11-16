@@ -142,6 +142,14 @@ function velq_growth_response(string $html, string $requestPath): string
     if (stripos($html, '<html') === false) return $html;
     $html = velq_growth_related_links($html, $path);
     $html = velq_growth_editorial_link($html, $path);
+    // Existing consumer search pages: answer-first copy and metadata.
+    if (in_array($path, [
+        '/blog/protein-gummies-for-adults',
+        '/blog/fiber-gummies-for-adults-guide',
+        '/blog/caffeine-gummies-vs-coffee-whats-the-difference',
+        '/blog/caffeine-l-theanine-vs-caffeine'
+    ], true)) return velq_growth_consumer_page($html, $path);
+
 
     // Keep the existing gummy guide canonical while linking to the product and wholesale pages.
     if ($path === '/guides' && !str_contains($html, 'href="/products/strawberry-protein-fiber-gummies"')) {
@@ -228,5 +236,86 @@ function velq_growth_response(string $html, string $requestPath): string
         return $html;
     }
 
+    return $html;
+}
+
+
+/**
+ * Answer-first buying information for the four existing consumer pages.
+ * Unlike FAQ rich-result markup, these are visible answers with clear source/
+ * commercial disclosures. Don't alter the signup form or make clinical claims.
+ */
+function velq_growth_consumer_page(string $html, string $path): string
+{
+    $pages = [
+        '/blog/protein-gummies-for-adults' => [
+            'title' => 'Protein Gummies for Adults: Serving Sizes & Labels | Velq',
+            'description' => 'How to compare protein gummies for adults by protein per full serving, source, sugar, caffeine and cost. Learn about Velq’s prelaunch protein + fiber gummies.',
+            'question' => 'Are protein gummies a good source of protein?',
+            'answer' => 'That depends on the grams of protein in the complete labeled serving and the protein source. Count all gummies required for a serving; a front-package number alone does not establish protein quality. Compare protein gummies with regular foods, shakes and bars rather than assuming they are interchangeable.',
+            'detail' => 'Velq’s development concept contains 10 strawberry gummies per packet with a proposed 20 g protein and 10 g prebiotic fiber. It also includes caffeine. The final product label and availability are not confirmed.',
+            'related' => [
+                ['/blog/protein-gummies-with-fiber-comparison', 'Compare protein gummies with fiber using manufacturer labels'],
+                ['/blog/protein-and-fiber-gummies-buying-guide', 'Read the complete protein + fiber buying guide'],
+                ['/products/strawberry-protein-fiber-gummies', 'See Velq’s prelaunch gummy packet']
+            ]
+        ],
+        '/blog/fiber-gummies-for-adults-guide' => [
+            'title' => 'Prebiotic Fiber Gummies for Adults: Label Guide | Velq',
+            'description' => 'What to look for in prebiotic fiber gummies: fiber types, full-serving grams, sugar, gradual intake and cost. Compare fiber gummy labels and Velq’s prelaunch format.',
+            'question' => 'What should you look for in prebiotic fiber gummies?',
+            'answer' => 'Check the named fiber ingredient, grams of dietary fiber per full serving, number of gummies, other ingredients and serving directions. Different fibers can behave differently, and “prebiotic” alone does not tell you the dose. Increase fiber gradually and follow product directions.',
+            'detail' => 'Velq is developing a strawberry gummy packet with a proposed 10 g prebiotic fiber, 20 g protein and caffeine. It is not a caffeine-free fiber supplement, and its final label is not yet published.',
+            'related' => [
+                ['/blog/fiber-gummies-vs-psyllium-husk', 'Compare fiber gummies and psyllium'],
+                ['/research/gummy-serving-study-2026', 'See the source-based fiber and protein gummy study'],
+                ['/blog/protein-gummies-for-adults', 'Compare protein gummy serving sizes']
+            ]
+        ],
+        '/blog/caffeine-gummies-vs-coffee-whats-the-difference' => [
+            'title' => 'Caffeine Gummies vs Coffee: Dosage & Safety | Velq',
+            'description' => 'Are caffeine gummies stronger than coffee? Compare caffeine milligrams per serving, timing, other ingredients and total daily caffeine before choosing a format.',
+            'question' => 'Are caffeine gummies stronger than coffee?',
+            'answer' => 'Not inherently. The relevant comparison is milligrams of caffeine in the complete gummy serving versus your actual coffee, which varies by size and preparation. Count caffeine from all sources and consider sleep, sensitivity, medications and age.',
+            'detail' => 'Velq’s prelaunch gummy concept lists 80 mg caffeine plus 200 mg L-theanine per 10-gummy packet, alongside protein and fiber. No product-specific energy or focus outcome has been clinically established.',
+            'related' => [
+                ['/blog/caffeine-l-theanine-vs-caffeine', 'What research says about caffeine and L-theanine'],
+                ['/blog/caffeine-gummies-vs-energy-drinks', 'Compare caffeine gummies and energy drinks'],
+                ['/products/strawberry-protein-fiber-gummies', 'Review Velq’s prelaunch formula']
+            ]
+        ],
+        '/blog/caffeine-l-theanine-vs-caffeine' => [
+            'title' => 'Caffeine + L-Theanine vs Caffeine Alone: Evidence | Velq',
+            'description' => 'Review the evidence for caffeine with L-theanine versus caffeine alone, limitations of attention studies, dose comparisons and caffeine safety considerations.',
+            'question' => 'Does L-theanine make caffeine jitter-free?',
+            'answer' => 'No benefit is guaranteed. Some small human trials found differences on specific attention tasks when caffeine and L-theanine were combined, but their results do not prove that any retail gummy prevents jitters or produces calm focus. Caffeine exposure and individual sensitivity still matter.',
+            'detail' => 'Velq’s development formula includes 80 mg caffeine and 200 mg L-theanine per proposed 10-gummy packet. The published studies discussed below did not test Velq; its finished retail label remains pending.',
+            'related' => [
+                ['/blog/caffeine-gummies-vs-coffee-whats-the-difference', 'Compare caffeine gummies and coffee'],
+                ['/blog/protein-gummies-for-adults', 'Understand protein gummy labels'],
+                ['/products/strawberry-protein-fiber-gummies', 'Explore the prelaunch Velq product']
+            ]
+        ]
+    ];
+    if (!isset($pages[$path]) || str_contains($html, 'data-velq-consumer-summary')) return $html;
+    $p = $pages[$path];
+    $html = velq_growth_snippet($html, $p['title'], $p['description']);
+    $section = '<section data-velq-consumer-summary class="velq-consumer-quick" aria-labelledby="velq-consumer-question">'
+        . '<p class="velq-consumer-eyebrow">Quick answer · Buyer checklist</p>'
+        . '<h2 id="velq-consumer-question">' . htmlspecialchars($p['question'], ENT_QUOTES | ENT_SUBSTITUTE, 'UTF-8') . '</h2>'
+        . '<p>' . htmlspecialchars($p['answer'], ENT_QUOTES | ENT_SUBSTITUTE, 'UTF-8') . '</p>'
+        . '<p class="velq-consumer-disclosure">' . htmlspecialchars($p['detail'], ENT_QUOTES | ENT_SUBSTITUTE, 'UTF-8') . ' Figures are development-stage specifications, not a verified final retail label.</p>'
+        . '<p class="velq-consumer-links"><strong>Compare and check:</strong> ';
+    $items = [];
+    foreach ($p['related'] as [$url, $label]) {
+        $items[] = '<a href="' . htmlspecialchars($url, ENT_QUOTES, 'UTF-8') . '">' . htmlspecialchars($label, ENT_QUOTES | ENT_SUBSTITUTE, 'UTF-8') . '</a>';
+    }
+    $section .= implode(' · ', $items) . '</p></section>';
+    $updated = preg_replace_callback('~<h2\b~i', static fn(array $m): string => $section . $m[0], $html, 1, $count);
+    if (!is_string($updated) || $count !== 1) return $html;
+    $html = $updated;
+    if (!str_contains($html, '/assets/velq-consumer-search.css')) {
+        $html = preg_replace('~</head>~i', '<link rel="stylesheet" href="/assets/velq-consumer-search.css"></head>', $html, 1) ?? $html;
+    }
     return $html;
 }
