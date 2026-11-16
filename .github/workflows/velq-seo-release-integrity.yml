@@ -1,0 +1,60 @@
+name: Velq SEO release integrity
+
+on:
+  push:
+    branches: [main]
+    paths:
+      - 'seo-growth-extension.php'
+      - 'assets/velq-consumer-search.css'
+      - 'sitemap.xml'
+      - 'scripts/test-consumer-search.php'
+      - '.github/workflows/velq-seo-release-integrity.yml'
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+jobs:
+  release-verification:
+    runs-on: ubuntu-latest
+    timeout-minutes: 8
+    steps:
+      - uses: actions/checkout@v4
+      - name: Check PHP syntax and new consumer render paths
+        run: |
+          php -l seo-growth-extension.php
+          php -l image-patch.php
+          php scripts/test-consumer-search.php
+      - name: Validate canonical sitemap entries
+        run: |
+          python3 - <<'PY'
+          import xml.etree.ElementTree as ET
+          tree=ET.parse('sitemap.xml')
+          ns='{http://www.sitemaps.org/schemas/sitemap/0.9}'
+          urls={x.findtext(ns+'loc'): x.findtext(ns+'lastmod') for x in tree.getroot()}
+          paths=['/wholesale/','/blog/protein-gummies-for-adults',
+                 '/blog/fiber-gummies-for-adults-guide',
+                 '/blog/caffeine-gummies-vs-coffee-whats-the-difference',
+                 '/blog/caffeine-l-theanine-vs-caffeine']
+          for path in paths:
+              url='https://velqnutrition.com'+path
+              assert urls.get(url)=='2026-11-16', f'Sitemap not updated: {url}'
+          print('PASS: five canonical, current sitemap entries')
+          PY
+      - name: Distinguish GitHub commit from Hostinger deployment
+        run: |
+          set -euo pipefail
+          curl -fsSL --retry 1 --max-time 25 -H 'Cache-Control: no-cache' \
+            'https://velqnutrition.com/wholesale/' -o /tmp/velq-wholesale.html
+          if ! grep -Fq 'Simple pricing. Clear resale math.' /tmp/velq-wholesale.html; then
+            echo 'NOT YET DEPLOYED: production wholesale page does not contain current branch pricing section'
+            exit 1
+          fi
+          curl -fsSL --retry 1 --max-time 25 \
+            'https://velqnutrition.com/blog/protein-gummies-for-adults' \
+            -o /tmp/velq-protein.html
+          if ! grep -Fq 'Are protein gummies a good source of protein?' /tmp/velq-protein.html; then
+            echo 'NOT YET DEPLOYED: production consumer search section is missing'
+            exit 1
+          fi
+          echo 'PASS: public production includes updated wholesale and consumer SEO sections'
