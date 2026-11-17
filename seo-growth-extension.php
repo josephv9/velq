@@ -141,8 +141,11 @@ function velq_growth_response(string $html, string $requestPath): string
         // Include the current, indexable wholesale inquiry page in the sitemap.
         $wholesaleUrl = 'https://velqnutrition.com/wholesale/';
         if (str_contains($html, '</urlset>') && !str_contains($html, '<loc>' . $wholesaleUrl . '</loc>')) {
-            $html = str_replace('</urlset>', '<url><loc>' . $wholesaleUrl . '</loc><lastmod>2026-11-16</lastmod></url>' . "\n" . '</urlset>', $html);
+            $html = str_replace('</urlset>', '<url><loc>' . $wholesaleUrl . '</loc><lastmod>2026-11-17</lastmod></url>' . "\n" . '</urlset>', $html);
         }
+        // Keep the wholesale last-modified date accurate when earlier filters generated the URL.
+        $wholesalePattern = '~(<url>\\s*<loc>' . preg_quote($wholesaleUrl, '~') . '</loc>\\s*)(?:<lastmod>[^<]*</lastmod>)?~';
+        $html = preg_replace_callback($wholesalePattern, static fn(array $m): string => $m[1] . '<lastmod>2026-11-17</lastmod>', $html, 1) ?? $html;
         // Only these pages are substantively updated in the November 14 release.
         foreach (['/', '/compare', '/blog/protein-and-fiber-gummies-buying-guide'] as $updatedPage) {
             $loc = 'https://velqnutrition.com' . $updatedPage;
