@@ -5,6 +5,9 @@ on:
     branches: [main]
     paths:
       - 'seo-growth-extension.php'
+      - '.htaccess'
+      - 'wholesale/**'
+      - 'assets/velq-wholesale.css'
       - 'assets/velq-consumer-search.css'
       - 'sitemap.xml'
       - 'scripts/velq-gsc-tracker/Code.gs'
@@ -26,6 +29,24 @@ jobs:
           php -l seo-growth-extension.php
           php -l image-patch.php
           php scripts/test-consumer-search.php
+      - name: Verify wholesale page and buyer sheet are quote-only
+        run: |
+          node - <<'NODE'
+          const fs = require('node:fs'), assert = require('node:assert/strict');
+          for (const file of ['wholesale/index.html','wholesale/buyer-sheet.html']) {
+            const html = fs.readFileSync(file,'utf8');
+            assert(!/\\$\\s*\\d/.test(html), file + ' exposes dollar amounts');
+            assert(!/gross profit|volume discount|resale math/i.test(html), file + ' exposes resale figures');
+            assert(html.includes('mailto:support@velqnutrition.com'), file + ' has no direct contact');
+          }
+          const page = fs.readFileSync('wholesale/index.html','utf8');
+          assert(page.includes('id="wholesale-inquiry"'), 'Wholesale inquiry form missing');
+          assert(!page.includes('id="pricing"'), 'Retired price section remains');
+          const rewrites = fs.readFileSync('.htaccess','utf8');
+          assert(rewrites.includes('velq-wholesale-buyer-sheet\\.pdf$ - [G,L,NC]'), 'Old price PDF not blocked');
+          assert(!fs.existsSync('assets/velq-wholesale-buyer-sheet.pdf'), 'Old priced PDF present');
+          console.log('PASS: prices hidden; direct contact and inquiry form remain');
+          NODE
       - name: Check free Apps Script JavaScript syntax
         run: |
           cp scripts/velq-gsc-tracker/Code.gs /tmp/velq-tracker.js
@@ -43,7 +64,8 @@ jobs:
                  '/blog/caffeine-l-theanine-vs-caffeine']
           for path in paths:
               url='https://velqnutrition.com'+path
-              assert urls.get(url)=='2026-11-16', f'Sitemap not updated: {url}'
+              date='2026-11-17' if path=='/wholesale/' else '2026-11-16'
+              assert urls.get(url)==date, f'Sitemap not updated: {url}'
           print('PASS: five canonical, current sitemap entries')
           PY
       - name: Distinguish GitHub commit from Hostinger deployment
@@ -51,8 +73,18 @@ jobs:
           set -euo pipefail
           curl -fsSL --retry 1 --max-time 25 -H 'Cache-Control: no-cache' \
             'https://velqnutrition.com/wholesale/' -o /tmp/velq-wholesale.html
-          if ! grep -Fq 'Simple pricing. Clear resale math.' /tmp/velq-wholesale.html; then
-            echo 'NOT YET DEPLOYED: production wholesale page does not contain current branch pricing section'
+          if ! grep -Fq 'Contact us for wholesale pricing' /tmp/velq-wholesale.html; then
+            echo 'NOT YET DEPLOYED: public wholesale contact-only page missing'
+            exit 1
+          fi
+          if grep -Eq '\\$[[:space:]]*[0-9]' /tmp/velq-wholesale.html; then
+            echo 'FAIL: wholesale prices are publicly visible'
+            exit 1
+          fi
+          curl -fsSL --retry 1 --max-time 25 -H 'Cache-Control: no-cache' \\
+            'https://velqnutrition.com/wholesale/buyer-sheet.html' -o /tmp/velq-wholesale-sheet.html
+          if grep -Eq '\\$[[:space:]]*[0-9]' /tmp/velq-wholesale-sheet.html; then
+            echo 'FAIL: archived wholesale sheet still shows prices'
             exit 1
           fi
           curl -fsSL --retry 1 --max-time 25 \
