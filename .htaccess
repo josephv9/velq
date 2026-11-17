@@ -14,6 +14,9 @@ php_value auto_prepend_file image-patch.php
   # Redirect explicit guide index alias to its single canonical URL.
   RewriteRule ^guides/index\.html$ /guides [R=301,L,NE,NC]
 
+  # Block the obsolete public wholesale price-list PDF, including older host copies.
+  RewriteRule ^assets/velq-wholesale-buyer-sheet\.pdf$ - [G,L,NC]
+
   # A prelaunch product detail page with the same confirmed waitlist journey.
   RewriteRule ^products/strawberry-protein-fiber-gummies(?:/|/index\.html)?$ conversion-content.php [END]
 
