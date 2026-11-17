@@ -1,0 +1,50 @@
+name: Velq QR offer checks
+
+on:
+  pull_request:
+    paths:
+      - 'claim/**'
+      - 'claim-api.php'
+      - '.htaccess'
+      - '.github/workflows/velq-qr-offer.yml'
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+jobs:
+  static-validation:
+    runs-on: ubuntu-latest
+    timeout-minutes: 6
+    steps:
+      - uses: actions/checkout@v4
+      - name: PHP syntax validation
+        run: php -l claim-api.php
+      - name: JavaScript syntax validation
+        run: node --check claim/claim.js
+      - name: Confirm server-side privacy boundaries
+        run: |
+          python3 - <<'PY'
+          from pathlib import Path
+          php = Path('claim-api.php').read_text()
+          html = Path('claim/index.html').read_text()
+          js = Path('claim/claim.js').read_text()
+          ht = Path('.htaccess').read_text()
+          required = [
+              'BEGIN IMMEDIATE', 'email_hash TEXT PRIMARY KEY',
+              'usageLimit', 'appliesOncePerCustomer', 'VELQ_QR_ENABLED',
+              'profile-subscription-bulk-create-jobs',
+              'velq_qr_discount_code',
+          ]
+          for fragment in required:
+              assert fragment in php, f"Missing critical safeguard: {fragment}"
+          assert "name=\"consent\"" in html and "type=\"checkbox\"" in html
+          assert "fetch('/api/claim'" in js
+          assert 'RewriteRule ^api/claim/?$ claim-api.php [END]' in ht
+          assert 'RewriteRule ^claim(?:/|/index\\.html)?$ claim/index.html [END]' in ht
+          assert 'localStorage.setItem' not in js
+          assert 'sessionStorage.setItem' not in js
+          assert 'VELQ_QR_SHOPIFY_TOKEN' not in html
+          assert 'VELQ_QR_KLAVIYO_TOKEN' not in html
+          print('PASS: QR routing, consent, dedup, discount limits and privacy checks')
+          PY
