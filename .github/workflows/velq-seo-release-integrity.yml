@@ -35,7 +35,7 @@ jobs:
           const fs = require('node:fs'), assert = require('node:assert/strict');
           for (const file of ['wholesale/index.html','wholesale/buyer-sheet.html']) {
             const html = fs.readFileSync(file,'utf8');
-            assert(!/\\$\\s*\\d/.test(html), file + ' exposes dollar amounts');
+            assert(!/\$\s*\d/.test(html), file + ' exposes dollar amounts');
             assert(!/gross profit|volume discount|resale math/i.test(html), file + ' exposes resale figures');
             assert(html.includes('mailto:support@velqnutrition.com'), file + ' has no direct contact');
           }
@@ -77,14 +77,19 @@ jobs:
             echo 'NOT YET DEPLOYED: public wholesale contact-only page missing'
             exit 1
           fi
-          if grep -Eq '\\$[[:space:]]*[0-9]' /tmp/velq-wholesale.html; then
+          if grep -Eq '\$[[:space:]]*[0-9]' /tmp/velq-wholesale.html; then
             echo 'FAIL: wholesale prices are publicly visible'
             exit 1
           fi
-          curl -fsSL --retry 1 --max-time 25 -H 'Cache-Control: no-cache' \\
-            'https://velqnutrition.com/wholesale/buyer-sheet.html' -o /tmp/velq-wholesale-sheet.html
-          if grep -Eq '\\$[[:space:]]*[0-9]' /tmp/velq-wholesale-sheet.html; then
-            echo 'FAIL: archived wholesale sheet still shows prices'
+          # A retired buyer-sheet URL may be 404/410. If publicly accessible, it must show no prices.
+          sheet_status=$(curl -sSL --retry 1 --max-time 25 -o /tmp/velq-wholesale-sheet.html -w '%{http_code}' 'https://velqnutrition.com/wholesale/buyer-sheet.html' || true)
+          if [ "$sheet_status" = "200" ]; then
+            if grep -Eq '\$[[:space:]]*[0-9]' /tmp/velq-wholesale-sheet.html; then
+              echo 'FAIL: public wholesale buyer sheet still shows prices'
+              exit 1
+            fi
+          elif [ "$sheet_status" != "404" ] && [ "$sheet_status" != "410" ] && [ "$sheet_status" != "403" ]; then
+            echo "CHECK INCONCLUSIVE: archived buyer sheet returned HTTP $sheet_status"
             exit 1
           fi
           curl -fsSL --retry 1 --max-time 25 \
