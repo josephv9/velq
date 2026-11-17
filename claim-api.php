@@ -31,7 +31,8 @@ function qr_origin_ok(array $server): bool {
         return is_array($parts) && ($parts['scheme'] ?? '') === 'https'
             && in_array(strtolower((string) ($parts['host'] ?? '')),
                 ['velqnutrition.com', 'www.velqnutrition.com'], true)
-            && !isset($parts['port'], $parts['user'], $parts['pass']);
+            && !isset($parts['port']) && !isset($parts['user'])
+            && !isset($parts['pass']);
     };
     $origin = trim((string) ($server['HTTP_ORIGIN'] ?? ''));
     if ($origin !== '') return $valid($origin);
@@ -147,7 +148,8 @@ if (!is_array($body)) qr_reply(400, 'error', 'Invalid request.');
 // Honeypot: don't reveal bot detection.
 if (!empty($body['company'])) qr_reply(200, 'processing', 'Check your inbox.');
 if (($body['consent'] ?? null) !== true) qr_reply(400, 'error', 'Email consent is required.');
-$email = strtolower(trim((string) ($body['email'] ?? '')));
+if (!is_string($body['email'] ?? null)) qr_reply(400, 'error', 'Enter a valid email address.');
+$email = strtolower(trim($body['email']));
 if (strlen($email) > 100 || !filter_var($email, FILTER_VALIDATE_EMAIL)) {
     qr_reply(400, 'error', 'Enter a valid email address.');
 }
