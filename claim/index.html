@@ -39,8 +39,8 @@
         <input id="claim-email" name="email" type="email" placeholder="you@example.com" maxlength="100" autocomplete="email" inputmode="email" autocapitalize="none" spellcheck="false" required aria-describedby="claim-message">
         <div class="honeypot" aria-hidden="true"><label>Company<input name="company" type="text" tabindex="-1" autocomplete="off"></label></div>
         <label class="consent"><input id="claim-consent" name="consent" type="checkbox" required><span>I agree to receive emails from Velq about this offer and its products. I can unsubscribe at any time.</span></label>
-        <button id="claim-button" class="claim-button" type="submit">CLAIM MY 10% OFF <span aria-hidden="true">↗</span></button>
-        <p id="claim-message" class="feedback" role="status" aria-live="polite" aria-atomic="true"></p>
+        <button id="claim-button" class="claim-button" type="submit" disabled>CLAIM MY 10% OFF <span aria-hidden="true">↗</span></button>
+        <p id="claim-message" class="feedback" role="status" aria-live="polite" aria-atomic="true" data-state="pending">The 10% claim is being prepared. Email signup will open when the offer is ready.</p>
       </form>
       <p class="fineprint">Discount available once per email address and redeemable once per code. Cannot be combined with other offers. Velq is preparing for launch; orders are not yet open. See our <a href="/privacy/">privacy policy</a>.</p>
     </section>
