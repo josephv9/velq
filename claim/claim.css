@@ -1,0 +1,53 @@
+*{box-sizing:border-box}
+:root{--ink:#181818;--red:#df3636;--muted:#6c6a68;--cream:#f8f7f4;--line:#e6e3de}
+html{scroll-behavior:smooth}
+body{margin:0;color:var(--ink);background:var(--cream);font-family:Inter,Arial,Helvetica,sans-serif;-webkit-font-smoothing:antialiased}
+a{color:inherit}
+.header{height:94px;padding:20px clamp(20px,5vw,84px);display:flex;align-items:center;justify-content:space-between;border-bottom:1px solid var(--line)}
+.brand{display:inline-flex;align-items:center;min-width:88px}
+.brand img{object-fit:contain;display:block;max-width:118px;height:auto}
+.header-note{font-size:11px;font-weight:800;letter-spacing:.16em}
+.main{width:min(1176px,calc(100% - 40px));margin:0 auto;display:grid;grid-template-columns:1fr 460px;gap:clamp(38px,6vw,110px);align-items:center;min-height:calc(100vh - 186px);padding:70px 0 88px}
+.intro{max-width:610px}
+.eyebrow{display:flex;align-items:center;gap:12px;color:#4b4b49;font-size:11px;letter-spacing:.17em;font-weight:800}
+.red-dot{display:inline-block;width:9px;height:9px;border-radius:50%;background:var(--red)}
+h1{font-weight:900;font-size:clamp(56px,6.65vw,99px);line-height:.96;letter-spacing:-.077em;margin:31px 0 30px}
+h1 span{color:var(--red)}
+.intro-copy{font-size:clamp(17px,1.8vw,21px);line-height:1.55;color:#55534f;max-width:490px;margin:0}
+.benefits{margin-top:44px;display:flex;align-items:center;gap:13px;flex-wrap:wrap;font-weight:800;font-size:10px;letter-spacing:.12em}
+.benefit-divider{height:16px;width:1px;background:#c7c1bb}
+.claim-card{background:white;border:1px solid var(--line);border-radius:22px;box-shadow:0 18px 50px rgba(10,10,10,.04);padding:32px clamp(22px,3.8vw,42px) 29px}
+.card-top{display:flex;justify-content:space-between;gap:12px;align-items:center;font-size:10px;font-weight:800;letter-spacing:.13em}
+.card-tag{color:var(--red);white-space:nowrap}
+.discount-row{display:flex;align-items:baseline;gap:15px;margin-top:24px}
+.discount{font-size:116px;line-height:1;font-weight:900;letter-spacing:-.09em}
+.discount span{font-size:48px;letter-spacing:-.1em;vertical-align:top;display:inline-block;margin:14px 0 0 4px}
+.discount-off{font-size:15px;letter-spacing:.22em;font-weight:900}
+h2{font-size:25px;letter-spacing:-.04em;margin:6px 0 12px}
+.card-description{color:var(--muted);font-size:14px;line-height:1.65;margin:0 0 24px}
+.field-label{display:block;font-weight:850;font-size:11px;letter-spacing:.14em;margin-bottom:9px}
+input[type=email]{width:100%;display:block;border-radius:7px;border:1px solid #d8d5d0;padding:15px 16px;background:white;color:var(--ink);font:inherit;font-size:16px;min-height:54px}
+input[type=email]:focus{outline:2px solid var(--ink);outline-offset:1px}
+input[aria-invalid=true]{border-color:#c32222}
+.consent{display:flex;gap:11px;align-items:flex-start;margin:19px 0 23px;font-size:12px;line-height:1.55;color:#55514e;cursor:pointer}
+.consent input{width:17px;height:17px;margin:2px 0 0;flex-shrink:0;accent-color:#111}
+.claim-button{display:flex;align-items:center;justify-content:space-between;background:#191919;color:white;border:1px solid #191919;border-radius:7px;width:100%;height:55px;padding:0 20px;font:inherit;font-size:12px;font-weight:850;letter-spacing:.13em;cursor:pointer;transition:background .18s,transform .18s}
+.claim-button:hover:not(:disabled){background:#d83232;border-color:#d83232;transform:translateY(-1px)}
+.claim-button:focus-visible{outline:3px solid #999;outline-offset:3px}
+.claim-button:disabled{opacity:.65;cursor:progress}
+.claim-button span{font-size:19px}
+.feedback{min-height:0;margin:12px 0 0;font-size:13px;line-height:1.5}
+.feedback:empty{display:none}
+.feedback[data-state=error]{color:#a92828}
+.feedback[data-state=success]{color:#256540;font-weight:700}
+.feedback[data-state=pending]{color:#565454}
+.fineprint{padding-top:19px;margin:22px 0 0;border-top:1px solid var(--line);color:#75716c;font-size:11px;line-height:1.65}
+.fineprint a{text-decoration:underline;text-underline-offset:3px}
+.honeypot{position:absolute!important;left:-9999px!important;width:1px;height:1px;overflow:hidden}
+.footer{border-top:1px solid var(--line);height:92px;display:flex;align-items:center;justify-content:space-between;padding:15px clamp(20px,5vw,84px);font-weight:900;font-size:10px;letter-spacing:.14em}
+.footer a{text-decoration:none}
+.footer a:hover{text-decoration:underline}
+@media(max-width:1000px){.main{grid-template-columns:1fr 440px;gap:26px}h1{font-size:clamp(52px,6.3vw,74px)}}
+@media(max-width:800px){.header{height:76px}.main{display:flex;flex-direction:column;align-items:stretch;gap:38px;padding:54px 0 76px;min-height:auto;max-width:530px}.intro{width:100%}.intro-copy{max-width:490px}.benefits{margin-top:23px}.claim-card{width:100%}h1{font-size:clamp(57px,10vw,78px);margin:24px 0}.footer{height:80px}}
+@media(max-width:440px){.header-note{font-size:9px;letter-spacing:.08em}.brand img{max-width:98px}.main{width:calc(100% - 30px);gap:30px;padding:39px 0 55px}h1{font-size:clamp(53px,12.3vw,67px)}.intro-copy{font-size:17px}.benefits{font-size:9px;gap:9px}.claim-card{border-radius:16px;padding:25px 20px}.discount{font-size:98px}.discount span{font-size:39px}.discount-off{font-size:13px}.card-description{font-size:13px}.footer{padding-inline:16px}.footer span{font-size:9px}}
+@media(prefers-reduced-motion:reduce){*{scroll-behavior:auto!important;transition:none!important}}
