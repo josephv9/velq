@@ -21,6 +21,25 @@
     message.textContent = text;
     message.dataset.state = state;
   };
+  // A live claim button is only shown after the server confirms activation.
+  // Until then, the page is a safe QR landing page that collects no emails.
+  const checkAvailability = async () => {
+    try {
+      const response = await fetch('/api/claim', {
+        method: 'GET', credentials: 'same-origin', cache: 'no-store'
+      });
+      const status = await response.json();
+      if (response.ok && status && status.status === 'ready') {
+        button.disabled = false;
+        show('', '');
+        return;
+      }
+    } catch (_) { /* Feature is safely unavailable. */ }
+    button.disabled = true;
+    show('The 10% claim is being prepared. Email signup will open when the offer is ready.', 'pending');
+  };
+  checkAvailability();
+
   const finish = (text, state, buttonText) => {
     show(text, state);
     button.textContent = buttonText;
