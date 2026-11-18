@@ -136,6 +136,27 @@ function qr_klaviyo(string $path, array $payload, string $token): int {
     return $status;
 }
 
+// Public readiness probe for the QR landing page. Never expose credentials.
+if (($_SERVER['REQUEST_METHOD'] ?? '') === 'GET') {
+    $privatePath = dirname(__DIR__) . '/velq-qr-private.php';
+    $private = is_file($privatePath) ? require $privatePath : [];
+    if (!is_array($private)) $private = [];
+    $enabled = qr_setting('VELQ_QR_ENABLED', $private) === '1';
+    $secret = qr_setting('VELQ_QR_HASH_SECRET', $private);
+    $dbPath = qr_setting('VELQ_QR_DB_PATH', $private);
+    $dbDir = $dbPath === '' ? false : realpath(dirname($dbPath));
+    $public = realpath((string) ($_SERVER['DOCUMENT_ROOT'] ?? __DIR__));
+    $ready = $enabled && strlen($secret) >= 32
+        && qr_setting('VELQ_QR_SHOPIFY_TOKEN', $private) !== ''
+        && qr_setting('VELQ_QR_KLAVIYO_TOKEN', $private) !== ''
+        && is_string($dbDir) && is_writable($dbDir)
+        && is_string($public)
+        && !($dbDir === $public || str_starts_with($dbDir . '/', $public . '/'))
+        && extension_loaded('pdo_sqlite') && function_exists('curl_init');
+    if (!$ready) qr_reply(503, 'unavailable', 'This offer is being prepared.');
+    qr_reply(200, 'ready');
+}
+
 if (($_SERVER['REQUEST_METHOD'] ?? '') !== 'POST') qr_reply(405, 'error', 'Method not allowed.');
 if (!qr_origin_ok($_SERVER)) qr_reply(403, 'error', 'Please use the Velq claim page.');
 if (stripos((string) ($_SERVER['CONTENT_TYPE'] ?? ''), 'application/json') !== 0) {
