@@ -25,7 +25,7 @@ function velq_home_cover(string $html, string $path): string {
     if ($path !== '/' || strpos($html, 'aria-labelledby="hero-title"') === false) return $html;
     $html = preg_replace('~<header class="header">.*?</header>~s',
         '<header class="header"><button id="menu-toggle" class="icon-button menu-toggle" aria-label="Open menu" aria-expanded="false" aria-controls="mobile-nav"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M3 6h18M3 12h18M3 18h18"/></svg></button><a href="/" class="wordmark" aria-label="Velq home"><img class="velq-rounded-logo" src="/assets/velq-rounded-wordmark-black.png?v=20261020" alt="Velq" width="1652" height="799"></a><a class="button nav-signup" href="#waitlist" data-waitlist-cta="header">Join waitlist</a></header>', $html, 1) ?? $html;
-    $artwork = '/assets/velq-cover-cyan-stems-20261104.webp';
+    $artwork = 'https://cdn.shopify.com/s/files/1/0723/8372/5647/files/velq-home-cover-woman-packet-20261119.jpg?v=1795128348';
     $hero = '<section class="hero lifestyle-cover velq-approved-cover" aria-labelledby="hero-title">'
         . '<div class="cover-photo">'
         . '<div class="cover-shipping" role="note" aria-label="Velq strawberry gummies coming soon"><div class="cover-shipping-track" aria-hidden="true"><span>STRAWBERRY GUMMIES COMING SOON &nbsp; • &nbsp; STRAWBERRY GUMMIES COMING SOON &nbsp; • &nbsp; </span><span>STRAWBERRY GUMMIES COMING SOON &nbsp; • &nbsp; STRAWBERRY GUMMIES COMING SOON &nbsp; • &nbsp; </span></div></div>'
@@ -128,7 +128,7 @@ function velq_compact_product_section(string $html): string {
     $section = <<<'HTML'
 <section class="products section velq-compact-product" id="products" aria-labelledby="products-title">
   <h2 id="products-title">Meet your daily<br>upgrade.</h2>
-  <a class="velq-compact-image" href="/products/strawberry-protein-fiber-gummies" data-product-detail-cta="product-image" aria-label="View Velq strawberry gummy details"><img src="https://cdn.shopify.com/s/files/1/0723/8372/5647/files/velq-strawberry-gummies-homepage-white-20261106.jpg?v=1793991829" alt="Velq strawberry protein, fiber and energy gummies pouch and packet with strawberries and red gummy bears on a bright white background" width="1254" height="1254" loading="lazy" decoding="async"></a>
+  <a class="velq-compact-image" href="/products/strawberry-protein-fiber-gummies" data-product-detail-cta="product-image" aria-label="View Velq strawberry gummy details"><img src="https://cdn.shopify.com/s/files/1/0723/8372/5647/files/velq-daily-upgrade-product-20261119.png?v=1795128345" alt="Velq strawberry protein, fiber and energy gummies pouch and packet with strawberries and red gummy bears on a bright white background" width="748" height="750" loading="lazy" decoding="async"></a>
   <p class="velq-compact-flavor">Strawberry · Zero sugar</p>
   <p class="velq-compact-size">10 packets per box</p>
   <a class="velq-compact-cta" href="#waitlist" data-waitlist-cta="home" data-interest="strawberry">NOTIFY ME AT LAUNCH</a>
