@@ -140,7 +140,6 @@ function velq_compact_product_section(string $html): string {
   <p class="velq-compact-flavor">Strawberry · Zero sugar</p>
   <p class="velq-compact-size">10 packets per box</p>
   <a class="velq-compact-cta" href="#waitlist" data-waitlist-cta="home" data-interest="strawberry">NOTIFY ME AT LAUNCH</a>
-  <a class="velq-compact-details" href="/products/strawberry-protein-fiber-gummies" data-product-detail-cta="product-card">Product details <span aria-hidden="true">↓</span></a>
 </section>
 
 HTML;
