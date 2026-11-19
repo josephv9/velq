@@ -31,15 +31,7 @@ function velq_growth_related_links(string $html, string $path): string
     $heading = '';
     $intro = '';
     $links = [];
-    if ($path === '/') {
-        $heading = 'Explore protein and fiber gummies';
-        $intro = 'Compare complete serving labels and learn about Velq before joining the launch list.';
-        $links = [
-            ['/products/strawberry-protein-fiber-gummies', 'Meet Velq strawberry protein and fiber gummies'],
-            ['/blog/protein-gummies-with-fiber-comparison', 'Compare protein gummies with fiber'],
-            ['/research/gummy-serving-study-2026', 'Read the 2026 gummy serving-size study'],
-        ];
-    } elseif ($path === '/products/strawberry-protein-fiber-gummies') {
+    if ($path === '/products/strawberry-protein-fiber-gummies') {
         $heading = 'Compare before you choose';
         $intro = 'Velq is in development and is not yet available to order. Use these free resources to understand gummy serving labels.';
         $links = [

@@ -27,12 +27,11 @@ assert(home.includes('<title>Protein Gummies with Fiber &amp; Caffeine | Velq</t
 assert(home.includes('Meet Velq strawberry protein gummies with prebiotic fiber, caffeine and L-theanine.'), 'Current homepage search description missing');
 assert(home.includes('id="hero-title">Strawberry Protein Gummies with Fiber &amp; Caffeine</h1>'), 'Product-focused homepage H1 missing');
 assert(home.includes('href="/products/strawberry-protein-fiber-gummies"'), 'Homepage product detail path missing');
-assert(home.includes('id="velq-seo-related"'), 'Homepage SEO related resources missing');
-assert(home.includes('href="/research/gummy-serving-study-2026"'), 'Original research not linked from homepage');
-assert(home.includes('/assets/velq-seo-related.css?v=20261111'), 'Responsive SEO link style missing');
+assert(!home.includes('id="velq-seo-related"'), 'Removed homepage related resources returned');
+assert(!home.includes('/assets/velq-seo-related.css'), 'Unused homepage related-resources stylesheet returned');
 assert(home.includes('rel="preconnect" href="https://cdn.shopify.com"'), 'Shopify image CDN preconnect missing');
 const repeatHome=render('/',home);
-assert.equal((repeatHome.match(/id="velq-seo-related"/g)||[]).length, 1, 'Repeated HTML processing duplicates homepage related links');
+assert.equal((repeatHome.match(/id="velq-seo-related"/g)||[]).length, 0, 'Repeated HTML processing restores removed homepage related links');
 
 assert(!home.includes('data-gummy-buyer-paths="home"'), 'Retired homepage buyer promotion returned');
 assert(home.includes('id="waitlist-form"'),'Home waitlist form removed');
@@ -49,6 +48,9 @@ assert(!compare.includes('Velq’s planned six-gummy packet'), 'Comparison hub h
 assert(!compare.includes('across Cutfruit, PROTEDY, Kuma, OAKA and Velq'), 'Comparison hub still promotes unverified source in active label list');
 
 const buyer=render('/blog/protein-and-fiber-gummies-buying-guide',asset('/blog/protein-and-fiber-gummies-buying-guide/index.html'));
+assert(buyer.includes('id="velq-seo-related"'), 'Buyer-guide related resources missing');
+assert(buyer.includes('href="/research/gummy-serving-study-2026"'), 'Original research not linked from buyer guide');
+assert(buyer.includes('/assets/velq-seo-related.css?v=20261111'), 'Buyer-guide responsive related-resources style missing');
 assert(buyer.includes('How to compare protein and fiber gummies by complete serving, protein source, sugar, caffeine and cost.'),'Buyer-guide search snippet not current');
 assert(!buyer.includes('while PROTEDY lists 8 g protein and 4 g fiber across eight gummies'), 'Unverified PROTEDY quantities returned');
 assert(!buyer.includes('prebiotic fiber in six gummies'), 'Buyer guide still claims Velq six-gummy packet');
