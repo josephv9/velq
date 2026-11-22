@@ -33,7 +33,7 @@ function velq_home_cover(string $html, string $path): string {
     if ($path !== '/' || strpos($html, 'aria-labelledby="hero-title"') === false) return $html;
     $html = preg_replace('~<header class="header">.*?</header>~s',
         '<header class="header"><button id="menu-toggle" class="icon-button menu-toggle" aria-label="Open menu" aria-expanded="false" aria-controls="mobile-nav"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M3 6h18M3 12h18M3 18h18"/></svg></button><a href="/" class="wordmark" aria-label="Velq home"><img class="velq-rounded-logo" src="/assets/velq-rounded-wordmark-black.png?v=20261020" alt="Velq" width="1652" height="799"></a><a class="button nav-signup" href="#waitlist" data-waitlist-cta="header">Join waitlist</a></header>', $html, 1) ?? $html;
-    $artwork = 'https://cdn.shopify.com/s/files/1/0723/8372/5647/files/velq-home-cover-woman-packet-20261119.jpg?v=1795128348';
+    $artwork = 'https://cdn.shopify.com/s/files/1/0723/8372/5647/files/velq-strawberry-bike-lifestyle-cover-20261122.jpg?v=1795384173';
     $hero = '<section class="hero lifestyle-cover velq-approved-cover" aria-labelledby="hero-title">'
         . '<div class="cover-photo">'
         . '<div class="cover-shipping" role="note" aria-label="Velq strawberry gummies coming soon"><div class="cover-shipping-track" aria-hidden="true"><span>STRAWBERRY GUMMIES COMING SOON &nbsp; • &nbsp; STRAWBERRY GUMMIES COMING SOON &nbsp; • &nbsp; </span><span>STRAWBERRY GUMMIES COMING SOON &nbsp; • &nbsp; STRAWBERRY GUMMIES COMING SOON &nbsp; • &nbsp; </span></div></div>'
@@ -42,7 +42,7 @@ function velq_home_cover(string $html, string $path): string {
         . '<a class="cover-home" href="/" aria-label="Velq home"></a>'
         . '<a class="cover-bag" href="#waitlist" data-waitlist-cta="header" aria-label="Get early access"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M5 7h14l2 14H3L5 7Z"/><path d="M8 8V6a4 4 0 0 1 8 0v2"/></svg></a>'
         . '</nav>'
-        . '<div class="cover-image-window"><img class="approved-cover-art" src="'.$artwork.'" width="1122" height="1402" alt="Smiling woman holding a white Velq strawberry protein, fiber and energy gummies pouch" fetchpriority="high" decoding="async"></div>'
+        . '<div class="cover-image-window"><img class="approved-cover-art" src="'.$artwork.'" width="1122" height="1402" alt="Woman in a red top next to a cream bicycle at sunset holding a Velq strawberry protein, fiber and energy gummies packet" fetchpriority="high" decoding="async"></div>'
         . '</div>'
         . '<div class="cover-conversion" id="waitlist">'
         . '<p class="cover-kicker">STRAWBERRY · COMING SOON</p>'
