@@ -26,7 +26,7 @@ function velq_home_cover(string $html, string $path): string {
     $html = preg_replace('~<header class="header">.*?</header>~s',
         '<header class="header"><button id="menu-toggle" class="icon-button menu-toggle" aria-label="Open menu" aria-expanded="false" aria-controls="mobile-nav"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M3 6h18M3 12h18M3 18h18"/></svg></button><a href="/" class="wordmark" aria-label="Velq home"><img class="velq-rounded-logo" src="/assets/velq-rounded-wordmark-black.png?v=20261020" alt="Velq" width="1652" height="799"></a><a class="button nav-signup" href="#waitlist" data-waitlist-cta="header">Join waitlist</a></header>', $html, 1) ?? $html;
     $artwork = 'https://cdn.shopify.com/s/files/1/0723/8372/5647/files/velq-strawberry-bike-lifestyle-cover-20261122.jpg?v=1795384173';
-    $hero = '<section class="hero lifestyle-cover velq-approved-cover" aria-labelledby="hero-title">'
+    $hero = '<section id="home-cover" class="hero lifestyle-cover velq-approved-cover" aria-labelledby="hero-title">'
         . '<div class="cover-photo">'
         . '<div class="cover-shipping" role="note" aria-label="Velq strawberry gummies coming soon"><div class="cover-shipping-track" aria-hidden="true"><span>STRAWBERRY GUMMIES COMING SOON &nbsp; • &nbsp; STRAWBERRY GUMMIES COMING SOON &nbsp; • &nbsp; </span><span>STRAWBERRY GUMMIES COMING SOON &nbsp; • &nbsp; STRAWBERRY GUMMIES COMING SOON &nbsp; • &nbsp; </span></div></div>'
         . '<nav class="cover-navigation" aria-label="Main navigation">'
@@ -71,7 +71,7 @@ function velq_home_cover(string $html, string $path): string {
     $html = str_replace('<body>', '<body class="velq-cover-home">', $html);
     $html = preg_replace('~<link\b[^>]*data-velq-responsive-preload[^>]*>~i', '', $html) ?? $html;
     $preload = '<link data-velq-responsive-preload rel="preload" as="image" href="'.$artwork.'" fetchpriority="high">';
-    return str_replace('</head>', '<link rel="stylesheet" href="/assets/velq-home-cover.css?v=20261123-clean-cover">'.$preload.'<link rel="stylesheet" href="/assets/velq-cover-layout-20261123-clean.css?v=preserve-full-bike-desktop"></head>', $html);
+    return str_replace('</head>', '<link rel="stylesheet" href="/assets/velq-home-cover.css?v=20261123-clean-cover">'.$preload.'<link rel="stylesheet" href="/assets/velq-cover-layout-20261123-clean.css?v=preserve-full-bike-desktop"><script defer src="/assets/velq-back-to-cover-20261123.js?v=1"></script></head>', $html);
 }
 
 /** Single-product layout. Image slots accept ordinary img elements when supplied. */
@@ -110,7 +110,7 @@ HTML;
 <section class="black-footer-social"><h3>SOCIAL</h3><div><a href="https://www.instagram.com/eatvelq?cplk=dTRtb2luY2tuMDkz&amp;utm_source=qr" aria-label="Velq on Instagram"><svg viewBox="0 0 24 24" aria-hidden="true"><rect x="3" y="3" width="18" height="18" rx="5"/><circle cx="12" cy="12" r="4"/><circle cx="17.5" cy="6.5" r=".7"/></svg></a><a href="https://www.tiktok.com/@velqnutrition" aria-label="Velq on TikTok"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M14 3v12a4 4 0 1 1-4-4M14 3c0 4 3 6 6 6"/></svg></a></div></section>
 <nav class="black-footer-policies" aria-label="Policies"><a href="/privacy/">PRIVACY POLICY</a><a href="/terms/">TERMS OF SERVICE</a><a href="/shipping/">SHIPPING POLICY</a><a href="/shipping/#refunds">REFUND POLICY</a></nav>
 <a class="club-wordmark" href="/" aria-label="Velq home"><img class="velq-bag-logo" src="/assets/velq-bag-wordmark-20261031.svg" alt="Velq" width="455" height="230"></a>
-<div class="black-footer-copyright">© 2026 Velq Nutrition LLC</div></footer><a class="back-top" href="#main" aria-label="Back to top">↑</a>
+<div class="black-footer-copyright">© 2026 Velq Nutrition LLC</div></footer><a class="back-top" href="#home-cover" aria-label="Back to the bicycle cover">↑</a>
 HTML;
 
     $html = preg_replace_callback('~<footer>.*?</footer>~s', static fn(array $m): string => $footer, $html, 1) ?? $html;
