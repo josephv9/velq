@@ -142,7 +142,7 @@ body.velq-cover-home .hero.velq-approved-cover :is(a,button,input):focus-visible
 @media(min-width:701px){
  body.velq-cover-home .hero.velq-approved-cover .cover-photo:before{
   content:"";position:absolute;z-index:0;inset:-18px;pointer-events:none;
-  background-image:url("/assets/velq-strawberry-bike-cover-approved-20261123.jpg?v=1");
+  background-image:url("https://cdn.shopify.com/s/files/1/0723/8372/5647/files/velq-strawberry-bike-lifestyle-cover-20261122.jpg?v=1795384173");
   background-position:center 42%;background-size:cover;background-repeat:no-repeat;
   filter:blur(18px) brightness(.52);transform:scale(1.04);
  }
