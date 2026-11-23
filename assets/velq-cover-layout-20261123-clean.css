@@ -111,7 +111,7 @@ body.velq-cover-home .hero.velq-approved-cover :is(a,button,input):focus-visible
  body.velq-cover-home .hero.velq-approved-cover .cover-image-window img.approved-cover-art{object-position:center 42%}
 }
 @media(max-width:700px){
- body.velq-cover-home #home-cover.hero.velq-approved-cover{height:clamp(620px,91svh,780px)!important;min-height:620px!important}
+ body.velq-cover-home #home-cover.hero.velq-approved-cover{height:clamp(500px,68svh,590px)!important;min-height:500px!important}
  body.velq-cover-home .hero.velq-approved-cover .cover-photo .cover-navigation{
   top:12px;left:3%;right:3%;width:94%;height:58px;padding:0 12px;gap:8px;border-radius:15px;
  }
@@ -131,7 +131,7 @@ body.velq-cover-home .hero.velq-approved-cover :is(a,button,input):focus-visible
  body.velq-cover-home .hero.velq-approved-cover #waitlist-submit{grid-column:1;grid-row:auto;width:100%}
 }
 @media(max-width:390px){
- body.velq-cover-home #home-cover.hero.velq-approved-cover{height:max(88svh,600px)!important;min-height:600px!important}
+ body.velq-cover-home #home-cover.hero.velq-approved-cover{height:clamp(480px,66svh,560px)!important;min-height:480px!important}
  body.velq-cover-home .hero.velq-approved-cover #waitlist.cover-conversion{bottom:3.5%}
  body.velq-cover-home .hero.velq-approved-cover #hero-title{font-size:34px}
 }
