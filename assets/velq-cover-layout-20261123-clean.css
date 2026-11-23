@@ -136,3 +136,18 @@ body.velq-cover-home .hero.velq-approved-cover :is(a,button,input):focus-visible
  body.velq-cover-home .hero.velq-approved-cover #hero-title{font-size:34px}
 }
 @media(prefers-reduced-motion:reduce){body.velq-cover-home .hero.velq-approved-cover .cover-shipping-track{animation:none}}
+
+/* Keep the complete portrait bicycle artwork visible on wider screens.
+   The soft duplicate backdrop fills the landscape frame without cropping the bike. */
+@media(min-width:701px){
+ body.velq-cover-home .hero.velq-approved-cover .cover-photo:before{
+  content:"";position:absolute;z-index:0;inset:-18px;pointer-events:none;
+  background-image:url("https://cdn.shopify.com/s/files/1/0723/8372/5647/files/velq-strawberry-bike-lifestyle-cover-20261122.jpg?v=1795384173");
+  background-position:center 42%;background-size:cover;background-repeat:no-repeat;
+  filter:blur(18px) brightness(.52);transform:scale(1.04);
+ }
+ body.velq-cover-home .hero.velq-approved-cover .cover-image-window{z-index:1;background:transparent}
+ body.velq-cover-home .hero.velq-approved-cover .cover-image-window img.approved-cover-art{
+  object-fit:contain!important;object-position:center center;
+ }
+}
