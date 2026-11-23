@@ -6,13 +6,11 @@
   link.addEventListener('click', (event) => {
     event.preventDefault();
     const reduceMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
-    try {
-      cover.scrollIntoView({ behavior: reduceMotion ? 'auto' : 'smooth', block: 'start' });
-    } catch {
-      window.scrollTo(0, 0);
-    }
+    const behavior = reduceMotion ? 'auto' : 'smooth';
+
     if (window.location.hash !== '#home-cover') {
       window.history.replaceState(null, '', '#home-cover');
     }
+    window.scrollTo({ top: 0, behavior });
   });
 })();
