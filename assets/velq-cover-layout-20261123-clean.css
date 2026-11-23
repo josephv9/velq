@@ -1,8 +1,8 @@
 /* Clean, compact cover inspired by the supplied Cadence reference. */
-body.velq-cover-home .hero.velq-approved-cover{
-  position:relative;display:block;width:100%;height:clamp(600px,78svh,780px);
-  max-width:none;min-height:0;max-height:none;margin:0;overflow:hidden;
-  background:#171615;color:#fff;isolation:isolate;
+body.velq-cover-home #home-cover.hero.velq-approved-cover{
+  position:relative;display:block;width:100%;height:clamp(600px,78svh,780px)!important;
+  max-width:none;min-height:600px!important;max-height:none!important;margin:0;overflow:hidden;
+  aspect-ratio:auto!important;background:#171615;color:#fff;isolation:isolate;
 }
 body.velq-cover-home .hero.velq-approved-cover .cover-photo{
   position:absolute;inset:0;width:100%;height:100%;overflow:hidden;
@@ -107,11 +107,11 @@ body.velq-cover-home .hero.velq-approved-cover #waitlist-form .signup-privacy a{
 body.velq-cover-home .hero.velq-approved-cover :is(a,button,input):focus-visible{outline:3px solid #fbdf4b;outline-offset:3px}
 
 @media(min-width:1200px){
- body.velq-cover-home .hero.velq-approved-cover{height:min(76svh,760px);min-height:590px}
+ body.velq-cover-home #home-cover.hero.velq-approved-cover{height:min(76svh,760px)!important;min-height:590px!important}
  body.velq-cover-home .hero.velq-approved-cover .cover-image-window img.approved-cover-art{object-position:center 42%}
 }
 @media(max-width:700px){
- body.velq-cover-home .hero.velq-approved-cover{height:clamp(620px,91svh,780px)}
+ body.velq-cover-home #home-cover.hero.velq-approved-cover{height:clamp(620px,91svh,780px)!important;min-height:620px!important}
  body.velq-cover-home .hero.velq-approved-cover .cover-photo .cover-navigation{
   top:12px;left:3%;right:3%;width:94%;height:58px;padding:0 12px;gap:8px;border-radius:15px;
  }
@@ -131,7 +131,7 @@ body.velq-cover-home .hero.velq-approved-cover :is(a,button,input):focus-visible
  body.velq-cover-home .hero.velq-approved-cover #waitlist-submit{grid-column:1;grid-row:auto;width:100%}
 }
 @media(max-width:390px){
- body.velq-cover-home .hero.velq-approved-cover{height:88svh;min-height:600px}
+ body.velq-cover-home #home-cover.hero.velq-approved-cover{height:max(88svh,600px)!important;min-height:600px!important}
  body.velq-cover-home .hero.velq-approved-cover #waitlist.cover-conversion{bottom:3.5%}
  body.velq-cover-home .hero.velq-approved-cover #hero-title{font-size:34px}
 }
