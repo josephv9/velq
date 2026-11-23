@@ -25,7 +25,7 @@ function velq_home_cover(string $html, string $path): string {
     if ($path !== '/' || strpos($html, 'aria-labelledby="hero-title"') === false) return $html;
     $html = preg_replace('~<header class="header">.*?</header>~s',
         '<header class="header"><button id="menu-toggle" class="icon-button menu-toggle" aria-label="Open menu" aria-expanded="false" aria-controls="mobile-nav"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M3 6h18M3 12h18M3 18h18"/></svg></button><a href="/" class="wordmark" aria-label="Velq home"><img class="velq-rounded-logo" src="/assets/velq-rounded-wordmark-black.png?v=20261020" alt="Velq" width="1652" height="799"></a><a class="button nav-signup" href="#waitlist" data-waitlist-cta="header">Join waitlist</a></header>', $html, 1) ?? $html;
-    $artwork = 'https://cdn.shopify.com/s/files/1/0723/8372/5647/files/velq-strawberry-bike-lifestyle-cover-20261122.jpg?v=1795384173';
+    $artwork = 'https://cdn.shopify.com/s/files/1/0723/8372/5647/files/velq-home-cover-woman-packet-20261119.jpg?v=1795128348';
     $hero = '<section class="hero lifestyle-cover velq-approved-cover" aria-labelledby="hero-title">'
         . '<div class="cover-photo">'
         . '<div class="cover-shipping" role="note" aria-label="Velq strawberry gummies coming soon"><div class="cover-shipping-track" aria-hidden="true"><span>STRAWBERRY GUMMIES COMING SOON &nbsp; • &nbsp; STRAWBERRY GUMMIES COMING SOON &nbsp; • &nbsp; </span><span>STRAWBERRY GUMMIES COMING SOON &nbsp; • &nbsp; STRAWBERRY GUMMIES COMING SOON &nbsp; • &nbsp; </span></div></div>'
@@ -34,7 +34,7 @@ function velq_home_cover(string $html, string $path): string {
         . '<a class="cover-home" href="/" aria-label="Velq home"></a>'
         . '<a class="cover-bag" href="#waitlist" data-waitlist-cta="header" aria-label="Get early access"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M5 7h14l2 14H3L5 7Z"/><path d="M8 8V6a4 4 0 0 1 8 0v2"/></svg></a>'
         . '</nav>'
-        . '<div class="cover-image-window"><img class="approved-cover-art" src="'.$artwork.'" width="1122" height="1402" alt="Woman in a red top next to a cream bicycle at sunset holding a Velq strawberry protein, fiber and energy gummies packet" fetchpriority="high" decoding="async"></div>'
+        . '<div class="cover-image-window"><img class="approved-cover-art" src="'.$artwork.'" width="1122" height="1402" alt="Smiling woman holding a white Velq strawberry protein and fiber gummies packet" fetchpriority="high" decoding="async"></div>'
         . '</div>'
         . '<div class="cover-conversion" id="waitlist">'
         . '<p class="cover-kicker">STRAWBERRY · COMING SOON</p>'
@@ -71,7 +71,7 @@ function velq_home_cover(string $html, string $path): string {
     $html = str_replace('<body>', '<body class="velq-cover-home">', $html);
     $html = preg_replace('~<link\b[^>]*data-velq-responsive-preload[^>]*>~i', '', $html) ?? $html;
     $preload = '<link data-velq-responsive-preload rel="preload" as="image" href="'.$artwork.'" fetchpriority="high">';
-    return str_replace('</head>', '<link rel="stylesheet" href="/assets/velq-home-cover.css?v=20261119-matched-card-photos">'.$preload.'<link rel="stylesheet" href="/assets/velq-cover-layout-20261031.css?v=blue-cover-2"></head>', $html);
+    return str_replace('</head>', '<link rel="stylesheet" href="/assets/velq-home-cover.css?v=20261123-desktop-fit">'.$preload.'<link rel="stylesheet" href="/assets/velq-cover-layout-20261031.css?v=blue-cover-2"></head>', $html);
 }
 
 /** Single-product layout. Image slots accept ordinary img elements when supplied. */
@@ -94,9 +94,9 @@ function velq_single_product_layout(string $html): string {
 </section>
 <section class="velq-image-carousel cadence-section" id="ingredients" aria-label="Discover Velq gummies">
 <div class="velq-image-track" tabindex="0" role="region" aria-label="Swipe or use arrow keys to explore three Velq images">
-<figure class="velq-image-slide" id="velq-discover-1" aria-label="1 of 3"><img src="https://cdn.shopify.com/s/files/1/0723/8372/5647/files/velq-strawberry-more-in-every-bite-20261122.jpg?v=1795385345" width="864" height="1536" alt="More in every bite: Velq strawberry gummies with 20g protein, 10g prebiotic fiber, 80mg caffeine and 200mg L-theanine per packet." loading="lazy" decoding="async"></figure>
-<figure class="velq-image-slide" id="velq-discover-2" aria-label="2 of 3"><img src="https://cdn.shopify.com/s/files/1/0723/8372/5647/files/velq-strawberry-zero-sugar-20261122.jpg?v=1795385349" width="864" height="1536" alt="Zero sugar, big strawberry flavor: Velq strawberry gummies and red gummy bears with 0g sugar per packet." loading="lazy" decoding="async"></figure>
-<figure class="velq-image-slide" id="velq-discover-3" aria-label="3 of 3"><img src="https://cdn.shopify.com/s/files/1/0723/8372/5647/files/velq-strawberry-take-it-with-you-20261122.jpg?v=1795385353" width="864" height="1536" alt="Take Velq with you: one portable strawberry gummy packet for your gym bag, workday and on the go." loading="lazy" decoding="async"></figure>
+<figure class="velq-image-slide" id="velq-discover-1" aria-label="1 of 3"><img src="/assets/velq-discover-nutrition-20261031-800.webp" srcset="/assets/velq-discover-nutrition-20261031-480.webp 480w, /assets/velq-discover-nutrition-20261031-800.webp 800w" sizes="(max-width: 620px) 88vw, 420px" width="706" height="1536" alt="More in every bite. Per packet: 20g protein, 10g prebiotic fiber, 80mg caffeine and 200mg L-theanine." loading="lazy" decoding="async"></figure>
+<figure class="velq-image-slide" id="velq-discover-2" aria-label="2 of 3"><img src="/assets/velq-discover-flavor-20261031-800.webp" srcset="/assets/velq-discover-flavor-20261031-480.webp 480w, /assets/velq-discover-flavor-20261031-800.webp 800w" sizes="(max-width: 620px) 88vw, 420px" width="706" height="1536" alt="Zero sugar. Big strawberry flavor. Strawberry gummies with 0g sugar per packet." loading="lazy" decoding="async"></figure>
+<figure class="velq-image-slide" id="velq-discover-3" aria-label="3 of 3"><img src="/assets/velq-discover-routine-20261031-800.webp" srcset="/assets/velq-discover-routine-20261031-480.webp 480w, /assets/velq-discover-routine-20261031-800.webp 800w" sizes="(max-width: 620px) 88vw, 420px" width="706" height="1536" alt="Your day. Take Velq with you. Portable packets for your gym bag, workday and on the go." loading="lazy" decoding="async"></figure>
 </div><nav class="velq-carousel-nav" aria-label="Choose a Velq slide"><a href="#velq-discover-1" aria-label="Slide 1: Nutrition">1</a><a href="#velq-discover-2" aria-label="Slide 2: Strawberry flavor">2</a><a href="#velq-discover-3" aria-label="Slide 3: Everyday convenience">3</a><span>Swipe to explore →</span></nav></section>
 HTML;
     $html = preg_replace('~<section class="ingredient-section".*?</section>~s', $why, $html, 1) ?? $html;
@@ -128,7 +128,7 @@ function velq_compact_product_section(string $html): string {
     $section = <<<'HTML'
 <section class="products section velq-compact-product" id="products" aria-labelledby="products-title">
   <h2 id="products-title">Meet your daily<br>upgrade.</h2>
-  <a class="velq-compact-image" href="/products/strawberry-protein-fiber-gummies" data-product-detail-cta="product-image" aria-label="View Velq strawberry gummy details"><img src="https://cdn.shopify.com/s/files/1/0723/8372/5647/files/velq-product-main-matched-packet-20261122.jpg?v=1795385822" alt="Velq strawberry protein, fiber and energy gummies 10-pack pouch with matching single packet on cream stone, strawberries and red gummy bears" width="1254" height="1254" loading="lazy" decoding="async"></a>
+  <a class="velq-compact-image" href="/products/strawberry-protein-fiber-gummies" data-product-detail-cta="product-image" aria-label="View Velq strawberry gummy details"><img src="https://cdn.shopify.com/s/files/1/0723/8372/5647/files/velq-daily-upgrade-product-20261119.png?v=1795128345" alt="Velq strawberry protein, fiber and energy gummies pouch and packet with strawberries and red gummy bears on a bright white background" width="748" height="750" loading="lazy" decoding="async"></a>
   <p class="velq-compact-flavor">Strawberry · Zero sugar</p>
   <p class="velq-compact-size">10 packets per box</p>
   <a class="velq-compact-cta" href="#waitlist" data-waitlist-cta="home" data-interest="strawberry">NOTIFY ME AT LAUNCH</a>

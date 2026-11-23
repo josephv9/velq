@@ -222,7 +222,7 @@ body.velq-cover-home .hero.lifestyle-cover.velq-approved-cover{position:relative
 .velq-cover-home .velq-approved-cover #hero-cta.cover-waitlist{left:12%;right:auto;top:87.8%;bottom:auto;width:76%;height:7%;min-height:0;margin:0;padding:0;background:transparent!important;border:0!important}
 .velq-cover-home .velq-approved-cover :is(a,button):focus-visible{outline:3px solid white;outline-offset:-4px;border-radius:14px}
 .velq-cover-home .mobile-nav{top:15%;left:4%;right:4%}
-@media(min-width:768px){body.velq-cover-home .hero.lifestyle-cover.velq-approved-cover{max-width:720px;margin:0 auto}.velq-cover-home main{background:#fff}}
+@media(min-width:768px){body.velq-cover-home .hero.lifestyle-cover.velq-approved-cover{max-width:none;width:100%;margin:0}.velq-cover-home main{background:#fff}}
 
 /* Replace the artwork's printed announcement with a real moving shipping banner. */
 .velq-cover-home .velq-approved-cover .cover-shipping{position:absolute;z-index:3;left:5.2%;right:5.2%;top:1.1%;height:4.15%;display:flex;align-items:center;overflow:hidden;background:#E4002B;border-radius:999px;color:#fff;font:500 clamp(11px,3.25vw,24px)/1 Arial,sans-serif;white-space:nowrap}
@@ -292,7 +292,7 @@ body.velq-cover-home .hero.lifestyle-cover.velq-approved-cover{position:relative
 /* Hero conversion refresh: preserve original packet imagery, crop out baked-in copy,
    and display the existing first-party waitlist form directly beneath the photo. */
 body.velq-cover-home .hero.lifestyle-cover.velq-approved-cover{
-  display:block;max-width:720px;margin:0 auto;width:100%;height:auto!important;
+  display:block;max-width:none;margin:0;width:100%;height:auto!important;
   min-height:0!important;max-height:none!important;aspect-ratio:auto!important;
   overflow:visible;background:#fff;color:#101010;
 }
