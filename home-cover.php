@@ -31,7 +31,7 @@ function velq_home_cover(string $html, string $path): string {
         . '<div class="cover-shipping" role="note" aria-label="Velq strawberry gummies coming soon"><div class="cover-shipping-track" aria-hidden="true"><span>STRAWBERRY GUMMIES COMING SOON &nbsp; • &nbsp; STRAWBERRY GUMMIES COMING SOON &nbsp; • &nbsp; </span><span>STRAWBERRY GUMMIES COMING SOON &nbsp; • &nbsp; STRAWBERRY GUMMIES COMING SOON &nbsp; • &nbsp; </span></div></div>'
         . '<nav class="cover-navigation" aria-label="Main navigation">'
         . '<button class="cover-menu" id="menu-toggle" aria-label="Open menu" aria-expanded="false" aria-controls="mobile-nav"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M4 6h16M4 12h16M4 18h16"/></svg></button>'
-        . '<a class="cover-home" href="/" aria-label="Velq home"></a>'
+        . '<a class="cover-home" href="/" aria-label="Velq home"><img class="velq-bag-logo" src="/assets/velq-bag-wordmark-20261031.svg" alt="Velq" width="455" height="230"></a>'
         . '<a class="cover-bag" href="#waitlist" data-waitlist-cta="header" aria-label="Get early access"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M5 7h14l2 14H3L5 7Z"/><path d="M8 8V6a4 4 0 0 1 8 0v2"/></svg></a>'
         . '</nav>'
         . '<div class="cover-image-window"><img class="approved-cover-art" src="'.$artwork.'" width="1122" height="1402" alt="Woman in a red top next to a cream bicycle at sunset holding a Velq strawberry protein, fiber and energy gummies packet" fetchpriority="high" decoding="async"></div>'
@@ -71,7 +71,7 @@ function velq_home_cover(string $html, string $path): string {
     $html = str_replace('<body>', '<body class="velq-cover-home">', $html);
     $html = preg_replace('~<link\b[^>]*data-velq-responsive-preload[^>]*>~i', '', $html) ?? $html;
     $preload = '<link data-velq-responsive-preload rel="preload" as="image" href="'.$artwork.'" fetchpriority="high">';
-    return str_replace('</head>', '<link rel="stylesheet" href="/assets/velq-home-cover.css?v=20261123-desktop-fit">'.$preload.'<link rel="stylesheet" href="/assets/velq-cover-layout-20261031.css?v=blue-cover-2"></head>', $html);
+    return str_replace('</head>', '<link rel="stylesheet" href="/assets/velq-home-cover.css?v=20261123-clean-cover">'.$preload.'<link rel="stylesheet" href="/assets/velq-cover-layout-20261123-clean.css"></head>', $html);
 }
 
 /** Single-product layout. Image slots accept ordinary img elements when supplied. */
