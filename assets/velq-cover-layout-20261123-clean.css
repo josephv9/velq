@@ -135,6 +135,29 @@ body.velq-cover-home .hero.velq-approved-cover :is(a,button,input):focus-visible
  body.velq-cover-home .hero.velq-approved-cover #waitlist.cover-conversion{bottom:3.5%}
  body.velq-cover-home .hero.velq-approved-cover #hero-title{font-size:34px}
 }
+
+/* On phones, keep the bicycle cover clean and place the full signup block
+   between the red benefit strip and the daily upgrade product section. */
+@media(max-width:700px){
+ body.velq-cover-home #waitlist.cover-conversion{
+  position:relative!important;inset:auto!important;left:auto!important;right:auto!important;
+  top:auto!important;bottom:auto!important;z-index:auto;display:block!important;
+  box-sizing:border-box;width:100%!important;max-width:none;margin:0!important;padding:28px 6% 32px!important;
+  border:0;border-radius:0;background:#fff!important;color:#111;text-align:center!important;
+  scroll-margin-top:16px;
+ }
+ body.velq-cover-home #waitlist .cover-kicker{margin:0 0 10px;color:#e4002b;font-size:12px;letter-spacing:.12em}
+ body.velq-cover-home #waitlist #hero-title{max-width:520px;margin:0 auto;color:#111;font-size:clamp(32px,8vw,42px);line-height:1.04;text-shadow:none}
+ body.velq-cover-home #waitlist .cover-tagline{max-width:480px;margin:12px auto 0;color:#444;font-size:16px}
+ body.velq-cover-home #waitlist .cover-benefit{display:block!important;max-width:440px;margin:8px auto 0;color:#555;font-size:13px;line-height:1.5}
+ body.velq-cover-home #waitlist .cover-form-container{width:100%;max-width:500px;margin:18px auto 0}
+ body.velq-cover-home #waitlist #waitlist-form>label:not(.consent-label){color:#333}
+ body.velq-cover-home #waitlist #waitlist-form .consent-label{color:#444;text-shadow:none}
+ body.velq-cover-home #waitlist #waitlist-form .signup-privacy,
+ body.velq-cover-home #waitlist #waitlist-form .signup-feedback{color:#555!important}
+ body.velq-cover-home #waitlist #waitlist-form .signup-privacy a{color:#e4002b}
+ body.velq-cover-home #waitlist .cover-no-payment{display:block!important;margin:12px auto 0;color:#555!important;font-size:12px}
+}
 @media(prefers-reduced-motion:reduce){body.velq-cover-home .hero.velq-approved-cover .cover-shipping-track{animation:none}}
 
 /* Keep the complete portrait bicycle artwork visible on wider screens.
