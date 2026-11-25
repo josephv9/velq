@@ -59,7 +59,7 @@ php_value auto_prepend_file image-patch.php
   RewriteRule ^(?:app|analytics|velq-waitlist)\.js$ - [END]
 
   # Serve the version-controlled crawler policy instead of the stale PHP copy.
-  RewriteRule ^robots\\.txt$ - [END]
+  RewriteRule ^robots\.txt$ - [END]
 
   # Route the current Site assets and APIs through its PHP bundle.
   RewriteRule ^(?:index\.html|tools(?:/.*)?|guides(?:/.*)?|blog(?:/.*)?|blogs/journal(?:/.*)?|(?:style|journal)\.css|(?:app|analytics|journal|analytics-config)\.js|api/waitlist|robots\.txt|sitemap\.xml)?$ velq-site.php [END]
