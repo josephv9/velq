@@ -1,0 +1,114 @@
+name: Velq IndexNow on site content updates
+
+on:
+  push:
+    branches:
+      - site
+    paths:
+      - "seo-growth-extension.php"
+      - "sitemap.xml"
+      - "blog/**/index.html"
+      - "guides/**/index.html"
+      - "products/**/index.html"
+      - "research/**/index.html"
+      - "tools/**/index.html"
+      - ".github/workflows/velq-indexnow-on-site-push.yml"
+
+permissions:
+  contents: read
+
+jobs:
+  submit-changed-pages:
+    runs-on: ubuntu-latest
+    timeout-minutes: 8
+    steps:
+      - name: Check out the published site branch
+        uses: actions/checkout@v4
+        with:
+          ref: site
+          fetch-depth: 0
+
+      - name: Check out the IndexNow preflight utility
+        uses: actions/checkout@v4
+        with:
+          ref: main
+          path: _indexnow-source
+
+      - name: Build the explicit changed-URL list
+        id: urls
+        env:
+          BEFORE: ${{ github.event.before }}
+          AFTER: ${{ github.sha }}
+        run: |
+          python3 - <<'PY'
+          import os
+          import subprocess
+          import xml.etree.ElementTree as ET
+
+          before = os.environ["BEFORE"]
+          after = os.environ["AFTER"]
+          zero = "0" * 40
+          if before == zero:
+              changed = subprocess.check_output(
+                  ["git", "diff-tree", "--no-commit-id", "--name-only", "-r", after],
+                  text=True,
+              ).splitlines()
+          else:
+              changed = subprocess.check_output(
+                  ["git", "diff", "--name-only", before, after],
+                  text=True,
+              ).splitlines()
+
+          affected = set()
+          seo_overlay_pages = {
+              "/blog/protein-gummies-vs-protein-bars",
+              "/blog/fiber-gummies-vs-psyllium-husk",
+              "/tools/protein-fiber-calculator",
+              "/blog/protein-gummies-with-fiber-comparison",
+              "/blog/best-fiber-gummies-2026",
+              "/blog/protein-gummies-for-adults",
+              "/blog/fiber-gummies-for-adults-guide",
+          }
+
+          def sitemap(revision):
+              try:
+                  raw = subprocess.check_output(
+                      ["git", "show", f"{revision}:sitemap.xml"], text=True
+                  )
+                  root = ET.fromstring(raw)
+                  ns = "{http://www.sitemaps.org/schemas/sitemap/0.9}"
+                  return {
+                      node.findtext(ns + "loc"): node.findtext(ns + "lastmod", default="")
+                      for node in root.findall(ns + "url")
+                  }
+              except (subprocess.CalledProcessError, ET.ParseError):
+                  return {}
+
+          for path in changed:
+              if path == "seo-growth-extension.php":
+                  affected.update(seo_overlay_pages)
+              elif path == "sitemap.xml":
+                  old = sitemap(before) if before != zero else {}
+                  new = sitemap(after)
+                  for url, modified in new.items():
+                      if url not in old or old[url] != modified:
+                          if url.startswith("https://velqnutrition.com/"):
+                              affected.add(url.removeprefix("https://velqnutrition.com"))
+              elif path.endswith("/index.html"):
+                  affected.add("/" + path[:-len("/index.html")].strip("/"))
+              elif path == "index.html":
+                  affected.add("/")
+
+          urls = sorted("https://velqnutrition.com" + path for path in affected)
+          with open("/tmp/velq-indexnow-urls.txt", "w", encoding="utf-8") as handle:
+              handle.write("\n".join(urls) + ("\n" if urls else ""))
+          with open(os.environ["GITHUB_OUTPUT"], "a", encoding="utf-8") as handle:
+              handle.write("has_urls=" + ("true" if urls else "false") + "\n")
+          print(f"Prepared {len(urls)} explicit canonical page URL(s).")
+          PY
+
+      - name: Preflight and submit to IndexNow
+        if: steps.urls.outputs.has_urls == 'true'
+        run: |
+          python3 _indexnow-source/scripts/submit-indexnow.py \
+            --submit --urls-file /tmp/velq-indexnow-urls.txt
