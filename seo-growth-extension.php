@@ -65,6 +65,61 @@ function velq_growth_related_links(string $html, string $path): string
     return $updated;
 }
 
+/** Refresh high-impression pages using the actual query/page matches in GSC. */
+function velq_growth_search_opportunities(string $html, string $path): string
+{
+    if ($path === '/blog/protein-gummies-vs-protein-bars') {
+        $html = velq_growth_snippet(
+            $html,
+            'Protein Gummies vs Protein Bars: Calories & Labels | Velq',
+            'Compare protein gummies and bars by calories, protein per full serving, fiber, sugar and ingredients. Check real labels and calculate cost per serving.'
+        );
+        if (!str_contains($html, 'data-velq-query-answer="protein-bars"')) {
+            $answer = '<section data-velq-query-answer="protein-bars" class="velq-search-answer" aria-labelledby="velq-protein-bar-answer">'
+                . '<h2 id="velq-protein-bar-answer">How do protein gummies compare with protein bars for calories?</h2>'
+                . '<p>There is no standard calorie difference between the two formats. Compare calories and protein for each product’s complete labeled serving, then check fiber, sugar, protein source and allergens. A gummy pouch is not automatically a meal replacement or nutritionally equivalent to a bar.</p>'
+                . '<p>Use the <a href="/tools/nutrition-label-value-calculator">free label-value calculator</a> to compare cost per serving, and see <a href="/blog/protein-gummies-with-fiber-comparison">manufacturer-published protein gummy labels</a> for dated serving examples.</p>'
+                . '</section>';
+            $html = preg_replace('~</h1\s*>~i', '$0' . $answer, $html, 1) ?? $html;
+        }
+        return $html;
+    }
+
+    if ($path === '/blog/fiber-gummies-vs-psyllium-husk') {
+        $html = velq_growth_snippet(
+            $html,
+            'Fiber Gummies vs Psyllium Husk: Compare Labels | Velq',
+            'Compare fiber gummies and psyllium by fiber type, grams per serving, fluid directions, ingredients and price. Learn what to check on each label.'
+        );
+        if (!str_contains($html, 'data-velq-query-answer="fiber-psyllium"')) {
+            $answer = '<section data-velq-query-answer="fiber-psyllium" class="velq-search-answer" aria-labelledby="velq-fiber-psyllium-answer">'
+                . '<h2 id="velq-fiber-psyllium-answer">Fiber gummies or psyllium: what should you compare?</h2>'
+                . '<p>Start with the named fiber ingredient and the full labeled serving. Psyllium is a specific fiber with product directions that may require mixing with adequate fluid; gummy products can use other fibers and have different directions. Matching grams on two labels does not make the fibers interchangeable.</p>'
+                . '<p>For a fair price comparison, count the complete serving and use the <a href="/tools/nutrition-label-value-calculator">free label-value calculator</a>. Then compare the ingredient and directions directly. See also <a href="/blog/fiber-gummies-vs-fiber-powder">fiber gummies versus fiber powder</a>.</p>'
+                . '</section>';
+            $html = preg_replace('~</h1\s*>~i', '$0' . $answer, $html, 1) ?? $html;
+        }
+        return $html;
+    }
+
+    if ($path === '/tools/protein-fiber-calculator') {
+        $html = velq_growth_snippet(
+            $html,
+            'Protein and Fiber Intake Calculator: Daily Targets | Velq',
+            'Estimate general daily protein and fiber reference ranges with a free calculator. See how estimates work, what they do not mean, and compare product labels.'
+        );
+        if (!str_contains($html, 'data-velq-query-answer="protein-fiber-tools"')) {
+            $section = '<section data-velq-query-answer="protein-fiber-tools" aria-labelledby="velq-calculator-next-steps">'
+                . '<h2 id="velq-calculator-next-steps">How to use these protein and fiber estimates</h2>'
+                . '<p>Use body weight and activity settings for a general protein reference range, and calorie intake for a general fiber estimate. Results are educational estimates, not personal medical targets or a recommendation to take a Velq serving. For product-to-product math, use the <a href="/tools/nutrition-label-value-calculator">cost-per-serving calculator</a>; for gummy serving examples, read the <a href="/blog/protein-gummies-with-fiber-comparison">protein and fiber gummy label comparison</a> and <a href="/blog/protein-gummies-vs-protein-bars">compare gummies with protein bars</a>.</p>'
+                . '</section>';
+            $html = preg_replace('~</h1\s*>~i', '$0' . $section, $html, 1) ?? $html;
+        }
+    }
+
+    return $html;
+}
+
 /** Disclose the existing editorial policy without claiming medical review. */
 function velq_growth_editorial_link(string $html, string $path): string
 {
@@ -149,6 +204,7 @@ function velq_growth_response(string $html, string $requestPath): string
     if (stripos($html, '<html') === false) return $html;
     $html = velq_growth_related_links($html, $path);
     $html = velq_growth_editorial_link($html, $path);
+    $html = velq_growth_search_opportunities($html, $path);
     // Existing consumer search pages: answer-first copy and metadata.
     if (in_array($path, [
         '/blog/protein-gummies-for-adults',
@@ -230,8 +286,8 @@ function velq_growth_response(string $html, string $requestPath): string
     if ($path === '/blog/protein-gummies-with-fiber-comparison') {
         return velq_growth_snippet(
             $html,
-            'Protein Gummies With Fiber: 2026 Label Comparison | Velq',
-            'Compare published Cutfruit, Kuma and OAKA protein gummy labels by protein, fiber, sugar and serving size. See Velq’s formula and free launch waitlist.'
+            'Protein and Fiber Gummies: Compare Labels & Servings | Velq',
+            'Compare protein and fiber gummies by protein, fiber, calories, full serving size and sugar using dated manufacturer label sources. See the calculations and limits.'
         );
     }
     if ($path === '/blog/best-fiber-gummies-2026') {
