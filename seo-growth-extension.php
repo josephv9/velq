@@ -213,6 +213,11 @@ function velq_growth_response(string $html, string $requestPath): string
             $html
         );
         $html = str_replace("Velq's prelaunch target is 20 g protein plus 10 g prebiotic fiber in six gummies", "Velq's prelaunch target is 20 g protein plus 10 g prebiotic fiber in 10 gummies", $html);
+        $html = str_replace(
+            'Grab six strawberry gummy bears and enjoy a little more from your day.',
+            'Open your 10-gummy packet and enjoy a little more from your day.',
+            $html
+        );
         $html = str_replace('Compare Cutfruit, PROTEDY, Kuma and Velq', 'Compare Cutfruit, Kuma, OAKA and prelaunch Velq', $html);
         $html = str_replace('Updated October 14, 2026', 'Updated October 26, 2026', $html);
         $html = str_replace('Get early access to Velq ↗', 'Get the Velq launch details ↗', $html);
