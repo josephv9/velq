@@ -174,3 +174,53 @@ body.velq-cover-home .hero.velq-approved-cover :is(a,button,input):focus-visible
   object-fit:contain!important;object-position:center center;
  }
 }
+
+/* Desktop and laptop only: one full-bleed approved photograph, no blurred side panels. */
+@media (min-width: 1024px) and (hover: hover) and (pointer: fine) {
+  body.velq-cover-home #home-cover.hero.velq-approved-cover{
+    width:100%;max-width:none;margin:0;padding:0;overflow:hidden;
+  }
+  body.velq-cover-home #home-cover .cover-photo:before{
+    content:none;display:none;background:none;filter:none;transform:none;
+  }
+  body.velq-cover-home #home-cover .cover-image-window{
+    position:absolute;inset:0;width:100%;height:100%;overflow:hidden;
+  }
+  body.velq-cover-home #home-cover .cover-image-window img.approved-cover-art{
+    position:absolute;inset:0;display:block;width:100%;height:100%!important;
+    max-width:none!important;max-height:none!important;aspect-ratio:auto;
+    object-fit:cover!important;object-position:center 54%;transform:none!important;
+    margin:0;padding:0;border-radius:0;
+  }
+  body.velq-cover-home #home-cover .cover-photo:after{
+    background:linear-gradient(90deg,rgba(0,0,0,.76) 0%,rgba(0,0,0,.54) 27%,rgba(0,0,0,.18) 49%,transparent 70%),linear-gradient(180deg,transparent 62%,rgba(0,0,0,.18) 100%);
+  }
+  body.velq-cover-home #home-cover .cover-photo .cover-navigation{
+    top:0;left:0;right:0;width:100%;height:76px;padding-inline:4%;
+    border:0;border-radius:0;background:#111;box-shadow:none;
+  }
+  body.velq-cover-home #home-cover #waitlist.cover-conversion{
+    display:block!important;left:5%;right:auto;bottom:clamp(26px,5svh,56px);
+    width:min(42%,560px);max-width:none;gap:0;text-align:left;
+  }
+  body.velq-cover-home #home-cover .cover-kicker,
+  body.velq-cover-home #home-cover #hero-title,
+  body.velq-cover-home #home-cover .cover-tagline,
+  body.velq-cover-home #home-cover #waitlist-form>label,
+  body.velq-cover-home #home-cover #waitlist-form .signup-privacy,
+  body.velq-cover-home #home-cover #waitlist-form .signup-privacy a{
+    color:#fff!important;
+  }
+  body.velq-cover-home #home-cover #hero-title{
+    font-size:clamp(36px,4.1vw,62px);text-wrap:balance;
+  }
+  body.velq-cover-home #home-cover .cover-form-container{
+    width:100%;max-width:520px;margin:18px 0 0;
+  }
+  body.velq-cover-home #home-cover #waitlist-form{
+    grid-template-columns:minmax(0,1fr) auto;
+  }
+  body.velq-cover-home #home-cover #waitlist-submit{
+    padding-inline:clamp(12px,1.2vw,20px);
+  }
+}
