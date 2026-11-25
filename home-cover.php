@@ -103,7 +103,7 @@ HTML;
     $html = preg_replace('~<section class="closing">.*?</section>~s', '', $html, 1) ?? $html;
     $footer = $waitlist . <<<'HTML'
 <footer class="velq-club-footer velq-black-footer" data-footer-version="black-20261031">
-<section class="black-footer-signup"><h2>SIGN UP TO GET 10% OFF YOUR FIRST ORDER</h2>
+<section class="black-footer-signup"><h2>GET LAUNCH UPDATES</h2>
 <form id="velq-footer-email-form"><label for="velq-footer-email" class="footer-visually-hidden">Email address</label><div class="black-footer-field"><input id="velq-footer-email" type="email" autocomplete="email" placeholder="EMAIL ADDRESS" required><button type="submit" aria-label="Continue to early access signup">→</button></div></form>
 <p>Launches, restocks, and where to find us in store.</p></section>
 <div class="black-footer-columns"><nav aria-label="Information"><h3>INFO</h3><a href="/our-story/">OUR STORY</a><a href="/wholesale/">WHOLESALE</a><a href="/contact/">CONTACT</a><a href="/blog">OUR JOURNAL</a><a href="#faq">FAQ</a></nav><nav aria-label="Shop"><h3>SHOP</h3><a href="#products">SHOP ALL</a><a href="/products/strawberry-protein-fiber-gummies">STRAWBERRY</a><a href="#waitlist" data-waitlist-cta="footer">GET EARLY ACCESS</a></nav></div>
