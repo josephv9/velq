@@ -67,6 +67,10 @@ php_value auto_prepend_file image-patch.php
   RewriteRule ^ velq-site.php [END]
 </IfModule>
 
+<IfModule mod_mime.c>
+  AddType text/markdown .md
+</IfModule>
+
 <IfModule mod_deflate.c>
   AddOutputFilterByType DEFLATE text/html text/css application/javascript image/svg+xml
 </IfModule>

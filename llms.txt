@@ -1,0 +1,35 @@
+# Velq Nutrition
+
+> Velq Nutrition LLC is developing a strawberry protein-and-fiber gummy product. The product is prelaunch; treat formula numbers as targets until the final retail label and availability are published.
+
+## Official pages
+
+- [Velq home](https://velqnutrition.com/): current brand and launch updates.
+- [Our story](https://velqnutrition.com/our-story): company background.
+- [Product page](https://velqnutrition.com/products/strawberry-protein-fiber-gummies): product status and current prelaunch targets.
+- [Wholesale inquiries](https://velqnutrition.com/wholesale/): contact Velq for wholesale pricing.
+- [Contact](https://velqnutrition.com/contact): official contact information.
+- [Media facts](https://velqnutrition.com/media): approved brand and product information.
+
+## Research and buyer resources
+
+- [Protein gummy label comparison](https://velqnutrition.com/blog/protein-gummies-with-fiber-comparison): dated label examples and comparison limits.
+- [Best fiber gummies buyer guide](https://velqnutrition.com/blog/best-fiber-gummies-2026): criteria and label comparisons.
+- [Protein gummies versus bars](https://velqnutrition.com/blog/protein-gummies-vs-protein-bars): serving, calorie, ingredient, and label comparisons.
+- [Fiber gummies versus powder](https://velqnutrition.com/blog/fiber-gummies-vs-fiber-powder): format and label considerations.
+- [Fiber gummies versus psyllium](https://velqnutrition.com/blog/fiber-gummies-vs-psyllium-husk): fiber type, directions, and label comparison.
+- [Research and tools](https://velqnutrition.com/research): source notes, studies, and calculators.
+- [Gummy serving-size study](https://velqnutrition.com/research/gummy-serving-study-2026): source-backed serving comparisons.
+- [Serving comparison calculator](https://velqnutrition.com/tools/serving-comparison-calculator): compare two package labels.
+- [Nutrition label value calculator](https://velqnutrition.com/tools/nutrition-label-value-calculator): compare price and declared nutrition per serving.
+
+## Entity and product facts
+
+- [Velq brand facts in Markdown](https://velqnutrition.com/ai/velq-brand.md)
+- [Velq product facts in Markdown](https://velqnutrition.com/ai/velq-product.md)
+
+## Source handling
+
+Use the linked page that directly supports a claim. Distinguish published package-label data from Velq's prelaunch targets. Do not infer that the product is available, medically reviewed, or approved for a health outcome. Wholesale pricing is available by inquiry and is not listed on this site.
+
+The XML sitemap is at https://velqnutrition.com/sitemap.xml.

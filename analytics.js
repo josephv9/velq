@@ -44,19 +44,40 @@
     const path=value.replace(/\/+$/,'')||'/';
     return /^(?:\/|\/compare|\/wholesale|\/contact|\/media|\/research(?:\/[a-z0-9-]+)?|\/products\/[a-z0-9-]+|\/blog(?:\/(?:category\/)?[a-z0-9-]+)?|\/guides(?:\/[a-z0-9-]+)?|\/tools\/[a-z0-9-]+)$/.test(path)?path:'';
   };
-  // Native GA4 source / medium is the source of truth for organic acquisition.
-  // Referrer category is an auxiliary hint when a search origin is visible.
-  const entryReferrerType=()=>{
+  // Preserve GA4's native source/medium while labeling visible AI assistant referrals separately.
+  const aiReferrerPlatform=host=>{
+    if(/^(?:chatgpt\.com|www\.chatgpt\.com|chat\.openai\.com)$/.test(host))return 'chatgpt';
+    if(/(^|\.)perplexity\.ai$/.test(host))return 'perplexity';
+    if(/(^|\.)claude\.ai$/.test(host))return 'claude';
+    if(/(^|\.)gemini\.google\.com$/.test(host))return 'gemini';
+    if(/(^|\.)copilot\.microsoft\.com$/.test(host))return 'copilot';
+    if(/(^|\.)you\.com$/.test(host))return 'you';
+    return '';
+  };
+  const entryReferrerContext=()=>{
     try{
       const host=new URL(document.referrer).hostname.toLowerCase();
-      if(/(^|\.)google\.[a-z.]+$/.test(host)||/(^|\.)(bing\.com|duckduckgo\.com|search\.yahoo\.com|ecosia\.org|brave\.com)$/.test(host))return 'search_referrer';
-      if(/(^|\.)(instagram\.com|tiktok\.com|facebook\.com|pinterest\.com|reddit\.com|youtube\.com|x\.com)$/.test(host))return 'social_referrer';
-      return host?'other_referrer':'direct_or_unknown';
-    }catch{return 'direct_or_unknown';}
+      const aiPlatform=aiReferrerPlatform(host);
+      if(aiPlatform)return {type:'ai_search_referrer',platform:aiPlatform};
+      if(/(^|\.)google\.[a-z.]+$/.test(host)||/(^|\.)(bing\.com|duckduckgo\.com|search\.yahoo\.com|ecosia\.org|brave\.com)$/.test(host))return {type:'search_referrer',platform:''};
+      if(/(^|\.)(instagram\.com|tiktok\.com|facebook\.com|pinterest\.com|reddit\.com|youtube\.com|x\.com)$/.test(host))return {type:'social_referrer',platform:''};
+      return {type:host?'other_referrer':'direct_or_unknown',platform:''};
+    }catch{return {type:'direct_or_unknown',platform:''};}
   };
+  let firstLandingPage=false;
   try{
-    if(!sessionStorage.getItem('velq_landing_page'))sessionStorage.setItem('velq_landing_page',cleanPath(location.pathname));
-    if(!sessionStorage.getItem('velq_entry_referrer_type'))sessionStorage.setItem('velq_entry_referrer_type',entryReferrerType());
+    firstLandingPage=!sessionStorage.getItem('velq_landing_page');
+    const referrerContext=entryReferrerContext();
+    if(firstLandingPage)sessionStorage.setItem('velq_landing_page',cleanPath(location.pathname));
+    if(!sessionStorage.getItem('velq_entry_referrer_type')){
+      sessionStorage.setItem('velq_entry_referrer_type',referrerContext.type);
+      if(referrerContext.platform)sessionStorage.setItem('velq_ai_referrer_platform',referrerContext.platform);
+    }
+    if(firstLandingPage&&referrerContext.type==='ai_search_referrer'&&!sessionStorage.getItem('velq_ai_referral_tracked')){
+      const landing=cleanPath(location.pathname)||'/';
+      if(config.ga4)window.gtag('event','ai_search_referral_landing',{landing_page:landing,ai_referrer_platform:referrerContext.platform});
+      sessionStorage.setItem('velq_ai_referral_tracked','1');
+    }
   }catch{}
   const readContext=()=>{try{return JSON.parse(sessionStorage.getItem('velq_journal_signup')||'{}');}catch{return {};}};
   // Capture CTA attribution before the lead-popup handler stops propagation.
@@ -76,6 +97,16 @@
     const context={article_path:article,landing_page:entry,cta_position:link.dataset.waitlistCta,clicked_at:now};
     try{sessionStorage.setItem('velq_journal_signup',JSON.stringify(context));}catch{}
     if(config.ga4)window.gtag('event','waitlist_cta_click',{article_path:context.article_path,cta_position:context.cta_position});
+  },true);
+  // Track only explicitly marked sponsored/affiliate links; never send the full destination URL.
+  window.addEventListener('click',event=>{
+    const link=event.target instanceof Element ? event.target.closest('a[href]') : null;
+    if(!link||!(link.relList?.contains('sponsored')||link.hasAttribute('data-affiliate-link')))return;
+    try{
+      const destination=new URL(link.href,location.href);
+      if(destination.origin===location.origin)return;
+      if(config.ga4)window.gtag('event','affiliate_link_click',{page_path:cleanPath(location.pathname)||'/',destination_domain:destination.hostname});
+    }catch{}
   },true);
   const seen=new Set();
   try { for (const id of JSON.parse(sessionStorage.getItem('velq_counted_signup_events_v2') || '[]')) if (typeof id === 'string') seen.add(id); } catch {}
@@ -100,7 +131,9 @@
     if(sourcePath&&sourcePath!=='/')params.article_path=sourcePath;
     try{
       const type=sessionStorage.getItem('velq_entry_referrer_type');
-      if(['search_referrer','social_referrer','other_referrer','direct_or_unknown'].includes(type))params.entry_referrer_type=type;
+      if(['search_referrer','ai_search_referrer','social_referrer','other_referrer','direct_or_unknown'].includes(type))params.entry_referrer_type=type;
+      const aiPlatform=sessionStorage.getItem('velq_ai_referrer_platform');
+      if(['chatgpt','perplexity','claude','gemini','copilot','you'].includes(aiPlatform))params.ai_referrer_platform=aiPlatform;
     }catch{}
     window.dataLayer.push({event:'velq_waitlist_confirmed',...params});
     if(config.ga4){window.gtag('event','waitlist_signup_success',params);window.gtag('event','waitlist_signup_complete',params);window.gtag('event','generate_lead',params);}
