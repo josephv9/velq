@@ -286,8 +286,8 @@ function velq_growth_response(string $html, string $requestPath): string
     if ($path === '/blog/protein-gummies-with-fiber-comparison') {
         return velq_growth_snippet(
             $html,
-            'Protein and Fiber Gummies: Compare Labels & Servings | Velq',
-            'Compare protein and fiber gummies by protein, fiber, calories, full serving size and sugar using dated manufacturer label sources. See the calculations and limits.'
+            'Protein Gummies With Fiber: Compare Labels & Servings | Velq',
+            'Compare protein gummies with fiber by protein, fiber, serving size, calories and sugar. Review Cutfruit, Kuma and OAKA label details with source notes.'
         );
     }
     if ($path === '/blog/best-fiber-gummies-2026') {
