@@ -9,6 +9,7 @@ require_once __DIR__ . '/home-cover.php';
 require_once __DIR__ . '/bag-wordmark.php';
 require_once __DIR__ . '/brand-colors.php';
 require_once __DIR__ . '/seo-growth-extension.php';
+require_once __DIR__ . '/ranking-opportunities-extension.php';
 
 ob_start(static function (string $html): string {
     // The packed analytics-config.js still contains an obsolete GA4 stream ID.
@@ -452,5 +453,5 @@ ob_start(static function (string $html): string {
             $html
         ) ?? $html;
     }
-    return $html;
+    return velq_ranking_opportunity_response($html, $assetPath);
 });
