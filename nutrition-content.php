@@ -49,5 +49,9 @@ if($_SERVER['REQUEST_METHOD']!=='HEAD'){
     'https://www.velqnutrition.com/assets/journal/high-protein-high-fiber-snacks-no-refrigeration.svg' => 'https://cdn.shopify.com/s/files/1/0723/8372/5647/files/velq-protein_fiber_snacks-2026-10.webp?v=1792103513',
     '/assets/journal/high-protein-high-fiber-snacks-no-refrigeration.svg' => 'https://cdn.shopify.com/s/files/1/0723/8372/5647/files/velq-protein_fiber_snacks-2026-10.webp?v=1792103513',
     ];
-    echo strtr($body,$coverReplacements);
+    $body = strtr($body,$coverReplacements);
+    if (strpos($body, '</main>') !== false) {
+        $body = preg_replace('~</main>~i', "<nav aria-label=\"Explore nutrition topics\"><h2>Explore nutrition topics</h2><ul><li><a href=\"/blog/category/protein\">Protein snacks</a></li><li><a href=\"/blog/category/fiber\">Fiber and gut health</a></li><li><a href=\"/blog/category/energy\">Caffeine and energy</a></li><li><a href=\"/blog/category/healthy-candy\">Lower-sugar candy</a></li><li><a href=\"/blog/category/pre-workout\">Pre-workout snacks</a></li><li><a href=\"/blog/category/functional-gummies\">Functional gummies</a></li><li><a href=\"/blog/category/fitness\">Fitness nutrition</a></li><li><a href=\"/blog/category/weight-management\">Protein and fiber snack planning</a></li></ul><p><a href=\"/products/strawberry-protein-fiber-gummies\">Explore Velq strawberry protein gummies (prelaunch)</a></p></nav>" . '</main>', $body, 1) ?? $body;
+    }
+    echo $body;
 }
