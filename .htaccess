@@ -54,6 +54,9 @@ php_value auto_prepend_file image-patch.php
   # Keep source control and build utilities outside the public site.
   RewriteRule ^(?:\.git|hostinger-migration|scripts|githooks)(?:/|$) - [F,L]
 
+  # Keep the internal SEO roadmap private from website visitors.
+  RewriteRule ^docs/seo-roadmap-2026-11-27\.md$ - [F,L,NC]
+
   # Canonical static category hubs.
   RewriteRule ^blog/category/(healthy-candy|pre-workout|functional-gummies|weight-management)(?:/|/index\.html)$ /blog/category/$1 [R=301,L,NE]
   RewriteRule ^blog/category/(healthy-candy|pre-workout|functional-gummies|weight-management)$ blog/category/$1/index.html [END]
