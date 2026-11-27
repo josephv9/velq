@@ -33,6 +33,11 @@ php_value auto_prepend_file image-patch.php
   # Keep the old image URLs stable for the bundled homepage and social previews.
   RewriteRule ^assets/(?:velq-fruit-snacks-original\.jpg|velq-neutral-product\.png)$ https://cdn.shopify.com/s/files/1/0723/8372/5647/files/velq-red-white-strawberry-final-hero-oct-2026.jpg?v=1791934937 [R=302,L,NE,NC]
 
+  # Consolidate direct requests for static article aliases to their declared canonical.
+  # THE_REQUEST prevents redirects of the internal index.html file rewrite.
+  RewriteCond %{THE_REQUEST} "\s/+[^?\s]+/(?:index\.html)?(?:[?\s])" [NC]
+  RewriteRule ^(blog/fiber-gummies-vs-fiber-powder|guides/(?:can-you-mix-protein-and-electrolytes|why-does-clear-protein-foam))/(?:index\.html)?$ /$1 [R=301,L,NE]
+
   # Keep the fiber gummies vs powder search landing page live; it now has a current buyer guide.
   RewriteRule ^blog/fiber-gummies-vs-fiber-powder(?:/|/index\.html)?$ /blog/fiber-gummies-vs-fiber-powder/index.html [END]
 
