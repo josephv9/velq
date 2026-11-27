@@ -32,7 +32,7 @@ const { chromium } = require(process.env.CODEX_PRIMARY_RUNTIME_NODE_MODULES
         };
       });
       assert(m.cover?.width>0 && m.image?.width>0,'Current cover artwork missing at '+width);
-      assert(m.imageSrc?.startsWith('/assets/'),'Missing first-party approved cover at '+width);
+      assert(m.imageSrc === 'https://cdn.shopify.com/s/files/1/0723/8372/5647/files/velq-strawberry-bike-lifestyle-cover-20261122.jpg?v=1795384173','Missing approved lifestyle cover at '+width);
       assert(m.heading?.includes('Strawberry Protein Gummies with Fiber & Caffeine'),'Product heading missing at '+width);
       assert(m.headingRect?.width>0,'Heading not visible at '+width);
       assert.equal(m.formCount,1,'Waitlist form must appear once at '+width);

@@ -143,14 +143,14 @@ for (const [route, record] of Object.entries(pages)) {
   // The homepage social preview is intentionally different from the editorial discovery image.
   // image-patch.php overrides the final OG and Twitter images after discovery has run.
   if (route === '/') {
-    const preview = 'https://cdn.shopify.com/s/files/1/0723/8372/5647/files/velq-home-cover-blue-20261031.jpg?v=1793489698';
+    const preview = 'https://cdn.shopify.com/s/files/1/0723/8372/5647/files/velq-link-preview-woman-strawberry-gummies-20261117.jpg?v=1794937877';
     Object.assign(expected, {
       'og:image': preview, 'og:image:secure_url': preview,
-      'og:image:width': '800', 'og:image:height': '1000',
+      'og:image:width': '1122', 'og:image:height': '1402',
       'og:image:type': 'image/jpeg',
-      'og:image:alt': 'Smiling woman holding Velq strawberry protein and fiber gummies',
+      'og:image:alt': 'Smiling woman holding the Velq strawberry protein, fiber and energy gummies packet',
       'twitter:image': preview,
-      'twitter:image:alt': 'Smiling woman holding Velq strawberry protein and fiber gummies'
+      'twitter:image:alt': 'Smiling woman holding the Velq strawberry protein, fiber and energy gummies packet'
     });
   }
   for (const [key, value] of Object.entries(expected)) {
@@ -183,11 +183,11 @@ for (const [route, record] of Object.entries(pages)) {
       assert.equal(afterAttrs[key], beforeAttrs[key], 'Homepage hero ' + key + ' changed');
     }
     assert.equal(afterAttrs.fetchpriority, 'high');
-    assert.equal(afterAttrs.src, '/assets/velq-cover-cyan-stems-20261104.webp', 'Approved cover asset changed');
+    assert.equal(afterAttrs.src, 'https://cdn.shopify.com/s/files/1/0723/8372/5647/files/velq-strawberry-bike-lifestyle-cover-20261122.jpg?v=1795384173', 'Approved cover asset changed');
     const preload = (head(output).match(/<link\b[^>]*>/gi) || []).find(tag => tag.includes('data-velq-responsive-preload'));
     assert(preload, 'Homepage hero preload missing');
     const preloadAttrs = attrs(preload);
-    assert.equal(preloadAttrs.href, '/assets/velq-cover-cyan-stems-20261104-800.webp', 'Hero preload should use optimized mobile fallback');
+    assert.equal(preloadAttrs.href, afterAttrs.src, 'Hero preload must match current artwork');
     assert.equal(preloadAttrs.imagesrcset, afterAttrs.srcset, 'Hero preload must match the displayed srcset');
     assert.equal(preloadAttrs.imagesizes, afterAttrs.sizes, 'Hero preload must match the displayed sizes');
     assert.equal(preloadAttrs.fetchpriority, 'high');
