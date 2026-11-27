@@ -97,3 +97,26 @@ const api='{"ok":true,"newLead":false}';
 assert.equal(render('/api/waitlist',api),api,'Non-HTML API response must not change');
 assert(home.includes('Packaging and nutrition shown are previews and may change.'), 'Current prelaunch disclosure removed');
 console.log('PASS: live-target gummy SEO metadata, product journey, buyer links, and prelaunch disclosure; no stale promo, API untouched.');
+
+
+const demandRoutes = {
+  '/blog/protein-gummies-vs-protein-bars':'Protein gummies vs. protein bars for energy and pre-workout nutrition',
+  '/blog/fiber-gummies-vs-psyllium-husk':'Psyllium gummies: are they the same as psyllium husk powder?',
+  '/blog/caffeine-l-theanine-vs-caffeine':'L-theanine vs. caffeine: are they the same ingredient?',
+  '/blog/how-much-fiber-do-you-need-every-day':'How many grams of fiber do adults need daily?',
+  '/blog/high-protein-high-fiber-snacks-no-refrigeration':'Non-perishable protein snacks: what to keep in your bag'
+};
+for(const [route, heading] of Object.entries(demandRoutes)){
+  const result=spawnSync('php',['-d','display_errors=1','-r',
+    '$_SERVER["REQUEST_URI"]=$argv[1]; $_SERVER["REQUEST_METHOD"]="GET"; $_SERVER["HTTP_HOST"]="velqnutrition.com"; require "image-patch.php"; require "nutrition-content.php";',route],
+    {encoding:'utf8',maxBuffer:16*1024*1024,timeout:15000});
+  assert.equal(result.status,0,result.stderr||route);
+  assert(!/Fatal error|Parse error/.test(result.stdout+result.stderr),route+' PHP error');
+  assert(result.stdout.includes(heading),route+' missing query-specific answer');
+  assert.equal((result.stdout.match(/id="velq-ranking-answer"/g)||[]).length,1,route+' duplicate answer');
+  assert.equal((result.stdout.match(/<h1\\b/g)||[]).length,1,route+' extra H1');
+  assert(result.stdout.includes('https://velqnutrition.com'+route),route+' canonical missing');
+}
+assert(fiberPowder.includes('Metamucil fiber gummies vs. powder: check the exact fiber source'));
+assert(!home.includes('id="velq-ranking-answer"'),'Article-specific section leaked onto homepage');
+console.log('PASS: five routed article improvements, static fiber comparison, unique answers, and homepage isolation.');
