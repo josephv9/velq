@@ -22,8 +22,8 @@ function velq_discovery_images(): array
     };
     $page = static fn(array $primary, array $visible = []): array => ['primary' => $primary, 'images' => $visible ?: [$primary['url']]];
 
-    $hero = $image('/assets/velq-cover-cyan-stems-20261104.webp', 1122, 1402,
-        'Smiling woman holding a Velq strawberry protein and fiber gummy packet. Approved homepage lifestyle artwork.');
+    $hero = $image('https://cdn.shopify.com/s/files/1/0723/8372/5647/files/velq-strawberry-bike-lifestyle-cover-20261122.jpg?v=1795384173', 1122, 1402,
+        'Woman in a red top next to a cream bicycle at sunset holding a Velq strawberry protein, fiber and energy gummies packet');
     $packshot = $image('/assets/velq-strawberry-pouches-20261103.webp', 1000, 1000,
         'Current Velq strawberry gummies packaging preview with pouch and individual packets.');
     $legacy = $packshot;

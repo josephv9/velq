@@ -1,0 +1,36 @@
+
+.velq-product-gallery{width:100%;max-width:700px;min-width:0;margin:0;align-self:start}
+.velq-product-gallery *{box-sizing:border-box}
+.velq-gallery-stage{position:relative;width:100%;background:#fff6f4;border:1px solid #efe5e1;border-radius:17px;overflow:hidden;touch-action:pan-y}
+.velq-gallery-track{display:flex;width:100%;transform:translate3d(0,0,0);transition:transform .32s ease;will-change:transform}
+.velq-gallery-slide{flex:0 0 100%;width:100%;aspect-ratio:1/1;min-width:0}
+.velq-gallery-zoom{display:block;width:100%;height:100%;background:transparent;border:0;padding:0;cursor:zoom-in}
+.velq-gallery-zoom img{width:100%;height:100%;object-fit:contain;display:block}
+.velq-gallery-arrow{position:absolute;top:50%;z-index:2;transform:translateY(-50%);border:1px solid #e5ddda;background:rgba(255,255,255,.96);color:#171717;border-radius:50%;width:42px;height:42px;display:grid;place-items:center;font-size:33px;line-height:1;cursor:pointer;box-shadow:0 1px 7px #0001}
+.velq-gallery-prev{left:12px}.velq-gallery-next{right:12px}
+.velq-gallery-arrow:hover{background:#e4002b;color:#fff}.velq-gallery-count{position:absolute;right:12px;bottom:12px;color:#161616;background:#fffc;padding:5px 11px;border-radius:100px;font:600 12px/1.5 Arial,sans-serif}
+.velq-gallery-thumbs{display:grid;grid-template-columns:repeat(6,minmax(0,1fr));gap:9px;margin-top:11px}
+.velq-gallery-thumb{border:2px solid transparent;padding:2px;border-radius:10px;background:#fff;overflow:hidden;cursor:pointer;aspect-ratio:1/1;transition:border-color .15s}
+.velq-gallery-thumb.is-active,.velq-gallery-thumb[aria-pressed="true"]{border-color:#e4002b}
+.velq-gallery-thumb img{width:100%;height:100%;object-fit:cover;border-radius:6px;display:block}
+.velq-product-gallery figcaption{padding-top:12px;color:#6a6264;font:400 12px/1.5 Arial,sans-serif}
+.velq-gallery-thumb:focus-visible,.velq-gallery-arrow:focus-visible,.velq-gallery-zoom:focus-visible,.velq-gallery-lightbox button:focus-visible{outline:3px solid #e4002b;outline-offset:2px}
+.velq-gallery-lightbox{border:none;border-radius:18px;padding:22px;max-width:min(94vw,880px);width:880px;max-height:94dvh;background:#fff;box-shadow:0 15px 80px #0005;position:fixed}
+.velq-gallery-lightbox::backdrop{background:rgba(0,0,0,.83)}
+.velq-gallery-lightbox[open]{display:flex;align-items:center;justify-content:center}
+.velq-lightbox-image{max-width:100%;max-height:calc(94dvh - 44px);width:auto;height:auto;object-fit:contain;aspect-ratio:1}
+.velq-lightbox-close,.velq-lightbox-prev,.velq-lightbox-next{position:absolute;width:40px;height:40px;background:#fff;border:1px solid #ddd;border-radius:50%;color:#161616;font-size:26px;line-height:1;cursor:pointer}
+.velq-lightbox-close{top:8px;right:8px;z-index:2}.velq-lightbox-prev{left:10px;top:50%}.velq-lightbox-next{right:10px;top:50%}
+@media(max-width:760px){.velq-product-gallery{max-width:100%}.velq-gallery-arrow{width:36px;height:36px;font-size:28px}.velq-gallery-thumbs{gap:5px}.velq-gallery-thumb{padding:1px;border-radius:7px}.velq-product-gallery figcaption{font-size:11px}.velq-gallery-lightbox{padding:14px}}
+@media(prefers-reduced-motion:reduce){.velq-gallery-track{transition:none}}
+
+/* Keep carousel intrinsic image widths from expanding grid tracks. */
+.velq-product-detail .velq-product-hero{grid-template-columns:minmax(0,1.05fr) minmax(0,1fr)}
+.velq-product-detail .velq-product-hero>*,
+.velq-product-detail .velq-product-faq>*,
+.velq-product-detail .waitlist-section>*{min-width:0;max-width:100%}
+.velq-product-detail .velq-gallery-stage{min-width:0;max-width:100%;overflow:hidden}
+.velq-product-detail .velq-gallery-thumb{min-width:0}
+.velq-product-detail .velq-gallery-lightbox:not([open]){display:none}
+.velq-product-detail .velq-product-targets{grid-template-columns:repeat(2,minmax(0,1fr))}
+@media(max-width:760px){.velq-product-detail .velq-product-hero,.velq-product-detail .velq-product-faq,.velq-product-detail .waitlist-section{grid-template-columns:minmax(0,1fr)}.velq-product-detail .velq-product-copy{overflow-wrap:anywhere}}

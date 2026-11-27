@@ -54,8 +54,8 @@ assert(buyer.includes('/assets/velq-seo-related.css?v=20261111'), 'Buyer-guide r
 assert(buyer.includes('How to compare protein and fiber gummies by complete serving, protein source, sugar, caffeine and cost.'),'Buyer-guide search snippet not current');
 assert(!buyer.includes('while PROTEDY lists 8 g protein and 4 g fiber across eight gummies'), 'Unverified PROTEDY quantities returned');
 assert(!buyer.includes('prebiotic fiber in six gummies'), 'Buyer guide still claims Velq six-gummy packet');
-const labels=render('/blog/protein-gummies-with-fiber-comparison',asset('/blog/protein-gummies-with-fiber-comparison/index.html'));
-assert(labels.includes('Compare published Cutfruit, Kuma and OAKA protein gummy labels'),'Updated label-comparison snippet missing');
+const labels=render('/blog/protein-gummies-with-fiber-comparison',fs.readFileSync('blog/protein-gummies-with-fiber-comparison/index.html','utf8'));
+assert(labels.includes('Review Cutfruit, Kuma and OAKA label details with source notes.'),'Updated label-comparison snippet missing');
 assert(labels.includes('Velq'), 'Velq prelaunch context missing from comparison');
 
 // Fiber-vs-powder readers now have direct paths to distinct buying intents.
