@@ -41,6 +41,27 @@ const { chromium } = require(process.env.CODEX_PRIMARY_RUNTIME_NODE_MODULES
       results.push({width,height,hero:true,waitlist:true,noHorizontalOverflow:true});
       await page.close();
     }
+    for (const slug of ['healthy-candy','pre-workout','functional-gummies','weight-management']) {
+      for (const width of [320,390,768,1440]) {
+        const page=await browser.newPage({viewport:{width,height:900},reducedMotion:'reduce'});
+        await page.route('**/*',route=>new URL(route.request().url()).origin==='http://127.0.0.1:8766'
+          ? route.continue() : route.fulfill({status:200,body:''}));
+        const hubPath='/blog/category/'+slug;
+        const response=await page.goto('http://127.0.0.1:8766'+hubPath,{waitUntil:'networkidle'});
+        assert.equal(response.status(),200,slug+' HTTP response');
+        assert.equal(await page.locator('h1').count(),1,slug+' heading');
+        assert.equal(await page.locator('.hub-card').count(),3,slug+' article cards');
+        assert.equal(await page.locator('details').count(),3,slug+' questions');
+        assert.equal(await page.locator('link[rel=canonical]').getAttribute('href'),'https://velqnutrition.com'+hubPath);
+        const layout=await page.evaluate(()=>({scroll:document.documentElement.scrollWidth,viewport:innerWidth,display:getComputedStyle(document.querySelector('.hub-card-grid')).display}));
+        assert.equal(layout.display,'grid',slug+' stylesheet applied');
+        assert(layout.scroll<=layout.viewport+2,slug+' horizontal overflow at '+width+': '+JSON.stringify(layout));
+        await page.locator('details summary').first().click();
+        assert.equal(await page.locator('details[open]').count(),1,slug+' expandable FAQ');
+        await page.close();
+      }
+    }
+    console.log('PASS: four Journal hubs at 320, 390, 768 and 1440px, article cards, canonical and FAQ interaction.');
   } finally {await browser.close();}
   console.log(JSON.stringify({status:'PASS',results,liveSignups:0},null,2));
 })().catch(e=>{console.error(e);process.exit(1);});

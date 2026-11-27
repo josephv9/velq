@@ -6,6 +6,12 @@ if ($path === '/analytics-config.js') { header('Content-Type: text/javascript');
 if ($path === '/api/waitlist') { http_response_code(503); header('Content-Type: application/json'); echo '{"ok":false,"error":"Local test only"}'; return; }
 $real = realpath($root . $path);
 if ($real && str_starts_with($real, $root . '/') && is_file($real) && !str_ends_with($path,'.php') && !str_ends_with($path,'.html')) { $ext=pathinfo($real, PATHINFO_EXTENSION); $mime=['css'=>'text/css','js'=>'text/javascript','webp'=>'image/webp','jpeg'=>'image/jpeg','jpg'=>'image/jpeg','png'=>'image/png','ico'=>'image/x-icon','svg'=>'image/svg+xml']; header('Content-Type: '.($mime[$ext]??'application/octet-stream')); readfile($real); return; }
+// Match the production allowlist for the four standalone category hubs.
+if (preg_match('~^/blog/category/(healthy-candy|pre-workout|functional-gummies|weight-management)$~', $path)) {
+    header('Content-Type: text/html; charset=utf-8');
+    readfile($root . $path . '/index.html');
+    return;
+}
 require $root . '/image-patch.php';
 if (str_starts_with($path,'/products/strawberry-protein-fiber-gummies')) { require $root . '/conversion-content.php'; return; }
 if ($path === '/blog/protein-gummies-with-fiber-comparison' || $path === '/media' || str_starts_with($path,'/research')) { require $root . '/research-content.php'; return; }
