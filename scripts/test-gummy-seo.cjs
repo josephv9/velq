@@ -114,7 +114,7 @@ for(const [route, heading] of Object.entries(demandRoutes)){
   assert(!/Fatal error|Parse error/.test(result.stdout+result.stderr),route+' PHP error');
   assert(result.stdout.includes(heading),route+' missing query-specific answer');
   assert.equal((result.stdout.match(/id="velq-ranking-answer"/g)||[]).length,1,route+' duplicate answer');
-  assert.equal((result.stdout.match(/<h1\\b/g)||[]).length,1,route+' extra H1');
+  assert.equal((result.stdout.match(/<h1\b/gi)||[]).length,1,route+' expected exactly one H1');
   assert(result.stdout.includes('https://velqnutrition.com'+route),route+' canonical missing');
 }
 assert(fiberPowder.includes('Metamucil fiber gummies vs. powder: check the exact fiber source'));
