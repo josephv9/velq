@@ -52,6 +52,8 @@
     if(/(^|\.)gemini\.google\.com$/.test(host))return 'gemini';
     if(/(^|\.)copilot\.microsoft\.com$/.test(host))return 'copilot';
     if(/(^|\.)you\.com$/.test(host))return 'you';
+    if(/^(?:www\.)?grok\.com$/.test(host))return 'grok';
+    if(/^(?:www\.)?meta\.ai$/.test(host))return 'meta_ai';
     return '';
   };
   const entryReferrerContext=()=>{
@@ -133,7 +135,7 @@
       const type=sessionStorage.getItem('velq_entry_referrer_type');
       if(['search_referrer','ai_search_referrer','social_referrer','other_referrer','direct_or_unknown'].includes(type))params.entry_referrer_type=type;
       const aiPlatform=sessionStorage.getItem('velq_ai_referrer_platform');
-      if(['chatgpt','perplexity','claude','gemini','copilot','you'].includes(aiPlatform))params.ai_referrer_platform=aiPlatform;
+      if(['chatgpt','perplexity','claude','gemini','copilot','you','grok','meta_ai'].includes(aiPlatform))params.ai_referrer_platform=aiPlatform;
     }catch{}
     window.dataLayer.push({event:'velq_waitlist_confirmed',...params});
     if(config.ga4){window.gtag('event','waitlist_signup_success',params);window.gtag('event','waitlist_signup_complete',params);window.gtag('event','generate_lead',params);}
