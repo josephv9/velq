@@ -173,3 +173,25 @@ assert.equal(render('/api/waitlist',api),api,'Editorial pass changed waitlist re
 const snackGuide=editorialRender('/guides/protein-and-fiber-snacks');
 assert(snackGuide.includes('High-Protein, High-Fiber Snacks: Ideas for Work and Travel | Velq'),'Missing differentiated snack guide title');
 console.log('PASS: 32 existing editorial URLs, 64 contextual links, destination rendering, heading preservation, idempotence and waitlist isolation.');
+
+
+// New articles must have unique canonical URLs, references, and discoverable inbound links.
+const newJournalRoutes=['/blog/sugar-free-gummies-vs-no-added-sugar','/blog/high-protein-snacks-to-buy'];
+const staticSitemap=fs.readFileSync('sitemap.xml','utf8');
+const generatedSitemap=render('/sitemap.xml',staticSitemap);
+const journalIndex=editorialRender('/blog/category/protein');
+const candyHub=fs.readFileSync('blog/category/healthy-candy/index.html','utf8');
+for (const route of newJournalRoutes) {
+ const html=fs.readFileSync(route.slice(1)+'/index.html','utf8');
+ assert.equal((html.match(/<h1\b/gi)||[]).length,1,route+' unique H1');
+ assert(html.includes('rel="canonical" href="https://velqnutrition.com'+route+'"'),route+' canonical');
+ assert(html.includes('https://www.fda.gov/food/nutrition-facts-label/'),route+' FDA reference missing');
+ assert(html.includes('final label is pending'),route+' prelaunch disclosure');
+ for (const xml of [staticSitemap,generatedSitemap]) assert.equal(xml.split('<loc>https://velqnutrition.com'+route+'</loc>').length-1,1,route+' exactly one sitemap entry');
+}
+assert(candyHub.includes('href="'+newJournalRoutes[0]+'"'),'Candy hub link missing');
+assert(journalIndex.includes('href="'+newJournalRoutes[1]+'"'),'Protein hub link missing');
+const generatedFromLegacy=render('/sitemap.xml',staticSitemap.replace(/<url><loc>https:\/\/velqnutrition\.com\/blog\/(?:sugar-free-gummies-vs-no-added-sugar|high-protein-snacks-to-buy)<\/loc><\/url>/g,''));
+for(const route of newJournalRoutes) assert(generatedFromLegacy.includes('<loc>https://velqnutrition.com'+route+'</loc>'),route+' generated sitemap entry missing');
+assert.equal(render('/api/waitlist',api),api,'New articles changed waitlist response');
+console.log('PASS: new article metadata, citations, sitemap inclusion, inbound links and waitlist isolation.');

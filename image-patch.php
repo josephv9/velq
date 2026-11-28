@@ -11,6 +11,7 @@ require_once __DIR__ . '/brand-colors.php';
 require_once __DIR__ . '/seo-growth-extension.php';
 require_once __DIR__ . '/ranking-opportunities-extension.php';
 require_once __DIR__ . '/editorial-content-extension.php';
+require_once __DIR__ . '/new-journal-extension.php';
 
 ob_start(static function (string $html): string {
     // The packed analytics-config.js still contains an obsolete GA4 stream ID.
@@ -42,7 +43,7 @@ ob_start(static function (string $html): string {
     }
     if (substr($assetPath, -4) === '.css') $html = velq_brand_red_css($html);
     if (stripos($html, '<html') === false) {
-        return velq_discovery_response(velq_growth_response($html, $assetPath), $assetPath);
+        return velq_new_journal_response(velq_discovery_response(velq_growth_response($html, $assetPath), $assetPath), $assetPath);
     }
 
     // Remove the Compare labels tab from both header navigation variants.
@@ -455,5 +456,6 @@ ob_start(static function (string $html): string {
         ) ?? $html;
     }
     $html = velq_ranking_opportunity_response($html, $assetPath);
-    return velq_editorial_content_response($html, $assetPath);
+    $html = velq_editorial_content_response($html, $assetPath);
+    return velq_new_journal_response($html, $assetPath);
 });

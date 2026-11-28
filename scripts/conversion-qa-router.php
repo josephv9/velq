@@ -12,6 +12,17 @@ if (preg_match('~^/blog/category/(healthy-candy|pre-workout|functional-gummies|w
     readfile($root . $path . '/index.html');
     return;
 }
+// Mirror the production static article routes, including canonical redirects.
+if (preg_match('~^/blog/(sugar-free-gummies-vs-no-added-sugar|high-protein-snacks-to-buy)(?:/(?:index\.html)?)?$~', $path, $match)) {
+    $canonical = '/blog/' . $match[1];
+    if ($path !== $canonical) {
+        header('Location: ' . $canonical, true, 301);
+        return;
+    }
+    header('Content-Type: text/html; charset=utf-8');
+    readfile($root . $canonical . '/index.html');
+    return;
+}
 require $root . '/image-patch.php';
 if (str_starts_with($path,'/products/strawberry-protein-fiber-gummies')) { require $root . '/conversion-content.php'; return; }
 if ($path === '/blog/protein-gummies-with-fiber-comparison' || $path === '/media' || str_starts_with($path,'/research')) { require $root . '/research-content.php'; return; }

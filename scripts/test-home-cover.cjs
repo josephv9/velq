@@ -62,6 +62,26 @@ const { chromium } = require(process.env.CODEX_PRIMARY_RUNTIME_NODE_MODULES
       }
     }
     console.log('PASS: four Journal hubs at 320, 390, 768 and 1440px, article cards, canonical and FAQ interaction.');
+    for (const slug of ['sugar-free-gummies-vs-no-added-sugar','high-protein-snacks-to-buy']) {
+      for (const width of [320,390,768,1440]) {
+        const page=await browser.newPage({viewport:{width,height:900},reducedMotion:'reduce'});
+        await page.route('**/*',route=>new URL(route.request().url()).origin==='http://127.0.0.1:8766'
+          ? route.continue() : route.fulfill({status:200,body:''}));
+        const articlePath='/blog/'+slug;
+        const response=await page.goto('http://127.0.0.1:8766'+articlePath,{waitUntil:'networkidle'});
+        assert.equal(response.status(),200,slug+' HTTP response');
+        assert.equal(await page.locator('h1').count(),1,slug+' single heading');
+        assert.equal(await page.locator('link[rel=canonical]').getAttribute('href'),'https://velqnutrition.com'+articlePath);
+        assert.equal(await page.locator('details').count(),3,slug+' questions');
+        const layout=await page.evaluate(()=>({scroll:document.documentElement.scrollWidth,viewport:innerWidth,maxWidth:getComputedStyle(document.querySelector('.new-journal-article')).maxWidth}));
+        assert.equal(layout.maxWidth,'800px',slug+' article stylesheet applied');
+        assert(layout.scroll<=layout.viewport+2,slug+' horizontal overflow at '+width+': '+JSON.stringify(layout));
+        await page.locator('details summary').first().click();
+        assert.equal(await page.locator('details[open]').count(),1,slug+' FAQ interaction');
+        await page.close();
+      }
+    }
+    console.log('PASS: two new Journal articles at four viewport widths with canonical URLs and FAQ interaction.');
   } finally {await browser.close();}
   console.log(JSON.stringify({status:'PASS',results,liveSignups:0},null,2));
 })().catch(e=>{console.error(e);process.exit(1);});

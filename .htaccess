@@ -62,6 +62,11 @@ php_value auto_prepend_file image-patch.php
   # Keep the internal SEO roadmap private from website visitors.
   RewriteRule ^docs/seo-roadmap-2026-11-27\.md$ - [F,L,NC]
 
+  # Canonical standalone Journal articles; only these two routes are approved.
+  RewriteCond %{THE_REQUEST} "\s/+[^?\s]+/(?:index\.html)?(?:[?\s])" [NC]
+  RewriteRule ^blog/(sugar-free-gummies-vs-no-added-sugar|high-protein-snacks-to-buy)/(?:index\.html)?$ /blog/$1 [R=301,L,NE]
+  RewriteRule ^blog/(sugar-free-gummies-vs-no-added-sugar|high-protein-snacks-to-buy)$ blog/$1/index.html [END]
+
   # Canonical static category hubs.
   RewriteRule ^blog/category/(healthy-candy|pre-workout|functional-gummies|weight-management)(?:/|/index\.html)$ /blog/category/$1 [R=301,L,NE]
   RewriteRule ^blog/category/(healthy-candy|pre-workout|functional-gummies|weight-management)$ blog/category/$1/index.html [END]
