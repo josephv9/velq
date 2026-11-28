@@ -13,6 +13,19 @@ require_once __DIR__ . '/ranking-opportunities-extension.php';
 require_once __DIR__ . '/editorial-content-extension.php';
 require_once __DIR__ . '/new-journal-extension.php';
 
+// Advertise one high-resolution, stable, crawlable site icon on HTML responses.
+function velq_favicon_response(string $html): string
+{
+    if (stripos($html, '<html') === false) return $html;
+    return preg_replace_callback('~(<head\b[^>]*>)([\s\S]*?)(</head>)~i', static function (array $head): string {
+        $contents = preg_replace('~<link\b(?=[^>]*\brel\s*=\s*["\x27](?:icon|shortcut\s+icon|apple-touch-icon(?:-precomposed)?)["\x27])[^>]*>\s*~i', '', $head[2]) ?? $head[2];
+        return $head[1] . rtrim($contents)
+            . "\n" . '<link rel="icon" type="image/png" sizes="192x192" href="/favicon-192x192.png">'
+            . "\n" . '<link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png">'
+            . "\n" . $head[3];
+    }, $html, 1) ?? $html;
+}
+
 ob_start(static function (string $html): string {
     // The packed analytics-config.js still contains an obsolete GA4 stream ID.
     // Correct only this script response, before the deferred /analytics.js reads
@@ -43,7 +56,7 @@ ob_start(static function (string $html): string {
     }
     if (substr($assetPath, -4) === '.css') $html = velq_brand_red_css($html);
     if (stripos($html, '<html') === false) {
-        return velq_new_journal_response(velq_discovery_response(velq_growth_response($html, $assetPath), $assetPath), $assetPath);
+        return velq_favicon_response(velq_new_journal_response(velq_discovery_response(velq_growth_response($html, $assetPath), $assetPath), $assetPath));
     }
 
     // Remove the Compare labels tab from both header navigation variants.
@@ -457,5 +470,5 @@ ob_start(static function (string $html): string {
     }
     $html = velq_ranking_opportunity_response($html, $assetPath);
     $html = velq_editorial_content_response($html, $assetPath);
-    return velq_new_journal_response($html, $assetPath);
+    return velq_favicon_response(velq_new_journal_response($html, $assetPath));
 });
