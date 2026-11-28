@@ -120,3 +120,56 @@ for(const [route, heading] of Object.entries(demandRoutes)){
 assert(fiberPowder.includes('Metamucil fiber gummies vs. powder: check the exact fiber source'));
 assert(!home.includes('id="velq-ranking-answer"'),'Article-specific section leaked onto homepage');
 console.log('PASS: five routed article improvements, static fiber comparison, unique answers, and homepage isolation.');
+
+
+// Test the actual routed Journal, snack guides and standalone HTML, not synthetic content.
+const editorialSource=fs.readFileSync('editorial-content-extension.php','utf8');
+const editorialRoutes=[...editorialSource.matchAll(/^\s*'(\/(?:blog|guides)\/[^']+)' => \[/gm)].map(m=>m[1]);
+assert.equal(editorialRoutes.length,29,'Expected all bundled editorial routes');
+const standaloneEditorial=[
+ '/blog/fiber-gummies-vs-fiber-powder',
+ '/guides/why-does-clear-protein-foam',
+ '/guides/can-you-mix-protein-and-electrolytes'
+];
+const standaloneHubs=[
+ '/blog/category/healthy-candy','/blog/category/pre-workout',
+ '/blog/category/functional-gummies','/blog/category/weight-management'
+];
+function editorialRender(route){
+ if([...standaloneEditorial,...standaloneHubs].includes(route)){
+   return fs.readFileSync(route.slice(1)+'/index.html','utf8');
+ }
+ const research=['/blog/protein-gummies-with-fiber-comparison','/tools/serving-comparison-calculator','/tools/nutrition-label-value-calculator'];
+ const handler=research.includes(route)?'research-content.php':route.startsWith('/blog/')?'nutrition-content.php':'velq-site.php';
+ const result=spawnSync('php',['-d','display_errors=1','-r',
+   '$_SERVER["REQUEST_URI"]=$argv[1]; $_SERVER["REQUEST_METHOD"]="GET"; $_SERVER["HTTP_HOST"]="velqnutrition.com"; require "image-patch.php"; require $argv[2];',route,handler],
+   {encoding:'utf8',maxBuffer:16*1024*1024,timeout:15000});
+ assert.equal(result.status,0,route+' PHP render failed: '+(result.stderr||''));
+ assert(!/Fatal error|Parse error/.test(result.stdout+result.stderr),route+' PHP error');
+ return result.stdout;
+}
+const editorialTargets=new Set();
+for(const route of [...editorialRoutes,...standaloneEditorial]){
+ const html=editorialRender(route);
+ assert.equal((html.match(/<h1\b/gi)||[]).length,1,route+' should preserve its original primary heading');
+ assert.equal((html.match(/id="velq-editorial-refresh"/g)||[]).length,1,route+' expected exactly one contextual section');
+ const section=html.match(/<section id="velq-editorial-refresh"[\s\S]*?<\/section>/i)?.[0];
+ assert(section,route+' contextual section missing');
+ const links=[...section.matchAll(/href="(\/[^"]+)"/g)].map(m=>m[1]);
+ assert.equal(new Set(links).size,2,route+' must have two distinct contextual links');
+ assert(!links.includes(route),route+' contains a self-link');
+ for(const target of links)editorialTargets.add(target);
+ if(!standaloneEditorial.includes(route)){
+   const again=render(route,html);
+   assert.equal((again.match(/id="velq-editorial-refresh"/g)||[]).length,1,route+' repeated filter duplicated section');
+ }
+}
+for(const target of editorialTargets){
+ const html=editorialRender(target);
+ assert(/<html\b/i.test(html)&&/<h1\b/i.test(html),target+' contextual destination did not render an HTML page');
+}
+assert(!home.includes('id="velq-editorial-refresh"'),'Editorial sections leaked onto homepage');
+assert.equal(render('/api/waitlist',api),api,'Editorial pass changed waitlist response');
+const snackGuide=editorialRender('/guides/protein-and-fiber-snacks');
+assert(snackGuide.includes('High-Protein, High-Fiber Snacks: Ideas for Work and Travel | Velq'),'Missing differentiated snack guide title');
+console.log('PASS: 32 existing editorial URLs, 64 contextual links, destination rendering, heading preservation, idempotence and waitlist isolation.');
